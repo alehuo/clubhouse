@@ -7,11 +7,11 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { logger } from "./reducers/middleware";
-import testReducer from "./reducers/testReducer";
+import calendarReducer from "./reducers/calendarReducer";
 
 // Combine reducers
 const reducer = combineReducers({
-  test: testReducer
+  calendar: calendarReducer
 });
 
 const middleware =

@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import "./App.css";
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { MainPage } from "./pages/MainPage";
-import { LoginPage} from "./pages/LoginPage";
-import { LogoutPage} from "./pages/LogoutPage";
-import { NewsPage} from "./pages/NewsPage";
-import { KeysPage} from "./pages/KeysPage";
-import { UserProfilePage} from "./pages/UserProfilePage";
-import { StudentUnionsPage} from "./pages/StudentUnionsPage";
+import MainPage from "./pages/MainPage";
+import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
+import NewsPage from "./pages/NewsPage";
+import KeysPage from "./pages/KeysPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import StudentUnionsPage from "./pages/StudentUnionsPage";
 import FontAwesome from "react-fontawesome";
-import { CalendarPage } from "./pages/CalendarPage";
+import CalendarPage from "./pages/CalendarPage";
 import { Link } from "react-router-dom";
+import UserService from "./services/UserService";
 class App extends Component {
   render() {
     return (
@@ -19,7 +20,9 @@ class App extends Component {
         <div>
           <Navbar inverse collapseOnSelect>
             <Navbar.Header>
-              <Navbar.Brand><Link to="/">Clubhouse management</Link></Navbar.Brand>
+              <Navbar.Brand>
+                <Link to="/">Clubhouse management</Link>
+              </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
@@ -75,16 +78,35 @@ class App extends Component {
             </Navbar.Collapse>
           </Navbar>
           <div className="container">
+            <button
+              onClick={async () => {
+                console.log("Logging in");
+                const loginRes = await UserService.login("admin", "admin");
+                console.log(loginRes);
+              }}
+            >
+              Login test
+            </button>
+            <button
+              onClick={async () => {
+                console.log("Registering");
+                const registerRes = await UserService.register({
+                  username: "admin",
+                  password: "admin"
+                });
+                console.log(registerRes);
+              }}
+            >
+              Register test
+            </button>
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <Route
-                exact path="/studentunions"
+                exact
+                path="/studentunions"
                 component={StudentUnionsPage}
               />
-              <Route
-                exact path="/keys"
-                component={KeysPage}
-              />
+              <Route exact path="/keys" component={KeysPage} />
               <Route exact path="/users" component={() => <div>Users</div>} />
               <Route exact path="/calendar" component={CalendarPage} />
               <Route exact path="/rules" component={() => <div>Rules</div>} />
@@ -92,7 +114,11 @@ class App extends Component {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/logout" component={LogoutPage} />
               <Route exact path="/profile" component={UserProfilePage} />
-              <Route exact path="/profile/settings" component={UserProfilePage} />
+              <Route
+                exact
+                path="/profile/settings"
+                component={UserProfilePage}
+              />
             </React.Fragment>
           </div>
         </div>
