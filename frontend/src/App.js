@@ -12,6 +12,7 @@ import StudentUnionsPage from "./pages/StudentUnionsPage";
 import FontAwesome from "react-fontawesome";
 import CalendarPage from "./pages/CalendarPage";
 import { Link } from "react-router-dom";
+import NotificationDrawer from "./components/NotificationDrawer";
 import { connect } from "react-redux";
 
 const AuthenticatedRoute = ({ component: Component, ...rest }) => (
@@ -96,6 +97,7 @@ class App extends Component {
             </Navbar.Collapse>
           </Navbar>
           <div className="container">
+            <NotificationDrawer />
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <AuthenticatedRoute
