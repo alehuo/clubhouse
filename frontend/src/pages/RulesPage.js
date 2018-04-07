@@ -1,23 +1,20 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Jumbotron, Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 
-export class NewsPage extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
-
+export class RulesPage extends Component {
   render() {
     return (
       <React.Fragment>
         <Jumbotron>
-          <h1>News</h1>
-          <p>See what's going on at the clubhouse.</p>
+          <h1>Rules</h1>
+          <p>
+            Rules of the clubhouse you <b>must</b> follow!
+          </p>
           <p>
             <Button bsStyle="success">
-              <FontAwesome name="plus" /> Add an article
+              <FontAwesome name="edit" /> Edit rules
             </Button>
           </p>
         </Jumbotron>
@@ -30,4 +27,4 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RulesPage);

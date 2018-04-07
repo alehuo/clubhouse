@@ -11,13 +11,15 @@ import calendarReducer from "./reducers/calendarReducer";
 import authenticationReducer from "./reducers/authenticationReducer";
 import notificationReducer from "./reducers/notificationReducer";
 import userReducer from "./reducers/userReducer";
+import keyReducer from "./reducers/keyReducer";
 
 // Combine reducers
 const reducer = combineReducers({
   calendar: calendarReducer,
   auth: authenticationReducer,
   user: userReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  key: keyReducer
 });
 
 const middleware =

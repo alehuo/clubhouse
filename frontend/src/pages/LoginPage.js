@@ -33,7 +33,7 @@ export class LoginPage extends Component {
 
   submitLogin(event) {
     event.preventDefault();
-    this.props.login(this.state.username, this.state.password);
+    this.props.login(this.state.email, this.state.password);
   }
 
   handleEmailChange(event) {

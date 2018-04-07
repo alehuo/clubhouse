@@ -1,7 +1,13 @@
 // User service
-const login = async (username, password) =>
-  new Promise(resolve => {
-    setTimeout(() => resolve({ token: "HelloWorld" }), 2000);
+const login = async (email, password) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (!(email === "admin" && password === "admin")) {
+        reject({ error: "Invalid email or password" });
+      } else {
+        resolve({ token: "HelloWorld" });
+      }
+    }, 2000);
   });
 
 const register = async user =>

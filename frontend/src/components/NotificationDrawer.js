@@ -15,7 +15,7 @@ export class NotificationDrawer extends Component {
                 notification.notificationType === notificationTypes.SUCCESS
                   ? "success"
                   : notification.notificationType === notificationTypes.ERROR
-                    ? "error"
+                    ? "danger"
                     : "warning"
               }
             />

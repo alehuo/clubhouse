@@ -1,20 +1,31 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem,
+  Button,
+  Alert
+} from "react-bootstrap";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import NewsPage from "./pages/NewsPage";
 import KeysPage from "./pages/KeysPage";
+import RulesPage from "./pages/RulesPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import StudentUnionsPage from "./pages/StudentUnionsPage";
 import FontAwesome from "react-fontawesome";
 import CalendarPage from "./pages/CalendarPage";
-import { Link } from "react-router-dom";
 import NotificationDrawer from "./components/NotificationDrawer";
 import { connect } from "react-redux";
 import { authenticateUser } from "./reducers/authenticationReducer";
+import { LinkContainer } from "react-router-bootstrap";
+import Notification from "./components/Notification";
+import Session from "./pages/Session";
 
 const AuthenticatedRoute = ({
   component: Component,
@@ -52,100 +63,107 @@ class App extends Component {
         <div>
           <Navbar inverse collapseOnSelect>
             <Navbar.Header>
-              <Navbar.Brand>
-                <Link to="/">Clubhouse management</Link>
-              </Navbar.Brand>
+              <LinkContainer to="/">
+                <Navbar.Brand>Clubhouse management</Navbar.Brand>
+              </LinkContainer>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
-                <NavItem eventKey={1}>
-                  <Link to="/news">
+                <LinkContainer to="/news">
+                  <NavItem eventKey={1}>
                     <FontAwesome name="comments" /> News
-                  </Link>
-                </NavItem>
-                <NavItem eventKey={2}>
-                  <Link to="/calendar">
+                  </NavItem>
+                </LinkContainer>
+                <LinkContainer to="/calendar">
+                  <NavItem eventKey={2}>
                     <FontAwesome name="calendar" /> Calendar
-                  </Link>
-                </NavItem>
-                <NavItem eventKey={3}>
-                  <Link to="/keys">
+                  </NavItem>
+                </LinkContainer>
+                <LinkContainer to="/keys">
+                  <NavItem eventKey={3}>
                     <FontAwesome name="key" /> Keys
-                  </Link>
-                </NavItem>
-                <NavItem eventKey={4}>
-                  <Link to="/rules">
+                  </NavItem>
+                </LinkContainer>
+                <LinkContainer to="/rules">
+                  <NavItem eventKey={4}>
                     <FontAwesome name="list-ol" /> Rules
-                  </Link>
-                </NavItem>
+                  </NavItem>
+                </LinkContainer>
               </Nav>
               <Nav pullRight>
-                <NavDropdown
-                  eventKey={5}
-                  title={
-                    <React.Fragment>
-                      <FontAwesome name="user" /> <span>user</span>
-                    </React.Fragment>
-                  }
-                  id="basic-nav-dropdown"
-                >
-                  <MenuItem eventKey={5.1}>
-                    <Link to="/profile">
-                      <FontAwesome name="user" /> My profile
-                    </Link>
-                  </MenuItem>
-                  <MenuItem eventKey={5.2}>
-                    <Link to="/profile/settings">
-                      <FontAwesome name="cog" /> Settings
-                    </Link>
-                  </MenuItem>
-                </NavDropdown>
-                <NavItem eventKey={6}>
-                  <Link to="/logout">
-                    <FontAwesome name="sign-out-alt" /> Logout
-                  </Link>
-                </NavItem>
+                {this.props.isAuthenticated ? (
+                  <React.Fragment>
+                    <LinkContainer to="/session">
+                      <NavItem>
+                        <FontAwesome name="beer" />{" "}
+                        <span>
+                          <b>Session</b>
+                        </span>
+                      </NavItem>
+                    </LinkContainer>
+                    <NavDropdown
+                      eventKey={5}
+                      title={
+                        <React.Fragment>
+                          <FontAwesome name="user" /> <span>John Doe</span>
+                        </React.Fragment>
+                      }
+                      id="basic-nav-dropdown"
+                    >
+                      <LinkContainer to="/user">
+                        <MenuItem eventKey={5.1}>
+                          <FontAwesome name="user" /> My profile
+                        </MenuItem>
+                      </LinkContainer>
+                    </NavDropdown>
+                    <LinkContainer to="/logout">
+                      <NavItem eventKey={6}>
+                        <FontAwesome name="sign-out-alt" /> Logout
+                      </NavItem>
+                    </LinkContainer>
+                  </React.Fragment>
+                ) : (
+                  <LinkContainer to="/login">
+                    <NavItem eventKey={6}>
+                      <FontAwesome name="sign-out-alt" /> Login
+                    </NavItem>
+                  </LinkContainer>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Navbar>
           <div className="container">
             <NotificationDrawer />
+            <Alert bsStyle="info">
+              <h4>
+                You are currently in an ongoing session with <b>X</b> other
+                person(s).
+              </h4>
+              <LinkContainer to="/session">
+                <Button bsStyle="primary" bsSize="large">
+                  View current session
+                </Button>
+              </LinkContainer>
+            </Alert>
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
+              <Route
                 exact
                 path="/studentunions"
                 component={StudentUnionsPage}
               />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
-                exact
-                path="/keys"
-                component={KeysPage}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
                 path="/users"
                 component={() => <div>Users</div>}
               />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
-                path="/calendar"
-                component={CalendarPage}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
-                path="/rules"
-                component={() => <div>Rules</div>}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
-                path="/news"
-                component={NewsPage}
-              />
+              <Route exact path="/keys" component={KeysPage} />
+              <Route exact path="/calendar" component={CalendarPage} />
+              <Route exact path="/rules" component={RulesPage} />
+              <Route exact path="/news" component={NewsPage} />
               <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/session" component={Session} />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
                 exact
@@ -154,14 +172,7 @@ class App extends Component {
               />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
-                exact
-                path="/profile"
-                component={UserProfilePage}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
-                exact
-                path="/profile/settings"
+                path="/user"
                 component={UserProfilePage}
               />
             </React.Fragment>
