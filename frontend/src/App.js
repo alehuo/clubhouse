@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
@@ -12,7 +12,25 @@ import StudentUnionsPage from "./pages/StudentUnionsPage";
 import FontAwesome from "react-fontawesome";
 import CalendarPage from "./pages/CalendarPage";
 import { Link } from "react-router-dom";
-import UserService from "./services/UserService";
+import { connect } from "react-redux";
+
+const AuthenticatedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => {
+      return props.isAuthenticated ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location }
+          }}
+        />
+      );
+    }}
+  />
+);
 class App extends Component {
   render() {
     return (
@@ -78,43 +96,55 @@ class App extends Component {
             </Navbar.Collapse>
           </Navbar>
           <div className="container">
-            <button
-              onClick={async () => {
-                console.log("Logging in");
-                const loginRes = await UserService.login("admin", "admin");
-                console.log(loginRes);
-              }}
-            >
-              Login test
-            </button>
-            <button
-              onClick={async () => {
-                console.log("Registering");
-                const registerRes = await UserService.register({
-                  username: "admin",
-                  password: "admin"
-                });
-                console.log(registerRes);
-              }}
-            >
-              Register test
-            </button>
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
-              <Route
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
                 exact
                 path="/studentunions"
                 component={StudentUnionsPage}
               />
-              <Route exact path="/keys" component={KeysPage} />
-              <Route exact path="/users" component={() => <div>Users</div>} />
-              <Route exact path="/calendar" component={CalendarPage} />
-              <Route exact path="/rules" component={() => <div>Rules</div>} />
-              <Route exact path="/news" component={NewsPage} />
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
+                exact
+                path="/keys"
+                component={KeysPage}
+              />
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
+                path="/users"
+                component={() => <div>Users</div>}
+              />
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
+                path="/calendar"
+                component={CalendarPage}
+              />
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
+                path="/rules"
+                component={() => <div>Rules</div>}
+              />
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
+                path="/news"
+                component={NewsPage}
+              />
               <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/logout" component={LogoutPage} />
-              <Route exact path="/profile" component={UserProfilePage} />
-              <Route
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
+                exact
+                path="/logout"
+                component={LogoutPage}
+              />
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
+                exact
+                path="/profile"
+                component={UserProfilePage}
+              />
+              <AuthenticatedRoute
+                isAuthenticated={this.props.isAuthenticated}
                 exact
                 path="/profile/settings"
                 component={UserProfilePage}
@@ -127,4 +157,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

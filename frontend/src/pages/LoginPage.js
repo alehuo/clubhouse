@@ -5,10 +5,11 @@ import {
   FormGroup,
   ControlLabel,
   HelpBlock,
-  Checkbox,
-  Radio,
   Button
 } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+
+import { login } from "./../reducers/userReducer";
 
 const FieldGroup = ({ id, label, help, ...props }) => (
   <FormGroup controlId={id}>
@@ -19,89 +20,69 @@ const FieldGroup = ({ id, label, help, ...props }) => (
 );
 
 export class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+    this.submitLogin = this.submitLogin.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  submitLogin(event) {
+    event.preventDefault();
+    this.props.login(this.state.username, this.state.password);
+  }
+
+  handleEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
     return (
-      <form>
-        <FieldGroup
-          id="formControlsText"
-          type="text"
-          label="Text"
-          placeholder="Enter text"
-        />
-        <FieldGroup
-          id="formControlsEmail"
-          type="email"
-          label="Email address"
-          placeholder="Enter email"
-        />
-        <FieldGroup
-          id="formControlsPassword"
-          label="Password"
-          type="password"
-        />
-        <FieldGroup
-          id="formControlsFile"
-          type="file"
-          label="File"
-          help="Example block-level help text here."
-        />
-
-        <Checkbox checked readOnly>
-          Checkbox
-        </Checkbox>
-        <Radio checked readOnly>
-          Radio
-        </Radio>
-
-        <FormGroup>
-          <Checkbox inline>1</Checkbox> <Checkbox inline>2</Checkbox>{" "}
-          <Checkbox inline>3</Checkbox>
-        </FormGroup>
-        <FormGroup>
-          <Radio name="radioGroup" inline>
-            1
-          </Radio>{" "}
-          <Radio name="radioGroup" inline>
-            2
-          </Radio>{" "}
-          <Radio name="radioGroup" inline>
-            3
-          </Radio>
-        </FormGroup>
-
-        <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Select</ControlLabel>
-          <FormControl componentClass="select" placeholder="select">
-            <option value="select">select</option>
-            <option value="other">...</option>
-          </FormControl>
-        </FormGroup>
-        <FormGroup controlId="formControlsSelectMultiple">
-          <ControlLabel>Multiple select</ControlLabel>
-          <FormControl componentClass="select" multiple>
-            <option value="select">select (multiple)</option>
-            <option value="other">...</option>
-          </FormControl>
-        </FormGroup>
-
-        <FormGroup controlId="formControlsTextarea">
-          <ControlLabel>Textarea</ControlLabel>
-          <FormControl componentClass="textarea" placeholder="textarea" />
-        </FormGroup>
-
-        <FormGroup>
-          <ControlLabel>Static text</ControlLabel>
-          <FormControl.Static>email@example.com</FormControl.Static>
-        </FormGroup>
-
-        <Button type="submit">Submit</Button>
-      </form>
+      <React.Fragment>
+        <h1>Login</h1>
+        <form onSubmit={this.submitLogin}>
+          <FieldGroup
+            id="formControlsText"
+            type="text"
+            label="Email address"
+            placeholder="Email address"
+            value={this.state.email}
+            onChange={this.handleEmailChange}
+          />
+          <FieldGroup
+            id="formControlsPassword"
+            label="Password"
+            type="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handlePasswordChange}
+          />
+          <Button type="submit" disabled={this.props.isLoggingIn}>
+            {this.props.isLoggingIn ? "Logging in.." : "Login"}
+          </Button>
+        </form>
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  isLoggingIn: state.auth.isLoggingIn
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  login
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

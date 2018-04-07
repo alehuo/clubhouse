@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
-import events from "./events";
 import { fetchEvents } from "./../reducers/calendarReducer";
 import { eventMapper } from "./../services/CalendarService";
 

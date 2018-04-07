@@ -8,10 +8,16 @@ import thunk from "redux-thunk";
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { logger } from "./reducers/middleware";
 import calendarReducer from "./reducers/calendarReducer";
+import authenticationReducer from "./reducers/authenticationReducer";
+import notificationReducer from "./reducers/notificationReducer";
+import userReducer from "./reducers/userReducer";
 
 // Combine reducers
 const reducer = combineReducers({
-  calendar: calendarReducer
+  calendar: calendarReducer,
+  auth: authenticationReducer,
+  user: userReducer,
+  notification: notificationReducer
 });
 
 const middleware =
