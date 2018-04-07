@@ -14,12 +14,17 @@ import CalendarPage from "./pages/CalendarPage";
 import { Link } from "react-router-dom";
 import NotificationDrawer from "./components/NotificationDrawer";
 import { connect } from "react-redux";
+import { authenticateUser } from "./reducers/authenticationReducer";
 
-const AuthenticatedRoute = ({ component: Component, ...rest }) => (
+const AuthenticatedRoute = ({
+  component: Component,
+  isAuthenticated,
+  ...rest
+}) => (
   <Route
     {...rest}
     render={props => {
-      return props.isAuthenticated ? (
+      return isAuthenticated ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -33,6 +38,14 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => (
   />
 );
 class App extends Component {
+  componentDidMount = () => {
+    if (localStorage.getItem("token")) {
+      this.props.authenticateUser();
+    }
+  };
+
+  isUserLoggedIn = () => this.props.isAuthenticated === true;
+
   render() {
     return (
       <Router>
@@ -101,52 +114,52 @@ class App extends Component {
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 exact
                 path="/studentunions"
                 component={StudentUnionsPage}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 exact
                 path="/keys"
                 component={KeysPage}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 path="/users"
                 component={() => <div>Users</div>}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 path="/calendar"
                 component={CalendarPage}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 path="/rules"
                 component={() => <div>Rules</div>}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 path="/news"
                 component={NewsPage}
               />
               <Route exact path="/login" component={LoginPage} />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 exact
                 path="/logout"
                 component={LogoutPage}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 exact
                 path="/profile"
                 component={UserProfilePage}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.props.isAuthenticated}
+                isAuthenticated={this.isUserLoggedIn()}
                 exact
                 path="/profile/settings"
                 component={UserProfilePage}
@@ -163,6 +176,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  authenticateUser
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

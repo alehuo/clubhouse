@@ -16,6 +16,7 @@ export const login = (username, password) => {
       dispatch(setIsLoggingIn(true));
       const loginResponse = await UserService.login(username, password);
       dispatch(setToken(loginResponse.token));
+      localStorage.setItem("token", loginResponse.token);
       dispatch(authenticateUser());
       dispatch(successMessage("Successfully logged in"));
       dispatch(setIsLoggingIn(false));
