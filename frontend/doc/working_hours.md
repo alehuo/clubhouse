@@ -6,3 +6,5 @@
 | 2.4.2018  | 2h    | Create placeholder pages                                                         |
 | 5.7.2018  | 4h    | Mocked auth, register and calendar back-end. Implemented authenticated routes    |
 | 7.7.2018  | 6h    | Created more mocked services. Added components for various parts of the website. |
+
+Total: 15 h
