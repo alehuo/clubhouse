@@ -6,10 +6,13 @@ import { addStudentUnion } from "./../../reducers/studentUnionReducer";
 
 export class AddStudentUnion extends Component {
   handleSubmit = values => {
-    this.props.addStudentUnion({
-      name: values.studentUnionName,
-      description: values.studentUnionDescription
-    });
+    this.props.addStudentUnion(
+      {
+        name: values.studentUnionName,
+        description: values.studentUnionDescription
+      },
+      this.props.token
+    );
   };
   render() {
     return (
@@ -28,7 +31,9 @@ export class AddStudentUnion extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  token: state.user.token
+});
 
 const mapDispatchToProps = { addStudentUnion };
 

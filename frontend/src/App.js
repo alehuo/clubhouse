@@ -73,31 +73,35 @@ class App extends Component {
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
-                <LinkContainer to="/news">
-                  <NavItem eventKey={1}>
-                    <FontAwesome name="comments" /> News
-                  </NavItem>
-                </LinkContainer>
-                <LinkContainer to="/calendar">
-                  <NavItem eventKey={2}>
-                    <FontAwesome name="calendar" /> Calendar
-                  </NavItem>
-                </LinkContainer>
-                <LinkContainer to="/keys">
-                  <NavItem eventKey={3}>
-                    <FontAwesome name="key" /> Keys
-                  </NavItem>
-                </LinkContainer>
-                <LinkContainer to="/studentunions">
-                  <NavItem eventKey={4}>
-                    <FontAwesome name="users" /> Student unions
-                  </NavItem>
-                </LinkContainer>
-                <LinkContainer to="/rules">
-                  <NavItem eventKey={5}>
-                    <FontAwesome name="list-ol" /> Rules
-                  </NavItem>
-                </LinkContainer>
+                {this.props.isAuthenticated && (
+                  <React.Fragment>
+                    <LinkContainer to="/news">
+                      <NavItem eventKey={1}>
+                        <FontAwesome name="comments" /> News
+                      </NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/calendar">
+                      <NavItem eventKey={2}>
+                        <FontAwesome name="calendar" /> Calendar
+                      </NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/keys">
+                      <NavItem eventKey={3}>
+                        <FontAwesome name="key" /> Keys
+                      </NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/studentunions">
+                      <NavItem eventKey={4}>
+                        <FontAwesome name="users" /> Student unions
+                      </NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/rules">
+                      <NavItem eventKey={5}>
+                        <FontAwesome name="list-ol" /> Rules
+                      </NavItem>
+                    </LinkContainer>
+                  </React.Fragment>
+                )}
               </Nav>
               <Nav pullRight>
                 {this.props.isAuthenticated ? (
@@ -143,7 +147,7 @@ class App extends Component {
           </Navbar>
           <div className="container">
             <NotificationDrawer />
-            {!this.props.watchPage && (
+            {!(this.props.watchPage || !this.props.isAuthenticated) && (
               <Alert bsStyle="info">
                 <h5>
                   You are currently in an ongoing session with <b>X</b> other
@@ -171,7 +175,12 @@ class App extends Component {
               <Route exact path="/rules" component={RulesPage} />
               <Route exact path="/news" component={NewsPage} />
               <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/session" component={Session} />
+              <AuthenticatedRoute
+                isAuthenticated={this.isUserLoggedIn()}
+                exact
+                path="/session"
+                component={Session}
+              />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
                 exact

@@ -5,7 +5,7 @@ import { deAuthenticateUser } from "./../reducers/authenticationReducer";
 import { successMessage } from "./../reducers/notificationReducer";
 
 export class LogoutPage extends Component {
-  componentDidMount = () => {
+  componentWillMount = () => {
     localStorage.clear();
     this.props.deAuthenticateUser();
     this.props.successMessage("You have been logged out.");

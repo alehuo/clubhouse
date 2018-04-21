@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import {
   FormControl,
   FormGroup,
   ControlLabel,
   HelpBlock,
-  Button
+  Button,
+  Well
 } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
@@ -37,7 +39,30 @@ export class AddStudentUnionForm extends Component {
           placeholder="Description"
           component={FieldGroup}
         />
-        <Button type="button" bsStyle="danger" onClick={this.props.handleClose} disabled={this.props.isAdding}>
+        <Well>
+          <FormGroup controlId="studentUnionPermission">
+            <Field
+              name="studentUnionPermission"
+              component="input"
+              type="checkbox"
+            />{" "}
+            <b>
+              I have the permission from the student union to save their
+              information to the service
+            </b>
+            <HelpBlock>
+              Your answer will be saved in case a student union wants to do a
+              data request, as required by the European Union General Data
+              Protection Regulation.
+            </HelpBlock>
+          </FormGroup>
+        </Well>
+        <Button
+          type="button"
+          bsStyle="danger"
+          onClick={this.props.handleClose}
+          disabled={this.props.isAdding}
+        >
           Cancel
         </Button>
         &nbsp;&nbsp;&nbsp;

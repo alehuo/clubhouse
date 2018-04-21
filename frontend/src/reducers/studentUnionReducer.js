@@ -1,5 +1,5 @@
 import StudentUnionService from "./../services/StudentUnionService";
-import { errorMessage } from "./notificationReducer";
+import { errorMessage, successMessage } from "./notificationReducer";
 
 const initialState = {
   studentUnions: [],
@@ -15,7 +15,7 @@ export const studentUnionActions = {
   ADD_TO_LIST: "ADD_TO_LIST"
 };
 
-export const fetchStudentUnions = (token) => {
+export const fetchStudentUnions = token => {
   return async dispatch => {
     try {
       const res = await StudentUnionService.getStudentUnions(token);
@@ -63,7 +63,10 @@ export const addStudentUnion = (stdu, token) => {
       });
       dispatch(setAdding(false));
       dispatch(addFormModalOpen(false));
-    } catch (err) {}
+      dispatch(successMessage("New student union added successfully"));
+    } catch (err) {
+      dispatch(errorMessage("Error adding student union"));
+    }
   };
 };
 
