@@ -27,7 +27,7 @@ export class LoginForm extends Component {
       <form onSubmit={this.props.handleSubmit}>
         <Field
           name="username"
-          id="formControlsText"
+          id="formControlsUsrname"
           type="text"
           label="Username"
           placeholder="Username"
@@ -35,7 +35,7 @@ export class LoginForm extends Component {
         />
         <Field
           name="password"
-          id="formControlsText"
+          id="formControlsPasswd"
           type="password"
           label="Password"
           placeholder="Password"

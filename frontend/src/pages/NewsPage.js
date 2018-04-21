@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Jumbotron, Button, PageHeader } from "react-bootstrap";
+import { Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import NewsPost from "../components/NewsPost";
 
@@ -16,15 +15,11 @@ const newsPosts = [
 ];
 
 export class NewsPage extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
-
   render() {
     return (
       <React.Fragment>
         <PageHeader>
-          <h1>News</h1>
+          News
           <p>
             <Button bsStyle="success">
               <FontAwesome name="plus" /> Add an article
@@ -34,6 +29,7 @@ export class NewsPage extends Component {
         {newsPosts &&
           newsPosts.map(newsPost => (
             <NewsPost
+              key={newsPost.postId}
               title={newsPost.title}
               author={newsPost.author}
               message={newsPost.message}

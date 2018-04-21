@@ -11,7 +11,7 @@ export class StudentUnionsPage extends Component {
     return (
       <React.Fragment>
         <PageHeader>
-          <h1>Student unions</h1>
+          Student unions
           <p>
             <Button
               bsStyle="success"

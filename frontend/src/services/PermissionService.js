@@ -6,4 +6,4 @@ const getUserPermissions = token =>
 
 const getAllPermissions = token => customAxios(token).get("api/v1/permission");
 
-export default { getUserPermissions };
+export default { getUserPermissions, getAllPermissions };

@@ -21,7 +21,7 @@ class CalendarPage extends Component {
     return (
       <React.Fragment>
         <PageHeader>
-          <h1>Calendar</h1>
+          Calendar
           <p>
             <Button bsStyle="success">
               <FontAwesome name="plus" /> Add an event

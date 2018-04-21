@@ -2,7 +2,7 @@ import PermissionService from "./../services/PermissionService";
 import { errorMessage } from "./notificationReducer";
 
 const initialState = {
-  userPerms: []
+  userPerms: 0
 };
 
 export const permissionActions = {
@@ -20,6 +20,7 @@ export const getUserPerms = token => {
   return async dispatch => {
     try {
       const res = await PermissionService.getUserPermissions(token);
+      dispatch(setUserPerms(res.data.permissions));
     } catch (err) {
       dispatch(errorMessage("Failed to fetch user permissions"));
     }

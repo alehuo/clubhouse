@@ -10,6 +10,7 @@ export class NotificationDrawer extends Component {
         {this.props.notifications &&
           this.props.notifications.map(notification => (
             <Notification
+              key={notification.id}
               text={notification.text}
               type={
                 notification.notificationType === notificationTypes.SUCCESS

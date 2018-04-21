@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import { PageHeader, Row, Col, NavItem, Nav } from "react-bootstrap";
@@ -8,9 +7,6 @@ import UserHistory from "./subpages/UserHistory";
 import UserInformation from "./subpages/UserInformation";
 import { LinkContainer } from "react-router-bootstrap";
 export class UserProfilePage extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
 
   render() {
     return (

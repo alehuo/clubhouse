@@ -9,7 +9,7 @@ export class KeysPage extends Component {
     return (
       <React.Fragment>
         <PageHeader>
-          <h1>Keys</h1>
+          Keys
           <p>
             <Button bsStyle="success">
               <FontAwesome name="plus" /> Add a keyholder

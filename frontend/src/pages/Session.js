@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PageHeader, Button, Panel, Label, Well } from "react-bootstrap";
+import { PageHeader, Button, Panel, Label } from "react-bootstrap";
 import { connect } from "react-redux";
 import FontAwesome from "react-fontawesome";
 import { toggleWatchPage } from "./../reducers/watchReducer";

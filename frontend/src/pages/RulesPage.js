@@ -8,12 +8,10 @@ export class RulesPage extends Component {
     return (
       <React.Fragment>
         <PageHeader>
-          <h1>Rules</h1>
-          <p>
-            <h5>
-              Rules of the clubhouse you <b>must</b> follow!
-            </h5>
-          </p>
+          Rules
+          <small>
+            Rules of the clubhouse you <b>must</b> follow!
+          </small>
           <p>
             <Button bsStyle="success">
               <FontAwesome name="edit" /> Edit rules
