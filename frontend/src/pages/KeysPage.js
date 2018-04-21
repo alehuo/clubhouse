@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Jumbotron, Button } from "react-bootstrap";
+import { PageHeader, Button } from "react-bootstrap";
 import KeysList from "./../components/KeysList";
 import FontAwesome from "react-fontawesome";
 
@@ -8,18 +8,18 @@ export class KeysPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Jumbotron>
+        <PageHeader>
           <h1>Keys</h1>
-          <p>This page contains a list of current keyholders.</p>
           <p>
             <Button bsStyle="success">
               <FontAwesome name="plus" /> Add a keyholder
-            </Button>{" "}
+            </Button>
+            {"  "}
             <Button bsStyle="info">
-              <FontAwesome name="email" /> Send an email to keyholder(s)
+              <FontAwesome name="envelope" /> Send an email to keyholder(s)
             </Button>
           </p>
-        </Jumbotron>
+        </PageHeader>
         <KeysList keys={this.props.keys} />
       </React.Fragment>
     );

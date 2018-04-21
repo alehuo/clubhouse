@@ -15,6 +15,7 @@ import keyReducer from "./reducers/keyReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
 import permissionReducer from "./reducers/permissionReducer";
 import { reducer as formReducer } from "redux-form";
+import watchReducer from "./reducers/watchReducer";
 
 // Combine reducers
 const reducer = combineReducers({
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   key: keyReducer,
   studentUnion: studentUnionReducer,
   permission: permissionReducer,
+  watch: watchReducer,
   form: formReducer
 });
 

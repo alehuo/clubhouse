@@ -1,23 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Jumbotron, Button } from "react-bootstrap";
+import { PageHeader, Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 
 export class RulesPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Jumbotron>
+        <PageHeader>
           <h1>Rules</h1>
           <p>
-            Rules of the clubhouse you <b>must</b> follow!
+            <h5>
+              Rules of the clubhouse you <b>must</b> follow!
+            </h5>
           </p>
           <p>
             <Button bsStyle="success">
               <FontAwesome name="edit" /> Edit rules
             </Button>
           </p>
-        </Jumbotron>
+        </PageHeader>
       </React.Fragment>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Jumbotron, Button } from "react-bootstrap";
+import { PageHeader, Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import StudentUnionsList from "./../components/StudentUnionsList";
 import AddStudentUnion from "./subpages/AddStudentUnion";
@@ -10,9 +10,8 @@ export class StudentUnionsPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Jumbotron>
+        <PageHeader>
           <h1>Student unions</h1>
-          <p>Browse student unions registered at the service.</p>
           <p>
             <Button
               bsStyle="success"
@@ -21,7 +20,7 @@ export class StudentUnionsPage extends Component {
               <FontAwesome name="plus" /> Add a student union
             </Button>
           </p>
-        </Jumbotron>
+        </PageHeader>
         <StudentUnionsList stdus={this.props.studentUnions} />
         <AddStudentUnion
           show={this.props.modalOpen}

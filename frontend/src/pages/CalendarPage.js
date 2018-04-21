@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import BigCalendar from "react-big-calendar";
-import { Jumbotron, Button } from "react-bootstrap";
+import { PageHeader, Button } from "react-bootstrap";
 import moment from "moment";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/calendarReducer";
@@ -20,15 +20,14 @@ class CalendarPage extends Component {
     );
     return (
       <React.Fragment>
-        <Jumbotron>
+        <PageHeader>
           <h1>Calendar</h1>
-          <p>List of calendar events of the clubhouse</p>
           <p>
             <Button bsStyle="success">
               <FontAwesome name="plus" /> Add an event
             </Button>
           </p>
-        </Jumbotron>
+        </PageHeader>
         <BigCalendar
           events={this.props.events.map(eventMapper)}
           step={60}

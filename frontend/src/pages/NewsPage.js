@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Jumbotron, Button } from "react-bootstrap";
+import { Jumbotron, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import NewsPost from "../components/NewsPost";
 
@@ -23,24 +23,23 @@ export class NewsPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <Jumbotron>
+        <PageHeader>
           <h1>News</h1>
-          <p>See what's going on at the clubhouse.</p>
           <p>
             <Button bsStyle="success">
               <FontAwesome name="plus" /> Add an article
             </Button>
           </p>
-          {newsPosts &&
-            newsPosts.map(newsPost => (
-              <NewsPost
-                title={newsPost.title}
-                author={newsPost.author}
-                message={newsPost.message}
-                date={newsPost.date.toString()}
-              />
-            ))}
-        </Jumbotron>
+        </PageHeader>
+        {newsPosts &&
+          newsPosts.map(newsPost => (
+            <NewsPost
+              title={newsPost.title}
+              author={newsPost.author}
+              message={newsPost.message}
+              date={newsPost.date.toString()}
+            />
+          ))}
       </React.Fragment>
     );
   }

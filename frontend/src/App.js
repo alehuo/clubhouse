@@ -143,15 +143,17 @@ class App extends Component {
           </Navbar>
           <div className="container">
             <NotificationDrawer />
-            <Alert bsStyle="info">
-              <h5>
-                You are currently in an ongoing session with <b>X</b> other
-                person(s).&nbsp;&nbsp;&nbsp;&nbsp;
-                <LinkContainer to="/session">
-                  <Button bsStyle="primary">View current session</Button>
-                </LinkContainer>
-              </h5>
-            </Alert>
+            {!this.props.watchPage && (
+              <Alert bsStyle="info">
+                <h5>
+                  You are currently in an ongoing session with <b>X</b> other
+                  person(s).&nbsp;&nbsp;&nbsp;&nbsp;
+                  <LinkContainer to="/session">
+                    <Button bsStyle="primary">View current session</Button>
+                  </LinkContainer>
+                </h5>
+              </Alert>
+            )}
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <Route
@@ -190,7 +192,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  watchPage: state.watch.watchPage
 });
 
 const mapDispatchToProps = {
