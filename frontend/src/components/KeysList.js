@@ -22,7 +22,7 @@ export class KeyList extends Component {
         <tbody>
           {this.props.keys ? (
             this.props.keys.map(key => (
-              <tr>
+              <tr key={key.id}>
                 <td>{key.id}</td>
                 <td>{key.name}</td>
                 <td>{key.studentUnion}</td>

@@ -1,8 +1,11 @@
 import UserService from "./../services/UserService";
 import { successMessage, errorMessage } from "./notificationReducer";
 import { authenticateUser, setIsLoggingIn } from "./authenticationReducer";
+import { getUserPerms } from "./permissionReducer";
 
-const initialState = {};
+const initialState = {
+  token: null
+};
 
 export const userActions = {
   LOGIN: "LOGIN",
@@ -15,8 +18,9 @@ export const login = (username, password) => {
     try {
       dispatch(setIsLoggingIn(true));
       const loginResponse = await UserService.login(username, password);
-      dispatch(setToken(loginResponse.token));
-      localStorage.setItem("token", loginResponse.token);
+      dispatch(setToken(loginResponse.data.token));
+      localStorage.setItem("token", loginResponse.data.token);
+      dispatch(getUserPerms(loginResponse.data.token));
       dispatch(authenticateUser());
       dispatch(successMessage("Successfully logged in"));
       dispatch(setIsLoggingIn(false));

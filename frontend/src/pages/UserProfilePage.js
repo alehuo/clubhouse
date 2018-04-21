@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { NavLink, Route, Redirect } from "react-router-dom";
-import {
-  PageHeader,
-  Tab,
-  Row,
-  Col,
-  NavItem,
-  Nav,
-  Button
-} from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
+import { Route, Redirect } from "react-router-dom";
+import { PageHeader, Row, Col, NavItem, Nav } from "react-bootstrap";
 import UserKeys from "./subpages/UserKeys";
 import UserHistory from "./subpages/UserHistory";
 import UserInformation from "./subpages/UserInformation";

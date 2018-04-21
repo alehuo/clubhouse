@@ -23,8 +23,9 @@ import CalendarPage from "./pages/CalendarPage";
 import NotificationDrawer from "./components/NotificationDrawer";
 import { connect } from "react-redux";
 import { authenticateUser } from "./reducers/authenticationReducer";
+import { getUserPerms } from "./reducers/permissionReducer";
+import { setToken } from "./reducers/userReducer";
 import { LinkContainer } from "react-router-bootstrap";
-import Notification from "./components/Notification";
 import Session from "./pages/Session";
 
 const AuthenticatedRoute = ({
@@ -49,8 +50,10 @@ const AuthenticatedRoute = ({
   />
 );
 class App extends Component {
-  componentDidMount = () => {
+  componentWillMount = () => {
     if (localStorage.getItem("token")) {
+      this.props.setToken(localStorage.getItem("token"));
+      this.props.getUserPerms(localStorage.getItem("token"));
       this.props.authenticateUser();
     }
   };
@@ -85,8 +88,13 @@ class App extends Component {
                     <FontAwesome name="key" /> Keys
                   </NavItem>
                 </LinkContainer>
-                <LinkContainer to="/rules">
+                <LinkContainer to="/studentunions">
                   <NavItem eventKey={4}>
+                    <FontAwesome name="users" /> Student unions
+                  </NavItem>
+                </LinkContainer>
+                <LinkContainer to="/rules">
+                  <NavItem eventKey={5}>
                     <FontAwesome name="list-ol" /> Rules
                   </NavItem>
                 </LinkContainer>
@@ -103,7 +111,7 @@ class App extends Component {
                       </NavItem>
                     </LinkContainer>
                     <NavDropdown
-                      eventKey={5}
+                      eventKey={6}
                       title={
                         <React.Fragment>
                           <FontAwesome name="user" /> <span>John Doe</span>
@@ -112,7 +120,7 @@ class App extends Component {
                       id="basic-nav-dropdown"
                     >
                       <LinkContainer to="/user">
-                        <MenuItem eventKey={5.1}>
+                        <MenuItem eventKey={6.1}>
                           <FontAwesome name="user" /> My profile
                         </MenuItem>
                       </LinkContainer>
@@ -136,15 +144,13 @@ class App extends Component {
           <div className="container">
             <NotificationDrawer />
             <Alert bsStyle="info">
-              <h4>
+              <h5>
                 You are currently in an ongoing session with <b>X</b> other
-                person(s).
-              </h4>
-              <LinkContainer to="/session">
-                <Button bsStyle="primary" bsSize="large">
-                  View current session
-                </Button>
-              </LinkContainer>
+                person(s).&nbsp;&nbsp;&nbsp;&nbsp;
+                <LinkContainer to="/session">
+                  <Button bsStyle="primary">View current session</Button>
+                </LinkContainer>
+              </h5>
             </Alert>
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
@@ -188,7 +194,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  authenticateUser
+  authenticateUser,
+  getUserPerms,
+  setToken
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

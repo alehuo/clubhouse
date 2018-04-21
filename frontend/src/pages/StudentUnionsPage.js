@@ -1,27 +1,42 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Jumbotron } from "react-bootstrap";
+import { Jumbotron, Button } from "react-bootstrap";
+import FontAwesome from "react-fontawesome";
+import StudentUnionsList from "./../components/StudentUnionsList";
+import AddStudentUnion from "./subpages/AddStudentUnion";
+import { addFormModalOpen } from "./../reducers/studentUnionReducer";
 
 export class StudentUnionsPage extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
-
   render() {
     return (
       <React.Fragment>
         <Jumbotron>
           <h1>Student unions</h1>
-          <p>Browse student unions registered at the service</p>
+          <p>Browse student unions registered at the service.</p>
+          <p>
+            <Button
+              bsStyle="success"
+              onClick={() => this.props.addFormModalOpen(true)}
+            >
+              <FontAwesome name="plus" /> Add a student union
+            </Button>
+          </p>
         </Jumbotron>
+        <StudentUnionsList stdus={this.props.studentUnions} />
+        <AddStudentUnion
+          show={this.props.modalOpen}
+          onHide={() => this.props.addFormModalOpen(false)}
+        />
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  studentUnions: state.studentUnion.studentUnions,
+  modalOpen: state.studentUnion.modalOpen
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { addFormModalOpen };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentUnionsPage);

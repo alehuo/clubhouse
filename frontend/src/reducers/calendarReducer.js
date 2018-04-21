@@ -1,4 +1,5 @@
 import CalendarService from "./../services/CalendarService";
+import { errorMessage } from "./notificationReducer";
 
 const initialState = {
   events: []
@@ -16,7 +17,7 @@ export const fetchEvents = () => async dispatch => {
       events
     });
   } catch (ex) {
-    alert(ex.toString());
+    dispatch(errorMessage("Failed to fetch calendar events"));
   }
 };
 

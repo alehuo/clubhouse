@@ -1,18 +1,20 @@
+const axios = require("axios");
+
 // User service
-const login = async (email, password) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (!(email === "admin" && password === "admin")) {
-        reject({ error: "Invalid email or password" });
-      } else {
-        resolve({ token: "HelloWorld" });
-      }
-    }, 2000);
+const login = async (username, password) =>
+  axios.post("api/v1/authenticate", {
+    username,
+    password
   });
 
 const register = async user =>
-  new Promise(resolve => {
-    setTimeout(() => resolve(Object.assign({}, user, { userId: 1 })), 2000);
+  axios.post("api/v1/user", {
+    username: user.username,
+    email: user.email,
+    password: user.password,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    unionId: user.unionId
   });
 
 export default { login, register };

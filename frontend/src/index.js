@@ -12,6 +12,9 @@ import authenticationReducer from "./reducers/authenticationReducer";
 import notificationReducer from "./reducers/notificationReducer";
 import userReducer from "./reducers/userReducer";
 import keyReducer from "./reducers/keyReducer";
+import studentUnionReducer from "./reducers/studentUnionReducer";
+import permissionReducer from "./reducers/permissionReducer";
+import { reducer as formReducer } from "redux-form";
 
 // Combine reducers
 const reducer = combineReducers({
@@ -19,7 +22,10 @@ const reducer = combineReducers({
   auth: authenticationReducer,
   user: userReducer,
   notification: notificationReducer,
-  key: keyReducer
+  key: keyReducer,
+  studentUnion: studentUnionReducer,
+  permission: permissionReducer,
+  form: formReducer
 });
 
 const middleware =
