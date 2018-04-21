@@ -7,11 +7,27 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { logger } from "./reducers/middleware";
-import testReducer from "./reducers/testReducer";
+import calendarReducer from "./reducers/calendarReducer";
+import authenticationReducer from "./reducers/authenticationReducer";
+import notificationReducer from "./reducers/notificationReducer";
+import userReducer from "./reducers/userReducer";
+import keyReducer from "./reducers/keyReducer";
+import studentUnionReducer from "./reducers/studentUnionReducer";
+import permissionReducer from "./reducers/permissionReducer";
+import { reducer as formReducer } from "redux-form";
+import watchReducer from "./reducers/watchReducer";
 
 // Combine reducers
 const reducer = combineReducers({
-  test: testReducer
+  calendar: calendarReducer,
+  auth: authenticationReducer,
+  user: userReducer,
+  notification: notificationReducer,
+  key: keyReducer,
+  studentUnion: studentUnionReducer,
+  permission: permissionReducer,
+  watch: watchReducer,
+  form: formReducer
 });
 
 const middleware =
