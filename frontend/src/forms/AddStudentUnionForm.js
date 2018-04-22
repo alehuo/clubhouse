@@ -23,7 +23,6 @@ export class AddStudentUnionForm extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
-        <button type="button" onClick={() => this.getPermCheckbox()} />
         <Field
           name="studentUnionName"
           id="formControlsText"

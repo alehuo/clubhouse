@@ -8,7 +8,7 @@ export class RulesPage extends Component {
     return (
       <React.Fragment>
         <PageHeader>
-          Rules
+          Rules{"  "}
           <small>
             Rules of the clubhouse you <b>must</b> follow!
           </small>

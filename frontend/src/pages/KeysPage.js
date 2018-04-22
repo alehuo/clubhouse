@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { PageHeader, Button } from "react-bootstrap";
 import KeysList from "./../components/KeysList";
 import FontAwesome from "react-fontawesome";
+import { toggleModal } from "./../reducers/keyReducer";
+import AddKeyHolder from "./subpages/AddKeyHolder";
 
 export class KeysPage extends Component {
   render() {
@@ -11,7 +13,10 @@ export class KeysPage extends Component {
         <PageHeader>
           Keys
           <p>
-            <Button bsStyle="success">
+            <Button
+              bsStyle="success"
+              onClick={() => this.props.toggleModal(true)}
+            >
               <FontAwesome name="plus" /> Add a keyholder
             </Button>
             {"  "}
@@ -21,15 +26,22 @@ export class KeysPage extends Component {
           </p>
         </PageHeader>
         <KeysList keys={this.props.keys} />
+        <AddKeyHolder
+          show={this.props.modalOpen}
+          onHide={() => this.props.toggleModal(false)}
+        />
       </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  keys: state.key.keys
+  keys: state.key.keys,
+  modalOpen: state.key.modalOpen
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  toggleModal
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(KeysPage);
