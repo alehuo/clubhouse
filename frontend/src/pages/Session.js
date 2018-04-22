@@ -3,6 +3,7 @@ import { PageHeader, Button, Panel, Label } from "react-bootstrap";
 import { connect } from "react-redux";
 import FontAwesome from "react-fontawesome";
 import { toggleWatchPage } from "./../reducers/watchReducer";
+import PermissionUtils from "./../utils/PermissionUtils";
 
 export class Session extends Component {
   componentDidMount() {
@@ -104,7 +105,7 @@ export class Session extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({ perms: state.permission.userPerms });
 
 const mapDispatchToProps = { toggleWatchPage };
 

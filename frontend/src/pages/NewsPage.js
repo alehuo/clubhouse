@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, PageHeader } from "react-bootstrap";
+import { Button, PageHeader, Alert } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import NewsPost from "../components/NewsPost";
+import PermissionUtils from "./../utils/PermissionUtils";
 
 const newsPosts = [
   {
@@ -21,12 +22,15 @@ export class NewsPage extends Component {
         <PageHeader>
           News
           <p>
-            <Button bsStyle="success">
-              <FontAwesome name="plus" /> Add an article
-            </Button>
+            {PermissionUtils.hasPermission(this.props.perms, 0x00100000) && (
+              <Button bsStyle="success">
+                <FontAwesome name="plus" /> Add an article
+              </Button>
+            )}
           </p>
         </PageHeader>
-        {newsPosts &&
+        {PermissionUtils.hasPermission(this.props.perms, 0x00800000) ? (
+          newsPosts &&
           newsPosts.map(newsPost => (
             <NewsPost
               key={newsPost.postId}
@@ -35,13 +39,21 @@ export class NewsPage extends Component {
               message={newsPost.message}
               date={newsPost.date.toString()}
             />
-          ))}
+          ))
+        ) : (
+          <Alert bsStyle="warning">
+            <h4>No permission to view news</h4>
+            <p>You don't have correct permissions to view news.</p>
+          </Alert>
+        )}
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  perms: state.permission.userPerms
+});
 
 const mapDispatchToProps = {};
 
