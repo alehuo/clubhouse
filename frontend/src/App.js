@@ -17,6 +17,7 @@ import NewsPage from "./pages/NewsPage";
 import KeysPage from "./pages/KeysPage";
 import RulesPage from "./pages/RulesPage";
 import UserProfilePage from "./pages/UserProfilePage";
+import UserListPage from "./pages/UserListPage";
 import StudentUnionsPage from "./pages/StudentUnionsPage";
 import FontAwesome from "react-fontawesome";
 import CalendarPage from "./pages/CalendarPage";
@@ -100,6 +101,11 @@ class App extends Component {
                         <FontAwesome name="list-ol" /> Rules
                       </NavItem>
                     </LinkContainer>
+                    <LinkContainer to="/users">
+                      <NavItem eventKey={10}>
+                        <FontAwesome name="users" />{" "}Users
+                      </NavItem>
+                    </LinkContainer>
                   </React.Fragment>
                 )}
               </Nav>
@@ -165,11 +171,6 @@ class App extends Component {
                 path="/studentunions"
                 component={StudentUnionsPage}
               />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
-                path="/users"
-                component={() => <div>Users</div>}
-              />
               <Route exact path="/keys" component={KeysPage} />
               <Route exact path="/calendar" component={CalendarPage} />
               <Route exact path="/rules" component={RulesPage} />
@@ -191,6 +192,12 @@ class App extends Component {
                 isAuthenticated={this.isUserLoggedIn()}
                 path="/user"
                 component={UserProfilePage}
+              />
+              <AuthenticatedRoute
+                isAuthenticated={this.isUserLoggedIn()}
+                exact
+                path="/users"
+                component={UserListPage}
               />
             </React.Fragment>
           </div>

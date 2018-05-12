@@ -37,7 +37,7 @@ export class AddKeyHolderForm extends Component {
           type="text"
           label="Key type"
           placeholder="Description"
-          component={FieldGroup}
+          component="select"
         />
         <Well>
           <FormGroup controlId="studentUnionPermission">

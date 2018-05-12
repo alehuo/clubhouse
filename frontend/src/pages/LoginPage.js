@@ -10,7 +10,7 @@ export class LoginPage extends Component {
   submitLogin = values => {
     // print the form values to the console
     console.log(values);
-    this.props.login(values.username, values.password);
+    this.props.login(values.email, values.password);
   };
 
   render() {
