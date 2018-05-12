@@ -124,7 +124,7 @@ export class AddStudentUnionForm extends Component {
         </Button>
         &nbsp;&nbsp;&nbsp;
         <Button type="submit" bsStyle="success" disabled={this.props.isAdding}>
-          {this.props.isAdding ? "Adding student union.." : "Add"}
+          {this.props.isAdding ? "Adding user.." : "Add"}
         </Button>
       </form>
     );
