@@ -30,7 +30,7 @@ export const login = (email, password) => {
       dispatch(setIsLoggingIn(false));
     } catch (ex) {
       dispatch(setIsLoggingIn(false));
-      dispatch(errorMessage("Failed to log in"));
+      dispatch(errorMessage(ex.response.data.error));
       console.error(ex);
     }
   };
@@ -56,8 +56,7 @@ export const fetchUsers = token => {
       const res = await UserService.getUsers(token);
       dispatch(setUsers(res.data));
     } catch (ex) {
-      console.error(ex);
-      dispatch(errorMessage("Failed to get list of users from the server"));
+      dispatch(errorMessage(ex.response.data.error));
     }
   };
 };

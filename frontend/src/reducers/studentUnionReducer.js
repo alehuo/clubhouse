@@ -21,10 +21,7 @@ export const fetchStudentUnions = token => {
       const res = await StudentUnionService.getStudentUnions(token);
       dispatch(setStudentUnions(res.data));
     } catch (ex) {
-      console.error(ex);
-      dispatch(
-        errorMessage("Failed to get list of student unions from the server")
-      );
+      dispatch(errorMessage(ex.response.data.error));
     }
   };
 };
@@ -65,7 +62,7 @@ export const addStudentUnion = (stdu, token) => {
       dispatch(addFormModalOpen(false));
       dispatch(successMessage("New student union added successfully"));
     } catch (err) {
-      dispatch(errorMessage("Error adding student union"));
+      dispatch(errorMessage(err.response.data.error));
     }
   };
 };

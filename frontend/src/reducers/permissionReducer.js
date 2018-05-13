@@ -1,5 +1,6 @@
 import PermissionService from "./../services/PermissionService";
 import { errorMessage } from "./notificationReducer";
+import { deAuthenticateUser } from "./authenticationReducer";
 
 const initialState = {
   userPerms: 0
@@ -22,7 +23,8 @@ export const getUserPerms = token => {
       const res = await PermissionService.getUserPermissions(token);
       dispatch(setUserPerms(res.data.permissions));
     } catch (err) {
-      dispatch(errorMessage("Failed to fetch user permissions"));
+      dispatch(errorMessage(err.response.data.error));
+      dispatch(deAuthenticateUser());
     }
   };
 };
