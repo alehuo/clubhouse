@@ -10,5 +10,6 @@
 | 21.4.2018 | 3h    | User can now view and add student unions. Hooked up authentication to back-end. UI refinements. Improved the layout with smaller headings to fit more content on the pages. Session page mock has been created. |
 | 22.4.2018 | 1h    | Added utility function to check for permissions. Hooked up permission system to some parts of front-end.                                                                                                        |
 | 12.5.2018 | 3h    | Created page for listing users, form to add users and reducer functionality for user.                                                                                                                           |
+| 20.5.2018 | 0.5h  | Created watch service and hooked it for watch checking.                                                                                                                                                         |
 
-Total: 24 h
+Total: 24.5 h

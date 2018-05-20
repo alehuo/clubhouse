@@ -27,6 +27,10 @@ import { authenticateUser } from "./reducers/authenticationReducer";
 import { getUserPerms } from "./reducers/permissionReducer";
 import { setToken } from "./reducers/userReducer";
 import { LinkContainer } from "react-router-bootstrap";
+import {
+  fetchOwnWatchStatus,
+  setWatchCheckInterval
+} from "./reducers/watchReducer";
 import Session from "./pages/Session";
 
 const AuthenticatedRoute = ({
@@ -56,8 +60,17 @@ class App extends Component {
       this.props.setToken(localStorage.getItem("token"));
       this.props.getUserPerms(localStorage.getItem("token"));
       this.props.authenticateUser();
+      const watchInterval = setInterval(() => {
+        this.props.fetchOwnWatchStatus(localStorage.getItem("token"));
+      }, 10000);
+      this.props.setWatchCheckInterval(watchInterval);
     }
   };
+
+  componentWillUnmount() {
+    clearInterval(this.props.watchInterval);
+    this.props.setWatchCheckInterval(null);
+  }
 
   isUserLoggedIn = () => this.props.isAuthenticated === true;
 
@@ -103,7 +116,7 @@ class App extends Component {
                     </LinkContainer>
                     <LinkContainer to="/users">
                       <NavItem eventKey={10}>
-                        <FontAwesome name="users" />{" "}Users
+                        <FontAwesome name="users" /> Users
                       </NavItem>
                     </LinkContainer>
                   </React.Fragment>
@@ -153,17 +166,29 @@ class App extends Component {
           </Navbar>
           <div className="container">
             <NotificationDrawer />
-            {!(this.props.watchPage || !this.props.isAuthenticated) && (
-              <Alert bsStyle="info">
-                <h5>
-                  You are currently in an ongoing session with <b>X</b> other
-                  person(s).&nbsp;&nbsp;&nbsp;&nbsp;
-                  <LinkContainer to="/session">
-                    <Button bsStyle="primary">View current session</Button>
-                  </LinkContainer>
-                </h5>
-              </Alert>
-            )}
+            {!(this.props.watchPage || !this.props.isAuthenticated) &&
+              this.props.watchRunning && (
+                <Alert bsStyle="info">
+                  <h5>
+                    {this.props.peopleCount > 0 ? (
+                      <React.Fragment>
+                        You are currently in an ongoing session with{" "}
+                        <b>{this.props.peopleCount}</b> other
+                        person(s).&nbsp;&nbsp;&nbsp;&nbsp;
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        You are currently alone in an ongoing
+                        session.&nbsp;&nbsp;&nbsp;&nbsp;
+                      </React.Fragment>
+                    )}
+
+                    <LinkContainer to="/session">
+                      <Button bsStyle="primary">View current session</Button>
+                    </LinkContainer>
+                  </h5>
+                </Alert>
+              )}
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <Route
@@ -209,13 +234,18 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  watchPage: state.watch.watchPage
+  watchPage: state.watch.watchPage,
+  watchRunning: state.watch.ownWatchRunning,
+  peopleCount: state.watch.ownWatchPeopleCount,
+  watchInterval: state.watch.watchCheckInterval
 });
 
 const mapDispatchToProps = {
   authenticateUser,
   getUserPerms,
-  setToken
+  setToken,
+  fetchOwnWatchStatus,
+  setWatchCheckInterval
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

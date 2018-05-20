@@ -2,6 +2,7 @@ import UserService from "./../services/UserService";
 import { successMessage, errorMessage } from "./notificationReducer";
 import { authenticateUser, setIsLoggingIn } from "./authenticationReducer";
 import { getUserPerms } from "./permissionReducer";
+import { fetchOwnWatchStatus } from "./watchReducer";
 
 const initialState = {
   token: null,
@@ -24,6 +25,7 @@ export const login = (email, password) => {
       const loginResponse = await UserService.login(email, password);
       dispatch(setToken(loginResponse.data.token));
       localStorage.setItem("token", loginResponse.data.token);
+      dispatch(fetchOwnWatchStatus(localStorage.getItem("token")));
       dispatch(getUserPerms(loginResponse.data.token));
       dispatch(authenticateUser());
       dispatch(successMessage("Successfully logged in"));
