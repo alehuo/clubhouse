@@ -11,13 +11,32 @@ import {
 } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
-const FieldGroup = ({ input, meta, id, label, help, ...props }) => (
+const FieldGroup = ({
+  input,
+  meta,
+  id,
+  label,
+  help,
+  meta: { touched, error, warning },
+  ...props
+}) => (
   <FormGroup controlId={id}>
     <ControlLabel>{label}</ControlLabel>
     <FormControl {...props} {...input} />
     {help && <HelpBlock>{help}</HelpBlock>}
+    {touched &&
+      ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
   </FormGroup>
 );
+
+const checked = val =>
+  val === true
+    ? undefined
+    : "You must have the permission from the student union";
+
+// Todo: add field name to message
+const notEmpty = val =>
+  val && val.length > 0 ? undefined : "Input must not be empty";
 
 export class AddStudentUnionForm extends Component {
   render() {
@@ -30,6 +49,7 @@ export class AddStudentUnionForm extends Component {
           label="Name"
           placeholder="Name"
           component={FieldGroup}
+          validate={[notEmpty]}
         />
         <Field
           name="studentUnionDescription"
@@ -38,6 +58,7 @@ export class AddStudentUnionForm extends Component {
           label="Description"
           placeholder="Description"
           component={FieldGroup}
+          validate={[notEmpty]}
         />
         <Well>
           <FormGroup controlId="studentUnionPermission">
@@ -45,6 +66,7 @@ export class AddStudentUnionForm extends Component {
               name="studentUnionPermission"
               component="input"
               type="checkbox"
+              validate={[checked]}
             />{" "}
             <b>
               I have the permission from the student union to save their

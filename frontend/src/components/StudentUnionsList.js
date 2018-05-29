@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Table } from "react-bootstrap";
-import { fetchStudentUnions } from "./../reducers/studentUnionReducer";
+import { Table, Button } from "react-bootstrap";
+import FontAwesome from "react-fontawesome";
+import {
+  fetchStudentUnions,
+  deleteStudentUnion
+} from "./../reducers/studentUnionReducer";
+import PermissionUtils from "./../utils/PermissionUtils";
 
 export class StudentUnionsList extends Component {
   componentDidMount() {
@@ -15,15 +20,38 @@ export class StudentUnionsList extends Component {
             <th>#</th>
             <th>Name</th>
             <th>Description</th>
+            {PermissionUtils.hasPermission(
+              this.props.perms,
+              Math.pow(2, 11) ||
+                PermissionUtils.hasPermission(this.props.perms, Math.pow(2, 12))
+            ) && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
           {this.props.stdus ? (
-            this.props.stdus.map(key => (
-              <tr key={key.unionId}>
-                <td>{key.unionId}</td>
-                <td>{key.name}</td>
-                <td>{key.description}</td>
+            this.props.stdus.map(union => (
+              <tr key={union.unionId}>
+                <td>{union.unionId}</td>
+                <td>{union.name}</td>
+                <td>{union.description}</td>
+                {PermissionUtils.hasPermission(
+                  this.props.perms,
+                  Math.pow(2, 11)
+                ) && (
+                  <td>
+                    <Button
+                      bsStyle="danger"
+                      onClick={() =>
+                        this.props.deleteStudentUnion(
+                          union.unionId,
+                          this.props.token
+                        )
+                      }
+                    >
+                      <FontAwesome name="delete" /> Delete
+                    </Button>
+                  </td>
+                )}
               </tr>
             ))
           ) : (
@@ -38,11 +66,13 @@ export class StudentUnionsList extends Component {
 }
 
 const mapStateToProps = state => ({
-  token: state.user.token
+  token: state.user.token,
+  perms: state.permission.userPerms
 });
 
 const mapDispatchToProps = {
-  fetchStudentUnions
+  fetchStudentUnions,
+  deleteStudentUnion
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentUnionsList);

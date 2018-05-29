@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import {
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
-  Button,
-  Alert
-} from "react-bootstrap";
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
@@ -81,7 +73,7 @@ class App extends Component {
         icon: "comments",
         text: "News"
       },
-      {
+      /*{
         url: "/calendar",
         icon: "calendar",
         text: "Calendar"
@@ -90,17 +82,17 @@ class App extends Component {
         url: "/keys",
         icon: "key",
         text: "Keys"
-      },
+      },*/
       {
         url: "/studentunions",
         icon: "users",
         text: "Student unions"
       },
-      {
+      /*{
         url: "/rules",
         icon: "list-ol",
         text: "Rules"
-      },
+      },*/
       {
         url: "/users",
         icon: "users",
@@ -122,7 +114,7 @@ class App extends Component {
                 {this.props.isAuthenticated && (
                   <React.Fragment>
                     {navButtons.map(navButton => (
-                      <LinkContainer to={navButton.url}>
+                      <LinkContainer to={navButton.url} key={navButton.url}>
                         <NavItem eventKey={1}>
                           <FontAwesome name={navButton.icon} /> {navButton.text}
                         </NavItem>
@@ -175,7 +167,7 @@ class App extends Component {
           </Navbar>
           <div className="container">
             <NotificationDrawer />
-            {!(this.props.watchPage || !this.props.isAuthenticated) &&
+            {/*!(this.props.watchPage || !this.props.isAuthenticated) &&
               this.props.watchRunning && (
                 <Alert bsStyle="info">
                   <h5>
@@ -197,7 +189,7 @@ class App extends Component {
                     </LinkContainer>
                   </h5>
                 </Alert>
-              )}
+              )*/}
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <Route

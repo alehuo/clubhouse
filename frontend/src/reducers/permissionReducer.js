@@ -21,7 +21,7 @@ export const getUserPerms = token => {
   return async dispatch => {
     try {
       const res = await PermissionService.getUserPermissions(token);
-      dispatch(setUserPerms(res.data.permissions));
+      dispatch(setUserPerms(res.data));
     } catch (err) {
       dispatch(errorMessage(err.response.data.error));
       dispatch(deAuthenticateUser());
@@ -32,7 +32,10 @@ export const getUserPerms = token => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case permissionActions.SET_USER_PERMS:
-      return Object.assign({}, state, { userPerms: action.permissions });
+      return Object.assign({}, state, {
+        userPerms: action.permissions.permissions,
+        userPermList: action.permissions.permission_list
+      });
     default:
       return state;
   }

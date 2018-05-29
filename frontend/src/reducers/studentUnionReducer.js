@@ -9,6 +9,7 @@ const initialState = {
 
 export const studentUnionActions = {
   ADD_STUDENT_UNION: "ADD_STUDENT_UNION",
+  DELETE_STUDENT_UNION: "DELETE_STUDENT_UNION",
   SET_STUDENT_UNIONS: "SET_STUDENT_UNIONS",
   SET_ADDING: "SET_ADDING",
   ADD_FORM_MODAL_OPEN: "ADD_FORM_MODAL_OPEN",
@@ -67,6 +68,23 @@ export const addStudentUnion = (stdu, token) => {
   };
 };
 
+export const deleteStudentUnion = (unionId, token) => {
+  return async dispatch => {
+    try {
+      const res = await StudentUnionService.deleteStudentUnion(unionId, token);
+      console.log(res);
+      dispatch({
+        type: studentUnionActions.DELETE_STUDENT_UNION,
+        unionId
+      });
+      dispatch(successMessage("Student union deleted successfully"));
+    } catch (err) {
+      console.error(err);
+      dispatch(errorMessage(err.response.data.error));
+    }
+  };
+};
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case studentUnionActions.SET_STUDENT_UNIONS:
@@ -78,6 +96,13 @@ export default (state = initialState, action) => {
     case studentUnionActions.ADD_TO_LIST:
       return Object.assign({}, state, {
         studentUnions: [...state.studentUnions, action.addedUnion]
+      });
+    case studentUnionActions.DELETE_STUDENT_UNION:
+      const unions = state.studentUnions.filter(
+        studentUnion => studentUnion.unionId !== action.unionId
+      );
+      return Object.assign({}, state, {
+        studentUnions: unions
       });
     default:
       return state;

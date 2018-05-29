@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, PageHeader, Alert } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
+import { PageHeader, Alert } from "react-bootstrap";
 import NewsPost from "../components/NewsPost";
 import PermissionUtils from "./../utils/PermissionUtils";
 
@@ -22,11 +21,11 @@ export class NewsPage extends Component {
         <PageHeader>
           News
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, 0x00100000) && (
+            {/*PermissionUtils.hasPermission(this.props.perms, 0x00100000) && (
               <Button bsStyle="success">
                 <FontAwesome name="plus" /> Add an article
               </Button>
-            )}
+            )*/}
           </p>
         </PageHeader>
         {PermissionUtils.hasPermission(this.props.perms, 0x00800000) ? (
