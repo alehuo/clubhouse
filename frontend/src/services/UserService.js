@@ -1,15 +1,15 @@
 const axios = require("axios");
+const customAxios = require("./custom-axios");
 
 // User service
-const login = async (username, password) =>
+const login = async (email, password) =>
   axios.post("api/v1/authenticate", {
-    username,
+    email,
     password
   });
 
 const register = async user =>
-  axios.post("api/v1/user", {
-    username: user.username,
+  axios.post("api/v1/users", {
     email: user.email,
     password: user.password,
     firstName: user.firstName,
@@ -17,4 +17,6 @@ const register = async user =>
     unionId: user.unionId
   });
 
-export default { login, register };
+const getUsers = token => customAxios(token).get("api/v1/users");
+
+export default { login, register, getUsers };

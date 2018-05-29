@@ -2,12 +2,22 @@ import KeyService from "./../services/KeyService";
 import { errorMessage } from "./notificationReducer";
 
 const initialState = {
-  keys: []
+  keys: [],
+  isAdding: false,
+  modalOpen: false
 };
 
 export const keyActions = {
   ADD_KEY: "ADD_KEY",
-  SET_KEYS: "SET_KEYS"
+  SET_KEYS: "SET_KEYS",
+  TOGGLE_MODAL: "TOGGLE_MODAL"
+};
+
+export const toggleModal = val => {
+  return {
+    type: keyActions.TOGGLE_MODAL,
+    val
+  };
 };
 
 export const fetchKeys = () => {
@@ -34,6 +44,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case keyActions.SET_KEYS:
       return Object.assign({}, state, { keys: action.keys });
+    case keyActions.TOGGLE_MODAL:
+      return Object.assign({}, state, { modalOpen: action.val });
     default:
       return state;
   }

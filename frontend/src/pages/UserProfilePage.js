@@ -6,8 +6,8 @@ import UserKeys from "./subpages/UserKeys";
 import UserHistory from "./subpages/UserHistory";
 import UserInformation from "./subpages/UserInformation";
 import { LinkContainer } from "react-router-bootstrap";
-export class UserProfilePage extends Component {
 
+export class UserProfilePage extends Component {
   render() {
     return (
       <React.Fragment>
@@ -44,7 +44,7 @@ export class UserProfilePage extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({ perms: state.permission.userPerms });
 
 const mapDispatchToProps = {};
 

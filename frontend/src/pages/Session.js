@@ -104,7 +104,7 @@ export class Session extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({ perms: state.permission.userPerms });
 
 const mapDispatchToProps = { toggleWatchPage };
 

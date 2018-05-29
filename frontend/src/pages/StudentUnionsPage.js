@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { PageHeader, Button } from "react-bootstrap";
+import { PageHeader, Button, Alert } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import StudentUnionsList from "./../components/StudentUnionsList";
 import AddStudentUnion from "./subpages/AddStudentUnion";
 import { addFormModalOpen } from "./../reducers/studentUnionReducer";
+import PermissionUtils from "./../utils/PermissionUtils";
 
 export class StudentUnionsPage extends Component {
   render() {
@@ -13,15 +14,24 @@ export class StudentUnionsPage extends Component {
         <PageHeader>
           Student unions
           <p>
-            <Button
-              bsStyle="success"
-              onClick={() => this.props.addFormModalOpen(true)}
-            >
-              <FontAwesome name="plus" /> Add a student union
-            </Button>
+            {PermissionUtils.hasPermission(this.props.perms, 0x00000400) && (
+              <Button
+                bsStyle="success"
+                onClick={() => this.props.addFormModalOpen(true)}
+              >
+                <FontAwesome name="plus" /> Add a student union
+              </Button>
+            )}
           </p>
         </PageHeader>
-        <StudentUnionsList stdus={this.props.studentUnions} />
+        {PermissionUtils.hasPermission(this.props.perms, 0x00002000) ? (
+          <StudentUnionsList stdus={this.props.studentUnions} />
+        ) : (
+          <Alert bsStyle="warning">
+            <h4>No permission to view student unions</h4>
+            <p>You don't have correct permissions to view student unions.</p>
+          </Alert>
+        )}
         <AddStudentUnion
           show={this.props.modalOpen}
           onHide={() => this.props.addFormModalOpen(false)}
@@ -33,7 +43,8 @@ export class StudentUnionsPage extends Component {
 
 const mapStateToProps = state => ({
   studentUnions: state.studentUnion.studentUnions,
-  modalOpen: state.studentUnion.modalOpen
+  modalOpen: state.studentUnion.modalOpen,
+  perms: state.permission.userPerms
 });
 
 const mapDispatchToProps = { addFormModalOpen };

@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import {
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
-  Button,
-  Alert
-} from "react-bootstrap";
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
@@ -17,6 +9,7 @@ import NewsPage from "./pages/NewsPage";
 import KeysPage from "./pages/KeysPage";
 import RulesPage from "./pages/RulesPage";
 import UserProfilePage from "./pages/UserProfilePage";
+import UserListPage from "./pages/UserListPage";
 import StudentUnionsPage from "./pages/StudentUnionsPage";
 import FontAwesome from "react-fontawesome";
 import CalendarPage from "./pages/CalendarPage";
@@ -26,6 +19,10 @@ import { authenticateUser } from "./reducers/authenticationReducer";
 import { getUserPerms } from "./reducers/permissionReducer";
 import { setToken } from "./reducers/userReducer";
 import { LinkContainer } from "react-router-bootstrap";
+import {
+  fetchOwnWatchStatus,
+  setWatchCheckInterval
+} from "./reducers/watchReducer";
 import Session from "./pages/Session";
 
 const AuthenticatedRoute = ({
@@ -55,12 +52,53 @@ class App extends Component {
       this.props.setToken(localStorage.getItem("token"));
       this.props.getUserPerms(localStorage.getItem("token"));
       this.props.authenticateUser();
+      const watchInterval = setInterval(() => {
+        this.props.fetchOwnWatchStatus(localStorage.getItem("token"));
+      }, 10000);
+      this.props.setWatchCheckInterval(watchInterval);
     }
   };
+
+  componentWillUnmount() {
+    clearInterval(this.props.watchInterval);
+    this.props.setWatchCheckInterval(null);
+  }
 
   isUserLoggedIn = () => this.props.isAuthenticated === true;
 
   render() {
+    const navButtons = [
+      {
+        url: "/news",
+        icon: "comments",
+        text: "News"
+      },
+      /*{
+        url: "/calendar",
+        icon: "calendar",
+        text: "Calendar"
+      },
+      {
+        url: "/keys",
+        icon: "key",
+        text: "Keys"
+      },*/
+      {
+        url: "/studentunions",
+        icon: "users",
+        text: "Student unions"
+      },
+      /*{
+        url: "/rules",
+        icon: "list-ol",
+        text: "Rules"
+      },*/
+      {
+        url: "/users",
+        icon: "users",
+        text: "Users"
+      }
+    ];
     return (
       <Router>
         <div>
@@ -75,31 +113,13 @@ class App extends Component {
               <Nav>
                 {this.props.isAuthenticated && (
                   <React.Fragment>
-                    <LinkContainer to="/news">
-                      <NavItem eventKey={1}>
-                        <FontAwesome name="comments" /> News
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/calendar">
-                      <NavItem eventKey={2}>
-                        <FontAwesome name="calendar" /> Calendar
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/keys">
-                      <NavItem eventKey={3}>
-                        <FontAwesome name="key" /> Keys
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/studentunions">
-                      <NavItem eventKey={4}>
-                        <FontAwesome name="users" /> Student unions
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/rules">
-                      <NavItem eventKey={5}>
-                        <FontAwesome name="list-ol" /> Rules
-                      </NavItem>
-                    </LinkContainer>
+                    {navButtons.map(navButton => (
+                      <LinkContainer to={navButton.url} key={navButton.url}>
+                        <NavItem eventKey={1}>
+                          <FontAwesome name={navButton.icon} /> {navButton.text}
+                        </NavItem>
+                      </LinkContainer>
+                    ))}
                   </React.Fragment>
                 )}
               </Nav>
@@ -147,28 +167,35 @@ class App extends Component {
           </Navbar>
           <div className="container">
             <NotificationDrawer />
-            {!(this.props.watchPage || !this.props.isAuthenticated) && (
-              <Alert bsStyle="info">
-                <h5>
-                  You are currently in an ongoing session with <b>X</b> other
-                  person(s).&nbsp;&nbsp;&nbsp;&nbsp;
-                  <LinkContainer to="/session">
-                    <Button bsStyle="primary">View current session</Button>
-                  </LinkContainer>
-                </h5>
-              </Alert>
-            )}
+            {/*!(this.props.watchPage || !this.props.isAuthenticated) &&
+              this.props.watchRunning && (
+                <Alert bsStyle="info">
+                  <h5>
+                    {this.props.peopleCount > 0 ? (
+                      <React.Fragment>
+                        You are currently in an ongoing session with{" "}
+                        <b>{this.props.peopleCount}</b> other
+                        person(s).&nbsp;&nbsp;&nbsp;&nbsp;
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        You are currently alone in an ongoing
+                        session.&nbsp;&nbsp;&nbsp;&nbsp;
+                      </React.Fragment>
+                    )}
+
+                    <LinkContainer to="/session">
+                      <Button bsStyle="primary">View current session</Button>
+                    </LinkContainer>
+                  </h5>
+                </Alert>
+              )*/}
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <Route
                 exact
                 path="/studentunions"
                 component={StudentUnionsPage}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
-                path="/users"
-                component={() => <div>Users</div>}
               />
               <Route exact path="/keys" component={KeysPage} />
               <Route exact path="/calendar" component={CalendarPage} />
@@ -192,6 +219,12 @@ class App extends Component {
                 path="/user"
                 component={UserProfilePage}
               />
+              <AuthenticatedRoute
+                isAuthenticated={this.isUserLoggedIn()}
+                exact
+                path="/users"
+                component={UserListPage}
+              />
             </React.Fragment>
           </div>
         </div>
@@ -202,13 +235,18 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  watchPage: state.watch.watchPage
+  watchPage: state.watch.watchPage,
+  watchRunning: state.watch.ownWatchRunning,
+  peopleCount: state.watch.ownWatchPeopleCount,
+  watchInterval: state.watch.watchCheckInterval
 });
 
 const mapDispatchToProps = {
   authenticateUser,
   getUserPerms,
-  setToken
+  setToken,
+  fetchOwnWatchStatus,
+  setWatchCheckInterval
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

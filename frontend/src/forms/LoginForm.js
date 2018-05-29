@@ -26,11 +26,11 @@ export class LoginForm extends Component {
     return (
       <form onSubmit={this.props.handleSubmit}>
         <Field
-          name="username"
+          name="email"
           id="formControlsUsrname"
           type="text"
-          label="Username"
-          placeholder="Username"
+          label="Email address"
+          placeholder="Email address"
           component={FieldGroup}
         />
         <Field
