@@ -2,7 +2,7 @@
   "name": "clubhousefrontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "https://clubhouse-backend.herokuapp.com",
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.21.0",
