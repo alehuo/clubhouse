@@ -3,7 +3,6 @@ import { PageHeader, Button, Panel, Label } from "react-bootstrap";
 import { connect } from "react-redux";
 import FontAwesome from "react-fontawesome";
 import { toggleWatchPage } from "./../reducers/watchReducer";
-import PermissionUtils from "./../utils/PermissionUtils";
 
 export class Session extends Component {
   componentDidMount() {

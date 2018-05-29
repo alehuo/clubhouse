@@ -1,6 +1,5 @@
 import watchService from "./../services/WatchService";
 import { errorMessage } from "./notificationReducer";
-import { watch } from "fs";
 
 const initialState = {
   watchPage: false,

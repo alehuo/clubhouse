@@ -30,10 +30,10 @@ const FieldGroup = ({
 );
 
 const checked = val =>
-  val == true ? undefined : "You must have the permission from the user";
+  val === true ? undefined : "You must have the permission from the user";
 
 const stduSelected = val =>
-  val == -1 ? undefined : "Please select a student union from the list";
+  val === -1 ? undefined : "Please select a student union from the list";
 
 export class AddStudentUnionForm extends Component {
   render() {
@@ -135,8 +135,6 @@ const mapStateToProps = state => ({
   isAdding: state.studentUnion.isAdding,
   studentUnions: state.studentUnion.studentUnions
 });
-
-const mapDispatchToProps = {};
 
 export default reduxForm({
   // a unique name for the form

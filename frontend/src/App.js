@@ -75,6 +75,38 @@ class App extends Component {
   isUserLoggedIn = () => this.props.isAuthenticated === true;
 
   render() {
+    const navButtons = [
+      {
+        url: "/news",
+        icon: "comments",
+        text: "News"
+      },
+      {
+        url: "/calendar",
+        icon: "calendar",
+        text: "Calendar"
+      },
+      {
+        url: "/keys",
+        icon: "key",
+        text: "Keys"
+      },
+      {
+        url: "/studentunions",
+        icon: "users",
+        text: "Student unions"
+      },
+      {
+        url: "/rules",
+        icon: "list-ol",
+        text: "Rules"
+      },
+      {
+        url: "/users",
+        icon: "users",
+        text: "Users"
+      }
+    ];
     return (
       <Router>
         <div>
@@ -89,36 +121,13 @@ class App extends Component {
               <Nav>
                 {this.props.isAuthenticated && (
                   <React.Fragment>
-                    <LinkContainer to="/news">
-                      <NavItem eventKey={1}>
-                        <FontAwesome name="comments" /> News
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/calendar">
-                      <NavItem eventKey={2}>
-                        <FontAwesome name="calendar" /> Calendar
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/keys">
-                      <NavItem eventKey={3}>
-                        <FontAwesome name="key" /> Keys
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/studentunions">
-                      <NavItem eventKey={4}>
-                        <FontAwesome name="users" /> Student unions
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/rules">
-                      <NavItem eventKey={5}>
-                        <FontAwesome name="list-ol" /> Rules
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/users">
-                      <NavItem eventKey={10}>
-                        <FontAwesome name="users" /> Users
-                      </NavItem>
-                    </LinkContainer>
+                    {navButtons.map(navButton => (
+                      <LinkContainer to={navButton.url}>
+                        <NavItem eventKey={1}>
+                          <FontAwesome name={navButton.icon} /> {navButton.text}
+                        </NavItem>
+                      </LinkContainer>
+                    ))}
                   </React.Fragment>
                 )}
               </Nav>

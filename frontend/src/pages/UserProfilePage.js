@@ -6,7 +6,6 @@ import UserKeys from "./subpages/UserKeys";
 import UserHistory from "./subpages/UserHistory";
 import UserInformation from "./subpages/UserInformation";
 import { LinkContainer } from "react-router-bootstrap";
-import PermissionUtils from "./../utils/PermissionUtils";
 
 export class UserProfilePage extends Component {
   render() {
