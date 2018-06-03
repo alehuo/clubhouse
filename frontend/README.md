@@ -8,6 +8,7 @@ Front-end for Full-stack software development project course.
 The front-end has been coded with JavaScript and React. React Redux is used to handle the application's state. Redux Thunk is used for asynchronous redux actions. React Bootstrap is used to construct the UI, with the help of React Router and React FontAwesome.
 
 * [Production application at Heroku](https://clubhouse-frontend.herokuapp.com)
+* [Back-end repository](https://github.com/alehuo/clubhouse-backend)
 
 ## Table of contents <!-- DOCTOC SKIP -->
 
