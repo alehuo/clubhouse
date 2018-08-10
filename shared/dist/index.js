@@ -7,5 +7,5 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const permissions = __importStar(require("./Permissions"));
-exports.permissions = permissions;
+const Permissions = __importStar(require("./Permissions"));
+exports.default = { Permissions };

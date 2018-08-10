@@ -1,3 +1,3 @@
-import * as permissions from "./Permissions";
+import * as Permissions from "./Permissions";
 
-export { permissions };
+export default { Permissions };
