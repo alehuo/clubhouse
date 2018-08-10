@@ -3,4 +3,6 @@
  * @author alehuo
  */
 
-export * from "./Permissions";
+import Permissions from "./Permissions";
+
+export { Permissions };
