@@ -4,6 +4,8 @@ import { PageHeader, Button, Alert } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import PermissionUtils from "./../utils/PermissionUtils";
 
+import { Permissions } from "@alehuo/clubhouse-shared";
+
 export class RulesPage extends Component {
   render() {
     return (
@@ -14,14 +16,14 @@ export class RulesPage extends Component {
             Rules of the clubhouse you <b>must</b> follow!
           </small>
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, 0x00040000) && (
+            {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_EDIT_RULES.value) && (
               <Button bsStyle="success">
                 <FontAwesome name="edit" /> Edit rules
               </Button>
             )}
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(this.props.perms, 0x00080000) ? (
+        {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_VIEW_RULES.value) ? (
           <div>Rules here</div>
         ) : (
           <Alert bsStyle="warning">

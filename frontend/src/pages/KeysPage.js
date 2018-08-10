@@ -7,6 +7,8 @@ import { toggleModal } from "./../reducers/keyReducer";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 import PermissionUtils from "./../utils/PermissionUtils";
 
+import { Permissions } from "@alehuo/clubhouse-shared";
+
 export class KeysPage extends Component {
   render() {
     return (
@@ -14,7 +16,10 @@ export class KeysPage extends Component {
         <PageHeader>
           Keys
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, 0x00000010) && (
+            {PermissionUtils.hasPermission(
+              this.props.perms,
+              Permissions.ALLOW_ADD_KEYS.value
+            ) && (
               <Button
                 bsStyle="success"
                 onClick={() => this.props.toggleModal(true)}
@@ -23,14 +28,17 @@ export class KeysPage extends Component {
               </Button>
             )}
             {"  "}
-            {PermissionUtils.hasPermission(this.props.perms, 0x02000000) && (
+            {
               <Button bsStyle="info">
                 <FontAwesome name="envelope" /> Send an email to keyholder(s)
               </Button>
-            )}
+            }
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(this.props.perms, 0x00000080) ? (
+        {PermissionUtils.hasPermission(
+          this.props.perms,
+          Permissions.ALLOW_VIEW_KEYS.value
+        ) ? (
           <KeysList keys={this.props.keys} />
         ) : (
           <Alert bsStyle="warning">
@@ -59,4 +67,7 @@ const mapDispatchToProps = {
   toggleModal
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(KeysPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KeysPage);

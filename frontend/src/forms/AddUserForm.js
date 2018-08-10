@@ -32,6 +32,11 @@ const FieldGroup = ({
 const checked = val =>
   val === true ? undefined : "You must have the permission from the user";
 
+const passwd = val =>
+  val && val.length >= 8
+    ? undefined
+    : "Password cannot be empty or shorter than 8 characters";
+
 const stduSelected = val =>
   val === -1 ? undefined : "Please select a student union from the list";
 
@@ -70,6 +75,7 @@ export class AddStudentUnionForm extends Component {
           label="Password"
           placeholder="Password"
           component={FieldGroup}
+          validate={[passwd]}
         />
         <Field
           name="passwordAgain"

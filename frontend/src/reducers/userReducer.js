@@ -15,7 +15,8 @@ export const userActions = {
   LOGOUT: "LOGOUT",
   SET_TOKEN: "SET_TOKEN",
   SET_USERS: "SET_USERS",
-  ADD_USER_FORM_MODAL_OPEN: "ADD_USER_FORM_MODAL_OPEN"
+  ADD_USER_FORM_MODAL_OPEN: "ADD_USER_FORM_MODAL_OPEN",
+  REMOVE_USER: "REMOVE_USER"
 };
 
 export const login = (email, password) => {
@@ -52,6 +53,26 @@ export const setUsers = users => {
   };
 };
 
+export const deleteUser = (userId, token) => {
+  return async dispatch => {
+    try {
+      await UserService.remove(userId, token);
+      dispatch(successMessage("Successfully deleted user"));
+      dispatch(removeUserFromList(userId));
+    } catch (ex) {
+      dispatch(errorMessage(ex.response.data.error));
+      console.error(ex);
+    }
+  };
+};
+
+export const removeUserFromList = userId => {
+  return {
+    type: userActions.REMOVE_USER,
+    userId
+  };
+};
+
 export const fetchUsers = token => {
   return async dispatch => {
     try {
@@ -71,8 +92,8 @@ export const addFormModalOpen = status => {
 };
 
 export const addUser = (user, token) => {
-  return {
-    type: "TEST"
+  return async dispatch => {
+    await UserService.register(user, token);
   };
 };
 
@@ -84,6 +105,10 @@ const userReducer = (state = initialState, action) => {
       return Object.assign({}, state, { users: action.users });
     case userActions.ADD_USER_FORM_MODAL_OPEN:
       return Object.assign({}, state, { modalOpen: action.status });
+    case userActions.REMOVE_USER:
+      return Object.assign({}, state, {
+        users: state.users.filter(user => user.userId !== action.userId)
+      });
     default:
       return state;
   }

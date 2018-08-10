@@ -8,6 +8,8 @@ import {
 } from "./../reducers/studentUnionReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
+import { Permissions } from "@alehuo/clubhouse-shared";
+
 export class StudentUnionsList extends Component {
   componentDidMount() {
     this.props.fetchStudentUnions(this.props.token);
@@ -22,8 +24,7 @@ export class StudentUnionsList extends Component {
             <th>Description</th>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Math.pow(2, 11) ||
-                PermissionUtils.hasPermission(this.props.perms, Math.pow(2, 12))
+              Permissions.ALLOW_REMOVE_STUDENT_UNION.value
             ) && <th>Actions</th>}
           </tr>
         </thead>
@@ -36,7 +37,7 @@ export class StudentUnionsList extends Component {
                 <td>{union.description}</td>
                 {PermissionUtils.hasPermission(
                   this.props.perms,
-                  Math.pow(2, 11)
+                  Permissions.ALLOW_REMOVE_STUDENT_UNION.value
                 ) && (
                   <td>
                     <Button
@@ -48,7 +49,7 @@ export class StudentUnionsList extends Component {
                         )
                       }
                     >
-                      <FontAwesome name="delete" /> Delete
+                      <FontAwesome name="trash" /> Delete
                     </Button>
                   </td>
                 )}
@@ -75,4 +76,7 @@ const mapDispatchToProps = {
   deleteStudentUnion
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentUnionsList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StudentUnionsList);

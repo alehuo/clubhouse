@@ -1,5 +1,5 @@
-const axios = require("axios");
-const customAxios = require("./custom-axios");
+import axios from "axios";
+import customAxios from "./custom-axios";
 
 // User service
 const login = async (email, password) =>
@@ -8,8 +8,8 @@ const login = async (email, password) =>
     password
   });
 
-const register = async user =>
-  axios.post("api/v1/users", {
+const register = async (user, token) =>
+  customAxios(token).post("api/v1/users", {
     email: user.email,
     password: user.password,
     firstName: user.firstName,
@@ -17,6 +17,9 @@ const register = async user =>
     unionId: user.unionId
   });
 
+const remove = async (userId, token) =>
+  customAxios(token).delete("api/v1/users/" + Number(userId));
+
 const getUsers = token => customAxios(token).get("api/v1/users");
 
-export default { login, register, getUsers };
+export default { login, register, getUsers, remove };

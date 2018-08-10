@@ -7,6 +7,8 @@ import AddStudentUnion from "./subpages/AddStudentUnion";
 import { addFormModalOpen } from "./../reducers/studentUnionReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
+import { Permissions } from "@alehuo/clubhouse-shared";
+
 export class StudentUnionsPage extends Component {
   render() {
     return (
@@ -14,7 +16,7 @@ export class StudentUnionsPage extends Component {
         <PageHeader>
           Student unions
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, 0x00000400) && (
+            {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_ADD_STUDENT_UNION.value) && (
               <Button
                 bsStyle="success"
                 onClick={() => this.props.addFormModalOpen(true)}
@@ -24,7 +26,7 @@ export class StudentUnionsPage extends Component {
             )}
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(this.props.perms, 0x00002000) ? (
+        {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_VIEW_STUDENT_UNIONS.value) ? (
           <StudentUnionsList stdus={this.props.studentUnions} />
         ) : (
           <Alert bsStyle="warning">

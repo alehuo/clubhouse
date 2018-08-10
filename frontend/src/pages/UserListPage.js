@@ -7,6 +7,8 @@ import AddUser from "./subpages/AddUser";
 import { addFormModalOpen } from "./../reducers/userReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
+import { Permissions } from "@alehuo/clubhouse-shared";
+
 export class UserListPage extends Component {
   render() {
     return (
@@ -14,15 +16,23 @@ export class UserListPage extends Component {
         <PageHeader>
           Users
           <p>
-            <Button
-              bsStyle="success"
-              onClick={() => this.props.addFormModalOpen(true)}
-            >
-              <FontAwesome name="plus" /> Add a user
-            </Button>
+            {PermissionUtils.hasPermission(
+              this.props.perms,
+              Permissions.ALLOW_ADD_USER.value
+            ) && (
+              <Button
+                bsStyle="success"
+                onClick={() => this.props.addFormModalOpen(true)}
+              >
+                <FontAwesome name="plus" /> Add a user
+              </Button>
+            )}
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(this.props.perms, 0x00002000) ? (
+        {PermissionUtils.hasPermission(
+          this.props.perms,
+          Permissions.ALLOW_VIEW_USERS.value
+        ) ? (
           <UsersList users={this.props.users} />
         ) : (
           <Alert bsStyle="warning">
@@ -48,4 +58,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { addFormModalOpen };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserListPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserListPage);

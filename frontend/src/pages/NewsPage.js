@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { PageHeader, Alert } from "react-bootstrap";
+import { PageHeader, Alert, Button } from "react-bootstrap";
 import NewsPost from "../components/NewsPost";
 import PermissionUtils from "./../utils/PermissionUtils";
+
+import FontAwesome from "react-fontawesome";
+
+import { Permissions } from "@alehuo/clubhouse-shared";
 
 const newsPosts = [
   {
@@ -21,14 +25,20 @@ export class NewsPage extends Component {
         <PageHeader>
           News
           <p>
-            {/*PermissionUtils.hasPermission(this.props.perms, 0x00100000) && (
+            {PermissionUtils.hasPermission(
+              this.props.perms,
+              Permissions.ALLOW_ADD_POSTS.value
+            ) && (
               <Button bsStyle="success">
                 <FontAwesome name="plus" /> Add an article
               </Button>
-            )*/}
+            )}
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(this.props.perms, 0x00800000) ? (
+        {PermissionUtils.hasPermission(
+          this.props.perms,
+          Permissions.ALLOW_VIEW_POSTS.value
+        ) ? (
           newsPosts &&
           newsPosts.map(newsPost => (
             <NewsPost
@@ -56,4 +66,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewsPage);
