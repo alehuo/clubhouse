@@ -63,5 +63,5 @@ const locationCrud = {
         value: Math.pow(2, 27),
     },
 };
-const userPermissions = Object.assign({}, userCrud, keyCrud, studentUnionCrud, calendarCrud, ruleCrud, newspostCrud, locationCrud);
-exports.default = userPermissions;
+const permissions = Object.assign({}, userCrud, keyCrud, studentUnionCrud, calendarCrud, ruleCrud, newspostCrud, locationCrud);
+exports.default = permissions;

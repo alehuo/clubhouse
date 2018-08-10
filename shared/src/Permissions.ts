@@ -68,7 +68,7 @@ const locationCrud = {
   },
 };
 
-const userPermissions: typeof userCrud &
+const permissions: typeof userCrud &
   typeof keyCrud &
   typeof studentUnionCrud &
   typeof calendarCrud &
@@ -84,4 +84,4 @@ const userPermissions: typeof userCrud &
   ...locationCrud,
 };
 
-export default userPermissions;
+export default permissions;

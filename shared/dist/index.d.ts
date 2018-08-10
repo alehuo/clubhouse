@@ -1,2 +1,2 @@
-export { default as Permissions } from "./Permissions";
+export * from "./Permissions";
 //# sourceMappingURL=index.d.ts.map

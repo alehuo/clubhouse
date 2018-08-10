@@ -124,6 +124,6 @@ declare const locationCrud: {
         value: number;
     };
 };
-declare const userPermissions: typeof userCrud & typeof keyCrud & typeof studentUnionCrud & typeof calendarCrud & typeof ruleCrud & typeof newspostCrud & typeof locationCrud;
-export default userPermissions;
+declare const permissions: typeof userCrud & typeof keyCrud & typeof studentUnionCrud & typeof calendarCrud & typeof ruleCrud & typeof newspostCrud & typeof locationCrud;
+export default permissions;
 //# sourceMappingURL=Permissions.d.ts.map
