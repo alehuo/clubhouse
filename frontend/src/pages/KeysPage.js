@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import { PageHeader, Button, Alert } from "react-bootstrap";
 import KeysList from "./../components/KeysList";
 import FontAwesome from "react-fontawesome";
-import { toggleModal } from "./../reducers/keyReducer";
+import { toggleModal, fetchKeys } from "./../reducers/keyReducer";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 
 export class KeysPage extends Component {
+  componentDidMount() {
+    this.props.fetchKeys();
+  }
   render() {
     return (
       <React.Fragment>
@@ -64,7 +67,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  toggleModal
+  toggleModal,
+  fetchKeys
 };
 
 export default connect(

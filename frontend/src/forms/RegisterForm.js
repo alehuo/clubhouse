@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import {
@@ -39,82 +39,80 @@ const passwd = val =>
     ? undefined
     : "Password cannot be empty or shorter than 8 characters";
 
-export class RegisterForm extends Component {
-  render() {
-    return (
-      <form onSubmit={this.props.handleSubmit}>
-        <Field
-          name="firstName"
-          id="firstName"
-          type="text"
-          label="First name"
-          placeholder="First name"
-          component={FieldGroup}
-        />
-        <Field
-          name="lastName"
-          id="lastName"
-          type="text"
-          label="Last name"
-          placeholder="First name"
-          component={FieldGroup}
-        />
-        <Field
-          name="email"
-          id="email"
-          type="text"
-          label="Email address"
-          placeholder="Email address"
-          component={FieldGroup}
-        />
-        <Field
-          name="password"
-          id="password"
-          type="password"
-          label="Password"
-          placeholder="Password"
-          component={FieldGroup}
-          validate={[passwd]}
-        />
-        <Field
-          name="passwordAgain"
-          id="passwordAgain"
-          type="password"
-          label="Confirm password"
-          placeholder="Confirm password"
-          component={FieldGroup}
-        />
-        <Well>
-          <FormGroup controlId="studentUnionPermission">
-            <Field
-              name="userPermission"
-              component="input"
-              type="checkbox"
-              validate={[checked]}
-            />{" "}
-            <b>
-              I give my consent for the service to store my data to the server
-              as said in the privacy policy.
-            </b>
-            <HelpBlock>Your answer will be saved.</HelpBlock>
-          </FormGroup>
-        </Well>
-        <Button
-          type="button"
-          bsStyle="danger"
-          onClick={this.props.handleClose}
-          disabled={this.props.isAdding}
-        >
-          Cancel
-        </Button>
-        &nbsp;&nbsp;&nbsp;
-        <Button type="submit" bsStyle="success" disabled={this.props.isAdding}>
-          {this.props.isAdding ? "Registering user.." : "Register"}
-        </Button>
-      </form>
-    );
-  }
-}
+const RegisterForm = props => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        name="firstName"
+        id="firstName"
+        type="text"
+        label="First name"
+        placeholder="First name"
+        component={FieldGroup}
+      />
+      <Field
+        name="lastName"
+        id="lastName"
+        type="text"
+        label="Last name"
+        placeholder="First name"
+        component={FieldGroup}
+      />
+      <Field
+        name="email"
+        id="email"
+        type="text"
+        label="Email address"
+        placeholder="Email address"
+        component={FieldGroup}
+      />
+      <Field
+        name="password"
+        id="password"
+        type="password"
+        label="Password"
+        placeholder="Password"
+        component={FieldGroup}
+        validate={[passwd]}
+      />
+      <Field
+        name="passwordAgain"
+        id="passwordAgain"
+        type="password"
+        label="Confirm password"
+        placeholder="Confirm password"
+        component={FieldGroup}
+      />
+      <Well>
+        <FormGroup controlId="studentUnionPermission">
+          <Field
+            name="userPermission"
+            component="input"
+            type="checkbox"
+            validate={[checked]}
+          />{" "}
+          <b>
+            I give my consent for the service to store my data to the server as
+            said in the privacy policy.
+          </b>
+          <HelpBlock>Your answer will be saved.</HelpBlock>
+        </FormGroup>
+      </Well>
+      <Button
+        type="button"
+        bsStyle="danger"
+        onClick={props.handleClose}
+        disabled={props.isAdding}
+      >
+        Cancel
+      </Button>
+      &nbsp;&nbsp;&nbsp;
+      <Button type="submit" bsStyle="success" disabled={props.isAdding}>
+        {props.isAdding ? "Registering user.." : "Register"}
+      </Button>
+    </form>
+  );
+};
 
 const mapStateToProps = state => ({
   isStarting: state.watch.isStarting
