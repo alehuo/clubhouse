@@ -1,13 +1,5 @@
 declare const userCrud: {
-    ALLOW_ADD_USER: {
-        name: string;
-        value: number;
-    };
-    ALLOW_EDIT_USER: {
-        name: string;
-        value: number;
-    };
-    ALLOW_DELETE_USER: {
+    ALLOW_REMOVE_USER: {
         name: string;
         value: number;
     };
@@ -17,15 +9,7 @@ declare const userCrud: {
     };
 };
 declare const keyCrud: {
-    ALLOW_ADD_KEYS: {
-        name: string;
-        value: number;
-    };
-    ALLOW_REMOVE_KEYS: {
-        name: string;
-        value: number;
-    };
-    ALLOW_EDIT_KEYS: {
+    ALLOW_ADD_REMOVE_KEYS: {
         name: string;
         value: number;
     };
@@ -35,15 +19,7 @@ declare const keyCrud: {
     };
 };
 declare const studentUnionCrud: {
-    ALLOW_ADD_STUDENT_UNION: {
-        name: string;
-        value: number;
-    };
-    ALLOW_REMOVE_STUDENT_UNION: {
-        name: string;
-        value: number;
-    };
-    ALLOW_EDIT_STUDENT_UNION: {
+    ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS: {
         name: string;
         value: number;
     };
@@ -53,15 +29,7 @@ declare const studentUnionCrud: {
     };
 };
 declare const calendarCrud: {
-    ALLOW_ADD_EVENT: {
-        name: string;
-        value: number;
-    };
-    ALLOW_EDIT_EVENT: {
-        name: string;
-        value: number;
-    };
-    ALLOW_REMOVE_EVENT: {
+    ALLOW_ADD_EDIT_REMOVE_EVENTS: {
         name: string;
         value: number;
     };
@@ -71,11 +39,7 @@ declare const calendarCrud: {
     };
 };
 declare const ruleCrud: {
-    ALLOW_ADD_RULES: {
-        name: string;
-        value: number;
-    };
-    ALLOW_EDIT_RULES: {
+    ALLOW_ADD_EDIT_REMOVE_RULES: {
         name: string;
         value: number;
     };
@@ -83,17 +47,9 @@ declare const ruleCrud: {
         name: string;
         value: number;
     };
-    ALLOW_REMOVE_RULES: {
-        name: string;
-        value: number;
-    };
 };
 declare const newspostCrud: {
-    ALLOW_ADD_POSTS: {
-        name: string;
-        value: number;
-    };
-    ALLOW_REMOVE_POSTS: {
+    ALLOW_ADD_EDIT_REMOVE_POSTS: {
         name: string;
         value: number;
     };
@@ -101,21 +57,9 @@ declare const newspostCrud: {
         name: string;
         value: number;
     };
-    ALLOW_EDIT_POSTS: {
-        name: string;
-        value: number;
-    };
 };
 declare const locationCrud: {
-    ALLOW_ADD_LOCATION: {
-        name: string;
-        value: number;
-    };
-    ALLOW_EDIT_LOCATION: {
-        name: string;
-        value: number;
-    };
-    ALLOW_DELETE_LOCATION: {
+    ALLOW_ADD_EDIT_REMOVE_LOCATIONS: {
         name: string;
         value: number;
     };
