@@ -68,6 +68,26 @@ declare const locationCrud: {
         value: number;
     };
 };
-declare const permissions: typeof userCrud & typeof keyCrud & typeof studentUnionCrud & typeof calendarCrud & typeof ruleCrud & typeof newspostCrud & typeof locationCrud;
+declare const messageCrud: {
+    ALLOW_ADD_EDIT_REMOVE_MESSAGES: {
+        name: string;
+        value: number;
+    };
+    ALLOW_VIEW_LOCATIONS: {
+        name: string;
+        value: number;
+    };
+};
+declare const permissionCrud: {
+    ALLOW_ADD_EDIT_REMOVE_PERMISSIONS: {
+        name: string;
+        value: number;
+    };
+    ALLOW_VIEW_PERMISSIONS: {
+        name: string;
+        value: number;
+    };
+};
+declare const permissions: typeof userCrud & typeof keyCrud & typeof studentUnionCrud & typeof calendarCrud & typeof ruleCrud & typeof newspostCrud & typeof locationCrud & typeof messageCrud & typeof permissionCrud;
 export default permissions;
 //# sourceMappingURL=Permissions.d.ts.map

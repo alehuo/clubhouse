@@ -57,13 +57,37 @@ const locationCrud = {
   },
 };
 
+const messageCrud = {
+  ALLOW_ADD_EDIT_REMOVE_MESSAGES: {
+    name: "ALLOW_ADD_EDIT_REMOVE_MESSAGES",
+    value: Math.pow(2, 14),
+  },
+  ALLOW_VIEW_LOCATIONS: {
+    name: "ALLOW_VIEW_MESSAGES",
+    value: Math.pow(2, 15),
+  },
+};
+
+const permissionCrud = {
+  ALLOW_ADD_EDIT_REMOVE_PERMISSIONS: {
+    name: "ALLOW_ADD_EDIT_REMOVE_PERMISSIONS",
+    value: Math.pow(2, 16),
+  },
+  ALLOW_VIEW_PERMISSIONS: {
+    name: "ALLOW_VIEW_PERMISSIONS",
+    value: Math.pow(2, 17),
+  },
+};
+
 const permissions: typeof userCrud &
   typeof keyCrud &
   typeof studentUnionCrud &
   typeof calendarCrud &
   typeof ruleCrud &
   typeof newspostCrud &
-  typeof locationCrud = {
+  typeof locationCrud &
+  typeof messageCrud &
+  typeof permissionCrud = {
   ...userCrud,
   ...keyCrud,
   ...studentUnionCrud,
@@ -71,6 +95,8 @@ const permissions: typeof userCrud &
   ...ruleCrud,
   ...newspostCrud,
   ...locationCrud,
+  ...messageCrud,
+  ...permissionCrud,
 };
 
 export default permissions;
