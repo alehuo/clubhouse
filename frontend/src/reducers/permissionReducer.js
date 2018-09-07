@@ -1,4 +1,4 @@
-import PermissionService from "./../services/PermissionService";
+import PermissionService from "../services/PermissionService";
 import { errorMessage } from "./notificationReducer";
 import { deAuthenticateUser } from "./authenticationReducer";
 

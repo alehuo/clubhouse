@@ -14,7 +14,7 @@ BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 class CalendarPage extends Component {
   componentDidMount() {
-    this.props.fetchEvents();
+    this.props.fetchEvents(this.props.token);
   }
   render() {
     let allViews = Object.keys(BigCalendar.Views).map(
@@ -27,7 +27,7 @@ class CalendarPage extends Component {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_EVENT.value
+              Permissions.ALLOW_ADD_EDIT_REMOVE_EVENTS.value
             ) && (
               <Button bsStyle="success">
                 <FontAwesome name="plus" /> Add an event
@@ -62,7 +62,8 @@ class CalendarPage extends Component {
 
 const mapStateToProps = state => ({
   events: state.calendar.events,
-  perms: state.permission.userPerms
+  perms: state.permission.userPerms,
+  token: state.user.token
 });
 
 const mapDispatchToProps = {

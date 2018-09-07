@@ -30,17 +30,16 @@ const FieldGroup = ({
 );
 
 const checked = val =>
-  val === true ? undefined : "You must have the permission from the user";
+  val === true
+    ? undefined
+    : "You must have read and accepted the privacy policy.";
 
 const passwd = val =>
   val && val.length >= 8
     ? undefined
     : "Password cannot be empty or shorter than 8 characters";
 
-const stduSelected = val =>
-  val === -1 ? undefined : "Please select a student union from the list";
-
-export class AddStudentUnionForm extends Component {
+export class RegisterForm extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
@@ -85,22 +84,6 @@ export class AddStudentUnionForm extends Component {
           placeholder="Confirm password"
           component={FieldGroup}
         />
-        <Field
-          name="unionId"
-          id="unionId"
-          componentClass="select"
-          label="Student union"
-          component={FieldGroup}
-          validate={[stduSelected]}
-        >
-          <option value="-1">Select student union</option>
-          {this.props.studentUnions &&
-            this.props.studentUnions.map(stdu => (
-              <option key={stdu.unionId} value={stdu.unionId}>
-                {stdu.name}
-              </option>
-            ))}
-        </Field>
         <Well>
           <FormGroup controlId="studentUnionPermission">
             <Field
@@ -110,14 +93,10 @@ export class AddStudentUnionForm extends Component {
               validate={[checked]}
             />{" "}
             <b>
-              I have the permission from the user to save their information to
-              the service
+              I give my consent for the service to store my data to the server
+              as said in the privacy policy.
             </b>
-            <HelpBlock>
-              Your answer will be saved in case the user wants to do a data
-              request, as required by the European Union General Data Protection
-              Regulation.
-            </HelpBlock>
+            <HelpBlock>Your answer will be saved.</HelpBlock>
           </FormGroup>
         </Well>
         <Button
@@ -130,7 +109,7 @@ export class AddStudentUnionForm extends Component {
         </Button>
         &nbsp;&nbsp;&nbsp;
         <Button type="submit" bsStyle="success" disabled={this.props.isAdding}>
-          {this.props.isAdding ? "Adding user.." : "Add"}
+          {this.props.isAdding ? "Registering user.." : "Register"}
         </Button>
       </form>
     );
@@ -138,11 +117,10 @@ export class AddStudentUnionForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAdding: state.studentUnion.isAdding,
-  studentUnions: state.studentUnion.studentUnions
+  isStarting: state.watch.isStarting
 });
 
 export default reduxForm({
   // a unique name for the form
-  form: "studentUnion"
-})(connect(mapStateToProps)(AddStudentUnionForm));
+  form: "registerUser"
+})(connect(mapStateToProps)(RegisterForm));

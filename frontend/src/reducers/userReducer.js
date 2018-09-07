@@ -1,8 +1,8 @@
-import UserService from "./../services/UserService";
+import UserService from "../services/UserService";
 import { successMessage, errorMessage } from "./notificationReducer";
 import { authenticateUser, setIsLoggingIn } from "./authenticationReducer";
 import { getUserPerms } from "./permissionReducer";
-import { fetchOwnWatchStatus } from "./watchReducer";
+import { fetchOwnWatchStatus } from "./sessionReducer";
 
 const initialState = {
   token: null,
@@ -91,24 +91,37 @@ export const addFormModalOpen = status => {
   };
 };
 
-export const addUser = (user, token) => {
+export const addUser = user => {
   return async dispatch => {
-    await UserService.register(user, token);
+    try {
+      await UserService.register(user);
+      dispatch(
+        successMessage(
+          "User successfully registered. Please use your email and password to login."
+        )
+      );
+    } catch (err) {
+      dispatch(errorMessage("Error registering user"));
+    }
   };
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case userActions.SET_TOKEN:
-      return Object.assign({}, state, { token: action.token });
+      return { ...{}, ...state, ...{ token: action.token } };
     case userActions.SET_USERS:
-      return Object.assign({}, state, { users: action.users });
+      return { ...{}, ...state, ...{ users: action.users } };
     case userActions.ADD_USER_FORM_MODAL_OPEN:
-      return Object.assign({}, state, { modalOpen: action.status });
+      return { ...{}, ...state, ...{ modalOpen: action.status } };
     case userActions.REMOVE_USER:
-      return Object.assign({}, state, {
-        users: state.users.filter(user => user.userId !== action.userId)
-      });
+      return {
+        ...{},
+        ...state,
+        ...{
+          users: state.users.filter(user => user.userId !== action.userId)
+        }
+      };
     default:
       return state;
   }

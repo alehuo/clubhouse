@@ -1,9 +1,9 @@
-const axios = require("axios");
+import { create } from "axios";
 
 const customAxios = token =>
-  axios.create({
-    timeout: 1000,
+  create({
+    timeout: 20000,
     headers: { Authorization: "Bearer " + token }
   });
 
-module.exports = customAxios;
+export default customAxios;

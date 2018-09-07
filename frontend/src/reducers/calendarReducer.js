@@ -9,12 +9,12 @@ const calendarActions = {
   SET_EVENTS: "SET_EVENTS"
 };
 
-export const fetchEvents = () => async dispatch => {
+export const fetchEvents = (token) => async dispatch => {
   try {
-    const events = await CalendarService.getEvents();
+    const events = await CalendarService.getEvents(token);
     dispatch({
       type: calendarActions.SET_EVENTS,
-      events
+      events: events.data
     });
   } catch (ex) {
     dispatch(errorMessage("Failed to fetch calendar events"));

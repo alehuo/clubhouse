@@ -24,7 +24,7 @@ export class StudentUnionsList extends Component {
             <th>Description</th>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_REMOVE_STUDENT_UNION.value
+              Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value
             ) && <th>Actions</th>}
           </tr>
         </thead>
@@ -37,7 +37,7 @@ export class StudentUnionsList extends Component {
                 <td>{union.description}</td>
                 {PermissionUtils.hasPermission(
                   this.props.perms,
-                  Permissions.ALLOW_REMOVE_STUDENT_UNION.value
+                  Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value
                 ) && (
                   <td>
                     <Button

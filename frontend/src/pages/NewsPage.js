@@ -27,7 +27,7 @@ export class NewsPage extends Component {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_POSTS.value
+              Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value
             ) && (
               <Button bsStyle="success">
                 <FontAwesome name="plus" /> Add an article

@@ -21,10 +21,11 @@
 | 12.5.2018 | 3h    | Created page for listing users, form to add users and reducer functionality for user.                                                                                                                           |
 | 20.5.2018 | 0.5h  | Created watch service and hooked it for watch checking.                                                                                                                                                         |
 | 29.5.2018 | 1h    | **Part 1 completed.** Implemented ability to delete student unions. Improved permission handling. Added application URL to README.md.                                                                           |
-| 10.8.2018 | 1h | Added @alehuo/clubhouse-shared module and integrated it into the project to replace hardcoded, hard-to-read permission bytes. Implemented user deletion. |
+| 10.8.2018 | 1h    | Added @alehuo/clubhouse-shared module and integrated it into the project to replace hardcoded, hard-to-read permission bytes. Implemented user deletion.                                                        |
+| 7.9.2018  | 2h    | Added support to start and stop a watch. Implemented user registration.                                                                                                                                         |
 
 Total:
 
 25.5 h (Part 1)
 
-1 h (Part 2)
+3 h (Part 2)

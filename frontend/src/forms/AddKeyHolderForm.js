@@ -19,12 +19,23 @@ const FieldGroup = ({ input, meta, id, label, help, ...props }) => (
   </FormGroup>
 );
 
+const keyTypes = [
+  {
+    name: "24h",
+    value: "24h"
+  },
+  {
+    name: "Day",
+    value: "day"
+  }
+];
+
 export class AddKeyHolderForm extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
         <Field
-          name="username"
+          name="user"
           id="formControlsUser"
           type="text"
           label="User"
@@ -38,7 +49,14 @@ export class AddKeyHolderForm extends Component {
           label="Key type"
           placeholder="Description"
           component="select"
-        />
+        >
+          {keyTypes &&
+            keyTypes.map(keyType => (
+              <option key={keyType.value} value={keyType.value}>
+                {keyType.name}
+              </option>
+            ))}
+        </Field>
         <Well>
           <FormGroup controlId="studentUnionPermission">
             <Field

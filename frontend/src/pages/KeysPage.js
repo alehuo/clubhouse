@@ -18,7 +18,7 @@ export class KeysPage extends Component {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_KEYS.value
+              Permissions.ALLOW_ADD_REMOVE_KEYS.value
             ) && (
               <Button
                 bsStyle="success"

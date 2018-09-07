@@ -2,11 +2,19 @@ import React, { Component } from "react";
 import { PageHeader, Button, Panel, Label } from "react-bootstrap";
 import { connect } from "react-redux";
 import FontAwesome from "react-fontawesome";
-import { toggleWatchPage } from "./../reducers/watchReducer";
+import {
+  toggleWatchPage,
+  toggleEndWatchModal,
+  toggleStartWatchModal,
+  fetchOwnWatchStatus
+} from "../reducers/sessionReducer";
+import EndWatch from "./subpages/EndWatch";
+import StartWatch from "./subpages/StartWatch";
 
 export class Session extends Component {
   componentDidMount() {
     this.props.toggleWatchPage(true);
+    this.props.fetchOwnWatchStatus(this.props.token);
   }
   componentWillUnmount() {
     this.props.toggleWatchPage(false);
@@ -14,22 +22,53 @@ export class Session extends Component {
   render() {
     return (
       <React.Fragment>
+        {this.props.endWatchModalOpen && (
+          <EndWatch
+            show={this.props.endWatchModalOpen}
+            onHide={() => this.props.toggleEndWatchModal(false)}
+          />
+        )}
+        {this.props.startWatchModalOpen && (
+          <StartWatch
+            show={this.props.startWatchModalOpen}
+            onHide={() => this.props.toggleStartWatchModal(false)}
+          />
+        )}
         <PageHeader>
-          Current session{" "}
+          Session status{" "}
           <small>
-            Elapsed time: <b>2 hours, 26 minutes, 20 seconds</b>
+            {this.props.watchRunning ? (
+              <span>
+                Elapsed time: <b>2 hours, 26 minutes, 20 seconds</b>
+              </span>
+            ) : (
+              <span>You are not currently in a session.</span>
+            )}
           </small>
           <p>
-            <Button bsStyle="warning">
-              <FontAwesome name="hourglass" /> End session
-            </Button>
+            {this.props.watchRunning && (
+              <Button
+                bsStyle="warning"
+                onClick={() => this.props.toggleEndWatchModal(true)}
+              >
+                <FontAwesome name="hourglass" /> End session
+              </Button>
+            )}
+            {!this.props.watchRunning && (
+              <Button
+                bsStyle="success"
+                onClick={() => this.props.toggleStartWatchModal(true)}
+              >
+                <FontAwesome name="play" /> Start session
+              </Button>
+            )}
             {"  "}
             <Button bsStyle="info">
-              <FontAwesome name="envelope" /> Send session message
+              <FontAwesome name="envelope" /> Send message
             </Button>
             {"  "}
             <Button bsStyle="danger">
-              <FontAwesome name="exclamation" /> REPORT INCIDENT
+              <FontAwesome name="exclamation" /> Report incident
             </Button>
           </p>
         </PageHeader>
@@ -104,8 +143,22 @@ export class Session extends Component {
   }
 }
 
-const mapStateToProps = state => ({ perms: state.permission.userPerms });
+const mapStateToProps = state => ({
+  perms: state.permission.userPerms,
+  token: state.user.token,
+  endWatchModalOpen: state.watch.endWatchModalOpen,
+  startWatchModalOpen: state.watch.startWatchModalOpen,
+  watchRunning: state.watch.ownWatchRunning
+});
 
-const mapDispatchToProps = { toggleWatchPage };
+const mapDispatchToProps = {
+  toggleWatchPage,
+  toggleEndWatchModal,
+  toggleStartWatchModal,
+  fetchOwnWatchStatus
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Session);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Session);

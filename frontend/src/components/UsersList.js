@@ -19,14 +19,10 @@ export class UsersList extends Component {
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
-            {(PermissionUtils.hasPermission(
+            {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_DELETE_USER.value
-            ) ||
-              PermissionUtils.hasPermission(
-                this.props.perms,
-                Permissions.ALLOW_EDIT_USER.value
-              )) && <th>Actions</th>}
+              Permissions.ALLOW_REMOVE_USER.value
+            ) && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -38,18 +34,14 @@ export class UsersList extends Component {
                   {user.firstName} {user.lastName}
                 </td>
                 <td>{user.email}</td>
-                {(PermissionUtils.hasPermission(
+                {PermissionUtils.hasPermission(
                   this.props.perms,
-                  Permissions.ALLOW_DELETE_USER.value
-                ) ||
-                  PermissionUtils.hasPermission(
-                    this.props.perms,
-                    Permissions.ALLOW_EDIT_USER.value
-                  )) && (
+                  Permissions.ALLOW_REMOVE_USER.value
+                ) && (
                   <td>
                     {PermissionUtils.hasPermission(
                       this.props.perms,
-                      Permissions.ALLOW_DELETE_USER.value
+                      Permissions.ALLOW_REMOVE_USER.value
                     ) && (
                       <Button
                         bsStyle="danger"
@@ -58,19 +50,6 @@ export class UsersList extends Component {
                         }
                       >
                         <FontAwesome name="trash" /> Delete
-                      </Button>
-                    )}{" "}
-                    {PermissionUtils.hasPermission(
-                      this.props.perms,
-                      Permissions.ALLOW_EDIT_USER.value
-                    ) && (
-                      <Button
-                        bsStyle="primary"
-                        onClick={() =>
-                          this.props.deleteUser(user.userId, this.props.token)
-                        }
-                      >
-                        <FontAwesome name="edit" /> Edit
                       </Button>
                     )}
                   </td>

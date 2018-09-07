@@ -8,13 +8,12 @@ const login = async (email, password) =>
     password
   });
 
-const register = async (user, token) =>
-  customAxios(token).post("api/v1/users", {
+const register = async user =>
+  axios.post("api/v1/users", {
     email: user.email,
     password: user.password,
     firstName: user.firstName,
-    lastName: user.lastName,
-    unionId: user.unionId
+    lastName: user.lastName
   });
 
 const remove = async (userId, token) =>

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { PageHeader, Button, Alert } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
+import { PageHeader, Alert } from "react-bootstrap";
 import UsersList from "./../components/UsersList";
-import AddUser from "./subpages/AddUser";
-import { addFormModalOpen } from "./../reducers/userReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
@@ -13,22 +10,7 @@ export class UserListPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <PageHeader>
-          Users
-          <p>
-            {PermissionUtils.hasPermission(
-              this.props.perms,
-              Permissions.ALLOW_ADD_USER.value
-            ) && (
-              <Button
-                bsStyle="success"
-                onClick={() => this.props.addFormModalOpen(true)}
-              >
-                <FontAwesome name="plus" /> Add a user
-              </Button>
-            )}
-          </p>
-        </PageHeader>
+        <PageHeader>Users</PageHeader>
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permissions.ALLOW_VIEW_USERS.value
@@ -40,10 +22,6 @@ export class UserListPage extends Component {
             <p>You don't have correct permissions to view users.</p>
           </Alert>
         )}
-        <AddUser
-          show={this.props.modalOpen}
-          onHide={() => this.props.addFormModalOpen(false)}
-        />
       </React.Fragment>
     );
   }
@@ -51,12 +29,11 @@ export class UserListPage extends Component {
 
 const mapStateToProps = state => ({
   studentUnions: state.studentUnion.studentUnions,
-  modalOpen: state.user.modalOpen,
   perms: state.permission.userPerms,
   users: state.user.users
 });
 
-const mapDispatchToProps = { addFormModalOpen };
+const mapDispatchToProps = { };
 
 export default connect(
   mapStateToProps,

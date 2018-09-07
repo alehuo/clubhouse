@@ -16,7 +16,7 @@ export class RulesPage extends Component {
             Rules of the clubhouse you <b>must</b> follow!
           </small>
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_EDIT_RULES.value) && (
+            {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_ADD_EDIT_REMOVE_RULES.value) && (
               <Button bsStyle="success">
                 <FontAwesome name="edit" /> Edit rules
               </Button>

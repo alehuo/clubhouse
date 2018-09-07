@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
-import AddStudentUnionForm from "./../../forms/AddStudentUnionForm";
-import { addStudentUnion } from "./../../reducers/studentUnionReducer";
+import AddStudentUnionForm from "../../forms/AddStudentUnionForm";
+import { addStudentUnion } from "../../reducers/studentUnionReducer";
 
 export class AddStudentUnion extends Component {
   handleSubmit = values => {

@@ -16,7 +16,7 @@ export class StudentUnionsPage extends Component {
         <PageHeader>
           Student unions
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_ADD_STUDENT_UNION.value) && (
+            {PermissionUtils.hasPermission(this.props.perms, Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value) && (
               <Button
                 bsStyle="success"
                 onClick={() => this.props.addFormModalOpen(true)}

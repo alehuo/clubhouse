@@ -1,5 +1,5 @@
 // Student union service
-const customAxios = require("./custom-axios");
+import customAxios from "./custom-axios";
 
 const getUserPermissions = token =>
   customAxios(token).get("api/v1/permission/user");

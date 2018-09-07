@@ -1,4 +1,4 @@
-import StudentUnionService from "./../services/StudentUnionService";
+import StudentUnionService from "../services/StudentUnionService";
 import { errorMessage, successMessage } from "./notificationReducer";
 
 const initialState = {
