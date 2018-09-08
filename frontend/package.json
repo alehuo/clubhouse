@@ -2,7 +2,6 @@
   "name": "clubhousefrontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://clubhouse-backend.herokuapp.com",
   "dependencies": {
     "@alehuo/clubhouse-shared": "https://github.com/alehuo/clubhouse-shared",
     "axios": "^0.18.0",
