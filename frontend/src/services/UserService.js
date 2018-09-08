@@ -21,4 +21,7 @@ const remove = async (userId, token) =>
 
 const getUsers = token => customAxios(token).get("api/v1/users");
 
-export default { login, register, getUsers, remove };
+const getOwnData = async token =>
+  customAxios(token).get("api/v1/users/ownData");
+
+export default { login, register, getUsers, remove, getOwnData };

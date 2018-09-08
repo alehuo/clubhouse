@@ -33,7 +33,7 @@ const mapStateToProps = state => ({
   users: state.user.users
 });
 
-const mapDispatchToProps = { };
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,

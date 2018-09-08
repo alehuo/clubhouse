@@ -24,6 +24,7 @@ import {
   fetchOwnWatchStatus,
   setWatchCheckInterval
 } from "./reducers/sessionReducer";
+import { fetchUserData } from "./reducers/userReducer";
 import Session from "./pages/Session";
 
 const AuthenticatedRoute = ({
@@ -54,6 +55,7 @@ class App extends Component {
       this.props.getUserPerms(localStorage.getItem("token"));
       this.props.authenticateUser();
       this.props.fetchOwnWatchStatus(localStorage.getItem("token"));
+      this.props.fetchUserData(localStorage.getItem("token"));
       /*const watchInterval = setInterval(() => {
         this.props.fetchOwnWatchStatus(localStorage.getItem("token"));
       }, 10000);
@@ -114,7 +116,7 @@ class App extends Component {
             <Navbar.Collapse>
               <Nav>
                 {this.props.isAuthenticated && (
-                  <React.Fragment>
+                  <NavDropdown title={"Menu"} id={1}>
                     {navButtons.map(navButton => (
                       <LinkContainer to={navButton.url} key={navButton.url}>
                         <NavItem eventKey={1}>
@@ -122,7 +124,7 @@ class App extends Component {
                         </NavItem>
                       </LinkContainer>
                     ))}
-                  </React.Fragment>
+                  </NavDropdown>
                 )}
               </Nav>
               <Nav pullRight>
@@ -140,22 +142,33 @@ class App extends Component {
                       eventKey={6}
                       title={
                         <React.Fragment>
-                          <FontAwesome name="user" /> <span>John Doe</span>
+                          <FontAwesome name="user" />{" "}
+                          <span>{this.props.userData.email || ""}</span>
                         </React.Fragment>
                       }
                       id="basic-nav-dropdown"
                     >
-                      <LinkContainer to="/user">
+                      <LinkContainer to="/user/info">
                         <MenuItem eventKey={6.1}>
-                          <FontAwesome name="user" /> My profile
+                          <FontAwesome name="user" /> My information
+                        </MenuItem>
+                      </LinkContainer>
+                      <LinkContainer to="/user/history">
+                        <MenuItem eventKey={6.2}>
+                          <FontAwesome name="history" /> My history
+                        </MenuItem>
+                      </LinkContainer>
+                      <LinkContainer to="/user/keys">
+                        <MenuItem eventKey={6.3}>
+                          <FontAwesome name="key" /> My keys
+                        </MenuItem>
+                      </LinkContainer>
+                      <LinkContainer to="/logout">
+                        <MenuItem eventKey={6.4}>
+                          <FontAwesome name="sign-out-alt" /> Logout
                         </MenuItem>
                       </LinkContainer>
                     </NavDropdown>
-                    <LinkContainer to="/logout">
-                      <NavItem eventKey={6}>
-                        <FontAwesome name="sign-out-alt" /> Logout
-                      </NavItem>
-                    </LinkContainer>
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
@@ -248,7 +261,8 @@ const mapStateToProps = state => ({
   watchPage: state.watch.watchPage,
   watchRunning: state.watch.ownWatchRunning,
   peopleCount: state.watch.ownWatchPeopleCount,
-  watchInterval: state.watch.watchCheckInterval
+  watchInterval: state.watch.watchCheckInterval,
+  userData: state.user.userData
 });
 
 const mapDispatchToProps = {
@@ -256,7 +270,8 @@ const mapDispatchToProps = {
   getUserPerms,
   setToken,
   fetchOwnWatchStatus,
-  setWatchCheckInterval
+  setWatchCheckInterval,
+  fetchUserData
 };
 
 export default connect(

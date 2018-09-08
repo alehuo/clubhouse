@@ -10,6 +10,9 @@ import {
 } from "../reducers/sessionReducer";
 import EndWatch from "./subpages/EndWatch";
 import StartWatch from "./subpages/StartWatch";
+import moment from "moment";
+import momentDurationFormat from "moment-duration-format";
+momentDurationFormat(moment);
 
 export class Session extends Component {
   componentDidMount() {
@@ -36,15 +39,24 @@ export class Session extends Component {
         )}
         <PageHeader>
           Session status{" "}
-          <small>
-            {this.props.watchRunning ? (
-              <span>
-                Elapsed time: <b>2 hours, 26 minutes, 20 seconds</b>
-              </span>
-            ) : (
-              <span>You are not currently in a session.</span>
-            )}
-          </small>
+          <p>
+            <small>
+              {this.props.watchRunning ? (
+                <span>
+                  Session started{" "}
+                  {moment
+                    .duration(
+                      moment().diff(moment(this.props.startTime)),
+                      "milliseconds"
+                    )
+                    .format()}{" "}
+                  ago
+                </span>
+              ) : (
+                <span>You are not currently in a session.</span>
+              )}
+            </small>
+          </p>
           <p>
             {this.props.watchRunning && (
               <Button
@@ -66,12 +78,19 @@ export class Session extends Component {
             <Button bsStyle="info">
               <FontAwesome name="envelope" /> Send message
             </Button>
-            {"  "}
-            <Button bsStyle="danger">
-              <FontAwesome name="exclamation" /> Report incident
-            </Button>
           </p>
         </PageHeader>
+        <p>
+          There {this.props.peopleCount > 1 ? "are" : "is"} currently{" "}
+          <strong>
+            {this.props.peopleCount === 0
+              ? "no one"
+              : this.props.peopleCount > 1
+                ? this.props.peopleCount + " persons"
+                : this.props.peopleCount + " person"}
+          </strong>{" "}
+          in an ongoing session.
+        </p>
         <p>
           Messages have different color codes.{" "}
           <Label bsStyle="info">Blue</Label> is session start, whereas{" "}
@@ -79,9 +98,7 @@ export class Session extends Component {
           <Label bsStyle="danger">Red</Label> is an incident, and white is a
           general message.
         </p>
-        <h3>
-          Session timeline, since <b>8.8.2017</b> at <b>10:33</b>
-        </h3>
+        <h3>Session timeline</h3>
         <div
           style={{
             overflowY: "scroll",
@@ -148,7 +165,9 @@ const mapStateToProps = state => ({
   token: state.user.token,
   endWatchModalOpen: state.watch.endWatchModalOpen,
   startWatchModalOpen: state.watch.startWatchModalOpen,
-  watchRunning: state.watch.ownWatchRunning
+  watchRunning: state.watch.ownWatchRunning,
+  peopleCount: state.watch.ownWatchPeopleCount,
+  startTime: state.watch.ownWatchStartTime
 });
 
 const mapDispatchToProps = {

@@ -73,7 +73,8 @@ export const fetchOwnWatchStatus = token => {
       dispatch(
         setOwnWatchStatus(
           ownWatchStatus.data.running,
-          ownWatchStatus.data.peopleCount
+          ownWatchStatus.data.peopleCount,
+          ownWatchStatus.data.startTime
         )
       );
     } catch (err) {
@@ -82,11 +83,16 @@ export const fetchOwnWatchStatus = token => {
   };
 };
 
-export const setOwnWatchStatus = (ownWatchRunning, ownWatchPeopleCount) => {
+export const setOwnWatchStatus = (
+  ownWatchRunning,
+  ownWatchPeopleCount,
+  ownWatchStartTime
+) => {
   return {
     type: watchActions.SET_OWN_SESSION_STATUS,
     ownWatchRunning,
-    ownWatchPeopleCount
+    ownWatchPeopleCount,
+    ownWatchStartTime
   };
 };
 
@@ -134,7 +140,8 @@ const watchReducer = (state = initialState, action) => {
         ...state,
         ...{
           ownWatchRunning: action.ownWatchRunning,
-          ownWatchPeopleCount: action.ownWatchPeopleCount
+          ownWatchPeopleCount: action.ownWatchPeopleCount,
+          ownWatchStartTime: action.ownWatchStartTime
         }
       };
     case watchActions.SET_SESSION_CHECK_INTERVAL:

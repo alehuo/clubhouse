@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class UserKeys extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <h2>User keys</h2>
-      </React.Fragment>
-    );
-  }
-}
+const UserKeys = () => {
+  return (
+    <React.Fragment>
+      <h2>User keys</h2>
+    </React.Fragment>
+  );
+};
+
+export default UserKeys;
