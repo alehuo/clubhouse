@@ -3,18 +3,26 @@ import { connect } from "react-redux";
 import { PageHeader, Button, Alert } from "react-bootstrap";
 import KeysList from "./../components/KeysList";
 import FontAwesome from "react-fontawesome";
-import { toggleModal } from "./../reducers/keyReducer";
+import { toggleModal, fetchKeys } from "./../reducers/keyReducer";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 import PermissionUtils from "./../utils/PermissionUtils";
 
+import { Permissions } from "@alehuo/clubhouse-shared";
+
 export class KeysPage extends Component {
+  componentDidMount() {
+    this.props.fetchKeys();
+  }
   render() {
     return (
       <React.Fragment>
         <PageHeader>
           Keys
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, 0x00000010) && (
+            {PermissionUtils.hasPermission(
+              this.props.perms,
+              Permissions.ALLOW_ADD_REMOVE_KEYS.value
+            ) && (
               <Button
                 bsStyle="success"
                 onClick={() => this.props.toggleModal(true)}
@@ -23,14 +31,17 @@ export class KeysPage extends Component {
               </Button>
             )}
             {"  "}
-            {PermissionUtils.hasPermission(this.props.perms, 0x02000000) && (
+            {
               <Button bsStyle="info">
                 <FontAwesome name="envelope" /> Send an email to keyholder(s)
               </Button>
-            )}
+            }
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(this.props.perms, 0x00000080) ? (
+        {PermissionUtils.hasPermission(
+          this.props.perms,
+          Permissions.ALLOW_VIEW_KEYS.value
+        ) ? (
           <KeysList keys={this.props.keys} />
         ) : (
           <Alert bsStyle="warning">
@@ -56,7 +67,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  toggleModal
+  toggleModal,
+  fetchKeys
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(KeysPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KeysPage);

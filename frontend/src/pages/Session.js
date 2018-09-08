@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import { PageHeader, Button, Panel, Label } from "react-bootstrap";
 import { connect } from "react-redux";
 import FontAwesome from "react-fontawesome";
-import { toggleWatchPage } from "./../reducers/watchReducer";
+import {
+  toggleWatchPage,
+  toggleEndWatchModal,
+  toggleStartWatchModal,
+  fetchOwnWatchStatus
+} from "../reducers/sessionReducer";
+import EndWatch from "./subpages/EndWatch";
+import StartWatch from "./subpages/StartWatch";
+import moment from "moment";
+import momentDurationFormat from "moment-duration-format";
+momentDurationFormat(moment);
 
 export class Session extends Component {
   componentDidMount() {
     this.props.toggleWatchPage(true);
+    this.props.fetchOwnWatchStatus(this.props.token);
   }
   componentWillUnmount() {
     this.props.toggleWatchPage(false);
@@ -14,25 +25,72 @@ export class Session extends Component {
   render() {
     return (
       <React.Fragment>
+        {this.props.endWatchModalOpen && (
+          <EndWatch
+            show={this.props.endWatchModalOpen}
+            onHide={() => this.props.toggleEndWatchModal(false)}
+          />
+        )}
+        {this.props.startWatchModalOpen && (
+          <StartWatch
+            show={this.props.startWatchModalOpen}
+            onHide={() => this.props.toggleStartWatchModal(false)}
+          />
+        )}
         <PageHeader>
-          Current session{" "}
-          <small>
-            Elapsed time: <b>2 hours, 26 minutes, 20 seconds</b>
-          </small>
+          Session status{" "}
           <p>
-            <Button bsStyle="warning">
-              <FontAwesome name="hourglass" /> End session
-            </Button>
+            <small>
+              {this.props.watchRunning ? (
+                <span>
+                  Session started{" "}
+                  {moment
+                    .duration(
+                      moment().diff(moment(this.props.startTime)),
+                      "milliseconds"
+                    )
+                    .format()}{" "}
+                  ago
+                </span>
+              ) : (
+                <span>You are not currently in a session.</span>
+              )}
+            </small>
+          </p>
+          <p>
+            {this.props.watchRunning && (
+              <Button
+                bsStyle="warning"
+                onClick={() => this.props.toggleEndWatchModal(true)}
+              >
+                <FontAwesome name="hourglass" /> End session
+              </Button>
+            )}
+            {!this.props.watchRunning && (
+              <Button
+                bsStyle="success"
+                onClick={() => this.props.toggleStartWatchModal(true)}
+              >
+                <FontAwesome name="play" /> Start session
+              </Button>
+            )}
             {"  "}
             <Button bsStyle="info">
-              <FontAwesome name="envelope" /> Send session message
-            </Button>
-            {"  "}
-            <Button bsStyle="danger">
-              <FontAwesome name="exclamation" /> REPORT INCIDENT
+              <FontAwesome name="envelope" /> Send message
             </Button>
           </p>
         </PageHeader>
+        <p>
+          There {this.props.peopleCount > 1 ? "are" : "is"} currently{" "}
+          <strong>
+            {this.props.peopleCount === 0
+              ? "no one"
+              : this.props.peopleCount > 1
+                ? this.props.peopleCount + " persons"
+                : this.props.peopleCount + " person"}
+          </strong>{" "}
+          in an ongoing session.
+        </p>
         <p>
           Messages have different color codes.{" "}
           <Label bsStyle="info">Blue</Label> is session start, whereas{" "}
@@ -40,9 +98,7 @@ export class Session extends Component {
           <Label bsStyle="danger">Red</Label> is an incident, and white is a
           general message.
         </p>
-        <h3>
-          Session timeline, since <b>8.8.2017</b> at <b>10:33</b>
-        </h3>
+        <h3>Session timeline</h3>
         <div
           style={{
             overflowY: "scroll",
@@ -104,8 +160,24 @@ export class Session extends Component {
   }
 }
 
-const mapStateToProps = state => ({ perms: state.permission.userPerms });
+const mapStateToProps = state => ({
+  perms: state.permission.userPerms,
+  token: state.user.token,
+  endWatchModalOpen: state.watch.endWatchModalOpen,
+  startWatchModalOpen: state.watch.startWatchModalOpen,
+  watchRunning: state.watch.ownWatchRunning,
+  peopleCount: state.watch.ownWatchPeopleCount,
+  startTime: state.watch.ownWatchStartTime
+});
 
-const mapDispatchToProps = { toggleWatchPage };
+const mapDispatchToProps = {
+  toggleWatchPage,
+  toggleEndWatchModal,
+  toggleStartWatchModal,
+  fetchOwnWatchStatus
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Session);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Session);

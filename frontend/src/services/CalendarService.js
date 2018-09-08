@@ -1,27 +1,5 @@
 // Calendar events
-
-const events = [
-  {
-    name: "Friday hangouts",
-    description: "Friday hangouts at our clubhouse",
-    restricted: false,
-    startTime: new Date(2018, 3, 25, 18, 0, 0),
-    endTime: new Date(2018, 3, 26, 2, 0, 0),
-    addedBy: 1,
-    unionId: 1,
-    locationId: 2
-  },
-  {
-    name: "Board meeting",
-    description: "Board meeting 5/2018",
-    restricted: true,
-    startTime: new Date(2018, 3, 23, 18, 0, 0),
-    endTime: new Date(2018, 3, 24, 2, 0, 0),
-    addedBy: 1,
-    unionId: 1,
-    locationId: 1
-  }
-];
+import customAxios from "./custom-axios";
 
 export const eventMapper = event => {
   return {
@@ -33,9 +11,8 @@ export const eventMapper = event => {
   };
 };
 
-const getEvents = async () =>
-  new Promise(resolve => {
-    setTimeout(() => resolve(events), 1000);
-  });
+const getEvents = async token => customAxios(token).get("/api/v1/calendar");
+const getEvent = async (id, token) =>
+  customAxios(token).get("/api/v1/calendar/" + id);
 
-export default { getEvents };
+export default { getEvents, getEvent };

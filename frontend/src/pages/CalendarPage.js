@@ -8,12 +8,13 @@ import { fetchEvents } from "./../reducers/calendarReducer";
 import { eventMapper } from "./../services/CalendarService";
 import FontAwesome from "react-fontawesome";
 import PermissionUtils from "./../utils/PermissionUtils";
+import { Permissions } from "@alehuo/clubhouse-shared";
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 class CalendarPage extends Component {
   componentDidMount() {
-    this.props.fetchEvents();
+    this.props.fetchEvents(this.props.token);
   }
   render() {
     let allViews = Object.keys(BigCalendar.Views).map(
@@ -24,14 +25,20 @@ class CalendarPage extends Component {
         <PageHeader>
           Calendar
           <p>
-            {PermissionUtils.hasPermission(this.props.perms, 0x00004000) && (
+            {PermissionUtils.hasPermission(
+              this.props.perms,
+              Permissions.ALLOW_ADD_EDIT_REMOVE_EVENTS.value
+            ) && (
               <Button bsStyle="success">
                 <FontAwesome name="plus" /> Add an event
               </Button>
             )}
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(this.props.perms, 0x00020000) ? (
+        {PermissionUtils.hasPermission(
+          this.props.perms,
+          Permissions.ALLOW_VIEW_EVENTS.value
+        ) ? (
           <BigCalendar
             events={this.props.events.map(eventMapper)}
             step={60}
@@ -43,7 +50,7 @@ class CalendarPage extends Component {
           />
         ) : (
           <Alert bsStyle="warning">
-            <h4>No permission to calendar events</h4>
+            <h4>No permission to view calendar events</h4>
             <p>You don't have correct permissions to view calendar events.</p>
           </Alert>
         )}
@@ -55,11 +62,15 @@ class CalendarPage extends Component {
 
 const mapStateToProps = state => ({
   events: state.calendar.events,
-  perms: state.permission.userPerms
+  perms: state.permission.userPerms,
+  token: state.user.token
 });
 
 const mapDispatchToProps = {
   fetchEvents
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CalendarPage);

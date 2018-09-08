@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   FormControl,
@@ -18,45 +18,41 @@ const FieldGroup = ({ input, meta, id, label, help, ...props }) => (
   </FormGroup>
 );
 
-export class LoginForm extends Component {
-  render() {
-    if (this.props.isAuthenticated) {
-      return <Redirect to="/" />;
-    }
-    return (
-      <form onSubmit={this.props.handleSubmit}>
-        <Field
-          name="email"
-          id="formControlsUsrname"
-          type="text"
-          label="Email address"
-          placeholder="Email address"
-          component={FieldGroup}
-        />
-        <Field
-          name="password"
-          id="formControlsPasswd"
-          type="password"
-          label="Password"
-          placeholder="Password"
-          component={FieldGroup}
-        />
-        <Button type="submit" disabled={this.props.isLoggingIn}>
-          {this.props.isLoggingIn ? "Logging in.." : "Login"}
-        </Button>
-      </form>
-    );
+const LoginForm = props => {
+  if (props.isAuthenticated) {
+    return <Redirect to="/" />;
   }
-}
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        name="email"
+        id="formControlsUsrname"
+        type="text"
+        label="Email address"
+        placeholder="Email address"
+        component={FieldGroup}
+      />
+      <Field
+        name="password"
+        id="formControlsPasswd"
+        type="password"
+        label="Password"
+        placeholder="Password"
+        component={FieldGroup}
+      />
+      <Button type="submit" disabled={props.isLoggingIn}>
+        {props.isLoggingIn ? "Logging in.." : "Login"}
+      </Button>
+    </form>
+  );
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   isLoggingIn: state.auth.isLoggingIn
 });
 
-LoginForm = connect(mapStateToProps)(LoginForm);
-
 export default reduxForm({
   // a unique name for the form
   form: "loginPage"
-})(LoginForm);
+})(connect(mapStateToProps)(LoginForm));

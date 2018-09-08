@@ -5,6 +5,8 @@ import { fetchUsers, deleteUser } from "./../reducers/userReducer";
 import FontAwesome from "react-fontawesome";
 import PermissionUtils from "./../utils/PermissionUtils";
 
+import { Permissions } from "@alehuo/clubhouse-shared";
+
 export class UsersList extends Component {
   componentDidMount() {
     this.props.fetchUsers(this.props.token);
@@ -17,11 +19,10 @@ export class UsersList extends Component {
             <th>#</th>
             <th>Name</th>
             <th>Email</th>
-            {(PermissionUtils.hasPermission(this.props.perms, Math.pow(2, 0)) ||
-              PermissionUtils.hasPermission(
-                this.props.perms,
-                Math.pow(2, 31)
-              )) && <th>Actions</th>}
+            {PermissionUtils.hasPermission(
+              this.props.perms,
+              Permissions.ALLOW_REMOVE_USER.value
+            ) && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -35,12 +36,12 @@ export class UsersList extends Component {
                 <td>{user.email}</td>
                 {PermissionUtils.hasPermission(
                   this.props.perms,
-                  Math.pow(2, 11)
+                  Permissions.ALLOW_REMOVE_USER.value
                 ) && (
                   <td>
                     {PermissionUtils.hasPermission(
                       this.props.perms,
-                      Math.pow(2, 0)
+                      Permissions.ALLOW_REMOVE_USER.value
                     ) && (
                       <Button
                         bsStyle="danger"
@@ -48,20 +49,7 @@ export class UsersList extends Component {
                           this.props.deleteUser(user.userId, this.props.token)
                         }
                       >
-                        <FontAwesome name="delete" /> Delete
-                      </Button>
-                    )}
-                    {PermissionUtils.hasPermission(
-                      this.props.perms,
-                      Math.pow(2, 31)
-                    ) && (
-                      <Button
-                        bsStyle="primary"
-                        onClick={() =>
-                          this.props.deleteUser(user.userId, this.props.token)
-                        }
-                      >
-                        <FontAwesome name="edit" /> Edit
+                        <FontAwesome name="trash" /> Delete
                       </Button>
                     )}
                   </td>
@@ -86,7 +74,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchUsers,
-  deleteUser: () => console.log("jee")
+  deleteUser
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UsersList);

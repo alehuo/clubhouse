@@ -30,52 +30,38 @@ const FieldGroup = ({
 );
 
 const checked = val =>
-  val === true
-    ? undefined
-    : "You must have the permission from the student union";
+  val === true ? undefined : "You must check the checkbox";
 
 // Todo: add field name to message
 const notEmpty = val =>
   val && val.length > 0 ? undefined : "Input must not be empty";
 
-const AddStudentUnionForm = props => {
+const EndWatchForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
-        name="studentUnionName"
+        autoFocus={true}
+        name="endMessage"
         id="formControlsText"
-        type="text"
-        label="Name"
-        placeholder="Name"
-        component={FieldGroup}
-        validate={[notEmpty]}
-      />
-      <Field
-        name="studentUnionDescription"
-        id="formControlsText"
-        type="text"
-        label="Description"
-        placeholder="Description"
+        type="textarea"
+        label="End message"
+        placeholder="End message"
         component={FieldGroup}
         validate={[notEmpty]}
       />
       <Well>
-        <FormGroup controlId="studentUnionPermission">
+        <FormGroup controlId="confirmation">
           <Field
-            name="studentUnionPermission"
+            name="confirmation"
             component="input"
             type="checkbox"
             validate={[checked]}
           />{" "}
           <b>
-            I have the permission from the student union to save their
-            information to the service
+            I confirm that I have transferred the people I was responsible for
+            to another keyholder or told them to leave the building.
           </b>
-          <HelpBlock>
-            Your answer will be saved in case a student union wants to do a data
-            request, as required by the European Union General Data Protection
-            Regulation.
-          </HelpBlock>
+          <HelpBlock>Your answer will be saved.</HelpBlock>
         </FormGroup>
       </Well>
       <Button
@@ -87,18 +73,18 @@ const AddStudentUnionForm = props => {
         Cancel
       </Button>
       &nbsp;&nbsp;&nbsp;
-      <Button type="submit" bsStyle="success" disabled={props.isAdding}>
-        {props.isAdding ? "Adding student union.." : "Add"}
+      <Button type="submit" bsStyle="success" disabled={props.isEnding}>
+        {props.isEnding ? "Ending watch.." : "End watch"}
       </Button>
     </form>
   );
 };
 
 const mapStateToProps = state => ({
-  isAdding: state.studentUnion.isAdding
+  isEnding: state.watch.isEnding
 });
 
 export default reduxForm({
   // a unique name for the form
-  form: "studentUnion"
-})(connect(mapStateToProps)(AddStudentUnionForm));
+  form: "endWatch"
+})(connect(mapStateToProps)(EndWatchForm));

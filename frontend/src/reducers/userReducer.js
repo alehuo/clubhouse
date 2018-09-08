@@ -1,12 +1,13 @@
-import UserService from "./../services/UserService";
+import UserService from "../services/UserService";
 import { successMessage, errorMessage } from "./notificationReducer";
 import { authenticateUser, setIsLoggingIn } from "./authenticationReducer";
 import { getUserPerms } from "./permissionReducer";
-import { fetchOwnWatchStatus } from "./watchReducer";
+import { fetchOwnWatchStatus } from "./sessionReducer";
 
 const initialState = {
   token: null,
   users: [],
+  userData: {},
   modalOpen: false
 };
 
@@ -15,7 +16,10 @@ export const userActions = {
   LOGOUT: "LOGOUT",
   SET_TOKEN: "SET_TOKEN",
   SET_USERS: "SET_USERS",
-  ADD_USER_FORM_MODAL_OPEN: "ADD_USER_FORM_MODAL_OPEN"
+  ADD_USER_FORM_MODAL_OPEN: "ADD_USER_FORM_MODAL_OPEN",
+  REMOVE_USER: "REMOVE_USER",
+  SET_USER_DATA: "SET_USER_DATA",
+  CLEAR_USER_DATA: "CLEAR_USER_DATA"
 };
 
 export const login = (email, password) => {
@@ -52,11 +56,49 @@ export const setUsers = users => {
   };
 };
 
+export const deleteUser = (userId, token) => {
+  return async dispatch => {
+    try {
+      await UserService.remove(userId, token);
+      dispatch(successMessage("Successfully deleted user"));
+      dispatch(removeUserFromList(userId));
+    } catch (ex) {
+      dispatch(errorMessage(ex.response.data.error));
+      console.error(ex);
+    }
+  };
+};
+
+export const removeUserFromList = userId => {
+  return {
+    type: userActions.REMOVE_USER,
+    userId
+  };
+};
+
 export const fetchUsers = token => {
   return async dispatch => {
     try {
       const res = await UserService.getUsers(token);
       dispatch(setUsers(res.data));
+    } catch (ex) {
+      dispatch(errorMessage(ex.response.data.error));
+    }
+  };
+};
+
+export const setUserData = data => {
+  return {
+    type: userActions.SET_USER_DATA,
+    data
+  };
+};
+
+export const fetchUserData = token => {
+  return async dispatch => {
+    try {
+      const res = await UserService.getOwnData(token);
+      dispatch(setUserData(res.data));
     } catch (ex) {
       dispatch(errorMessage(ex.response.data.error));
     }
@@ -70,20 +112,41 @@ export const addFormModalOpen = status => {
   };
 };
 
-export const addUser = (user, token) => {
-  return {
-    type: "TEST"
+export const addUser = user => {
+  return async dispatch => {
+    try {
+      await UserService.register(user);
+      dispatch(
+        successMessage(
+          "User successfully registered. Please use your email and password to login."
+        )
+      );
+    } catch (err) {
+      dispatch(errorMessage("Error registering user"));
+    }
   };
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case userActions.SET_TOKEN:
-      return Object.assign({}, state, { token: action.token });
+      return { ...{}, ...state, ...{ token: action.token } };
     case userActions.SET_USERS:
-      return Object.assign({}, state, { users: action.users });
+      return { ...{}, ...state, ...{ users: action.users } };
     case userActions.ADD_USER_FORM_MODAL_OPEN:
-      return Object.assign({}, state, { modalOpen: action.status });
+      return { ...{}, ...state, ...{ modalOpen: action.status } };
+    case userActions.REMOVE_USER:
+      return {
+        ...{},
+        ...state,
+        ...{
+          users: state.users.filter(user => user.userId !== action.userId)
+        }
+      };
+    case userActions.SET_USER_DATA:
+      return { ...{}, ...state, ...{ userData: action.data } };
+    case userActions.CLEAR_USER_DATA:
+      return { ...{}, ...state, ...{ userData: {} } };
     default:
       return state;
   }

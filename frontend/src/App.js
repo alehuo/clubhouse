@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
+import RegisterPage from "./pages/RegisterPage";
 import NewsPage from "./pages/NewsPage";
 import KeysPage from "./pages/KeysPage";
 import RulesPage from "./pages/RulesPage";
@@ -22,7 +23,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import {
   fetchOwnWatchStatus,
   setWatchCheckInterval
-} from "./reducers/watchReducer";
+} from "./reducers/sessionReducer";
+import { fetchUserData } from "./reducers/userReducer";
 import Session from "./pages/Session";
 
 const AuthenticatedRoute = ({
@@ -47,15 +49,17 @@ const AuthenticatedRoute = ({
   />
 );
 class App extends Component {
-  componentWillMount = () => {
+  componentDidMount = () => {
     if (localStorage.getItem("token")) {
       this.props.setToken(localStorage.getItem("token"));
       this.props.getUserPerms(localStorage.getItem("token"));
       this.props.authenticateUser();
-      const watchInterval = setInterval(() => {
+      this.props.fetchOwnWatchStatus(localStorage.getItem("token"));
+      this.props.fetchUserData(localStorage.getItem("token"));
+      /*const watchInterval = setInterval(() => {
         this.props.fetchOwnWatchStatus(localStorage.getItem("token"));
       }, 10000);
-      this.props.setWatchCheckInterval(watchInterval);
+      this.props.setWatchCheckInterval(watchInterval);*/
     }
   };
 
@@ -73,7 +77,7 @@ class App extends Component {
         icon: "comments",
         text: "News"
       },
-      /*{
+      {
         url: "/calendar",
         icon: "calendar",
         text: "Calendar"
@@ -82,17 +86,17 @@ class App extends Component {
         url: "/keys",
         icon: "key",
         text: "Keys"
-      },*/
+      },
       {
         url: "/studentunions",
         icon: "users",
         text: "Student unions"
       },
-      /*{
+      {
         url: "/rules",
         icon: "list-ol",
         text: "Rules"
-      },*/
+      },
       {
         url: "/users",
         icon: "users",
@@ -112,7 +116,7 @@ class App extends Component {
             <Navbar.Collapse>
               <Nav>
                 {this.props.isAuthenticated && (
-                  <React.Fragment>
+                  <NavDropdown title={"Menu"} id={1}>
                     {navButtons.map(navButton => (
                       <LinkContainer to={navButton.url} key={navButton.url}>
                         <NavItem eventKey={1}>
@@ -120,7 +124,7 @@ class App extends Component {
                         </NavItem>
                       </LinkContainer>
                     ))}
-                  </React.Fragment>
+                  </NavDropdown>
                 )}
               </Nav>
               <Nav pullRight>
@@ -138,29 +142,47 @@ class App extends Component {
                       eventKey={6}
                       title={
                         <React.Fragment>
-                          <FontAwesome name="user" /> <span>John Doe</span>
+                          <FontAwesome name="user" />{" "}
+                          <span>{this.props.userData.email || ""}</span>
                         </React.Fragment>
                       }
                       id="basic-nav-dropdown"
                     >
-                      <LinkContainer to="/user">
+                      <LinkContainer to="/user/info">
                         <MenuItem eventKey={6.1}>
-                          <FontAwesome name="user" /> My profile
+                          <FontAwesome name="user" /> My information
+                        </MenuItem>
+                      </LinkContainer>
+                      <LinkContainer to="/user/history">
+                        <MenuItem eventKey={6.2}>
+                          <FontAwesome name="history" /> My history
+                        </MenuItem>
+                      </LinkContainer>
+                      <LinkContainer to="/user/keys">
+                        <MenuItem eventKey={6.3}>
+                          <FontAwesome name="key" /> My keys
+                        </MenuItem>
+                      </LinkContainer>
+                      <LinkContainer to="/logout">
+                        <MenuItem eventKey={6.4}>
+                          <FontAwesome name="sign-out-alt" /> Logout
                         </MenuItem>
                       </LinkContainer>
                     </NavDropdown>
-                    <LinkContainer to="/logout">
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <LinkContainer to="/login">
                       <NavItem eventKey={6}>
-                        <FontAwesome name="sign-out-alt" /> Logout
+                        <FontAwesome name="sign-out-alt" /> Login
+                      </NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/register">
+                      <NavItem eventKey={6}>
+                        <FontAwesome name="sign-in-alt" /> Register
                       </NavItem>
                     </LinkContainer>
                   </React.Fragment>
-                ) : (
-                  <LinkContainer to="/login">
-                    <NavItem eventKey={6}>
-                      <FontAwesome name="sign-out-alt" /> Login
-                    </NavItem>
-                  </LinkContainer>
                 )}
               </Nav>
             </Navbar.Collapse>
@@ -202,6 +224,7 @@ class App extends Component {
               <Route exact path="/rules" component={RulesPage} />
               <Route exact path="/news" component={NewsPage} />
               <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={RegisterPage} />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
                 exact
@@ -238,7 +261,8 @@ const mapStateToProps = state => ({
   watchPage: state.watch.watchPage,
   watchRunning: state.watch.ownWatchRunning,
   peopleCount: state.watch.ownWatchPeopleCount,
-  watchInterval: state.watch.watchCheckInterval
+  watchInterval: state.watch.watchCheckInterval,
+  userData: state.user.userData
 });
 
 const mapDispatchToProps = {
@@ -246,7 +270,11 @@ const mapDispatchToProps = {
   getUserPerms,
   setToken,
   fetchOwnWatchStatus,
-  setWatchCheckInterval
+  setWatchCheckInterval,
+  fetchUserData
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

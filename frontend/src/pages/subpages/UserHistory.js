@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class UserHistory extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <h2>User history</h2>
-      </React.Fragment>
-    );
-  }
-}
+const UserHistory = () => {
+  return (
+    <React.Fragment>
+      <h2>User history</h2>
+    </React.Fragment>
+  );
+};
+
+export default UserHistory;

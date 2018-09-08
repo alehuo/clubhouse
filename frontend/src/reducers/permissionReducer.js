@@ -1,4 +1,4 @@
-import PermissionService from "./../services/PermissionService";
+import PermissionService from "../services/PermissionService";
 import { errorMessage } from "./notificationReducer";
 import { deAuthenticateUser } from "./authenticationReducer";
 
@@ -33,8 +33,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case permissionActions.SET_USER_PERMS:
       return Object.assign({}, state, {
-        userPerms: action.permissions.permissions,
-        userPermList: action.permissions.permission_list
+        userPerms: action.permissions.permissions
       });
     default:
       return state;

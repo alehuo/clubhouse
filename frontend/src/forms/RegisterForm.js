@@ -32,50 +32,70 @@ const FieldGroup = ({
 const checked = val =>
   val === true
     ? undefined
-    : "You must have the permission from the student union";
+    : "You must have read and accepted the privacy policy.";
 
-// Todo: add field name to message
-const notEmpty = val =>
-  val && val.length > 0 ? undefined : "Input must not be empty";
+const passwd = val =>
+  val && val.length >= 8
+    ? undefined
+    : "Password cannot be empty or shorter than 8 characters";
 
-const AddStudentUnionForm = props => {
+const RegisterForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
-        name="studentUnionName"
-        id="formControlsText"
+        name="firstName"
+        id="firstName"
         type="text"
-        label="Name"
-        placeholder="Name"
+        label="First name"
+        placeholder="First name"
         component={FieldGroup}
-        validate={[notEmpty]}
       />
       <Field
-        name="studentUnionDescription"
-        id="formControlsText"
+        name="lastName"
+        id="lastName"
         type="text"
-        label="Description"
-        placeholder="Description"
+        label="Last name"
+        placeholder="First name"
         component={FieldGroup}
-        validate={[notEmpty]}
+      />
+      <Field
+        name="email"
+        id="email"
+        type="text"
+        label="Email address"
+        placeholder="Email address"
+        component={FieldGroup}
+      />
+      <Field
+        name="password"
+        id="password"
+        type="password"
+        label="Password"
+        placeholder="Password"
+        component={FieldGroup}
+        validate={[passwd]}
+      />
+      <Field
+        name="passwordAgain"
+        id="passwordAgain"
+        type="password"
+        label="Confirm password"
+        placeholder="Confirm password"
+        component={FieldGroup}
       />
       <Well>
         <FormGroup controlId="studentUnionPermission">
           <Field
-            name="studentUnionPermission"
+            name="userPermission"
             component="input"
             type="checkbox"
             validate={[checked]}
           />{" "}
           <b>
-            I have the permission from the student union to save their
-            information to the service
+            I give my consent for the service to store my data to the server as
+            said in the privacy policy.
           </b>
-          <HelpBlock>
-            Your answer will be saved in case a student union wants to do a data
-            request, as required by the European Union General Data Protection
-            Regulation.
-          </HelpBlock>
+          <HelpBlock>Your answer will be saved.</HelpBlock>
         </FormGroup>
       </Well>
       <Button
@@ -88,17 +108,17 @@ const AddStudentUnionForm = props => {
       </Button>
       &nbsp;&nbsp;&nbsp;
       <Button type="submit" bsStyle="success" disabled={props.isAdding}>
-        {props.isAdding ? "Adding student union.." : "Add"}
+        {props.isAdding ? "Registering user.." : "Register"}
       </Button>
     </form>
   );
 };
 
 const mapStateToProps = state => ({
-  isAdding: state.studentUnion.isAdding
+  isStarting: state.watch.isStarting
 });
 
 export default reduxForm({
   // a unique name for the form
-  form: "studentUnion"
-})(connect(mapStateToProps)(AddStudentUnionForm));
+  form: "registerUser"
+})(connect(mapStateToProps)(RegisterForm));

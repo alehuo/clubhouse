@@ -1,6 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
 
 - [Working hours (Front-end)](#working-hours-front-end)
 
@@ -19,6 +20,13 @@
 | 22.4.2018 | 1h    | Added utility function to check for permissions. Hooked up permission system to some parts of front-end.                                                                                                        |
 | 12.5.2018 | 3h    | Created page for listing users, form to add users and reducer functionality for user.                                                                                                                           |
 | 20.5.2018 | 0.5h  | Created watch service and hooked it for watch checking.                                                                                                                                                         |
-| 29.5.2018 | 1h    | Implemented ability to delete student unions. Improved permission handling. Added application URL to README.md.                                                                                                 |
+| 29.5.2018 | 1h    | **Part 1 completed.** Implemented ability to delete student unions. Improved permission handling. Added application URL to README.md.                                                                           |
+| 10.8.2018 | 1h    | Added @alehuo/clubhouse-shared module and integrated it into the project to replace hardcoded, hard-to-read permission bytes. Implemented user deletion.                                                        |
+| 7.9.2018  | 2h    | Added support to start and stop a watch. Implemented user registration.                                                                                                                                         |
+| 8.9.2018  | 2.5h  | Improved site layout. Added moment for timestamp formatting.                                                                                                                                                    |
 
-Total: 25.5 h
+Total:
+
+25.5 h (Part 1)
+
+5.5 h (Part 2)
