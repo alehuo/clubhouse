@@ -40,29 +40,27 @@ const UserInformation = props => {
         You will be prompted with a zip-file that includes all of your personal
         information.
       </p>
-      <p>
-        <ul>
-          <li>
-            <b>First name</b>, <b>Last name</b>, <b>Email-address</b>,{" "}
-            <b>Account registration date</b> and <b>Account update date</b>
-          </li>
-          <li>
-            <b>Keys assigned to you</b>
-          </li>
-          <li>
-            <b>Messages sent by you</b>
-          </li>
-          <li>
-            <b>Ongoing and old watches</b>
-          </li>
-          <li>
-            <b>Calendar events created by you</b>
-          </li>
-          <li>
-            <b>Newsposts created by you</b>
-          </li>
-        </ul>
-      </p>
+      <ul>
+        <li>
+          <b>First name</b>, <b>Last name</b>, <b>Email-address</b>,{" "}
+          <b>Account registration date</b> and <b>Account update date</b>
+        </li>
+        <li>
+          <b>Keys assigned to you</b>
+        </li>
+        <li>
+          <b>Messages sent by you</b>
+        </li>
+        <li>
+          <b>Ongoing and old watches</b>
+        </li>
+        <li>
+          <b>Calendar events created by you</b>
+        </li>
+        <li>
+          <b>Newsposts created by you</b>
+        </li>
+      </ul>
       <p>
         <Button bsStyle="success">Download personal information</Button>
       </p>

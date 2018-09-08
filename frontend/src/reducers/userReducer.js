@@ -34,6 +34,7 @@ export const login = (email, password) => {
       dispatch(authenticateUser());
       dispatch(successMessage("Successfully logged in"));
       dispatch(setIsLoggingIn(false));
+      dispatch(fetchUserData(loginResponse.data.token));
     } catch (ex) {
       dispatch(setIsLoggingIn(false));
       dispatch(errorMessage(ex.response.data.error));
