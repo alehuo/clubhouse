@@ -10,7 +10,7 @@ const login = async (email, password) =>
       password
     },
     {
-      baseUrl: process.env.REACT_APP_BACKEND_URL
+      baseURL: process.env.REACT_APP_BACKEND_URL
     }
   );
 
@@ -24,7 +24,7 @@ const register = async user =>
       lastName: user.lastName
     },
     {
-      baseUrl: process.env.REACT_APP_BACKEND_URL
+      baseURL: process.env.REACT_APP_BACKEND_URL
     }
   );
 
