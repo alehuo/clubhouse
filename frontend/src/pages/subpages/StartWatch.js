@@ -6,7 +6,6 @@ import StartWatchForm from "../../forms/StartSessionForm";
 
 export class StartWatch extends Component {
   handleSubmit = values => {
-    console.log(values);
     this.props.startWatch(this.props.token, values.startMessage);
   };
   render() {

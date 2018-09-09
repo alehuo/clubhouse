@@ -6,7 +6,6 @@ import EndWatchForm from "../../forms/EndSessionForm";
 
 export class EndWatch extends Component {
   handleSubmit = values => {
-    console.log(values);
     this.props.endWatch(this.props.token, values.endMessage);
   };
   render() {

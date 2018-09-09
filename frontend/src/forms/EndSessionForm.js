@@ -46,6 +46,7 @@ const EndWatchForm = props => {
         type="textarea"
         label="End message"
         placeholder="End message"
+        autoComplete="off"
         component={FieldGroup}
         validate={[notEmpty]}
       />

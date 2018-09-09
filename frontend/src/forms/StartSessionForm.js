@@ -46,6 +46,7 @@ const StartWatchForm = props => {
         type="textarea"
         label="Start message"
         placeholder="Start message"
+        autoComplete="off"
         component={FieldGroup}
         validate={[notEmpty]}
       />

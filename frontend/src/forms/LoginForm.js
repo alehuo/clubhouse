@@ -29,6 +29,7 @@ const LoginForm = props => {
         id="formControlsUsrname"
         type="text"
         label="Email address"
+        autoComplete="email"
         placeholder="Email address"
         component={FieldGroup}
       />
@@ -37,6 +38,7 @@ const LoginForm = props => {
         id="formControlsPasswd"
         type="password"
         label="Password"
+        autoComplete="password"
         placeholder="Password"
         component={FieldGroup}
       />

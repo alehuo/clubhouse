@@ -4,9 +4,7 @@ import { Modal } from "react-bootstrap";
 import AddKeyHolderForm from "../../forms/AddKeyHolderForm";
 
 export class AddKeyHolder extends Component {
-  handleSubmit = values => {
-    console.log(values);
-  };
+  handleSubmit = values => {};
   render() {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
@@ -30,4 +28,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddKeyHolder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddKeyHolder);

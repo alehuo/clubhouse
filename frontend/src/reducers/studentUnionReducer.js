@@ -71,15 +71,13 @@ export const addStudentUnion = (stdu, token) => {
 export const deleteStudentUnion = (unionId, token) => {
   return async dispatch => {
     try {
-      const res = await StudentUnionService.deleteStudentUnion(unionId, token);
-      console.log(res);
+      await StudentUnionService.deleteStudentUnion(unionId, token);
       dispatch({
         type: studentUnionActions.DELETE_STUDENT_UNION,
         unionId
       });
       dispatch(successMessage("Student union deleted successfully"));
     } catch (err) {
-      console.error(err);
       dispatch(errorMessage(err.response.data.error));
     }
   };

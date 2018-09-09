@@ -38,6 +38,7 @@ const AddKeyHolderForm = props => {
         id="formControlsUser"
         type="text"
         label="User"
+        autoComplete="off"
         placeholder="User"
         component={FieldGroup}
       />
@@ -46,6 +47,7 @@ const AddKeyHolderForm = props => {
         id="formControlsText"
         type="text"
         label="Key type"
+        autoComplete="off"
         placeholder="Description"
         component="select"
       >

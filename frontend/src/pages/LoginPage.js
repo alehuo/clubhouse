@@ -8,8 +8,6 @@ import LoginForm from "./../forms/LoginForm";
 
 export class LoginPage extends Component {
   submitLogin = values => {
-    // print the form values to the console
-    console.log(values);
     this.props.login(values.email, values.password);
   };
 

@@ -47,15 +47,17 @@ const AddStudentUnionForm = props => {
         type="text"
         label="Name"
         placeholder="Name"
+        autocomplete="off"
         component={FieldGroup}
         validate={[notEmpty]}
       />
       <Field
         name="studentUnionDescription"
         id="formControlsText"
-        type="text"
+        type="textarea"
         label="Description"
         placeholder="Description"
+        autoComplete="off"
         component={FieldGroup}
         validate={[notEmpty]}
       />
