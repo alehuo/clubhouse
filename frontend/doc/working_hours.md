@@ -24,9 +24,10 @@
 | 10.8.2018 | 1h    | Added @alehuo/clubhouse-shared module and integrated it into the project to replace hardcoded, hard-to-read permission bytes. Implemented user deletion.                                                        |
 | 7.9.2018  | 2h    | Added support to start and stop a watch. Implemented user registration.                                                                                                                                         |
 | 8.9.2018  | 3.5h  | Improved site layout. Added moment for timestamp formatting. Deployed app to Heroku.                                                                                                                            |
+| 9.9.2018  | 0.5h  | Code cleanup.                                                                                                                                                                                                   |
 
 Total:
 
 25.5 h (Part 1)
 
-6.5 h (Part 2)
+7.0 h (Part 2)
