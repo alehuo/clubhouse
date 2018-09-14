@@ -26,9 +26,10 @@
 | 8.9.2018  | 3.5h  | Improved site layout. Added moment for timestamp formatting. Deployed app to Heroku.                                                                                                                            |
 | 9.9.2018  | 0.5h  | Code cleanup.                                                                                                                                                                                                   |
 | 14.9.2018 | 1.5h  | Progress on Rule page. UI fixes and optimizations                                                                                                                                                               |
+| 15.9.2018 | 1.0h  | Updated favicon. Improved KeyHolder form                                                                                                                                                                        |
 
 Total:
 
 25.5 h (Part 1)
 
-8.5 h (Part 2)
+9.5 h (Part 2)
