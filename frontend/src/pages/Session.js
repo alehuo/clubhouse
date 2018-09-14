@@ -45,10 +45,7 @@ export class Session extends Component {
                 <span>
                   Session started{" "}
                   {moment
-                    .duration(
-                      moment().diff(moment(this.props.startTime)),
-                      "milliseconds"
-                    )
+                    .duration(moment().diff(moment(this.props.startTime)))
                     .format()}{" "}
                   ago
                 </span>

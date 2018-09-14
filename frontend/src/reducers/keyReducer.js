@@ -43,9 +43,9 @@ export const setKeys = keys => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case keyActions.SET_KEYS:
-      return Object.assign({}, state, { keys: action.keys });
+      return { ...{}, ...state, keys: action.keys };
     case keyActions.TOGGLE_MODAL:
-      return Object.assign({}, state, { modalOpen: action.val });
+      return { ...{}, ...state, modalOpen: action.val };
     default:
       return state;
   }

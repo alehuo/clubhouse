@@ -9,7 +9,7 @@ const calendarActions = {
   SET_EVENTS: "SET_EVENTS"
 };
 
-export const fetchEvents = (token) => async dispatch => {
+export const fetchEvents = token => async dispatch => {
   try {
     const events = await CalendarService.getEvents(token);
     dispatch({
@@ -24,7 +24,7 @@ export const fetchEvents = (token) => async dispatch => {
 const calendarReducer = (state = initialState, action) => {
   switch (action.type) {
     case calendarActions.SET_EVENTS:
-      return Object.assign({}, state, { events: action.events });
+      return { ...{}, ...state, events: action.events };
     default:
       return state;
   }

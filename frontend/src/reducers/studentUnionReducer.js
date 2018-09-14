@@ -86,22 +86,26 @@ export const deleteStudentUnion = (unionId, token) => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case studentUnionActions.SET_STUDENT_UNIONS:
-      return Object.assign({}, state, { studentUnions: action.studentUnions });
+      return { ...{}, ...state, studentUnions: action.studentUnions };
     case studentUnionActions.SET_ADDING:
-      return Object.assign({}, state, { isAdding: action.isAdding });
+      return { ...{}, ...state, isAdding: action.isAdding };
     case studentUnionActions.ADD_FORM_MODAL_OPEN:
-      return Object.assign({}, state, { modalOpen: action.status });
+      return { ...{}, ...state, modalOpen: action.status };
     case studentUnionActions.ADD_TO_LIST:
-      return Object.assign({}, state, {
+      return {
+        ...{},
+        ...state,
         studentUnions: [...state.studentUnions, action.addedUnion]
-      });
+      };
     case studentUnionActions.DELETE_STUDENT_UNION:
       const unions = state.studentUnions.filter(
         studentUnion => studentUnion.unionId !== action.unionId
       );
-      return Object.assign({}, state, {
+      return {
+        ...{},
+        ...state,
         studentUnions: unions
-      });
+      };
     default:
       return state;
   }

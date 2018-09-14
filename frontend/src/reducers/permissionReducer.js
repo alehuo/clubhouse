@@ -32,9 +32,11 @@ export const getUserPerms = token => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case permissionActions.SET_USER_PERMS:
-      return Object.assign({}, state, {
+      return {
+        ...{},
+        ...state,
         userPerms: action.permissions.permissions
-      });
+      };
     default:
       return state;
   }

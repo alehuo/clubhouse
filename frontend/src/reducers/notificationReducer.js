@@ -57,7 +57,9 @@ export const addNotification = (id, text, notificationType) => {
 const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
     case notificationActions.ADD_NOTIFICATION:
-      return Object.assign({}, state, {
+      return {
+        ...{},
+        ...state,
         notifications: [
           ...state.notifications,
           {
@@ -66,12 +68,12 @@ const notificationReducer = (state = initialState, action) => {
             text: action.text
           }
         ]
-      });
+      };
     case notificationActions.CLEAR_NOTIFICATION:
       const notifications = state.notifications.filter(
         notification => notification.id !== action.id
       );
-      return Object.assign({}, state, { notifications });
+      return { ...{}, ...state, ...{ notifications } };
     default:
       return state;
   }

@@ -45,28 +45,32 @@ export class MainPage extends Component {
         <hr />
         This project is meant to solve this problem by providing:
         <ul>
-          <li>A list of student unions</li>
+          <li>Student union management</li>
           <li>
-            A list of students that have access to clubhouses (night / day keys
-            etc..)
+            Key management (To assign keys to people with different types of
+            keys. For example, 24h and day keys)
           </li>
           <li>
-            An event calendar to look for events (Available also as iCal / RSS)
+            Event management to organize and look for events (Events are
+            available as an iCal feed)
           </li>
-          <li>The rules of the clubhouse easily available</li>
-          <li>The cleaning schedules of the clubhouse</li>
+          <li>Rule management</li>
+          <li>Cleaning schedule management</li>
           <li>A "newsboard" system for posting announcements</li>
           <li>
             A management interface for easy responsibility taking of other
             people
           </li>
-          <li>
-            A comprehensive admin interface for administrators to be constantly
-            up to date of whats happening.
-          </li>
+          <li>Sending messages to other people in the service</li>
           <li>
             A very flexible permissions system. You can add roles and customize
             their permissions as you wish.
+          </li>
+          <li>E-mail integration</li>
+          <li>Push-notification support</li>
+          <li>
+            Available as a PWA (Progressive Web Application) that can be easily
+            installed
           </li>
         </ul>
         <hr />
@@ -83,4 +87,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainPage);

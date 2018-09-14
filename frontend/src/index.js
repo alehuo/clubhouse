@@ -16,6 +16,7 @@ import studentUnionReducer from "./reducers/studentUnionReducer";
 import permissionReducer from "./reducers/permissionReducer";
 import { reducer as formReducer } from "redux-form";
 import sessionReducer from "./reducers/sessionReducer";
+import ruleReducer from "./reducers/ruleReducer";
 
 // Combine reducers
 const reducer = combineReducers({
@@ -27,7 +28,8 @@ const reducer = combineReducers({
   studentUnion: studentUnionReducer,
   permission: permissionReducer,
   watch: sessionReducer,
-  form: formReducer
+  form: formReducer,
+  rule: ruleReducer
 });
 
 const middleware =

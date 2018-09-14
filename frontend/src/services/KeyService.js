@@ -17,9 +17,6 @@ const keyHolders = [
   }
 ];
 
-const getKeys = async =>
-  new Promise(resolve => {
-    setTimeout(() => resolve(keyHolders), 2000);
-  });
+const getKeys = async => Promise.resolve(keyHolders);
 
 export default { getKeys };
