@@ -17,9 +17,6 @@ class CalendarPage extends Component {
     this.props.fetchEvents(this.props.token);
   }
   render() {
-    let allViews = Object.keys(BigCalendar.Views).map(
-      k => BigCalendar.Views[k]
-    );
     return (
       <React.Fragment>
         <PageHeader>
@@ -35,6 +32,21 @@ class CalendarPage extends Component {
             )}
           </p>
         </PageHeader>
+        {process.env.REACT_APP_BACKEND_URL && (
+          <p>
+            iCal feed:{" "}
+            <a
+              href={process.env.REACT_APP_BACKEND_URL + "/api/v1/calendar/ical"}
+              target="_blank"
+            >
+              {process.env.REACT_APP_BACKEND_URL + "/api/v1/calendar/ical"}
+            </a>
+            <br />
+            <small>
+              Please copy and paste this URL to your calendar application.
+            </small>
+          </p>
+        )}
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permissions.ALLOW_VIEW_EVENTS.value
@@ -42,7 +54,9 @@ class CalendarPage extends Component {
           <BigCalendar
             events={this.props.events.map(eventMapper)}
             step={60}
-            views={allViews}
+            views={Object.keys(BigCalendar.Views).map(
+              k => BigCalendar.Views[k]
+            )}
             timeslots={1}
             showMultiDayTimes
             defaultDate={new Date()}
@@ -50,7 +64,7 @@ class CalendarPage extends Component {
           />
         ) : (
           <Alert bsStyle="warning">
-            <h4>No permission to view calendar events</h4>
+            <h4>No permission to view calendar events.</h4>
             <p>You don't have correct permissions to view calendar events.</p>
           </Alert>
         )}

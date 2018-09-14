@@ -101,7 +101,7 @@ export const endWatch = (token, endMessage) => {
     dispatch(toggleIsEnding(true));
     try {
       await watchService.stopWatch(token, endMessage);
-      dispatch(successMessage("Your watch has been ended."));
+      dispatch(successMessage("Your session has ended."));
     } catch (err) {
       dispatch(errorMessage(err.response.data.error));
     }
@@ -116,7 +116,7 @@ export const startWatch = (token, startMessage) => {
     dispatch(toggleIsStarting(true));
     try {
       await watchService.startWatch(token, startMessage);
-      dispatch(successMessage("Your watch has been started."));
+      dispatch(successMessage("Your session has started."));
     } catch (err) {
       dispatch(errorMessage(err.response.data.error));
     }

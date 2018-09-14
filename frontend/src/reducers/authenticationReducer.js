@@ -31,11 +31,11 @@ export const setIsLoggingIn = isLoggingIn => {
 const authenticationReducer = (state = initialState, action) => {
   switch (action.type) {
     case authenticationActions.AUTHENTICATE_USER:
-      return Object.assign({}, state, { isAuthenticated: true });
+      return { ...{}, ...state, isAuthenticated: true };
     case authenticationActions.DEAUTHENTICATE_USER:
-      return Object.assign({}, state, { isAuthenticated: false });
+      return { ...{}, ...state, isAuthenticated: false };
     case authenticationActions.SET_IS_LOGGING_IN:
-      return Object.assign({}, state, { isLoggingIn: action.isLoggingIn });
+      return { ...{}, ...state, isLoggingIn: action.isLoggingIn };
     default:
       return state;
   }
