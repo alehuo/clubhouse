@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem,
+  Alert,
+  Button
+} from "react-bootstrap";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
@@ -189,29 +197,23 @@ class App extends Component {
           </Navbar>
           <div className="container">
             <NotificationDrawer />
-            {/*!(this.props.watchPage || !this.props.isAuthenticated) &&
+            {!(this.props.watchPage || !this.props.isAuthenticated) &&
               this.props.watchRunning && (
                 <Alert bsStyle="info">
                   <h5>
-                    {this.props.peopleCount > 0 ? (
+                    {this.props.peopleCount > 0 && (
                       <React.Fragment>
-                        You are currently in an ongoing session with{" "}
-                        <b>{this.props.peopleCount}</b> other
-                        person(s).&nbsp;&nbsp;&nbsp;&nbsp;
-                      </React.Fragment>
-                    ) : (
-                      <React.Fragment>
-                        You are currently alone in an ongoing
-                        session.&nbsp;&nbsp;&nbsp;&nbsp;
+                        You are currently in an ongoing session.
                       </React.Fragment>
                     )}
-
+                    <br />
+                    <br />
                     <LinkContainer to="/session">
                       <Button bsStyle="primary">View current session</Button>
                     </LinkContainer>
                   </h5>
                 </Alert>
-              )*/}
+              )}
             <React.Fragment>
               <Route exact path="/" component={MainPage} />
               <Route

@@ -15,6 +15,8 @@ export class AddKeyHolder extends Component {
           <AddKeyHolderForm
             handleClose={this.props.onHide}
             onSubmit={this.handleSubmit}
+            keyTypes={this.props.keyTypes}
+            users={this.props.users}
           />
         </Modal.Body>
       </Modal>

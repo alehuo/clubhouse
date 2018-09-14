@@ -17,6 +17,19 @@ const keyHolders = [
   }
 ];
 
+const keyTypes = [
+  {
+    id: 1,
+    title: "24h"
+  },
+  {
+    id: 2,
+    title: "Day"
+  }
+];
+
 const getKeys = async => Promise.resolve(keyHolders);
 
-export default { getKeys };
+const getKeyTypes = async => Promise.resolve(keyTypes);
+
+export default { getKeys, getKeyTypes };

@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import { PageHeader, Button, Alert } from "react-bootstrap";
 import KeysList from "./../components/KeysList";
 import FontAwesome from "react-fontawesome";
-import { toggleModal, fetchKeys } from "./../reducers/keyReducer";
+import {
+  toggleModal,
+  fetchKeys,
+  fetchKeyTypes
+} from "./../reducers/keyReducer";
+import { fetchUsers } from "./../reducers/userReducer";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 import PermissionUtils from "./../utils/PermissionUtils";
 
@@ -12,6 +17,9 @@ import { Permissions } from "@alehuo/clubhouse-shared";
 export class KeysPage extends Component {
   componentDidMount() {
     this.props.fetchKeys();
+    this.props.fetchKeyTypes();
+    this.props.fetchUsers(this.props.token);
+    console.log(this.props.token);
   }
   render() {
     return (
@@ -54,6 +62,8 @@ export class KeysPage extends Component {
         <AddKeyHolder
           show={this.props.modalOpen}
           onHide={() => this.props.toggleModal(false)}
+          keyTypes={this.props.keyTypes}
+          users={this.props.users}
         />
       </React.Fragment>
     );
@@ -61,14 +71,19 @@ export class KeysPage extends Component {
 }
 
 const mapStateToProps = state => ({
+  token: state.user.token,
   keys: state.key.keys,
+  users: state.user.users,
+  keyTypes: state.key.keyTypes,
   modalOpen: state.key.modalOpen,
   perms: state.permission.userPerms
 });
 
 const mapDispatchToProps = {
   toggleModal,
-  fetchKeys
+  fetchKeys,
+  fetchKeyTypes,
+  fetchUsers
 };
 
 export default connect(

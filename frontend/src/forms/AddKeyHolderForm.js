@@ -6,76 +6,112 @@ import {
   FormGroup,
   ControlLabel,
   HelpBlock,
-  Button,
-  Well
+  Button
 } from "react-bootstrap";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, formValueSelector } from "redux-form";
 
-const FieldGroup = ({ input, meta, id, label, help, ...props }) => (
+const FieldGroup = ({
+  input,
+  meta,
+  id,
+  label,
+  help,
+  meta: { touched, error, warning },
+  ...props
+}) => (
   <FormGroup controlId={id}>
     <ControlLabel>{label}</ControlLabel>
     <FormControl {...props} {...input} />
     {help && <HelpBlock>{help}</HelpBlock>}
+    {touched &&
+      ((error && <span style={{ color: "red" }}>{error}</span>) ||
+        (warning && <span>{warning}</span>))}
   </FormGroup>
 );
 
-const keyTypes = [
-  {
-    name: "24h",
-    value: "24h"
-  },
-  {
-    name: "Day",
-    value: "day"
+const checked = val =>
+  val === true
+    ? undefined
+    : "You must have the permission to add a key to the user.";
+
+const userFilter = (users, id) => {
+  const user = users.find(user => Number(user.userId) === Number(id));
+  if (!user) {
+    return "N/A";
   }
-];
+  return user.firstName + " " + user.lastName;
+};
 
 const AddKeyHolderForm = props => {
+  const {
+    handleSubmit,
+    users,
+    keyTypes,
+    handleClose,
+    selectedKey,
+    selectedUser
+  } = props;
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field
-        name="user"
-        id="formControlsUser"
-        type="text"
-        label="User"
-        autoComplete="off"
-        placeholder="User"
         component={FieldGroup}
-      />
-      <Field
-        name="keyType"
-        id="formControlsText"
-        type="text"
-        label="Key type"
-        autoComplete="off"
-        placeholder="Description"
-        component="select"
+        name="user"
+        componentClass="select"
+        label="User"
       >
-        {keyTypes &&
-          keyTypes.map(keyType => (
-            <option key={keyType.value} value={keyType.value}>
-              {keyType.name}
+        {users &&
+          users.map(user => (
+            <option key={user.firstName + user.lastName} value={user.userId}>
+              {user.firstName + " " + user.lastName}
             </option>
           ))}
       </Field>
-      <Well>
-        <FormGroup controlId="studentUnionPermission">
-          <Field
-            name="studentUnionPermission"
-            component="input"
-            type="checkbox"
-          />{" "}
-          <b>I have the permission to add a key for the user</b>
-          <HelpBlock>
-            By checking this box you agree you have the permission of the user
-            to add a key to him/her.
-          </HelpBlock>
-        </FormGroup>
-      </Well>
-      <Button type="button" bsStyle="danger" onClick={props.handleClose}>
+      <Field
+        component={FieldGroup}
+        name="keyType"
+        componentClass="select"
+        label="Key type"
+      >
+        {keyTypes &&
+          keyTypes.map(keyType => (
+            <option key={keyType.id} value={keyType.id}>
+              {keyType.title}
+            </option>
+          ))}
+      </Field>
+      <FormGroup controlId="studentUnionPermission">
+        <Field
+          name="studentUnionPermission"
+          type="checkbox"
+          label="Agreement"
+          component={FieldGroup}
+          validate={[checked]}
+        />{" "}
+        <HelpBlock>
+          By checking this checkbox you agree you have the permission to add the
+          following key:
+          <p>
+            {selectedKey &&
+              selectedUser && (
+                <span>
+                  <b>
+                    {
+                      keyTypes.find(
+                        keyType => Number(keyType.id) === Number(selectedKey)
+                      ).title
+                    }{" "}
+                    key
+                  </b>{" "}
+                  for user <b>{userFilter(users, selectedUser)}</b>
+                </span>
+              )}
+          </p>
+        </HelpBlock>
+      </FormGroup>
+      <Button type="button" bsStyle="danger" onClick={handleClose}>
         Cancel
       </Button>
-      &nbsp;&nbsp;&nbsp;
+      {"   "}
       <Button type="submit" bsStyle="success">
         {props.isAdding ? "Adding key to user..." : "Add"}
       </Button>
@@ -83,9 +119,25 @@ const AddKeyHolderForm = props => {
   );
 };
 
-const mapStateToProps = state => ({});
-
-export default reduxForm({
-  // a unique name for the form
+const AddKeyHolderFormRx = reduxForm({
   form: "keyHolder"
-})(connect(mapStateToProps)(AddKeyHolderForm));
+})(AddKeyHolderForm);
+
+const selector = formValueSelector("keyHolder");
+
+const mapStateToProps = state => {
+  return {
+    initialValues: {
+      keyType: 1,
+      user: 1
+    }
+  };
+};
+
+export default connect(
+  state => ({
+    selectedUser: selector(state, "user"),
+    selectedKey: selector(state, "keyType")
+  }),
+  mapStateToProps
+)(AddKeyHolderFormRx);
