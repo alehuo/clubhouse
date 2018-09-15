@@ -1,63 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
+
+import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
+import { Field, reduxForm } from "redux-form";
+import { FieldGroup } from "./../components/FieldGroup";
 
 import {
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  HelpBlock,
-  Button,
-  Well
-} from "react-bootstrap";
-import { Field, reduxForm } from "redux-form";
-import validator from "validator";
-
-const FieldGroup = ({
-  input,
-  meta,
-  id,
-  label,
-  help,
-  meta: { touched, error, warning },
-  ...props
-}) => (
-  <FormGroup controlId={id}>
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl {...props} {...input} />
-    {help && <HelpBlock>{help}</HelpBlock>}
-    {touched &&
-      ((error && <span style={{ color: "red" }}>{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </FormGroup>
-);
-
-const checked = val =>
-  val === true
-    ? undefined
-    : "You must have read and accepted the privacy policy.";
-
-const isEmpty = name => val => {
-  return val ? undefined : name + " cannot be empty";
-};
-
-const validEmail = val => {
-  return validator.isEmail(val) ? undefined : "E-mail address is invalid";
-};
-
-const passwd = length => val =>
-  val && val.length >= length
-    ? undefined
-    : "Password cannot be empty or shorter than " + length + " characters";
-
-const validatePasswords = (value, values) => {
-  if (!values.passwordAgain) {
-    return "Please type your password again";
-  }
-  if (values.passwordAgain !== values.password) {
-    return "Passwords do not match";
-  }
-  return undefined;
-};
+  isEmpty,
+  passwd,
+  validatePasswords,
+  validEmail,
+  checked
+} from "./../utils/FormValidators";
 
 const RegisterForm = props => {
   return (
@@ -122,18 +75,13 @@ const RegisterForm = props => {
           <HelpBlock>Your answer will be saved.</HelpBlock>
         </FormGroup>
       </Well>
-      <Button type="submit" bsStyle="success" disabled={props.isAdding}>
-        {props.isAdding ? "Registering user.." : "Register"}
+      <Button type="submit" bsStyle="success" disabled={props.isRegistering}>
+        {props.isRegistering ? "Registering user.." : "Register"}
       </Button>
     </form>
   );
 };
 
-const mapStateToProps = state => ({
-  isStarting: state.watch.isStarting
-});
-
 export default reduxForm({
-  // a unique name for the form
-  form: "registerUser"
-})(connect(mapStateToProps)(RegisterForm));
+  form: "registerForm"
+})(RegisterForm);

@@ -18,6 +18,7 @@ export class StartWatch extends Component {
           <StartWatchForm
             handleClose={this.props.onHide}
             onSubmit={this.handleSubmit}
+            isAdding={this.props.isAdding}
           />
         </Modal.Body>
       </Modal>
@@ -26,7 +27,8 @@ export class StartWatch extends Component {
 }
 
 const mapStateToProps = state => ({
-  token: state.user.token
+  token: state.user.token,
+  isAdding: state.studentUnion.isAdding
 });
 
 const mapDispatchToProps = {

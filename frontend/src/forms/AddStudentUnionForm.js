@@ -1,42 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  HelpBlock,
-  Button,
-  Well
-} from "react-bootstrap";
+import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
-const FieldGroup = ({
-  input,
-  meta,
-  id,
-  label,
-  help,
-  meta: { touched, error, warning },
-  ...props
-}) => (
-  <FormGroup controlId={id}>
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl {...props} {...input} />
-    {help && <HelpBlock>{help}</HelpBlock>}
-    {touched &&
-      ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-  </FormGroup>
-);
-
-const checked = val =>
-  val === true
-    ? undefined
-    : "You must have the permission from the student union";
-
-// Todo: add field name to message
-const notEmpty = val =>
-  val && val.length > 0 ? undefined : "Input must not be empty";
+import { FieldGroup } from "./../components/FieldGroup";
+import { isEmpty, checked } from "./../utils/FormValidators";
 
 const AddStudentUnionForm = props => {
   return (
@@ -49,7 +18,7 @@ const AddStudentUnionForm = props => {
         placeholder="Name"
         autocomplete="off"
         component={FieldGroup}
-        validate={[notEmpty]}
+        validate={[isEmpty("Name")]}
       />
       <Field
         name="studentUnionDescription"
@@ -59,7 +28,7 @@ const AddStudentUnionForm = props => {
         placeholder="Description"
         autoComplete="off"
         component={FieldGroup}
-        validate={[notEmpty]}
+        validate={[isEmpty("Description")]}
       />
       <Well>
         <FormGroup controlId="studentUnionPermission">
@@ -67,7 +36,9 @@ const AddStudentUnionForm = props => {
             name="studentUnionPermission"
             component="input"
             type="checkbox"
-            validate={[checked]}
+            validate={[
+              checked("You must have the permission from the student union")
+            ]}
           />{" "}
           <b>
             I have the permission from the student union to save their

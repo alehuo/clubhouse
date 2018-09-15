@@ -8,7 +8,8 @@ const initialState = {
   token: null,
   users: [],
   userData: {},
-  modalOpen: false
+  modalOpen: false,
+  isRegistering: false
 };
 
 export const userActions = {

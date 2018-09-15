@@ -1,38 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  HelpBlock,
-  Button
-} from "react-bootstrap";
+import { HelpBlock, Button } from "react-bootstrap";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 
-const FieldGroup = ({
-  input,
-  meta,
-  id,
-  label,
-  help,
-  meta: { touched, error, warning },
-  ...props
-}) => (
-  <FormGroup controlId={id}>
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl {...props} {...input} />
-    {help && <HelpBlock>{help}</HelpBlock>}
-    {touched &&
-      ((error && <span style={{ color: "red" }}>{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </FormGroup>
-);
-
-const checked = val =>
-  val === true
-    ? undefined
-    : "You must have the permission to add a key to the user.";
+import { FieldGroup } from "./../components/FieldGroup";
+import { checked } from "./../utils/FormValidators";
 
 const userFilter = (users, id) => {
   const user = users.find(user => Number(user.userId) === Number(id));
@@ -79,35 +52,35 @@ const AddKeyHolderForm = props => {
             </option>
           ))}
       </Field>
-      <FormGroup controlId="studentUnionPermission">
-        <Field
-          name="studentUnionPermission"
-          type="checkbox"
-          label="Agreement"
-          component={FieldGroup}
-          validate={[checked]}
-        />{" "}
-        <HelpBlock>
-          By checking this checkbox you agree you have the permission to add the
-          following key:
-          <p>
-            {selectedKey &&
-              selectedUser && (
-                <span>
-                  <b>
-                    {
-                      keyTypes.find(
-                        keyType => Number(keyType.id) === Number(selectedKey)
-                      ).title
-                    }{" "}
-                    key
-                  </b>{" "}
-                  for user <b>{userFilter(users, selectedUser)}</b>
-                </span>
-              )}
-          </p>
-        </HelpBlock>
-      </FormGroup>
+      <Field
+        name="studentUnionPermission"
+        type="checkbox"
+        label="Agreement"
+        component={FieldGroup}
+        validate={[
+          checked("You must have the permission to add a key to the user.")
+        ]}
+      />{" "}
+      <HelpBlock>
+        By checking this checkbox you agree you have the permission to add the
+        following key:
+        <p>
+          {selectedKey &&
+            selectedUser && (
+              <span>
+                <b>
+                  {
+                    keyTypes.find(
+                      keyType => Number(keyType.id) === Number(selectedKey)
+                    ).title
+                  }{" "}
+                  key
+                </b>{" "}
+                for user <b>{userFilter(users, selectedUser)}</b>
+              </span>
+            )}
+        </p>
+      </HelpBlock>
       <Button type="button" bsStyle="danger" onClick={handleClose}>
         Cancel
       </Button>

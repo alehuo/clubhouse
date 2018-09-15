@@ -1,60 +1,39 @@
 import React from "react";
-import { connect } from "react-redux";
-import {
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  HelpBlock,
-  Button
-} from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
-
-const FieldGroup = ({ input, meta, id, label, help, ...props }) => (
-  <FormGroup controlId={id}>
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl {...props} {...input} />
-    {help && <HelpBlock>{help}</HelpBlock>}
-  </FormGroup>
-);
+import { FieldGroup } from "../components/FieldGroup";
+import { isEmpty } from "../utils/FormValidators";
 
 const LoginForm = props => {
-  if (props.isAuthenticated) {
-    return <Redirect to="/" />;
-  }
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
         name="email"
-        id="formControlsUsrname"
+        id="formControlEmail"
         type="text"
         label="Email address"
         autoComplete="email"
-        placeholder="Email address"
+        placeholder="E-mail address"
         component={FieldGroup}
+        validate={[isEmpty("E-mail address")]}
       />
       <Field
         name="password"
-        id="formControlsPasswd"
+        id="formControlPassword"
         type="password"
         label="Password"
         autoComplete="password"
         placeholder="Password"
         component={FieldGroup}
+        validate={[isEmpty("Password")]}
       />
-      <Button type="submit" disabled={props.isLoggingIn}>
+      <Button type="submit" bsStyle="success" disabled={props.isLoggingIn}>
         {props.isLoggingIn ? "Logging in.." : "Login"}
       </Button>
     </form>
   );
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  isLoggingIn: state.auth.isLoggingIn
-});
-
 export default reduxForm({
-  // a unique name for the form
-  form: "loginPage"
-})(connect(mapStateToProps)(LoginForm));
+  form: "loginForm"
+})(LoginForm);

@@ -1,40 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import {
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  HelpBlock,
-  Button,
-  Well
-} from "react-bootstrap";
+import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
-const FieldGroup = ({
-  input,
-  meta,
-  id,
-  label,
-  help,
-  meta: { touched, error, warning },
-  ...props
-}) => (
-  <FormGroup controlId={id}>
-    <ControlLabel>{label}</ControlLabel>
-    <FormControl {...props} {...input} />
-    {help && <HelpBlock>{help}</HelpBlock>}
-    {touched &&
-      ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-  </FormGroup>
-);
-
-const checked = val =>
-  val === true ? undefined : "You must check the checkbox";
-
-// Todo: add field name to message
-const notEmpty = val =>
-  val && val.length > 0 ? undefined : "Input must not be empty";
+import { FieldGroup } from "./../components/FieldGroup";
+import { checked, isEmpty } from "./../utils/FormValidators";
 
 const EndWatchForm = props => {
   return (
@@ -48,7 +19,7 @@ const EndWatchForm = props => {
         placeholder="End message"
         autoComplete="off"
         component={FieldGroup}
-        validate={[notEmpty]}
+        validate={[isEmpty("End message")]}
       />
       <Well>
         <FormGroup controlId="confirmation">
@@ -56,7 +27,7 @@ const EndWatchForm = props => {
             name="confirmation"
             component="input"
             type="checkbox"
-            validate={[checked]}
+            validate={[checked("You must check the checkbox")]}
           />{" "}
           <b>
             I confirm that I have transferred the people I was responsible for

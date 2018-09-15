@@ -22,13 +22,18 @@ export class RegisterPage extends Component {
     return (
       <React.Fragment>
         <h1>Register</h1>
-        <RegisterForm onSubmit={this.handleSubmit} />
+        <RegisterForm
+          onSubmit={this.handleSubmit}
+          isRegistering={this.props.isRegistering}
+        />
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isRegistering: state.user.isRegistering
+});
 
 const mapDispatchToProps = {
   addUser

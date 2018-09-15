@@ -18,7 +18,10 @@ export class LoginPage extends Component {
     return (
       <React.Fragment>
         <h1>Login</h1>
-        <LoginForm onSubmit={this.submitLogin} />
+        <LoginForm
+          onSubmit={this.submitLogin}
+          isLoggingIn={this.props.isLoggingIn}
+        />
       </React.Fragment>
     );
   }
@@ -33,4 +36,7 @@ const mapDispatchToProps = {
   login
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginPage);
