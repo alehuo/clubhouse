@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
@@ -12,7 +11,7 @@ const confirmationChecked = checked(
   "You must agree that you have made the required steps before ending a session"
 );
 
-const EndWatchForm = props => {
+const EndSessionForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
@@ -57,11 +56,7 @@ const EndWatchForm = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  isEnding: state.watch.isEnding
-});
-
 export default reduxForm({
   // a unique name for the form
-  form: "endWatch"
-})(connect(mapStateToProps)(EndWatchForm));
+  form: "endSession"
+})(EndSessionForm);

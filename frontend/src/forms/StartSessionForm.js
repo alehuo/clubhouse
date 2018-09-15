@@ -11,7 +11,7 @@ const confirmationChecked = checked(
   "You must agree to the rules of the clubhouse before starting a session"
 );
 
-const StartWatchForm = props => {
+const StartSessionForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
@@ -58,5 +58,5 @@ const StartWatchForm = props => {
 
 export default reduxForm({
   // a unique name for the form
-  form: "startWatch"
-})(StartWatchForm);
+  form: "startSession"
+})(StartSessionForm);

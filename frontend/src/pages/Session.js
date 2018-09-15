@@ -8,8 +8,8 @@ import {
   toggleStartWatchModal,
   fetchOwnWatchStatus
 } from "../reducers/sessionReducer";
-import EndWatch from "./subpages/EndWatch";
-import StartWatch from "./subpages/StartWatch";
+import EndSession from "./subpages/EndSession";
+import StartSession from "./subpages/StartSession";
 import moment from "moment";
 import momentDurationFormat from "moment-duration-format";
 momentDurationFormat(moment);
@@ -26,13 +26,13 @@ export class Session extends Component {
     return (
       <React.Fragment>
         {this.props.endWatchModalOpen && (
-          <EndWatch
+          <EndSession
             show={this.props.endWatchModalOpen}
             onHide={() => this.props.toggleEndWatchModal(false)}
           />
         )}
         {this.props.startWatchModalOpen && (
-          <StartWatch
+          <StartSession
             show={this.props.startWatchModalOpen}
             onHide={() => this.props.toggleStartWatchModal(false)}
           />

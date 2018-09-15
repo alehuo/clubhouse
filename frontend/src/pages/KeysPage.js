@@ -19,7 +19,6 @@ export class KeysPage extends Component {
     this.props.fetchKeys();
     this.props.fetchKeyTypes();
     this.props.fetchUsers(this.props.token);
-    console.log(this.props.token);
   }
   render() {
     return (

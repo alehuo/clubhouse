@@ -4,7 +4,7 @@ import { Modal } from "react-bootstrap";
 import { endWatch } from "../../reducers/sessionReducer";
 import EndWatchForm from "../../forms/EndSessionForm";
 
-export class EndWatch extends Component {
+export class EndSession extends Component {
   handleSubmit = values => {
     this.props.endWatch(this.props.token, values.endMessage);
   };
@@ -18,6 +18,7 @@ export class EndWatch extends Component {
           <EndWatchForm
             handleClose={this.props.onHide}
             onSubmit={this.handleSubmit}
+            isEnding={this.props.isEnding}
           />
         </Modal.Body>
       </Modal>
@@ -26,7 +27,8 @@ export class EndWatch extends Component {
 }
 
 const mapStateToProps = state => ({
-  token: state.user.token
+  token: state.user.token,
+  isEnding: state.watch.isEnding
 });
 
 const mapDispatchToProps = {
@@ -36,4 +38,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EndWatch);
+)(EndSession);

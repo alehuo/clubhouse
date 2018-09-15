@@ -7,18 +7,13 @@ import PermissionUtils from "./../utils/PermissionUtils";
 import FontAwesome from "react-fontawesome";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
-
-const newsPosts = [
-  {
-    postId: 1,
-    author: { id: 1, name: "user1" },
-    title: "Welcome to our site",
-    message: "Welcome to the new clubhouse management website.",
-    date: new Date(2018, 1, 1, 12, 55)
-  }
-];
+import { toggleNewsModal, fetchNewsposts } from "../reducers/newsReducer";
+import AddNewspost from "./subpages/AddNewspost";
 
 export class NewsPage extends Component {
+  componentDidMount() {
+    this.props.fetchNewsposts();
+  }
   render() {
     return (
       <React.Fragment>
@@ -29,7 +24,10 @@ export class NewsPage extends Component {
               this.props.perms,
               Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value
             ) && (
-              <Button bsStyle="success">
+              <Button
+                bsStyle="success"
+                onClick={() => this.props.toggleNewsModal(true)}
+              >
                 <FontAwesome name="plus" /> Add an article
               </Button>
             )}
@@ -39,8 +37,8 @@ export class NewsPage extends Component {
           this.props.perms,
           Permissions.ALLOW_VIEW_POSTS.value
         ) ? (
-          newsPosts &&
-          newsPosts.map(newsPost => (
+          this.props.newsPosts &&
+          this.props.newsPosts.map(newsPost => (
             <NewsPost
               key={newsPost.postId}
               title={newsPost.title}
@@ -55,16 +53,25 @@ export class NewsPage extends Component {
             <p>You don't have correct permissions to view news.</p>
           </Alert>
         )}
+        <AddNewspost
+          show={this.props.modalOpen}
+          onHide={() => this.props.toggleNewsModal(false)}
+        />
       </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  perms: state.permission.userPerms
+  perms: state.permission.userPerms,
+  newsPosts: state.news.newsPosts,
+  modalOpen: state.news.modalOpen
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  toggleNewsModal,
+  fetchNewsposts
+};
 
 export default connect(
   mapStateToProps,

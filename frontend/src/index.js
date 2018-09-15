@@ -17,6 +17,7 @@ import permissionReducer from "./reducers/permissionReducer";
 import { reducer as formReducer } from "redux-form";
 import sessionReducer from "./reducers/sessionReducer";
 import ruleReducer from "./reducers/ruleReducer";
+import newsReducer from "./reducers/newsReducer";
 
 // Combine reducers
 const reducer = combineReducers({
@@ -29,7 +30,8 @@ const reducer = combineReducers({
   permission: permissionReducer,
   watch: sessionReducer,
   form: formReducer,
-  rule: ruleReducer
+  rule: ruleReducer,
+  news: newsReducer
 });
 
 const middleware =

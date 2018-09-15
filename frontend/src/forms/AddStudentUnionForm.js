@@ -19,6 +19,7 @@ const AddStudentUnionForm = props => {
         autocomplete="off"
         component={FieldGroup}
         validate={[isEmpty]}
+        autoFocus={true}
       />
       <Field
         name="studentUnionDescription"

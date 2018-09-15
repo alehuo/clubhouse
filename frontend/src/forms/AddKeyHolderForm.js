@@ -15,6 +15,8 @@ const userFilter = (users, id) => {
   return user.firstName + " " + user.lastName;
 };
 
+const confirmed = checked("You must have the permission to add a key");
+
 const AddKeyHolderForm = props => {
   const {
     handleSubmit,
@@ -57,7 +59,7 @@ const AddKeyHolderForm = props => {
         type="checkbox"
         label="Agreement"
         component={FieldGroup}
-        validate={[checked]}
+        validate={[confirmed]}
       />{" "}
       <HelpBlock>
         By checking this checkbox you agree you have the permission to add the

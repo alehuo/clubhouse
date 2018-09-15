@@ -1,24 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
-import { startWatch } from "../../reducers/sessionReducer";
-import StartWatchForm from "../../forms/StartSessionForm";
+import AddNewspostForm from "../../forms/AddNewspostForm";
 
-export class StartWatch extends Component {
+import { addNewspost } from "../../reducers/newsReducer";
+
+export class AddNewspost extends Component {
   handleSubmit = values => {
-    this.props.startWatch(this.props.token, values.startMessage);
+    this.props.addNewspost(
+      this.props.token,
+      values.newspostTitle,
+      values.newspostMessage
+    );
   };
   render() {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <Modal.Header closeButton>
-          <Modal.Title>Start session</Modal.Title>
+          <Modal.Title>Submit a newspost</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <StartWatchForm
+          <AddNewspostForm
             handleClose={this.props.onHide}
             onSubmit={this.handleSubmit}
-            isAdding={this.props.isAdding}
           />
         </Modal.Body>
       </Modal>
@@ -28,14 +32,14 @@ export class StartWatch extends Component {
 
 const mapStateToProps = state => ({
   token: state.user.token,
-  isAdding: state.studentUnion.isAdding
+  isAdding: state.news.isAdding
 });
 
 const mapDispatchToProps = {
-  startWatch
+  addNewspost
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(StartWatch);
+)(AddNewspost);
