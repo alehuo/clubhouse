@@ -10,6 +10,7 @@ import {
   Well
 } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
+import validator from "validator";
 
 const FieldGroup = ({
   input,
@@ -25,7 +26,8 @@ const FieldGroup = ({
     <FormControl {...props} {...input} />
     {help && <HelpBlock>{help}</HelpBlock>}
     {touched &&
-      ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+      ((error && <span style={{ color: "red" }}>{error}</span>) ||
+        (warning && <span>{warning}</span>))}
   </FormGroup>
 );
 
@@ -34,10 +36,28 @@ const checked = val =>
     ? undefined
     : "You must have read and accepted the privacy policy.";
 
-const passwd = val =>
-  val && val.length >= 8
+const isEmpty = name => val => {
+  return val ? undefined : name + " cannot be empty";
+};
+
+const validEmail = val => {
+  return validator.isEmail(val) ? undefined : "E-mail address is invalid";
+};
+
+const passwd = length => val =>
+  val && val.length >= length
     ? undefined
-    : "Password cannot be empty or shorter than 8 characters";
+    : "Password cannot be empty or shorter than " + length + " characters";
+
+const validatePasswords = (value, values) => {
+  if (!values.passwordAgain) {
+    return "Please type your password again";
+  }
+  if (values.passwordAgain !== values.password) {
+    return "Passwords do not match";
+  }
+  return undefined;
+};
 
 const RegisterForm = props => {
   return (
@@ -49,22 +69,25 @@ const RegisterForm = props => {
         label="First name"
         placeholder="First name"
         component={FieldGroup}
+        validate={[isEmpty("First name")]}
       />
       <Field
         name="lastName"
         id="lastName"
         type="text"
         label="Last name"
-        placeholder="First name"
+        placeholder="Last name"
         component={FieldGroup}
+        validate={[isEmpty("Last name")]}
       />
       <Field
         name="email"
         id="email"
         type="text"
-        label="Email address"
-        placeholder="Email address"
+        label="E-mail address"
+        placeholder="something@email.com"
         component={FieldGroup}
+        validate={[isEmpty("E-mail address"), validEmail]}
       />
       <Field
         name="password"
@@ -73,7 +96,7 @@ const RegisterForm = props => {
         label="Password"
         placeholder="Password"
         component={FieldGroup}
-        validate={[passwd]}
+        validate={[passwd(8)]}
       />
       <Field
         name="passwordAgain"
@@ -82,6 +105,7 @@ const RegisterForm = props => {
         label="Confirm password"
         placeholder="Confirm password"
         component={FieldGroup}
+        validate={validatePasswords}
       />
       <Well>
         <FormGroup controlId="studentUnionPermission">
@@ -98,15 +122,6 @@ const RegisterForm = props => {
           <HelpBlock>Your answer will be saved.</HelpBlock>
         </FormGroup>
       </Well>
-      <Button
-        type="button"
-        bsStyle="danger"
-        onClick={props.handleClose}
-        disabled={props.isAdding}
-      >
-        Cancel
-      </Button>
-      &nbsp;&nbsp;&nbsp;
       <Button type="submit" bsStyle="success" disabled={props.isAdding}>
         {props.isAdding ? "Registering user.." : "Register"}
       </Button>
