@@ -26,10 +26,12 @@
 | 8.9.2018  | 3.5h  | Improved site layout. Added moment for timestamp formatting. Deployed app to Heroku.                                                                                                                            |
 | 9.9.2018  | 0.5h  | Code cleanup.                                                                                                                                                                                                   |
 | 14.9.2018 | 1.5h  | Progress on Rule page. UI fixes and optimizations                                                                                                                                                               |
-| 15.9.2018 | 2.0h  | Updated favicon. Improved KeyHolder form. Refactored FieldGroup into its own file. Addedmore validators to forms                                                                                                |
+| 15.9.2018 | 3.0h  | Updated favicon. Improved KeyHolder form. Refactored FieldGroup into its own file. Added more validators to forms. Implemented reducer & UI functionality for adding newsposts. Mocked newsposts API for now.   |
+
+0.5h newspost delete functionality
 
 Total:
 
 25.5 h (Part 1)
 
-9.5 h (Part 2)
+10.5 h (Part 2)

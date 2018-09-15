@@ -29,6 +29,7 @@ const RegisterForm = props => {
         placeholder="First name"
         component={FieldGroup}
         validate={[firstNameEmpty]}
+        autoFocus={true}
       />
       <Field
         name="lastName"

@@ -23,6 +23,7 @@ const EndSessionForm = props => {
         placeholder="End message"
         autoComplete="off"
         component={FieldGroup}
+        componentClass="textarea"
         validate={[endMessageEmpty]}
       />
       <Well>

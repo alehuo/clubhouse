@@ -16,8 +16,8 @@ import { Permissions } from "@alehuo/clubhouse-shared";
 
 export class KeysPage extends Component {
   componentDidMount() {
-    this.props.fetchKeys();
-    this.props.fetchKeyTypes();
+    this.props.fetchKeys(this.props.token);
+    this.props.fetchKeyTypes(this.props.token);
     this.props.fetchUsers(this.props.token);
   }
   render() {

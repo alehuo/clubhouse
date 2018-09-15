@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { Button } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
@@ -9,7 +10,7 @@ import { isEmpty } from "./../utils/FormValidators";
 const emptyTitle = isEmpty("Title");
 const emptyText = isEmpty("Text");
 
-const AddNewspostForm = props => {
+const EditNewspostForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
@@ -38,18 +39,28 @@ const AddNewspostForm = props => {
         type="button"
         bsStyle="danger"
         onClick={props.handleClose}
-        disabled={props.isAdding}
+        disabled={props.isEditing}
       >
         Cancel
       </Button>
       &nbsp;&nbsp;&nbsp;
-      <Button type="submit" bsStyle="success" disabled={props.isAdding}>
-        {props.isAdding ? "Adding newspost.." : "Add"}
+      <Button type="submit" bsStyle="success" disabled={props.isEditing}>
+        {props.isEditing ? "Editing newspost.." : "Edit"}
       </Button>
     </form>
   );
 };
 
-export default reduxForm({
-  form: "addNewspostForm"
-})(AddNewspostForm);
+const EditNewspostRx = reduxForm({
+  form: "editNewspostForm",
+  enableReinitialize: true
+})(EditNewspostForm);
+
+export default connect(state => {
+  return {
+    initialValues: {
+      newspostTitle: "Hello",
+      newspostMessage: "World"
+    }
+  };
+})(EditNewspostRx);

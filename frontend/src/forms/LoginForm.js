@@ -19,6 +19,7 @@ const LoginForm = props => {
         placeholder="E-mail address"
         component={FieldGroup}
         validate={[emailEmpty]}
+        autoFocus={true}
       />
       <Field
         name="password"

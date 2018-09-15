@@ -23,6 +23,7 @@ const StartSessionForm = props => {
         placeholder="Start message"
         autoComplete="off"
         component={FieldGroup}
+        componentClass="textarea"
         validate={[emptyStartMessage]}
       />
       <Well>

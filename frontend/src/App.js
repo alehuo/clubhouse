@@ -260,6 +260,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  token: state.user.token,
   watchPage: state.watch.watchPage,
   watchRunning: state.watch.ownWatchRunning,
   peopleCount: state.watch.ownWatchPeopleCount,

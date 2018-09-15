@@ -22,10 +22,10 @@ export const toggleModal = val => {
   };
 };
 
-export const fetchKeys = () => {
+export const fetchKeys = token => {
   return async dispatch => {
     try {
-      const res = await KeyService.getKeys();
+      const res = await KeyService.getKeys(token);
       dispatch(setKeys(res));
     } catch (ex) {
       dispatch(
@@ -35,10 +35,10 @@ export const fetchKeys = () => {
   };
 };
 
-export const fetchKeyTypes = () => {
+export const fetchKeyTypes = token => {
   return async dispatch => {
     try {
-      const res = await KeyService.getKeyTypes();
+      const res = await KeyService.getKeyTypes(token);
       dispatch(setKeyTypes(res));
     } catch (ex) {
       dispatch(errorMessage("Failed to get list of key types from the server"));

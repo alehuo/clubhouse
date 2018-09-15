@@ -28,8 +28,8 @@ const keyTypes = [
   }
 ];
 
-const getKeys = async => Promise.resolve(keyHolders);
+const getKeys = async token => Promise.resolve(keyHolders);
 
-const getKeyTypes = async => Promise.resolve(keyTypes);
+const getKeyTypes = async token => Promise.resolve(keyTypes);
 
 export default { getKeys, getKeyTypes };

@@ -7,36 +7,45 @@ import PermissionUtils from "./../utils/PermissionUtils";
 import FontAwesome from "react-fontawesome";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
-import { toggleNewsModal, fetchNewsposts } from "../reducers/newsReducer";
+import {
+  toggleNewsAddModal,
+  toggleNewsEditModal,
+  fetchNewsposts,
+  deleteNewspost,
+  setEditId
+} from "../reducers/newsReducer";
 import AddNewspost from "./subpages/AddNewspost";
+import EditNewspost from "./subpages/EditNewspost";
 
 export class NewsPage extends Component {
   componentDidMount() {
-    this.props.fetchNewsposts();
+    this.props.fetchNewsposts(this.props.token);
   }
   render() {
+    const editDeletePermissions = PermissionUtils.hasPermission(
+      this.props.perms,
+      Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value
+    );
+    const viewPermissions = PermissionUtils.hasPermission(
+      this.props.perms,
+      Permissions.ALLOW_VIEW_POSTS.value
+    );
     return (
       <React.Fragment>
         <PageHeader>
           News
           <p>
-            {PermissionUtils.hasPermission(
-              this.props.perms,
-              Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value
-            ) && (
+            {editDeletePermissions && (
               <Button
                 bsStyle="success"
-                onClick={() => this.props.toggleNewsModal(true)}
+                onClick={() => this.props.toggleNewsAddModal(true)}
               >
                 <FontAwesome name="plus" /> Add an article
               </Button>
             )}
           </p>
         </PageHeader>
-        {PermissionUtils.hasPermission(
-          this.props.perms,
-          Permissions.ALLOW_VIEW_POSTS.value
-        ) ? (
+        {viewPermissions ? (
           this.props.newsPosts &&
           this.props.newsPosts.map(newsPost => (
             <NewsPost
@@ -45,6 +54,19 @@ export class NewsPage extends Component {
               author={newsPost.author}
               message={newsPost.message}
               date={newsPost.date.toString()}
+              onDelete={event => {
+                event.preventDefault();
+                if (
+                  window.confirm("Do you want to delete the selected newspost?")
+                ) {
+                  this.props.deleteNewspost(this.props.token, newsPost.postId);
+                }
+              }}
+              onEdit={() => {
+                this.props.setEditId(newsPost.postId);
+                this.props.toggleNewsEditModal(true);
+              }}
+              hasEditDeletePermissions={editDeletePermissions}
             />
           ))
         ) : (
@@ -54,8 +76,12 @@ export class NewsPage extends Component {
           </Alert>
         )}
         <AddNewspost
-          show={this.props.modalOpen}
-          onHide={() => this.props.toggleNewsModal(false)}
+          show={this.props.addModalOpen}
+          onHide={() => this.props.toggleNewsAddModal(false)}
+        />
+        <EditNewspost
+          show={this.props.editModalOpen}
+          onHide={() => this.props.toggleNewsEditModal(false)}
         />
       </React.Fragment>
     );
@@ -65,12 +91,16 @@ export class NewsPage extends Component {
 const mapStateToProps = state => ({
   perms: state.permission.userPerms,
   newsPosts: state.news.newsPosts,
-  modalOpen: state.news.modalOpen
+  addModalOpen: state.news.addModalOpen,
+  editModalOpen: state.news.editModalOpen
 });
 
 const mapDispatchToProps = {
-  toggleNewsModal,
-  fetchNewsposts
+  toggleNewsAddModal,
+  toggleNewsEditModal,
+  fetchNewsposts,
+  deleteNewspost,
+  setEditId
 };
 
 export default connect(
