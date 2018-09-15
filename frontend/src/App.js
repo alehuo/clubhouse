@@ -57,7 +57,7 @@ const AuthenticatedRoute = ({
   />
 );
 class App extends Component {
-  componentDidMount = () => {
+  componentDidMount() {
     if (localStorage.getItem("token")) {
       this.props.setToken(localStorage.getItem("token"));
       this.props.getUserPerms(localStorage.getItem("token"));
@@ -69,7 +69,7 @@ class App extends Component {
       }, 10000);
       this.props.setWatchCheckInterval(watchInterval);*/
     }
-  };
+  }
 
   componentWillUnmount() {
     clearInterval(this.props.watchInterval);

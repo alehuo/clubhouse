@@ -26,7 +26,7 @@
 | 8.9.2018  | 3.5h  | Improved site layout. Added moment for timestamp formatting. Deployed app to Heroku.                                                                                                                            |
 | 9.9.2018  | 0.5h  | Code cleanup.                                                                                                                                                                                                   |
 | 14.9.2018 | 1.5h  | Progress on Rule page. UI fixes and optimizations                                                                                                                                                               |
-| 15.9.2018 | 1.0h  | Updated favicon. Improved KeyHolder form                                                                                                                                                                        |
+| 15.9.2018 | 2.0h  | Updated favicon. Improved KeyHolder form. Refactored FieldGroup into its own file. Addedmore validators to forms                                                                                                |
 
 Total:
 
