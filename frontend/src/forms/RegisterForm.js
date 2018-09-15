@@ -12,6 +12,12 @@ import {
   checked
 } from "./../utils/FormValidators";
 
+const firstNameEmpty = isEmpty("First name");
+const lastNameEmpty = isEmpty("Last name");
+const emailEmpty = isEmpty("E-mail address");
+const passwordEmpty = isEmpty("Password");
+const passwordValid = passwd(8);
+
 const RegisterForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
@@ -22,7 +28,7 @@ const RegisterForm = props => {
         label="First name"
         placeholder="First name"
         component={FieldGroup}
-        validate={[isEmpty("First name")]}
+        validate={[firstNameEmpty]}
       />
       <Field
         name="lastName"
@@ -31,7 +37,7 @@ const RegisterForm = props => {
         label="Last name"
         placeholder="Last name"
         component={FieldGroup}
-        validate={[isEmpty("Last name")]}
+        validate={[lastNameEmpty]}
       />
       <Field
         name="email"
@@ -40,7 +46,7 @@ const RegisterForm = props => {
         label="E-mail address"
         placeholder="something@email.com"
         component={FieldGroup}
-        validate={[isEmpty("E-mail address"), validEmail]}
+        validate={[emailEmpty, validEmail]}
       />
       <Field
         name="password"
@@ -49,7 +55,7 @@ const RegisterForm = props => {
         label="Password"
         placeholder="Password"
         component={FieldGroup}
-        validate={[passwd(8)]}
+        validate={[passwordEmpty, passwordValid]}
       />
       <Field
         name="passwordAgain"

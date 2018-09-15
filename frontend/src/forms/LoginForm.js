@@ -4,6 +4,9 @@ import { Field, reduxForm } from "redux-form";
 import { FieldGroup } from "../components/FieldGroup";
 import { isEmpty } from "../utils/FormValidators";
 
+const emailEmpty = isEmpty("E-mail address");
+const passwordEmpty = isEmpty("Password");
+
 const LoginForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
@@ -15,7 +18,7 @@ const LoginForm = props => {
         autoComplete="email"
         placeholder="E-mail address"
         component={FieldGroup}
-        validate={[isEmpty("E-mail address")]}
+        validate={[emailEmpty]}
       />
       <Field
         name="password"
@@ -25,7 +28,7 @@ const LoginForm = props => {
         autoComplete="password"
         placeholder="Password"
         component={FieldGroup}
-        validate={[isEmpty("Password")]}
+        validate={[passwordEmpty]}
       />
       <Button type="submit" bsStyle="success" disabled={props.isLoggingIn}>
         {props.isLoggingIn ? "Logging in.." : "Login"}

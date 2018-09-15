@@ -7,6 +7,11 @@ import { Field, reduxForm } from "redux-form";
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked, isEmpty } from "./../utils/FormValidators";
 
+const endMessageEmpty = isEmpty("End message");
+const confirmationChecked = checked(
+  "You must agree that you have made the required steps before ending a session"
+);
+
 const EndWatchForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
@@ -19,7 +24,7 @@ const EndWatchForm = props => {
         placeholder="End message"
         autoComplete="off"
         component={FieldGroup}
-        validate={[isEmpty("End message")]}
+        validate={[endMessageEmpty]}
       />
       <Well>
         <FormGroup controlId="confirmation">
@@ -27,7 +32,7 @@ const EndWatchForm = props => {
             name="confirmation"
             component="input"
             type="checkbox"
-            validate={[checked("You must check the checkbox")]}
+            validate={[confirmationChecked]}
           />{" "}
           <b>
             I confirm that I have transferred the people I was responsible for

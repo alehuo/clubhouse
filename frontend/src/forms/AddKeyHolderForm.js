@@ -57,9 +57,7 @@ const AddKeyHolderForm = props => {
         type="checkbox"
         label="Agreement"
         component={FieldGroup}
-        validate={[
-          checked("You must have the permission to add a key to the user.")
-        ]}
+        validate={[checked]}
       />{" "}
       <HelpBlock>
         By checking this checkbox you agree you have the permission to add the

@@ -6,6 +6,11 @@ import { Field, reduxForm } from "redux-form";
 import { FieldGroup } from "./../components/FieldGroup";
 import { isEmpty, checked } from "./../utils/FormValidators";
 
+const emptyStartMessage = isEmpty("Start message");
+const confirmationChecked = checked(
+  "You must agree to the rules of the clubhouse before starting a session"
+);
+
 const StartWatchForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
@@ -18,7 +23,7 @@ const StartWatchForm = props => {
         placeholder="Start message"
         autoComplete="off"
         component={FieldGroup}
-        validate={[isEmpty]}
+        validate={[emptyStartMessage]}
       />
       <Well>
         <FormGroup controlId="confirmation">
@@ -26,7 +31,7 @@ const StartWatchForm = props => {
             name="confirmation"
             component="input"
             type="checkbox"
-            validate={[checked("You must check the checkbox")]}
+            validate={[confirmationChecked]}
           />{" "}
           <b>
             I confirm that I have read the rules of the clubhouse before

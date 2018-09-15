@@ -18,7 +18,7 @@ const AddStudentUnionForm = props => {
         placeholder="Name"
         autocomplete="off"
         component={FieldGroup}
-        validate={[isEmpty("Name")]}
+        validate={[isEmpty]}
       />
       <Field
         name="studentUnionDescription"
@@ -28,7 +28,7 @@ const AddStudentUnionForm = props => {
         placeholder="Description"
         autoComplete="off"
         component={FieldGroup}
-        validate={[isEmpty("Description")]}
+        validate={[isEmpty]}
       />
       <Well>
         <FormGroup controlId="studentUnionPermission">
@@ -36,9 +36,7 @@ const AddStudentUnionForm = props => {
             name="studentUnionPermission"
             component="input"
             type="checkbox"
-            validate={[
-              checked("You must have the permission from the student union")
-            ]}
+            validate={[checked]}
           />{" "}
           <b>
             I have the permission from the student union to save their
