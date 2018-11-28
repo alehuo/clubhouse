@@ -5,3 +5,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Permissions_1 = __importDefault(require("./Permissions"));
 exports.Permissions = Permissions_1.default;
+//# sourceMappingURL=index.js.map

@@ -74,3 +74,4 @@ const permissionCrud = {
 };
 const permissions = Object.assign({}, userCrud, keyCrud, studentUnionCrud, calendarCrud, ruleCrud, newspostCrud, locationCrud, messageCrud, permissionCrud);
 exports.default = permissions;
+//# sourceMappingURL=Permissions.js.map
