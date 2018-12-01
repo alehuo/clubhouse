@@ -3,10 +3,11 @@ import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
-import styled from "styled-components";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
+import { Container } from "./components/Container";
 import { Navigation } from "./components/Navigation";
 import NotificationDrawer from "./components/NotificationDrawer";
+import { navButtons } from "./navButtons";
 import CalendarPage from "./pages/CalendarPage";
 import KeysPage from "./pages/KeysPage";
 import LoginPage from "./pages/LoginPage";
@@ -28,43 +29,6 @@ import {
 import { setToken } from "./reducers/userReducer";
 import { fetchUserData } from "./reducers/userReducer";
 
-const Container = styled.div`
-  margin-top: 60px;
-`;
-
-const navButtons = [
-  {
-    url: "/news",
-    icon: "comments",
-    text: "News",
-  },
-  {
-    url: "/calendar",
-    icon: "calendar",
-    text: "Calendar",
-  },
-  {
-    url: "/keys",
-    icon: "key",
-    text: "Keys",
-  },
-  {
-    url: "/studentunions",
-    icon: "users",
-    text: "Student unions",
-  },
-  {
-    url: "/rules",
-    icon: "list-ol",
-    text: "Rules",
-  },
-  {
-    url: "/users",
-    icon: "users",
-    text: "Users",
-  },
-];
-
 class App extends React.Component<any, any> {
   public componentDidMount() {
     if (localStorage.getItem("token")) {
@@ -85,8 +49,6 @@ class App extends React.Component<any, any> {
     this.props.setWatchCheckInterval(null);
   }
 
-  public isUserLoggedIn = () => this.props.isAuthenticated === true;
-
   public render() {
     const {
       userData,
@@ -99,7 +61,7 @@ class App extends React.Component<any, any> {
       <Router>
         <React.Fragment>
           <Navigation
-            isAuthenticated={this.isUserLoggedIn()}
+            isAuthenticated={this.props.isAuthenticated}
             navButtons={navButtons}
             userData={userData}
           />
@@ -135,24 +97,24 @@ class App extends React.Component<any, any> {
               <Route exact={true} path="/login" component={LoginPage} />
               <Route exact={true} path="/register" component={RegisterPage} />
               <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
+                isAuthenticated={this.props.isAuthenticated}
                 exact={true}
                 path="/session"
                 component={Session}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
+                isAuthenticated={this.props.isAuthenticated}
                 exact={true}
                 path="/logout"
                 component={LogoutPage}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
+                isAuthenticated={this.props.isAuthenticated}
                 path="/user"
                 component={UserProfilePage}
               />
               <AuthenticatedRoute
-                isAuthenticated={this.isUserLoggedIn()}
+                isAuthenticated={this.props.isAuthenticated}
                 exact={true}
                 path="/users"
                 component={UserListPage}

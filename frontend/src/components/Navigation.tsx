@@ -32,7 +32,7 @@ const Navigation: React.SFC<NavigationProps> = ({
     <Navbar.Collapse>
       <Nav>
         {isAuthenticated && (
-          <NavDropdown title={"Menu"} id="1">
+          <NavDropdown title={"Menu"} id="1" onSelect={() => null}>
             {navButtons.map((navButton) => (
               <LinkContainer to={navButton.url} key={navButton.url}>
                 <NavItem eventKey={1}>
