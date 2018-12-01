@@ -14,11 +14,11 @@ const login = async (email: string, password: string) =>
     "api/v1/authenticate",
     {
       email,
-      password
+      password,
     },
     {
-      baseURL: process.env.REACT_APP_BACKEND_URL
-    }
+      baseURL: process.env.REACT_APP_BACKEND_URL,
+    },
   );
 
 const register = async (user: UserModel) =>
@@ -28,11 +28,11 @@ const register = async (user: UserModel) =>
       email: user.email,
       password: user.password,
       firstName: user.firstName,
-      lastName: user.lastName
+      lastName: user.lastName,
     },
     {
-      baseURL: process.env.REACT_APP_BACKEND_URL
-    }
+      baseURL: process.env.REACT_APP_BACKEND_URL,
+    },
   );
 
 const remove = async (userId: number, token: string) =>

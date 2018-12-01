@@ -7,31 +7,31 @@ interface AuthenticationState {
 
 const initialState = {
   isLoggingIn: false,
-  isAuthenticated: false
+  isAuthenticated: false,
 };
 
 export const authenticationActions = {
   SET_IS_LOGGING_IN: "SET_IS_LOGGING_IN",
   AUTHENTICATE_USER: "AUTHENTICATE_USER",
-  DEAUTHENTICATE_USER: "DEAUTHENTICATE_USER"
+  DEAUTHENTICATE_USER: "DEAUTHENTICATE_USER",
 };
 
 export const authenticateUser = () => {
   return {
-    type: authenticationActions.AUTHENTICATE_USER
+    type: authenticationActions.AUTHENTICATE_USER,
   };
 };
 
 export const deAuthenticateUser = () => {
   return {
-    type: authenticationActions.DEAUTHENTICATE_USER
+    type: authenticationActions.DEAUTHENTICATE_USER,
   };
 };
 
 export const setIsLoggingIn = (isLoggingIn: boolean) => {
   return {
     type: authenticationActions.SET_IS_LOGGING_IN,
-    isLoggingIn
+    isLoggingIn,
   };
 };
 

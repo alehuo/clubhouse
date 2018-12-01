@@ -1,7 +1,7 @@
-import KeyService from "./../services/KeyService";
-import { errorMessage } from "./notificationReducer";
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import KeyService from "./../services/KeyService";
+import { errorMessage } from "./notificationReducer";
 
 interface KeyState {
   keys: any[];
@@ -14,20 +14,20 @@ const initialState = {
   keys: [],
   keyTypes: [],
   isAdding: false,
-  modalOpen: false
+  modalOpen: false,
 };
 
 export const keyActions = {
   ADD_KEY: "ADD_KEY",
   SET_KEYS: "SET_KEYS",
   SET_KEY_TYPES: "SET_KEY_TYPES",
-  TOGGLE_MODAL: "TOGGLE_MODAL"
+  TOGGLE_MODAL: "TOGGLE_MODAL",
 };
 
 export const toggleModal = (val: string) => {
   return {
     type: keyActions.TOGGLE_MODAL,
-    val
+    val,
   };
 };
 
@@ -38,7 +38,7 @@ export const fetchKeys = (token: string) => {
       dispatch(setKeys(res));
     } catch (ex) {
       dispatch(
-        errorMessage("Failed to get list of keyholders from the server")
+        errorMessage("Failed to get list of keyholders from the server"),
       );
     }
   };
@@ -58,14 +58,14 @@ export const fetchKeyTypes = (token: string) => {
 export const setKeys = (keys: any[]) => {
   return {
     type: keyActions.SET_KEYS,
-    keys
+    keys,
   };
 };
 
 export const setKeyTypes = (keyTypes: any[]) => {
   return {
     type: keyActions.SET_KEY_TYPES,
-    keyTypes
+    keyTypes,
   };
 };
 

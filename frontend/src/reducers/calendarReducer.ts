@@ -1,28 +1,28 @@
-import CalendarService from "./../services/CalendarService";
-import { errorMessage } from "./notificationReducer";
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import CalendarService from "./../services/CalendarService";
+import { errorMessage } from "./notificationReducer";
 
 interface CalendarState {
   events: any[];
 }
 
 const initialState = {
-  events: []
+  events: [],
 };
 
 const calendarActions = {
-  SET_EVENTS: "SET_EVENTS"
+  SET_EVENTS: "SET_EVENTS",
 };
 
 export const fetchEvents = (token: string) => async (
-  dispatch: ThunkDispatch<any, any, any>
+  dispatch: ThunkDispatch<any, any, any>,
 ) => {
   try {
     const events = await CalendarService.getEvents(token);
     dispatch({
       type: calendarActions.SET_EVENTS,
-      events: events.data
+      events: events.data,
     });
   } catch (ex) {
     dispatch(errorMessage("Failed to fetch calendar events"));

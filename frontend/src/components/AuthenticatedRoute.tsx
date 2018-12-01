@@ -9,7 +9,10 @@ interface AuthenticatedRouteProps {
 const AuthenticatedRoute: React.SFC<AuthenticatedRouteProps & RouteProps> = ({
   component: Component,
   isAuthenticated,
-  ...rest
+  // FIXME: TSLint / TypeScript bug.
+  // The object spread operator confuses the linter as a trailing comma is not allowed after the rest operator
+  // @ts-ignore
+  ...rest,
 }) => (
   <Route
     {...rest}

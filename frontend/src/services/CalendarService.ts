@@ -15,7 +15,7 @@ export const eventMapper = (event: CalendarEvent) => {
     title: event.name,
     desc: event.description,
     start: event.startTime,
-    end: event.endTime
+    end: event.endTime,
   };
 };
 
