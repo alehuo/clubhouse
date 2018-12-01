@@ -28,6 +28,8 @@
 | 14.9.2018 | 1.5h  | Progress on Rule page. UI fixes and optimizations                                                                                                                                                                                                                 |
 | 15.9.2018 | 4.0h  | Updated favicon. Improved KeyHolder form. Refactored FieldGroup into its own file. Added more validators to forms. Implemented reducer & UI functionality for adding newsposts. Mocked newsposts API for now. Started implementing newspost delete functionality. |
 
+| 3.11.2018 | 1.5h  | Upgraded dependencies. Switched to TypeScript |
+
 Total:
 
 25.5 h (Part 1)
