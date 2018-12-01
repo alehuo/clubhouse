@@ -6,7 +6,7 @@ import {
   HelpBlock
 } from "react-bootstrap";
 
-export const FieldGroup = ({
+export const FieldGroup: React.SFC<any> = ({
   input,
   meta,
   id,

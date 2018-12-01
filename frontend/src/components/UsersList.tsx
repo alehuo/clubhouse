@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Button, Table } from "react-bootstrap";
 import { fetchUsers, deleteUser } from "./../reducers/userReducer";
@@ -7,7 +7,7 @@ import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 
-export class UsersList extends Component {
+export class UsersList extends React.Component<any, any> {
   componentDidMount() {
     this.props.fetchUsers(this.props.token);
   }
@@ -27,7 +27,7 @@ export class UsersList extends Component {
         </thead>
         <tbody>
           {this.props.users ? (
-            this.props.users.map(user => (
+            this.props.users.map((user: any) => (
               <tr key={user.userId}>
                 <td>{user.userId}</td>
                 <td>
@@ -67,7 +67,7 @@ export class UsersList extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   token: state.user.token,
   perms: state.permission.userPerms
 });
