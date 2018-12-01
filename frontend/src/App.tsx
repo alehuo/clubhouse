@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  Alert,
-  Button,
-  MenuItem,
-  Nav,
-  Navbar,
-  NavDropdown,
-  NavItem,
-} from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
+import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
-import "./App.css";
+import styled from "styled-components";
+import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
+import { Navigation } from "./components/Navigation";
 import NotificationDrawer from "./components/NotificationDrawer";
 import CalendarPage from "./pages/CalendarPage";
 import KeysPage from "./pages/KeysPage";
@@ -35,28 +28,43 @@ import {
 import { setToken } from "./reducers/userReducer";
 import { fetchUserData } from "./reducers/userReducer";
 
-const AuthenticatedRoute: React.SFC<any> = ({
-  component: Component,
-  isAuthenticated,
-  // @ts-ignore
-  ...rest,
-}) => (
-  <Route
-    {...rest}
-    render={(props) => {
-      return isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location },
-          }}
-        />
-      );
-    }}
-  />
-);
+const Container = styled.div`
+  margin-top: 60px;
+`;
+
+const navButtons = [
+  {
+    url: "/news",
+    icon: "comments",
+    text: "News",
+  },
+  {
+    url: "/calendar",
+    icon: "calendar",
+    text: "Calendar",
+  },
+  {
+    url: "/keys",
+    icon: "key",
+    text: "Keys",
+  },
+  {
+    url: "/studentunions",
+    icon: "users",
+    text: "Student unions",
+  },
+  {
+    url: "/rules",
+    icon: "list-ol",
+    text: "Rules",
+  },
+  {
+    url: "/users",
+    icon: "users",
+    text: "Users",
+  },
+];
+
 class App extends React.Component<any, any> {
   public componentDidMount() {
     if (localStorage.getItem("token")) {
@@ -80,163 +88,61 @@ class App extends React.Component<any, any> {
   public isUserLoggedIn = () => this.props.isAuthenticated === true;
 
   public render() {
-    const navButtons = [
-      {
-        url: "/news",
-        icon: "comments",
-        text: "News",
-      },
-      {
-        url: "/calendar",
-        icon: "calendar",
-        text: "Calendar",
-      },
-      {
-        url: "/keys",
-        icon: "key",
-        text: "Keys",
-      },
-      {
-        url: "/studentunions",
-        icon: "users",
-        text: "Student unions",
-      },
-      {
-        url: "/rules",
-        icon: "list-ol",
-        text: "Rules",
-      },
-      {
-        url: "/users",
-        icon: "users",
-        text: "Users",
-      },
-    ];
+    const {
+      userData,
+      watchPage,
+      watchRunning,
+      isAuthenticated,
+      peopleCount,
+    } = this.props;
     return (
       <Router>
-        <div>
-          <Navbar inverse collapseOnSelect>
-            <Navbar.Header>
-              <LinkContainer to="/">
-                <Navbar.Brand>Clubhouse management</Navbar.Brand>
-              </LinkContainer>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              <Nav>
-                {this.props.isAuthenticated && (
-                  <NavDropdown title={"Menu"} id="1">
-                    {navButtons.map((navButton) => (
-                      <LinkContainer to={navButton.url} key={navButton.url}>
-                        <NavItem eventKey={1}>
-                          <FontAwesome name={navButton.icon} /> {navButton.text}
-                        </NavItem>
-                      </LinkContainer>
-                    ))}
-                  </NavDropdown>
-                )}
-              </Nav>
-              <Nav pullRight>
-                {this.props.isAuthenticated ? (
-                  <React.Fragment>
-                    <LinkContainer to="/session">
-                      <NavItem>
-                        <FontAwesome name="beer" />{" "}
-                        <span>
-                          <b>Session</b>
-                        </span>
-                      </NavItem>
-                    </LinkContainer>
-                    <NavDropdown
-                      eventKey={6}
-                      title={
-                        <React.Fragment>
-                          <FontAwesome name="user" />{" "}
-                          <span>{this.props.userData.email || ""}</span>
-                        </React.Fragment>
-                      }
-                      id="basic-nav-dropdown"
-                    >
-                      <LinkContainer to="/user/info">
-                        <MenuItem eventKey={6.1}>
-                          <FontAwesome name="user" /> My information
-                        </MenuItem>
-                      </LinkContainer>
-                      <LinkContainer to="/user/history">
-                        <MenuItem eventKey={6.2}>
-                          <FontAwesome name="history" /> My history
-                        </MenuItem>
-                      </LinkContainer>
-                      <LinkContainer to="/user/keys">
-                        <MenuItem eventKey={6.3}>
-                          <FontAwesome name="key" /> My keys
-                        </MenuItem>
-                      </LinkContainer>
-                      <LinkContainer to="/logout">
-                        <MenuItem eventKey={6.4}>
-                          <FontAwesome name="sign-out-alt" /> Logout
-                        </MenuItem>
-                      </LinkContainer>
-                    </NavDropdown>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <LinkContainer to="/login">
-                      <NavItem eventKey={6}>
-                        <FontAwesome name="sign-out-alt" /> Login
-                      </NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/register">
-                      <NavItem eventKey={6}>
-                        <FontAwesome name="sign-in-alt" /> Register
-                      </NavItem>
-                    </LinkContainer>
-                  </React.Fragment>
-                )}
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-          <div className="container">
+        <React.Fragment>
+          <Navigation
+            isAuthenticated={this.isUserLoggedIn()}
+            navButtons={navButtons}
+            userData={userData}
+          />
+          <Container className="container">
             <NotificationDrawer />
-            {!(this.props.watchPage || !this.props.isAuthenticated) &&
-              this.props.watchRunning && (
-                <Alert bsStyle="info">
-                  <h5>
-                    {this.props.peopleCount > 0 && (
-                      <React.Fragment>
-                        You are currently in an ongoing session.
-                      </React.Fragment>
-                    )}
-                    <br />
-                    <br />
-                    <LinkContainer to="/session">
-                      <Button bsStyle="primary">View current session</Button>
-                    </LinkContainer>
-                  </h5>
-                </Alert>
-              )}
+            {!(watchPage || !isAuthenticated) && watchRunning && (
+              <Alert bsStyle="info">
+                <h5>
+                  {peopleCount > 0 && (
+                    <React.Fragment>
+                      You are currently in an ongoing session.
+                    </React.Fragment>
+                  )}
+                  <br />
+                  <br />
+                  <LinkContainer to="/session">
+                    <Button bsStyle="primary">View current session</Button>
+                  </LinkContainer>
+                </h5>
+              </Alert>
+            )}
             <React.Fragment>
-              <Route exact path="/" component={MainPage} />
+              <Route exact={true} path="/" component={MainPage} />
               <Route
-                exact
+                exact={true}
                 path="/studentunions"
                 component={StudentUnionsPage}
               />
-              <Route exact path="/keys" component={KeysPage} />
-              <Route exact path="/calendar" component={CalendarPage} />
-              <Route exact path="/rules" component={RulesPage} />
-              <Route exact path="/news" component={NewsPage} />
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/register" component={RegisterPage} />
+              <Route exact={true} path="/keys" component={KeysPage} />
+              <Route exact={true} path="/calendar" component={CalendarPage} />
+              <Route exact={true} path="/rules" component={RulesPage} />
+              <Route exact={true} path="/news" component={NewsPage} />
+              <Route exact={true} path="/login" component={LoginPage} />
+              <Route exact={true} path="/register" component={RegisterPage} />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
-                exact
+                exact={true}
                 path="/session"
                 component={Session}
               />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
-                exact
+                exact={true}
                 path="/logout"
                 component={LogoutPage}
               />
@@ -247,13 +153,13 @@ class App extends React.Component<any, any> {
               />
               <AuthenticatedRoute
                 isAuthenticated={this.isUserLoggedIn()}
-                exact
+                exact={true}
                 path="/users"
                 component={UserListPage}
               />
             </React.Fragment>
-          </div>
-        </div>
+          </Container>
+        </React.Fragment>
       </Router>
     );
   }

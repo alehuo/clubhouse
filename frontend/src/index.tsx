@@ -37,7 +37,7 @@ const reducer = combineReducers({
 const middleware = [thunk, logger];
 
 // Create store
-const store = createStore(reducer, applyMiddleware(compose(...middleware)));
+const store = createStore(reducer, applyMiddleware(...middleware));
 
 ReactDOM.render(
   <Provider store={store}>
