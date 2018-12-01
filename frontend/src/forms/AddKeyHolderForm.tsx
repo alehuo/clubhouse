@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { HelpBlock, Button } from "react-bootstrap";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import { Button, HelpBlock } from "react-bootstrap";
+import { Field, formValueSelector, reduxForm } from "redux-form";
 
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked } from "./../utils/FormValidators";
 
 const userFilter = (users: any, id: number) => {
-  const user = users.find((user: any) => Number(user.userId) === Number(id));
+  const user = users.find((usr: any) => Number(usr.userId) === Number(id));
   if (!user) {
     return "N/A";
   }
@@ -24,7 +24,7 @@ const AddKeyHolderForm: React.SFC<any> = ({
   handleClose,
   selectedKey,
   selectedUser,
-  isAdding
+  isAdding,
 }) => (
   <form onSubmit={handleSubmit}>
     <Field
@@ -69,7 +69,7 @@ const AddKeyHolderForm: React.SFC<any> = ({
             <b>
               {
                 keyTypes.find(
-                  (keyType: any) => Number(keyType.id) === Number(selectedKey)
+                  (keyType: any) => Number(keyType.id) === Number(selectedKey),
                 ).title
               }{" "}
               key
@@ -89,8 +89,8 @@ const AddKeyHolderForm: React.SFC<any> = ({
   </form>
 );
 
-const AddKeyHolderFormRx = reduxForm({
-  form: "keyHolder"
+const AddKeyHolderFormRx = reduxForm<{}, any, string>({
+  form: "keyHolder",
 })(AddKeyHolderForm);
 
 const selector = formValueSelector("keyHolder");
@@ -99,15 +99,15 @@ const mapStateToProps = (state: any) => {
   return {
     initialValues: {
       keyType: 1,
-      user: 1
-    }
+      user: 1,
+    },
   };
 };
 
 export default connect(
-  state => ({
+  (state) => ({
     selectedUser: selector(state, "user"),
-    selectedKey: selector(state, "keyType")
+    selectedKey: selector(state, "keyType"),
   }),
-  mapStateToProps
+  mapStateToProps,
 )(AddKeyHolderFormRx);

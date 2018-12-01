@@ -1,28 +1,29 @@
-import React, { Component } from "react";
-import { PageHeader, Button, Panel, Label } from "react-bootstrap";
-import { connect } from "react-redux";
+import moment from "moment";
+import momentDurationFormat from "moment-duration-format";
+import React from "react";
+import { Button, Label, PageHeader, Panel } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
 import {
-  toggleWatchPage,
+  fetchOwnWatchStatus,
   toggleEndWatchModal,
   toggleStartWatchModal,
-  fetchOwnWatchStatus
+  toggleWatchPage,
 } from "../reducers/sessionReducer";
 import EndSession from "./subpages/EndSession";
 import StartSession from "./subpages/StartSession";
-import moment from "moment";
-import momentDurationFormat from "moment-duration-format";
+// @ts-ignore
 momentDurationFormat(moment);
 
-export class Session extends Component {
-  componentDidMount() {
+export class Session extends React.Component<any, any> {
+  public componentDidMount() {
     this.props.toggleWatchPage(true);
     this.props.fetchOwnWatchStatus(this.props.token);
   }
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.props.toggleWatchPage(false);
   }
-  render() {
+  public render() {
     return (
       <React.Fragment>
         {this.props.endWatchModalOpen && (
@@ -83,8 +84,8 @@ export class Session extends Component {
             {this.props.peopleCount === 0
               ? "no one"
               : this.props.peopleCount > 1
-                ? this.props.peopleCount + " persons"
-                : this.props.peopleCount + " person"}
+              ? this.props.peopleCount + " persons"
+              : this.props.peopleCount + " person"}
           </strong>{" "}
           in an ongoing session.
         </p>
@@ -99,7 +100,7 @@ export class Session extends Component {
         <div
           style={{
             overflowY: "scroll",
-            height: 350
+            height: 350,
           }}
         >
           <Panel bsStyle="warning">
@@ -157,24 +158,24 @@ export class Session extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   perms: state.permission.userPerms,
   token: state.user.token,
   endWatchModalOpen: state.watch.endWatchModalOpen,
   startWatchModalOpen: state.watch.startWatchModalOpen,
   watchRunning: state.watch.ownWatchRunning,
   peopleCount: state.watch.ownWatchPeopleCount,
-  startTime: state.watch.ownWatchStartTime
+  startTime: state.watch.ownWatchStartTime,
 });
 
 const mapDispatchToProps = {
   toggleWatchPage,
   toggleEndWatchModal,
   toggleStartWatchModal,
-  fetchOwnWatchStatus
+  fetchOwnWatchStatus,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Session);

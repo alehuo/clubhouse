@@ -1,7 +1,7 @@
+import { Reducer } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 import watchService from "../services/SessionService";
 import { errorMessage, successMessage } from "./notificationReducer";
-import { ThunkDispatch } from "redux-thunk";
-import { Reducer } from "redux";
 
 interface SessionState {
   watchPage: boolean;
@@ -24,7 +24,7 @@ const initialState = {
   startWatchModalOpen: false,
   sendMessageModalOpen: false,
   isEnding: false,
-  isStarting: false
+  isStarting: false,
 };
 
 export const watchActions = {
@@ -35,48 +35,48 @@ export const watchActions = {
   TOGGLE_START_SESSION_MODAL: "TOGGLE_START_SESSION_MODAL",
   TOGGLE_END_SESSION_MODAL: "TOGGLE_END_SESSION_MODAL",
   TOGGLE_IS_ENDING: "TOGGLE_IS_ENDING",
-  TOGGLE_IS_STARTING: "TOGGLE_IS_STARTING"
+  TOGGLE_IS_STARTING: "TOGGLE_IS_STARTING",
 };
 
 export const toggleWatchPage = (value: boolean) => {
   return {
     type: watchActions.TOGGLE_SESSION_PAGE,
-    value
+    value,
   };
 };
 
 export const toggleIsEnding = (value: boolean) => {
   return {
     type: watchActions.TOGGLE_IS_ENDING,
-    value
+    value,
   };
 };
 
 export const toggleIsStarting = (value: boolean) => {
   return {
     type: watchActions.TOGGLE_IS_STARTING,
-    value
+    value,
   };
 };
 
 export const toggleStartWatchModal = (value: boolean) => {
   return {
     type: watchActions.TOGGLE_START_SESSION_MODAL,
-    value
+    value,
   };
 };
 
 export const toggleEndWatchModal = (value: boolean) => {
   return {
     type: watchActions.TOGGLE_END_SESSION_MODAL,
-    value
+    value,
   };
 };
 
 export const setWatchCheckInterval = (obj: any) => {
   return {
     type: watchActions.SET_SESSION_CHECK_INTERVAL,
-    obj
+    obj,
   };
 };
 
@@ -88,8 +88,8 @@ export const fetchOwnWatchStatus = (token: string) => {
         setOwnWatchStatus(
           ownWatchStatus.data.running,
           ownWatchStatus.data.peopleCount,
-          ownWatchStatus.data.startTime
-        )
+          ownWatchStatus.data.startTime,
+        ),
       );
     } catch (err) {
       dispatch(errorMessage(err.response.data.error));
@@ -100,13 +100,13 @@ export const fetchOwnWatchStatus = (token: string) => {
 export const setOwnWatchStatus = (
   ownWatchRunning: boolean,
   ownWatchPeopleCount: number,
-  ownWatchStartTime: Date
+  ownWatchStartTime: Date,
 ) => {
   return {
     type: watchActions.SET_OWN_SESSION_STATUS,
     ownWatchRunning,
     ownWatchPeopleCount,
-    ownWatchStartTime
+    ownWatchStartTime,
   };
 };
 
@@ -142,14 +142,14 @@ export const startWatch = (token: string, startMessage: string) => {
 
 const watchReducer: Reducer<SessionState, any> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case watchActions.TOGGLE_SESSION_PAGE:
       return {
         ...{},
         ...state,
-        ...{ watchPage: action.value }
+        ...{ watchPage: action.value },
       };
     case watchActions.SET_OWN_SESSION_STATUS:
       return {
@@ -158,48 +158,48 @@ const watchReducer: Reducer<SessionState, any> = (
         ...{
           ownWatchRunning: action.ownWatchRunning,
           ownWatchPeopleCount: action.ownWatchPeopleCount,
-          ownWatchStartTime: action.ownWatchStartTime
-        }
+          ownWatchStartTime: action.ownWatchStartTime,
+        },
       };
     case watchActions.SET_SESSION_CHECK_INTERVAL:
       return {
         ...{},
         ...state,
         ...{
-          watchCheckInterval: action.obj
-        }
+          watchCheckInterval: action.obj,
+        },
       };
     case watchActions.TOGGLE_END_SESSION_MODAL:
       return {
         ...{},
         ...state,
         ...{
-          endWatchModalOpen: action.value
-        }
+          endWatchModalOpen: action.value,
+        },
       };
     case watchActions.TOGGLE_START_SESSION_MODAL:
       return {
         ...{},
         ...state,
         ...{
-          startWatchModalOpen: action.value
-        }
+          startWatchModalOpen: action.value,
+        },
       };
     case watchActions.TOGGLE_IS_ENDING:
       return {
         ...{},
         ...state,
         ...{
-          isEnding: action.value
-        }
+          isEnding: action.value,
+        },
       };
     case watchActions.TOGGLE_IS_STARTING:
       return {
         ...{},
         ...state,
         ...{
-          isStarting: action.value
-        }
+          isStarting: action.value,
+        },
       };
     default:
       return state;

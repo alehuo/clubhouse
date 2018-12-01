@@ -1,11 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
 import AddKeyHolderForm from "../../forms/AddKeyHolderForm";
 
 export class AddKeyHolder extends React.Component<any, any> {
-  handleSubmit = values => {};
-  render() {
+  public handleSubmit = (values: any) => {
+    // tslint:disable-next-line:no-console
+    console.log("Submitted");
+  }
+  public render() {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <Modal.Header closeButton>
@@ -24,13 +27,13 @@ export class AddKeyHolder extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = state => ({
-  token: state.user.token
+const mapStateToProps = (state: any) => ({
+  token: state.user.token,
 });
 
 const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AddKeyHolder);

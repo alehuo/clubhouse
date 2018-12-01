@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
-import { startWatch } from "../../reducers/sessionReducer";
+import { connect } from "react-redux";
 import StartWatchForm from "../../forms/StartSessionForm";
+import { startWatch } from "../../reducers/sessionReducer";
 
-export class StartSession extends Component {
-  handleSubmit = values => {
+export class StartSession extends React.Component<any> {
+  public handleSubmit = (values: any) => {
     this.props.startWatch(this.props.token, values.startMessage);
-  };
-  render() {
+  }
+  public render() {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <Modal.Header closeButton>
@@ -26,16 +26,16 @@ export class StartSession extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   token: state.user.token,
-  isAdding: state.studentUnion.isAdding
+  isAdding: state.studentUnion.isAdding,
 });
 
 const mapDispatchToProps = {
-  startWatch
+  startWatch,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(StartSession);

@@ -1,23 +1,23 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Table, PageHeader, Button, Alert } from "react-bootstrap";
+import { Alert, Button, PageHeader, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import { Rule } from "../components/Rule";
 import {
   fetchRules,
-  moveRuleUp,
   moveRuleDown,
-  toggleEditMode
+  moveRuleUp,
+  toggleEditMode,
 } from "./../reducers/ruleReducer";
-import { Rule } from "../components/Rule";
 
-export class RulesPage extends Component {
-  componentDidMount() {
+export class RulesPage extends React.Component<any> {
+  public componentDidMount() {
     this.props.fetchRules();
   }
-  render() {
+  public render() {
     return (
       <React.Fragment>
         <PageHeader>Rules</PageHeader>
@@ -39,12 +39,12 @@ export class RulesPage extends Component {
         </p>
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_RULES.value
+          Permissions.ALLOW_VIEW_RULES.value,
         ) ? (
           this.props.rules && (
             <Table responsive striped>
               <tbody>
-                {this.props.rules.map((rule, i) => (
+                {this.props.rules.map((rule: any, i: number) => (
                   <Rule
                     id={i + 1}
                     key={i}
@@ -70,20 +70,20 @@ export class RulesPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   perms: state.permission.userPerms,
   rules: state.rule.rules,
-  editMode: state.rule.editMode
+  editMode: state.rule.editMode,
 });
 
 const mapDispatchToProps = {
   fetchRules,
   moveRuleUp,
   moveRuleDown,
-  toggleEditMode
+  toggleEditMode,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(RulesPage);

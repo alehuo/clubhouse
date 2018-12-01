@@ -1,9 +1,9 @@
 import React from "react";
 import {
+  ControlLabel,
   FormControl,
   FormGroup,
-  ControlLabel,
-  HelpBlock
+  HelpBlock,
 } from "react-bootstrap";
 
 export const FieldGroup: React.SFC<any> = ({
@@ -13,7 +13,8 @@ export const FieldGroup: React.SFC<any> = ({
   label,
   help,
   meta: { touched, error, warning },
-  ...props
+  // @ts-ignore
+  ...props,
 }) => (
   <FormGroup controlId={id}>
     <ControlLabel>{label}</ControlLabel>

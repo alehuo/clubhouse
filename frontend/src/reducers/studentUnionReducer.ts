@@ -1,7 +1,7 @@
-import StudentUnionService from "../services/StudentUnionService";
-import { errorMessage, successMessage } from "./notificationReducer";
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import StudentUnionService from "../services/StudentUnionService";
+import { errorMessage, successMessage } from "./notificationReducer";
 
 interface StudentUnionState {
   studentUnions: any[];
@@ -12,7 +12,7 @@ interface StudentUnionState {
 const initialState = {
   studentUnions: [],
   isAdding: false,
-  modalOpen: false
+  modalOpen: false,
 };
 
 export const studentUnionActions = {
@@ -21,7 +21,7 @@ export const studentUnionActions = {
   SET_STUDENT_UNIONS: "SET_STUDENT_UNIONS",
   SET_ADDING: "SET_ADDING",
   ADD_FORM_MODAL_OPEN: "ADD_FORM_MODAL_OPEN",
-  ADD_TO_LIST: "ADD_TO_LIST"
+  ADD_TO_LIST: "ADD_TO_LIST",
 };
 
 export const fetchStudentUnions = (token: string) => {
@@ -38,21 +38,21 @@ export const fetchStudentUnions = (token: string) => {
 export const setStudentUnions = (studentUnions: any[]) => {
   return {
     type: studentUnionActions.SET_STUDENT_UNIONS,
-    studentUnions
+    studentUnions,
   };
 };
 
 export const setAdding = (isAdding: boolean) => {
   return {
     type: studentUnionActions.SET_ADDING,
-    isAdding
+    isAdding,
   };
 };
 
 export const addFormModalOpen = (status: boolean) => {
   return {
     type: studentUnionActions.ADD_FORM_MODAL_OPEN,
-    status
+    status,
   };
 };
 
@@ -64,7 +64,7 @@ export const addStudentUnion = (stdu: any, token: string) => {
       const addedUnion = res.data;
       dispatch({
         type: studentUnionActions.ADD_TO_LIST,
-        addedUnion
+        addedUnion,
       });
       dispatch(setAdding(false));
       dispatch(addFormModalOpen(false));
@@ -81,7 +81,7 @@ export const deleteStudentUnion = (unionId: number, token: string) => {
       await StudentUnionService.deleteStudentUnion(unionId, token);
       dispatch({
         type: studentUnionActions.DELETE_STUDENT_UNION,
-        unionId
+        unionId,
       });
       dispatch(successMessage("Student union deleted successfully"));
     } catch (err) {
@@ -92,7 +92,7 @@ export const deleteStudentUnion = (unionId: number, token: string) => {
 
 const studentUnionReducer: Reducer<StudentUnionState, any> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case studentUnionActions.SET_STUDENT_UNIONS:
@@ -105,16 +105,16 @@ const studentUnionReducer: Reducer<StudentUnionState, any> = (
       return {
         ...{},
         ...state,
-        studentUnions: [...state.studentUnions, action.addedUnion]
+        studentUnions: [...state.studentUnions, action.addedUnion],
       };
     case studentUnionActions.DELETE_STUDENT_UNION:
       const unions = state.studentUnions.filter(
-        studentUnion => studentUnion.unionId !== action.unionId
+        (studentUnion) => studentUnion.unionId !== action.unionId,
       );
       return {
         ...{},
         ...state,
-        studentUnions: unions
+        studentUnions: unions,
       };
     default:
       return state;

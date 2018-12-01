@@ -5,28 +5,28 @@ import { deAuthenticateUser } from "./../reducers/authenticationReducer";
 import { successMessage } from "./../reducers/notificationReducer";
 import { setWatchCheckInterval } from "./../reducers/sessionReducer";
 
-export class LogoutPage extends Component {
-  componentWillMount = () => {
+export class LogoutPage extends React.Component<any, any> {
+  public componentWillMount = () => {
     clearInterval(this.props.watchInterval);
     this.props.setWatchCheckInterval(null);
     localStorage.clear();
     this.props.deAuthenticateUser();
     this.props.successMessage("You have been logged out.");
-  };
+  }
 
-  render() {
+  public render() {
     return <Redirect to="/" />;
   }
 }
 
-const mapStateToProps = state => ({
-  watchInterval: state.watch.watchCheckInterval
+const mapStateToProps = (state: any) => ({
+  watchInterval: state.watch.watchCheckInterval,
 });
 
 const mapDispatchToProps = {
   deAuthenticateUser,
   successMessage,
-  setWatchCheckInterval
+  setWatchCheckInterval,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogoutPage);

@@ -9,7 +9,7 @@ const NewsPost: React.SFC<any> = ({
   date,
   onDelete,
   onEdit,
-  hasEditDeletePermissions
+  hasEditDeletePermissions,
 }) => (
   <Panel bsStyle="primary">
     <Panel.Heading>

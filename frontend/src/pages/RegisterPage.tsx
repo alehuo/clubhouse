@@ -5,20 +5,20 @@ import { addUser } from "./../reducers/userReducer";
 
 import RegisterForm from "./../forms/RegisterForm";
 
-export class RegisterPage extends Component {
-  handleSubmit = values => {
+export class RegisterPage extends React.Component<any> {
+  public handleSubmit = (values: any) => {
     this.props.addUser(
       {
         email: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
-        password: values.password
+        password: values.password,
       },
-      this.props.token
+      this.props.token,
     );
-  };
+  }
 
-  render() {
+  public render() {
     return (
       <React.Fragment>
         <h1>Register</h1>
@@ -31,15 +31,15 @@ export class RegisterPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isRegistering: state.user.isRegistering
+const mapStateToProps = (state: any) => ({
+  isRegistering: state.user.isRegistering,
 });
 
 const mapDispatchToProps = {
-  addUser
+  addUser,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(RegisterPage);

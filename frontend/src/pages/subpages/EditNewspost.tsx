@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
 import EditNewspostForm from "../../forms/EditNewspostForm";
 
-export class EditNewspost extends Component {
-  handleSubmit = values => {
+export class EditNewspost extends React.Component<any, any> {
+  public handleSubmit = (values: any) => {
+    // tslint:disable-next-line:no-console
     console.log(values);
-  };
-  render() {
+  }
+  public render() {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <Modal.Header closeButton>
@@ -24,14 +25,14 @@ export class EditNewspost extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   token: state.user.token,
-  isEditing: state.news.isEditing
+  isEditing: state.news.isEditing,
 });
 
 const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(EditNewspost);

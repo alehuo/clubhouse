@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
+import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
 import { FieldGroup } from "./../components/FieldGroup";
@@ -8,10 +8,10 @@ import { checked, isEmpty } from "./../utils/FormValidators";
 
 const endMessageEmpty = isEmpty("End message");
 const confirmationChecked = checked(
-  "You must agree that you have made the required steps before ending a session"
+  "You must agree that you have made the required steps before ending a session",
 );
 
-const EndSessionForm: React.SFC<any> = props => (
+const EndSessionForm: React.SFC<any> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       autoFocus={true}
@@ -54,8 +54,8 @@ const EndSessionForm: React.SFC<any> = props => (
     </Button>
   </form>
 );
-
-export default reduxForm({
+// TODO: Typings
+export default reduxForm<{}, any, string>({
   // a unique name for the form
-  form: "endSession"
+  form: "endSession",
 })(EndSessionForm);

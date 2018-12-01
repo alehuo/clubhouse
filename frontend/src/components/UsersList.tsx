@@ -1,17 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Button, Table } from "react-bootstrap";
-import { fetchUsers, deleteUser } from "./../reducers/userReducer";
 import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
+import { deleteUser, fetchUsers } from "./../reducers/userReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 
 export class UsersList extends React.Component<any, any> {
-  componentDidMount() {
+  public componentDidMount() {
     this.props.fetchUsers(this.props.token);
   }
-  render() {
+  public render() {
     return (
       <Table striped bordered condensed hover responsive>
         <thead>
@@ -21,7 +21,7 @@ export class UsersList extends React.Component<any, any> {
             <th>Email</th>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_REMOVE_USER.value
+              Permissions.ALLOW_REMOVE_USER.value,
             ) && <th>Actions</th>}
           </tr>
         </thead>
@@ -36,12 +36,12 @@ export class UsersList extends React.Component<any, any> {
                 <td>{user.email}</td>
                 {PermissionUtils.hasPermission(
                   this.props.perms,
-                  Permissions.ALLOW_REMOVE_USER.value
+                  Permissions.ALLOW_REMOVE_USER.value,
                 ) && (
                   <td>
                     {PermissionUtils.hasPermission(
                       this.props.perms,
-                      Permissions.ALLOW_REMOVE_USER.value
+                      Permissions.ALLOW_REMOVE_USER.value,
                     ) && (
                       <Button
                         bsStyle="danger"
@@ -69,15 +69,15 @@ export class UsersList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => ({
   token: state.user.token,
-  perms: state.permission.userPerms
+  perms: state.permission.userPerms,
 });
 
 const mapDispatchToProps = {
   fetchUsers,
-  deleteUser
+  deleteUser,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UsersList);

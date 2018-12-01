@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
 import AddStudentUnionForm from "../../forms/AddStudentUnionForm";
 import { addStudentUnion } from "../../reducers/studentUnionReducer";
 
-export class AddStudentUnion extends Component {
-  handleSubmit = values => {
+export class AddStudentUnion extends React.Component<any> {
+  public handleSubmit = (values: any) => {
     this.props.addStudentUnion(
       {
         name: values.studentUnionName,
-        description: values.studentUnionDescription
+        description: values.studentUnionDescription,
       },
-      this.props.token
+      this.props.token,
     );
-  };
-  render() {
+  }
+  public render() {
     return (
       <Modal show={this.props.show} onHide={this.props.onHide}>
         <Modal.Header closeButton>
@@ -31,8 +31,8 @@ export class AddStudentUnion extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  token: state.user.token
+const mapStateToProps = (state: any) => ({
+  token: state.user.token,
 });
 
 const mapDispatchToProps = { addStudentUnion };

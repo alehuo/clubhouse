@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { PageHeader, Button, Alert } from "react-bootstrap";
+import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
 import StudentUnionsList from "./../components/StudentUnionsList";
-import AddStudentUnion from "./subpages/AddStudentUnion";
 import {
   addFormModalOpen,
-  fetchStudentUnions
+  fetchStudentUnions,
 } from "./../reducers/studentUnionReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
+import AddStudentUnion from "./subpages/AddStudentUnion";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 
-export class StudentUnionsPage extends Component {
-  componentDidMount() {
+export class StudentUnionsPage extends React.Component<any> {
+  public componentDidMount() {
     this.props.fetchStudentUnions(this.props.token);
   }
-  render() {
+  public render() {
     return (
       <React.Fragment>
         <PageHeader>
@@ -24,7 +24,7 @@ export class StudentUnionsPage extends Component {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value
+              Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value,
             ) && (
               <Button
                 bsStyle="success"
@@ -37,7 +37,7 @@ export class StudentUnionsPage extends Component {
         </PageHeader>
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_STUDENT_UNIONS.value
+          Permissions.ALLOW_VIEW_STUDENT_UNIONS.value,
         ) ? (
           <StudentUnionsList stdus={this.props.studentUnions} />
         ) : (
@@ -55,16 +55,16 @@ export class StudentUnionsPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   studentUnions: state.studentUnion.studentUnions,
   modalOpen: state.studentUnion.modalOpen,
   perms: state.permission.userPerms,
-  token: state.user.token
+  token: state.user.token,
 });
 
 const mapDispatchToProps = { addFormModalOpen, fetchStudentUnions };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(StudentUnionsPage);

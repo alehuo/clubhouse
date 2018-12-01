@@ -9,7 +9,7 @@ export const Rule: React.SFC<any> = ({
   canMoveUp,
   onMoveUpClick,
   canMoveDown,
-  onMoveDownClick
+  onMoveDownClick,
 }) => (
   <tr>
     <td>

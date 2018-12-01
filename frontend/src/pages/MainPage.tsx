@@ -1,33 +1,39 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Jumbotron } from "react-bootstrap";
+import { connect } from "react-redux";
 
 import Typed from "typed.js";
 
 export class MainPage extends Component {
-  componentDidMount() {
-    var options = {
+  private typed: Typed | null = null;
+  private el: HTMLSpanElement | null = null;
+  public componentDidMount() {
+    const options = {
       strings: [
-        "Manage your clubhouse with ease.\nSource code available <a href='https://github.com/alehuo/clubhouse-frontend.git'>here (frontend)</a> and <a href='https://github.com/alehuo/clubhouse-backend.git'>here (backend)</a>.\n\nEnjoy!"
+        "Manage your clubhouse with ease.\n" +
+          "Source code available <a href='https://github.com/alehuo/clubhouse-frontend.git'>here (frontend)</a>" +
+          " and <a href='https://github.com/alehuo/clubhouse-backend.git'>here (backend)</a>.\n\nEnjoy!",
       ],
-      typeSpeed: 25
+      typeSpeed: 25,
     };
-
+    // @ts-ignore
     this.typed = new Typed(this.el, options);
   }
 
-  componentWillUnmount() {
-    this.typed.destroy();
+  public componentWillUnmount() {
+    if (this.typed) {
+      this.typed.destroy();
+    }
   }
 
-  render() {
+  public render() {
     return (
       <Jumbotron>
         <h1>Welcome!</h1>
         <p>
           <span
             style={{ whiteSpace: "pre" }}
-            ref={el => {
+            ref={(el) => {
               this.el = el;
             }}
           />
@@ -83,11 +89,11 @@ export class MainPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state: any) => ({});
 
 const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MainPage);

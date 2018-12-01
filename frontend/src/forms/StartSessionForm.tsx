@@ -1,17 +1,18 @@
 import React from "react";
 
-import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
+import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
+import { any } from "prop-types";
 import { FieldGroup } from "./../components/FieldGroup";
-import { isEmpty, checked } from "./../utils/FormValidators";
+import { checked, isEmpty } from "./../utils/FormValidators";
 
 const emptyStartMessage = isEmpty("Start message");
 const confirmationChecked = checked(
-  "You must agree to the rules of the clubhouse before starting a session"
+  "You must agree to the rules of the clubhouse before starting a session",
 );
 
-const StartSessionForm: React.SFC<any> = props => (
+const StartSessionForm: React.SFC<any> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       autoFocus={true}
@@ -55,7 +56,7 @@ const StartSessionForm: React.SFC<any> = props => (
   </form>
 );
 
-export default reduxForm({
+export default reduxForm<{}, any, string>({
   // a unique name for the form
-  form: "startSession"
+  form: "startSession",
 })(StartSessionForm);

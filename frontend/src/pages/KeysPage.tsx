@@ -1,26 +1,27 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { PageHeader, Button, Alert } from "react-bootstrap";
-import KeysList from "./../components/KeysList";
+import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
+import KeysList from "./../components/KeysList";
 import {
-  toggleModal,
   fetchKeys,
-  fetchKeyTypes
+  fetchKeyTypes,
+  toggleModal,
 } from "./../reducers/keyReducer";
 import { fetchUsers } from "./../reducers/userReducer";
-import AddKeyHolder from "./subpages/AddKeyHolder";
 import PermissionUtils from "./../utils/PermissionUtils";
+import AddKeyHolder from "./subpages/AddKeyHolder";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import { any } from "prop-types";
 
-export class KeysPage extends Component {
-  componentDidMount() {
+export class KeysPage extends React.Component<any, any> {
+  public componentDidMount() {
     this.props.fetchKeys(this.props.token);
     this.props.fetchKeyTypes(this.props.token);
     this.props.fetchUsers(this.props.token);
   }
-  render() {
+  public render() {
     return (
       <React.Fragment>
         <PageHeader>
@@ -28,7 +29,7 @@ export class KeysPage extends Component {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_REMOVE_KEYS.value
+              Permissions.ALLOW_ADD_REMOVE_KEYS.value,
             ) && (
               <Button
                 bsStyle="success"
@@ -47,7 +48,7 @@ export class KeysPage extends Component {
         </PageHeader>
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_KEYS.value
+          Permissions.ALLOW_VIEW_KEYS.value,
         ) ? (
           <KeysList keys={this.props.keys} />
         ) : (
@@ -69,23 +70,23 @@ export class KeysPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   token: state.user.token,
   keys: state.key.keys,
   users: state.user.users,
   keyTypes: state.key.keyTypes,
   modalOpen: state.key.modalOpen,
-  perms: state.permission.userPerms
+  perms: state.permission.userPerms,
 });
 
 const mapDispatchToProps = {
   toggleModal,
   fetchKeys,
   fetchKeyTypes,
-  fetchUsers
+  fetchUsers,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(KeysPage);

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import Notification from "./Notification";
-import { notificationTypes } from "../reducers/notificationReducer";
 
 const NotificationDrawer: React.SFC<any> = ({ notifications }) => (
   <React.Fragment>
@@ -11,9 +10,9 @@ const NotificationDrawer: React.SFC<any> = ({ notifications }) => (
           key={notification.id}
           text={notification.text}
           type={
-            notification.notificationType === notificationTypes.SUCCESS
+            notification.notificationType === "SUCCESS"
               ? "success"
-              : notification.notificationType === notificationTypes.ERROR
+              : notification.notificationType === "ERROR"
               ? "danger"
               : "warning"
           }
@@ -23,12 +22,12 @@ const NotificationDrawer: React.SFC<any> = ({ notifications }) => (
 );
 
 const mapStateToProps = (state: any) => ({
-  notifications: state.notification.notifications
+  notifications: state.notification.notifications,
 });
 
 const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(NotificationDrawer);

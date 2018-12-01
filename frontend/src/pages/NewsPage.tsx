@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Alert, Button, PageHeader } from "react-bootstrap";
 import { connect } from "react-redux";
-import { PageHeader, Alert, Button } from "react-bootstrap";
 import NewsPost from "../components/NewsPost";
 import PermissionUtils from "./../utils/PermissionUtils";
 
@@ -8,27 +8,27 @@ import FontAwesome from "react-fontawesome";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 import {
+  deleteNewspost,
+  fetchNewsposts,
+  setEditId,
   toggleNewsAddModal,
   toggleNewsEditModal,
-  fetchNewsposts,
-  deleteNewspost,
-  setEditId
 } from "../reducers/newsReducer";
 import AddNewspost from "./subpages/AddNewspost";
 import EditNewspost from "./subpages/EditNewspost";
 
-export class NewsPage extends Component {
-  componentDidMount() {
+export class NewsPage extends React.Component<any> {
+  public componentDidMount() {
     this.props.fetchNewsposts(this.props.token);
   }
-  render() {
+  public render() {
     const editDeletePermissions = PermissionUtils.hasPermission(
       this.props.perms,
-      Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value
+      Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value,
     );
     const viewPermissions = PermissionUtils.hasPermission(
       this.props.perms,
-      Permissions.ALLOW_VIEW_POSTS.value
+      Permissions.ALLOW_VIEW_POSTS.value,
     );
     return (
       <React.Fragment>
@@ -47,14 +47,14 @@ export class NewsPage extends Component {
         </PageHeader>
         {viewPermissions ? (
           this.props.newsPosts &&
-          this.props.newsPosts.map(newsPost => (
+          this.props.newsPosts.map((newsPost: any) => (
             <NewsPost
               key={newsPost.postId}
               title={newsPost.title}
               author={newsPost.author}
               message={newsPost.message}
               date={newsPost.date.toString()}
-              onDelete={event => {
+              onDelete={(event: any) => {
                 event.preventDefault();
                 if (
                   window.confirm("Do you want to delete the selected newspost?")
@@ -88,11 +88,11 @@ export class NewsPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   perms: state.permission.userPerms,
   newsPosts: state.news.newsPosts,
   addModalOpen: state.news.addModalOpen,
-  editModalOpen: state.news.editModalOpen
+  editModalOpen: state.news.editModalOpen,
 });
 
 const mapDispatchToProps = {
@@ -100,10 +100,10 @@ const mapDispatchToProps = {
   toggleNewsEditModal,
   fetchNewsposts,
   deleteNewspost,
-  setEditId
+  setEditId,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(NewsPage);

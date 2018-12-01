@@ -1,22 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import BigCalendar from "react-big-calendar";
-import { PageHeader, Button, Alert } from "react-bootstrap";
+import { Permissions } from "@alehuo/clubhouse-shared";
 import moment from "moment";
+import React, { Component } from "react";
+import BigCalendar from "react-big-calendar";
+import { Alert, Button, PageHeader } from "react-bootstrap";
+import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/calendarReducer";
 import { eventMapper } from "./../services/CalendarService";
-import FontAwesome from "react-fontawesome";
 import PermissionUtils from "./../utils/PermissionUtils";
-import { Permissions } from "@alehuo/clubhouse-shared";
 
-BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
-
-class CalendarPage extends Component {
-  componentDidMount() {
+class CalendarPage extends React.Component<any, any> {
+  public componentDidMount() {
     this.props.fetchEvents(this.props.token);
   }
-  render() {
+  public render() {
     return (
       <React.Fragment>
         <PageHeader>
@@ -24,7 +22,7 @@ class CalendarPage extends Component {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_EDIT_REMOVE_EVENTS.value
+              Permissions.ALLOW_ADD_EDIT_REMOVE_EVENTS.value,
             ) && (
               <Button bsStyle="success">
                 <FontAwesome name="plus" /> Add an event
@@ -49,18 +47,19 @@ class CalendarPage extends Component {
         )}
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_EVENTS.value
+          Permissions.ALLOW_VIEW_EVENTS.value,
         ) ? (
           <BigCalendar
+            localizer={BigCalendar.momentLocalizer(moment)}
             events={this.props.events.map(eventMapper)}
             step={60}
             views={Object.keys(BigCalendar.Views).map(
-              k => BigCalendar.Views[k]
+              // @ts-ignore
+              (k) => BigCalendar.Views[k],
             )}
             timeslots={1}
             showMultiDayTimes
             defaultDate={new Date()}
-            style={{ height: 800 }}
           />
         ) : (
           <Alert bsStyle="warning">
@@ -74,17 +73,17 @@ class CalendarPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   events: state.calendar.events,
   perms: state.permission.userPerms,
-  token: state.user.token
+  token: state.user.token,
 });
 
 const mapDispatchToProps = {
-  fetchEvents
+  fetchEvents,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CalendarPage);

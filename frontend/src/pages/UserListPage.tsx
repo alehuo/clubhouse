@@ -1,19 +1,19 @@
 import React, { Component } from "react";
+import { Alert, PageHeader } from "react-bootstrap";
 import { connect } from "react-redux";
-import { PageHeader, Alert } from "react-bootstrap";
 import UsersList from "./../components/UsersList";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 
-export class UserListPage extends Component {
-  render() {
+export class UserListPage extends React.Component<any> {
+  public render() {
     return (
       <React.Fragment>
         <PageHeader>Users</PageHeader>
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_USERS.value
+          Permissions.ALLOW_VIEW_USERS.value,
         ) ? (
           <UsersList users={this.props.users} />
         ) : (
@@ -27,15 +27,15 @@ export class UserListPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   studentUnions: state.studentUnion.studentUnions,
   perms: state.permission.userPerms,
-  users: state.user.users
+  users: state.user.users,
 });
 
 const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UserListPage);

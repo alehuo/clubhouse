@@ -6,12 +6,12 @@ import { login } from "./../reducers/userReducer";
 
 import LoginForm from "./../forms/LoginForm";
 
-export class LoginPage extends Component {
-  submitLogin = values => {
+export class LoginPage extends React.Component<any, any> {
+  public submitLogin = (values: any) => {
     this.props.login(values.email, values.password);
-  };
+  }
 
-  render() {
+  public render() {
     if (this.props.isAuthenticated) {
       return <Redirect to="/" />;
     }
@@ -27,16 +27,16 @@ export class LoginPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  isLoggingIn: state.auth.isLoggingIn
+  isLoggingIn: state.auth.isLoggingIn,
 });
 
 const mapDispatchToProps = {
-  login
+  login,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoginPage);

@@ -1,6 +1,6 @@
-import uuidv1 from "uuid/v1";
-import { ThunkDispatch } from "redux-thunk";
 import { Reducer } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import uuidv1 from "uuid/v1";
 
 export interface NotificationState {
   notifications: Notification[];
@@ -13,14 +13,14 @@ export interface Notification {
 }
 
 const initialState: NotificationState = {
-  notifications: []
+  notifications: [],
 };
 
 export const notificationActions = {
   SUCCESS_MESSAGE: "SUCCESS_MESSAGE",
   ERROR_MESSAGE: "ERROR_MESSAGE",
   CLEAR_NOTIFICATION: "CLEAR_NOTIFICATION",
-  ADD_NOTIFICATION: "ADD_NOTIFICATION"
+  ADD_NOTIFICATION: "ADD_NOTIFICATION",
 };
 
 type NotificationType = "ERROR" | "SUCCESS" | "INFO" | "WARNING";
@@ -46,23 +46,23 @@ export const errorMessage = (text: string, timeout = 4000) => {
 export const clearNotification = (id: string) => {
   return {
     type: notificationActions.CLEAR_NOTIFICATION,
-    id
+    id,
   };
 };
 
 const wait = (timeout: number) =>
-  new Promise(resolve => setTimeout(resolve, timeout));
+  new Promise((resolve) => setTimeout(resolve, timeout));
 
 export const addNotification = (
   id: string,
   text: string,
-  notificationType: NotificationType
+  notificationType: NotificationType,
 ) => {
   return {
     type: notificationActions.ADD_NOTIFICATION,
     id,
     text,
-    notificationType
+    notificationType,
   };
 };
 
@@ -77,13 +77,13 @@ const notificationReducer: Reducer<NotificationState, any> = (state = initialSta
           {
             id: action.id,
             notificationType: action.notificationType,
-            text: action.text
-          }
-        ]
+            text: action.text,
+          },
+        ],
       };
     case notificationActions.CLEAR_NOTIFICATION:
       const notifications = state.notifications.filter(
-        (notification: any) => notification.id !== action.id
+        (notification: any) => notification.id !== action.id,
       );
       return { ...{}, ...state, ...{ notifications } };
     default:

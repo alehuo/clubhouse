@@ -1,7 +1,7 @@
+import { Reducer } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 import NewsService from "../services/NewsService";
 import { errorMessage, successMessage } from "./notificationReducer";
-import { ThunkDispatch } from "redux-thunk";
-import { Reducer } from "redux";
 
 interface NewsState {
   newsPosts: NewsPost[];
@@ -28,7 +28,7 @@ const initialState: NewsState = {
   isAdding: false,
   isEditing: false,
   addModalOpen: false,
-  editModalOpen: false
+  editModalOpen: false,
 };
 
 export const newsPostTypes = {
@@ -41,48 +41,48 @@ export const newsPostTypes = {
   REMOVE_NEWSPOST: "REMOVE_NEWSPOST",
   SET_IS_ADDING: "SET_IS_ADDING",
   SET_IS_EDITING: "SET_IS_EDITING",
-  SET_EDIT_ID: "SET_EDIT_ID"
+  SET_EDIT_ID: "SET_EDIT_ID",
 };
 
 export const toggleNewsAddModal = (val: boolean) => {
   return {
     type: newsPostTypes.TOGGLE_ADD_MODAL,
-    val
+    val,
   };
 };
 
 export const setEditId = (id: number) => {
   return {
     type: newsPostTypes.SET_EDIT_ID,
-    id
+    id,
   };
 };
 
 export const toggleNewsEditModal = (val: boolean) => {
   return {
     type: newsPostTypes.TOGGLE_EDIT_MODAL,
-    val
+    val,
   };
 };
 
 export const setIsAdding = (val: boolean) => {
   return {
     type: newsPostTypes.SET_IS_ADDING,
-    val
+    val,
   };
 };
 
 export const setIsEditing = (val: boolean) => {
   return {
     type: newsPostTypes.SET_IS_EDITING,
-    val
+    val,
   };
 };
 
 export const setNewsposts = (newsPosts: NewsPost[]) => {
   return {
     type: newsPostTypes.SET_NEWSPOSTS,
-    newsPosts
+    newsPosts,
   };
 };
 
@@ -115,12 +115,12 @@ export const addNewspost = (token: string, title: string, message: string) => {
         addNewspostToList({
           author: {
             id: 1,
-            name: "Testing"
+            name: "Testing",
           },
           title,
           message,
-          date: new Date()
-        })
+          date: new Date(),
+        }),
       );
       dispatch(successMessage("Newspost added"));
     } catch (err) {
@@ -149,14 +149,14 @@ export const editNewspost = (token: string, id: number, title: string, message: 
 export const addNewspostToList = (newspost: NewsPost) => {
   return {
     type: newsPostTypes.ADD_NEWSPOST_TO_LIST,
-    newspost
+    newspost,
   };
 };
 
 export const deleteNewspostFromList = (id: number) => {
   return {
     type: newsPostTypes.DELETE_NEWSPOST_FROM_LIST,
-    id
+    id,
   };
 };
 
@@ -171,29 +171,29 @@ const newsReducer: Reducer<NewsState, any> = (state = initialState, action) => {
     case newsPostTypes.ADD_NEWSPOST_TO_LIST:
       return {
         ...state,
-        ...{ newsPosts: [action.newspost, ...state.newsPosts] }
+        ...{ newsPosts: [action.newspost, ...state.newsPosts] },
       };
     case newsPostTypes.DELETE_NEWSPOST_FROM_LIST:
       return {
         ...state,
         newsPosts: [
-          ...state.newsPosts.filter((newsPost: any) => newsPost.id !== action.id)
-        ]
+          ...state.newsPosts.filter((newsPost: any) => newsPost.id !== action.id),
+        ],
       };
     case newsPostTypes.SET_IS_ADDING:
       return {
         ...state,
-        isAdding: action.val
+        isAdding: action.val,
       };
     case newsPostTypes.SET_IS_EDITING:
       return {
         ...state,
-        isEditing: action.val
+        isEditing: action.val,
       };
     case newsPostTypes.SET_EDIT_ID:
       return {
         ...state,
-        editId: action.id
+        editId: action.id,
       };
     default:
       return state;

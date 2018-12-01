@@ -1,25 +1,25 @@
-import PermissionService from "../services/PermissionService";
-import { errorMessage } from "./notificationReducer";
-import { deAuthenticateUser } from "./authenticationReducer";
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import PermissionService from "../services/PermissionService";
+import { deAuthenticateUser } from "./authenticationReducer";
+import { errorMessage } from "./notificationReducer";
 
 interface PermissionState {
   userPerms: number;
 }
 
 const initialState = {
-  userPerms: 0
+  userPerms: 0,
 };
 
 export const permissionActions = {
-  SET_USER_PERMS: "SET_USER_PERMS"
+  SET_USER_PERMS: "SET_USER_PERMS",
 };
 
 export const setUserPerms = (permissions: number) => {
   return {
     type: permissionActions.SET_USER_PERMS,
-    permissions
+    permissions,
   };
 };
 
@@ -37,14 +37,14 @@ export const getUserPerms = (token: string) => {
 
 const permissionReducer: Reducer<PermissionState, any> = (
   state = initialState,
-  action
+  action,
 ) => {
   switch (action.type) {
     case permissionActions.SET_USER_PERMS:
       return {
         ...{},
         ...state,
-        userPerms: action.permissions.permissions
+        userPerms: action.permissions.permissions,
       };
     default:
       return state;

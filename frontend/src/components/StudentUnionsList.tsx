@@ -1,7 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Table, Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
 import { deleteStudentUnion } from "./../reducers/studentUnionReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
@@ -10,8 +10,8 @@ import { Permissions } from "@alehuo/clubhouse-shared";
 const StudentUnionsList: React.SFC<any> = ({
   perms,
   stdus,
-  deleteStudentUnion,
-  token
+  deleteStdu,
+  token,
 }) => (
   <Table striped bordered condensed hover responsive>
     <thead>
@@ -21,7 +21,7 @@ const StudentUnionsList: React.SFC<any> = ({
         <th>Description</th>
         {PermissionUtils.hasPermission(
           perms,
-          Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value
+          Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value,
         ) && <th>Actions</th>}
       </tr>
     </thead>
@@ -34,12 +34,12 @@ const StudentUnionsList: React.SFC<any> = ({
             <td>{union.description}</td>
             {PermissionUtils.hasPermission(
               perms,
-              Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value
+              Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value,
             ) && (
               <td>
                 <Button
                   bsStyle="danger"
-                  onClick={() => deleteStudentUnion(union.unionId, token)}
+                  onClick={() => deleteStdu(union.unionId, token)}
                 >
                   <FontAwesome name="trash" /> Delete
                 </Button>
@@ -58,14 +58,14 @@ const StudentUnionsList: React.SFC<any> = ({
 
 const mapStateToProps = (state: any) => ({
   token: state.user.token,
-  perms: state.permission.userPerms
+  perms: state.permission.userPerms,
 });
 
 const mapDispatchToProps = {
-  deleteStudentUnion
+  deleteStudentUnion,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(StudentUnionsList);

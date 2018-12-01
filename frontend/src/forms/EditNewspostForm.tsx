@@ -10,7 +10,13 @@ import { isEmpty } from "./../utils/FormValidators";
 const emptyTitle = isEmpty("Title");
 const emptyText = isEmpty("Text");
 
-const EditNewspostForm: React.SFC<any> = props => (
+interface EditNewspostFormProps {
+  handleClose?: any;
+  handleSubmit?: any;
+  isEditing?: any;
+}
+
+const EditNewspostForm: React.SFC<EditNewspostFormProps> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       name="newspostTitle"
@@ -49,13 +55,14 @@ const EditNewspostForm: React.SFC<any> = props => (
   </form>
 );
 
-const EditNewspostRx = reduxForm({
+const EditNewspostRx = reduxForm<{}, EditNewspostFormProps, string>({
   form: "editNewspostForm",
-  enableReinitialize: true
+  enableReinitialize: true,
+  // @ts-ignore
 })(EditNewspostForm);
 
 export default connect((state: any) => {
   return {
-    initialValues: state.news.selectedNewspost
+    initialValues: state.news.selectedNewspost,
   };
 })(EditNewspostRx);

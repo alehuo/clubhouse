@@ -1,7 +1,7 @@
 import React from "react";
-import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
-const UserInformation = props => {
+const UserInformation = (props: any) => {
   return (
     <React.Fragment>
       <h2>User information</h2>

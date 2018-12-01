@@ -1,15 +1,15 @@
 import React from "react";
 
-import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
+import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 import { FieldGroup } from "./../components/FieldGroup";
 
 import {
+  checked,
   isEmpty,
   passwd,
   validatePasswords,
   validEmail,
-  checked
 } from "./../utils/FormValidators";
 
 const firstNameEmpty = isEmpty("First name");
@@ -18,7 +18,7 @@ const emailEmpty = isEmpty("E-mail address");
 const passwordEmpty = isEmpty("Password");
 const passwordValid = passwd(8);
 
-const RegisterForm: React.SFC<any> = props => (
+const RegisterForm: React.SFC<any> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       name="firstName"
@@ -86,7 +86,7 @@ const RegisterForm: React.SFC<any> = props => (
     </Button>
   </form>
 );
-
-export default reduxForm({
-  form: "registerForm"
+// TODO: Props
+export default reduxForm<{}, any, string>({
+  form: "registerForm",
 })(RegisterForm);

@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { FormGroup, HelpBlock, Button, Well } from "react-bootstrap";
+import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
 import { FieldGroup } from "./../components/FieldGroup";
-import { isEmpty, checked } from "./../utils/FormValidators";
+import { checked, isEmpty } from "./../utils/FormValidators";
 
 const AddStudentUnionForm: React.SFC<any> = ({
   handleSubmit,
   handleClose,
-  isAdding
+  isAdding,
 }) => (
   <form onSubmit={handleSubmit}>
     <Field
@@ -69,11 +69,11 @@ const AddStudentUnionForm: React.SFC<any> = ({
 );
 
 const mapStateToProps = (state: any) => ({
-  isAdding: state.studentUnion.isAdding
+  isAdding: state.studentUnion.isAdding,
 });
 
 export default reduxForm({
   // a unique name for the form
-  form: "studentUnion"
+  form: "studentUnion",
   // @ts-ignore
 })(connect(mapStateToProps)(AddStudentUnionForm));

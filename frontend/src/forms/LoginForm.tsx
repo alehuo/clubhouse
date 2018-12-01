@@ -1,13 +1,18 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Field, reduxForm } from "redux-form";
+import { Field, FormProps, InjectedFormProps, reduxForm } from "redux-form";
 import { FieldGroup } from "../components/FieldGroup";
 import { isEmpty } from "../utils/FormValidators";
 
 const emailEmpty = isEmpty("E-mail address");
 const passwordEmpty = isEmpty("Password");
 
-const LoginForm: React.SFC<any> = props => (
+interface LoginFormProps {
+  isLoggingIn: boolean;
+  handleSubmit: any;
+}
+
+const LoginForm: React.StatelessComponent<LoginFormProps> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       name="email"
@@ -37,5 +42,6 @@ const LoginForm: React.SFC<any> = props => (
 );
 
 export default reduxForm({
-  form: "loginForm"
+  form: "loginForm",
+  // @ts-ignore
 })(LoginForm);

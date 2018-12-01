@@ -1,10 +1,10 @@
-import UserService from "../services/UserService";
-import { successMessage, errorMessage } from "./notificationReducer";
-import { authenticateUser, setIsLoggingIn } from "./authenticationReducer";
-import { getUserPerms } from "./permissionReducer";
-import { fetchOwnWatchStatus } from "./sessionReducer";
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import UserService from "../services/UserService";
+import { authenticateUser, setIsLoggingIn } from "./authenticationReducer";
+import { errorMessage, successMessage } from "./notificationReducer";
+import { getUserPerms } from "./permissionReducer";
+import { fetchOwnWatchStatus } from "./sessionReducer";
 
 interface UserState {
   token: string;
@@ -19,7 +19,7 @@ const initialState = {
   users: [],
   userData: {},
   modalOpen: false,
-  isRegistering: false
+  isRegistering: false,
 };
 
 export const userActions = {
@@ -30,7 +30,7 @@ export const userActions = {
   ADD_USER_FORM_MODAL_OPEN: "ADD_USER_FORM_MODAL_OPEN",
   REMOVE_USER: "REMOVE_USER",
   SET_USER_DATA: "SET_USER_DATA",
-  CLEAR_USER_DATA: "CLEAR_USER_DATA"
+  CLEAR_USER_DATA: "CLEAR_USER_DATA",
 };
 
 export const login = (email: string, password: string) => {
@@ -57,14 +57,14 @@ export const login = (email: string, password: string) => {
 export const setToken = (token: string) => {
   return {
     type: userActions.SET_TOKEN,
-    token
+    token,
   };
 };
 
 export const setUsers = (users: any) => {
   return {
     type: userActions.SET_USERS,
-    users
+    users,
   };
 };
 
@@ -84,7 +84,7 @@ export const deleteUser = (userId: number, token: string) => {
 export const removeUserFromList = (userId: number) => {
   return {
     type: userActions.REMOVE_USER,
-    userId
+    userId,
   };
 };
 
@@ -102,7 +102,7 @@ export const fetchUsers = (token: string) => {
 export const setUserData = (data: any) => {
   return {
     type: userActions.SET_USER_DATA,
-    data
+    data,
   };
 };
 
@@ -120,7 +120,7 @@ export const fetchUserData = (token: string) => {
 export const addFormModalOpen = (status: boolean) => {
   return {
     type: userActions.ADD_USER_FORM_MODAL_OPEN,
-    status
+    status,
   };
 };
 
@@ -130,8 +130,8 @@ export const addUser = (user: any) => {
       await UserService.register(user);
       dispatch(
         successMessage(
-          "User successfully registered. Please use your email and password to login."
-        )
+          "User successfully registered. Please use your email and password to login.",
+        ),
       );
     } catch (err) {
       dispatch(errorMessage("Error registering user"));
@@ -152,8 +152,8 @@ const userReducer: Reducer<UserState, any> = (state = initialState, action) => {
         ...{},
         ...state,
         ...{
-          users: state.users.filter(user => user.userId !== action.userId)
-        }
+          users: state.users.filter((user) => user.userId !== action.userId),
+        },
       };
     case userActions.SET_USER_DATA:
       return { ...{}, ...state, ...{ userData: action.data } };

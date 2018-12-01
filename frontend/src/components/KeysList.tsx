@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
+import { connect } from "react-redux";
 
 const KeyList: React.SFC<any> = ({ keys }) => (
   <Table striped bordered condensed hover responsive>
@@ -39,5 +39,5 @@ const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(KeyList);
