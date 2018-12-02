@@ -62,7 +62,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = {
-  deleteStudentUnion,
+  deleteStdu: deleteStudentUnion,
 };
 
 export default connect(

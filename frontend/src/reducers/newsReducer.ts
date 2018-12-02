@@ -12,14 +12,12 @@ interface NewsState {
   editModalOpen: boolean;
 }
 
-interface NewsPost {
-  author: {
-    id: number;
-    name: string;
-  };
+export interface NewsPost {
+  postId: number;
+  author: number;
   title: string;
   message: string;
-  date: Date;
+  created_at: string | Date;
 }
 
 const initialState: NewsState = {
@@ -109,17 +107,15 @@ export const addNewspost = (token: string, title: string, message: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     dispatch(setIsAdding(true));
     try {
-      await NewsService.addNewspost(token, title, message);
+      const res = await NewsService.addNewspost(token, title, message);
       // TODO: Hook to back-end
       dispatch(
         addNewspostToList({
-          author: {
-            id: 1,
-            name: "Testing",
-          },
-          title,
-          message,
-          date: new Date(),
+          postId: res.postId,
+          author: res.author,
+          title: res.title,
+          message: res.message,
+          created_at: new Date().toISOString(),
         }),
       );
       dispatch(successMessage("Newspost added"));

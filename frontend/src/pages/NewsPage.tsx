@@ -10,6 +10,7 @@ import { Permissions } from "@alehuo/clubhouse-shared";
 import {
   deleteNewspost,
   fetchNewsposts,
+  NewsPost as NewsPostType,
   setEditId,
   toggleNewsAddModal,
   toggleNewsEditModal,
@@ -47,13 +48,13 @@ export class NewsPage extends React.Component<any> {
         </PageHeader>
         {viewPermissions ? (
           this.props.newsPosts &&
-          this.props.newsPosts.map((newsPost: any) => (
+          this.props.newsPosts.map((newsPost: NewsPostType) => (
             <NewsPost
               key={newsPost.postId}
               title={newsPost.title}
               author={newsPost.author}
               message={newsPost.message}
-              date={newsPost.date.toString()}
+              date={newsPost.created_at}
               onDelete={(event: any) => {
                 event.preventDefault();
                 if (
@@ -93,6 +94,7 @@ const mapStateToProps = (state: any) => ({
   newsPosts: state.news.newsPosts,
   addModalOpen: state.news.addModalOpen,
   editModalOpen: state.news.editModalOpen,
+  token: state.user.token,
 });
 
 const mapDispatchToProps = {

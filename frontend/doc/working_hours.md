@@ -27,12 +27,11 @@
 | 9.9.2018  | 0.5h  | Code cleanup.                                                                                                                                                                                                                                                     |
 | 14.9.2018 | 1.5h  | Progress on Rule page. UI fixes and optimizations                                                                                                                                                                                                                 |
 | 15.9.2018 | 4.0h  | Updated favicon. Improved KeyHolder form. Refactored FieldGroup into its own file. Added more validators to forms. Implemented reducer & UI functionality for adding newsposts. Mocked newsposts API for now. Started implementing newspost delete functionality. |
+| 1.12.2018 | 5.0h  | Upgraded dependencies. Switched to TypeScript. Added typings to various components and reducers. Splitting components into smaller parts. Added styled-components dependency.                                                                                     |
+| 2.12.2018 | 1.0h  | Newspost page improvements. Implemented Newspost service functionality.                                                                                                                                                                                           |
 
-| 3.11.2018 | 1.5h  | Upgraded dependencies. Switched to TypeScript |
-| 3.11.2018 | 3.5h  | TypeScript progress. Added typings to various components and reducers. Splitting components into smaller parts. Added styled-components dependency. |
-
-Total:
+Total:'
 
 25.5 h (Part 1)
 
-15.0 h (Part 2)
+16.0 h (Part 2)

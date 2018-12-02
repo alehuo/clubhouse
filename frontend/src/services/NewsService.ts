@@ -1,4 +1,5 @@
 // Newspost service
+import customAxios from "./custom-axios";
 
 const newsPosts = [
   {
@@ -24,10 +25,24 @@ const newsPosts = [
   },
 ];
 
-const getNewsposts = async (token: string) => Promise.resolve(newsPosts);
+const getNewsposts = async (token: string) => {
+  const response = await customAxios(token).get("api/v1/newspost");
+  return response.data;
+};
 
-const addNewspost = async (token: string, title: string, text: string) =>
-  Promise.resolve({ title, text });
+const addNewspost = async (token: string, title: string, message: string) => {
+  const result = await customAxios(token).post(
+    "api/v1/newspost",
+    {
+      title,
+      message,
+    },
+    {
+      baseURL: process.env.REACT_APP_BACKEND_URL,
+    },
+  );
+  return result.data;
+};
 
 const editNewspost = async (
   token: string,

@@ -5,38 +5,31 @@ import { connect } from "react-redux";
 import Typed from "typed.js";
 
 export class MainPage extends Component {
-  private typed: Typed | null = null;
-  private el: HTMLSpanElement | null = null;
-  public componentDidMount() {
-    const options = {
-      strings: [
-        "Manage your clubhouse with ease.\n" +
-          "Source code available <a href='https://github.com/alehuo/clubhouse-frontend.git'>here (frontend)</a>" +
-          " and <a href='https://github.com/alehuo/clubhouse-backend.git'>here (backend)</a>.\n\nEnjoy!",
-      ],
-      typeSpeed: 25,
-    };
-    // @ts-ignore
-    this.typed = new Typed(this.el, options);
-  }
-
-  public componentWillUnmount() {
-    if (this.typed) {
-      this.typed.destroy();
-    }
-  }
-
   public render() {
     return (
       <Jumbotron>
         <h1>Welcome!</h1>
         <p>
-          <span
-            style={{ whiteSpace: "pre" }}
-            ref={(el) => {
-              this.el = el;
-            }}
-          />
+          Manage your clubhouse with ease.
+          <br />
+          Source code available{" "}
+          <a
+            href="https://github.com/alehuo/clubhouse-frontend.git"
+            target="blank"
+          >here (frontend)
+          </a>
+          <br />
+          and{" "}
+          <a
+            href="https://github.com/alehuo/clubhouse-backend.git"
+            target="blank"
+          >
+            here (backend)
+          </a>
+          .
+          <br />
+          <br />
+          Enjoy!
         </p>
         <hr />
         <p>
