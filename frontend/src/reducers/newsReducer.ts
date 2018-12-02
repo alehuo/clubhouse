@@ -173,7 +173,7 @@ const newsReducer: Reducer<NewsState, any> = (state = initialState, action) => {
       return {
         ...state,
         newsPosts: [
-          ...state.newsPosts.filter((newsPost: any) => newsPost.id !== action.id),
+          ...state.newsPosts.filter((newsPost: NewsPost) => newsPost.postId !== action.id),
         ],
       };
     case newsPostTypes.SET_IS_ADDING:

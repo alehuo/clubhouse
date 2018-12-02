@@ -30,6 +30,12 @@ import { setToken } from "./reducers/userReducer";
 import { fetchUserData } from "./reducers/userReducer";
 
 class App extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      canRender: false,
+    };
+  }
   public componentDidMount() {
     if (localStorage.getItem("token")) {
       this.props.setToken(localStorage.getItem("token"));
@@ -42,6 +48,7 @@ class App extends React.Component<any, any> {
       }, 10000);
       this.props.setWatchCheckInterval(watchInterval);*/
     }
+    this.setState({ canRender: true });
   }
 
   public componentWillUnmount() {
@@ -57,6 +64,9 @@ class App extends React.Component<any, any> {
       isAuthenticated,
       peopleCount,
     } = this.props;
+    if (!this.state.canRender) {
+      return <div />;
+    }
     return (
       <Router>
         <React.Fragment>

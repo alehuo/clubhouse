@@ -60,6 +60,7 @@ class CalendarPage extends React.Component<any, any> {
             timeslots={1}
             showMultiDayTimes
             defaultDate={new Date()}
+            className={"calendar"}
           />
         ) : (
           <Alert bsStyle="warning">
