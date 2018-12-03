@@ -29,9 +29,10 @@
 | 15.9.2018 | 4.0h  | Updated favicon. Improved KeyHolder form. Refactored FieldGroup into its own file. Added more validators to forms. Implemented reducer & UI functionality for adding newsposts. Mocked newsposts API for now. Started implementing newspost delete functionality. |
 | 1.12.2018 | 5.0h  | Upgraded dependencies. Switched to TypeScript. Added typings to various components and reducers. Splitting components into smaller parts. Added styled-components dependency.                                                                                     |
 | 2.12.2018 | 1.0h  | Newspost page improvements. Implemented Newspost service functionality.                                                                                                                                                                                           |
+| 3.12.2018 | 2.0h  | Created Dockerfiles for production and development environments. Improved error handling so that the application won't crash when back-end is down.                                                                                                               |
 
-Total:'
+Total:
 
 25.5 h (Part 1)
 
-16.0 h (Part 2)
+18.0 h (Part 2)

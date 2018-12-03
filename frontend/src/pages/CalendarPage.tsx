@@ -5,10 +5,15 @@ import BigCalendar from "react-big-calendar";
 import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/calendarReducer";
 import { eventMapper } from "./../services/CalendarService";
 import PermissionUtils from "./../utils/PermissionUtils";
+
+const Calendar = styled<any>(BigCalendar)`
+  height: 800px !important;
+`;
 
 class CalendarPage extends React.Component<any, any> {
   public componentDidMount() {
@@ -49,7 +54,7 @@ class CalendarPage extends React.Component<any, any> {
           this.props.perms,
           Permissions.ALLOW_VIEW_EVENTS.value,
         ) ? (
-          <BigCalendar
+          <Calendar
             localizer={BigCalendar.momentLocalizer(moment)}
             events={this.props.events.map(eventMapper)}
             step={60}
@@ -60,7 +65,6 @@ class CalendarPage extends React.Component<any, any> {
             timeslots={1}
             showMultiDayTimes
             defaultDate={new Date()}
-            className={"calendar"}
           />
         ) : (
           <Alert bsStyle="warning">
