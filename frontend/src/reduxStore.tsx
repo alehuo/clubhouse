@@ -28,7 +28,8 @@ const reducer = combineReducers({
   news: newsReducer,
 });
 
-const middleware = [thunk, logger];
+const middleware =
+  process.env.NODE_ENV !== "production" ? [thunk, logger] : [thunk];
 
 // Create store
 export const reduxStore = createStore(reducer, applyMiddleware(...middleware));

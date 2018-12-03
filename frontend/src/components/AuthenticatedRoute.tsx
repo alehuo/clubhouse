@@ -17,7 +17,7 @@ const AuthenticatedRoute: React.SFC<AuthenticatedRouteProps & RouteProps> = ({
   <Route
     {...rest}
     render={(props) => {
-      return isAuthenticated ? (
+      return localStorage.getItem("token") ? (
         <Component {...props} />
       ) : (
         <Redirect

@@ -66,7 +66,10 @@ export const addNotification = (
   };
 };
 
-const notificationReducer: Reducer<NotificationState, any> = (state = initialState, action: any) => {
+const notificationReducer: Reducer<NotificationState, any> = (
+  state = initialState,
+  action: any,
+) => {
   switch (action.type) {
     case notificationActions.ADD_NOTIFICATION:
       return {

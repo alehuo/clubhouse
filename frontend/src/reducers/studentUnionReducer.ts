@@ -29,8 +29,13 @@ export const fetchStudentUnions = (token: string) => {
     try {
       const res = await StudentUnionService.getStudentUnions(token);
       dispatch(setStudentUnions(res.data));
-    } catch (ex) {
-      dispatch(errorMessage(ex.response.data.error));
+    } catch (err) {
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error fetching student unions"));
+      }
     }
   };
 };
@@ -70,7 +75,12 @@ export const addStudentUnion = (stdu: any, token: string) => {
       dispatch(addFormModalOpen(false));
       dispatch(successMessage("New student union added successfully"));
     } catch (err) {
-      dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error adding student union"));
+      }
     }
   };
 };
@@ -85,7 +95,12 @@ export const deleteStudentUnion = (unionId: number, token: string) => {
       });
       dispatch(successMessage("Student union deleted successfully"));
     } catch (err) {
-      dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error deleting student union"));
+      }
     }
   };
 };

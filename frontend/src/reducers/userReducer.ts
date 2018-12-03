@@ -46,10 +46,14 @@ export const login = (email: string, password: string) => {
       dispatch(successMessage("Successfully logged in"));
       dispatch(setIsLoggingIn(false));
       dispatch(fetchUserData(loginResponse.data.token));
-    } catch (ex) {
+    } catch (err) {
       dispatch(setIsLoggingIn(false));
-      dispatch(errorMessage(ex.response.data.error));
-      console.error(ex);
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error logging in"));
+      }
     }
   };
 };
@@ -74,9 +78,13 @@ export const deleteUser = (userId: number, token: string) => {
       await UserService.remove(userId, token);
       dispatch(successMessage("Successfully deleted user"));
       dispatch(removeUserFromList(userId));
-    } catch (ex) {
-      dispatch(errorMessage(ex.response.data.error));
-      console.error(ex);
+    } catch (err) {
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error deleting user"));
+      }
     }
   };
 };
@@ -93,8 +101,13 @@ export const fetchUsers = (token: string) => {
     try {
       const res = await UserService.getUsers(token);
       dispatch(setUsers(res.data));
-    } catch (ex) {
-      dispatch(errorMessage(ex.response.data.error));
+    } catch (err) {
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error fetching users"));
+      }
     }
   };
 };
@@ -111,8 +124,13 @@ export const fetchUserData = (token: string) => {
     try {
       const res = await UserService.getOwnData(token);
       dispatch(setUserData(res.data));
-    } catch (ex) {
-      dispatch(errorMessage(ex.response.data.error));
+    } catch (err) {
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error fetching user data"));
+      }
     }
   };
 };
@@ -134,7 +152,12 @@ export const addUser = (user: any) => {
         ),
       );
     } catch (err) {
-      dispatch(errorMessage("Error registering user"));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error registering user"));
+      }
     }
   };
 };

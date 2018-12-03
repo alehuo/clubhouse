@@ -29,7 +29,11 @@ export const getUserPerms = (token: string) => {
       const res = await PermissionService.getUserPermissions(token);
       dispatch(setUserPerms(res.data));
     } catch (err) {
-      dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        dispatch(errorMessage("Error fetching user permissions"));
+      }
       dispatch(deAuthenticateUser());
     }
   };

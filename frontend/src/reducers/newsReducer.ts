@@ -98,7 +98,12 @@ export const deleteNewspost = (token: string, id: number) => {
       dispatch(deleteNewspostFromList(id));
       dispatch(successMessage("Newspost deleted"));
     } catch (err) {
-      dispatch(errorMessage("Failed to delete newspost"));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Failed to delete newspost"));
+      }
     }
   };
 };
@@ -120,14 +125,24 @@ export const addNewspost = (token: string, title: string, message: string) => {
       );
       dispatch(successMessage("Newspost added"));
     } catch (err) {
-      dispatch(errorMessage("Cannot add newspost"));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Failed to add newspost"));
+      }
     }
     dispatch(toggleNewsAddModal(false));
     dispatch(setIsAdding(false));
   };
 };
 
-export const editNewspost = (token: string, id: number, title: string, message: string) => {
+export const editNewspost = (
+  token: string,
+  id: number,
+  title: string,
+  message: string,
+) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     dispatch(setIsEditing(true));
     try {
@@ -135,7 +150,12 @@ export const editNewspost = (token: string, id: number, title: string, message: 
       // TODO: Hook to back-end
       dispatch(successMessage("Newspost edited"));
     } catch (err) {
-      dispatch(errorMessage("Cannot edit newspost"));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Failed to edit newspost"));
+      }
     }
     dispatch(toggleNewsEditModal(false));
     dispatch(setIsEditing(false));
@@ -173,7 +193,9 @@ const newsReducer: Reducer<NewsState, any> = (state = initialState, action) => {
       return {
         ...state,
         newsPosts: [
-          ...state.newsPosts.filter((newsPost: NewsPost) => newsPost.postId !== action.id),
+          ...state.newsPosts.filter(
+            (newsPost: NewsPost) => newsPost.postId !== action.id,
+          ),
         ],
       };
     case newsPostTypes.SET_IS_ADDING:

@@ -24,8 +24,13 @@ export const fetchEvents = (token: string) => async (
       type: calendarActions.SET_EVENTS,
       events: events.data,
     });
-  } catch (ex) {
-    dispatch(errorMessage("Failed to fetch calendar events"));
+  } catch (err) {
+    if (err.response && err.response.data.error) {
+      dispatch(errorMessage(err.response.data.error));
+    } else {
+      // If the response doesn't contain an error key, the back-end might be down
+      dispatch(errorMessage("Failed to fetch calendar events"));
+    }
   }
 };
 

@@ -36,10 +36,13 @@ export const fetchKeys = (token: string) => {
     try {
       const res = await KeyService.getKeys(token);
       dispatch(setKeys(res));
-    } catch (ex) {
-      dispatch(
-        errorMessage("Failed to get list of keyholders from the server"),
-      );
+    } catch (err) {
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Failed to fetch keys"));
+      }
     }
   };
 };
@@ -49,8 +52,13 @@ export const fetchKeyTypes = (token: string) => {
     try {
       const res = await KeyService.getKeyTypes(token);
       dispatch(setKeyTypes(res));
-    } catch (ex) {
-      dispatch(errorMessage("Failed to get list of key types from the server"));
+    } catch (err) {
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Failed to fetch key types"));
+      }
     }
   };
 };

@@ -45,9 +45,19 @@ export class UsersList extends React.Component<any, any> {
                     ) && (
                       <Button
                         bsStyle="danger"
-                        onClick={() =>
-                          this.props.deleteUser(user.userId, this.props.token)
-                        }
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Do you want to delete this user?" +
+                                " Deleting a user will delete ALL messages and watch history.",
+                            )
+                          ) {
+                            this.props.deleteUser(
+                              user.userId,
+                              this.props.token,
+                            );
+                          }
+                        }}
                       >
                         <FontAwesome name="trash" /> Delete
                       </Button>

@@ -92,7 +92,12 @@ export const fetchOwnWatchStatus = (token: string) => {
         ),
       );
     } catch (err) {
-      dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error fetching watch status"));
+      }
     }
   };
 };
@@ -117,7 +122,12 @@ export const endWatch = (token: string, endMessage: string) => {
       await watchService.stopWatch(token, endMessage);
       dispatch(successMessage("Your session has ended."));
     } catch (err) {
-      dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error ending session"));
+      }
     }
     dispatch(toggleEndWatchModal(false));
     dispatch(toggleIsEnding(false));
@@ -132,7 +142,12 @@ export const startWatch = (token: string, startMessage: string) => {
       await watchService.startWatch(token, startMessage);
       dispatch(successMessage("Your session has started."));
     } catch (err) {
-      dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Error starting session"));
+      }
     }
     dispatch(toggleStartWatchModal(false));
     dispatch(toggleIsStarting(false));
