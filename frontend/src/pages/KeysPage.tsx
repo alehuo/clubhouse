@@ -3,19 +3,16 @@ import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import KeysList from "./../components/KeysList";
-import {
-  fetchKeys,
-  fetchKeyTypes,
-  toggleModal,
-} from "./../reducers/keyReducer";
+import { toggleModal } from "./../reducers/actions/keyActions";
+import { fetchKeys, fetchKeyTypes } from "./../reducers/keyReducer";
 import { fetchUsers } from "./../reducers/userReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
-import { any } from "prop-types";
+import { RootState } from "../reduxStore";
 
-export class KeysPage extends React.Component<any, any> {
+export class KeysPage extends React.Component<any> {
   public componentDidMount() {
     this.props.fetchKeys(this.props.token);
     this.props.fetchKeyTypes(this.props.token);
@@ -70,7 +67,7 @@ export class KeysPage extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState, ownProps: any) => ({
   token: state.user.token,
   keys: state.key.keys,
   users: state.user.users,

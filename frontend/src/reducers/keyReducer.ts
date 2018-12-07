@@ -1,6 +1,9 @@
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import { ActionType } from "typesafe-actions";
 import KeyService from "./../services/KeyService";
+import * as keyActions from "./actions/keyActions";
+import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "./constants/keyConstants";
 import { errorMessage } from "./notificationReducer";
 
 export interface KeyState {
@@ -17,25 +20,13 @@ const initialState = {
   modalOpen: false,
 };
 
-export const keyActions = {
-  ADD_KEY: "ADD_KEY",
-  SET_KEYS: "SET_KEYS",
-  SET_KEY_TYPES: "SET_KEY_TYPES",
-  TOGGLE_MODAL: "TOGGLE_MODAL",
-};
-
-export const toggleModal = (val: string) => {
-  return {
-    type: keyActions.TOGGLE_MODAL,
-    val,
-  };
-};
+export type KeyAction = ActionType<typeof keyActions>;
 
 export const fetchKeys = (token: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
       const res = await KeyService.getKeys(token);
-      dispatch(setKeys(res));
+      dispatch(keyActions.setKeys(res));
     } catch (err) {
       if (err.response && err.response.data.error) {
         dispatch(errorMessage(err.response.data.error));
@@ -51,7 +42,7 @@ export const fetchKeyTypes = (token: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
       const res = await KeyService.getKeyTypes(token);
-      dispatch(setKeyTypes(res));
+      dispatch(keyActions.setKeyTypes(res));
     } catch (err) {
       if (err.response && err.response.data.error) {
         dispatch(errorMessage(err.response.data.error));
@@ -63,28 +54,14 @@ export const fetchKeyTypes = (token: string) => {
   };
 };
 
-export const setKeys = (keys: any[]) => {
-  return {
-    type: keyActions.SET_KEYS,
-    keys,
-  };
-};
-
-export const setKeyTypes = (keyTypes: any[]) => {
-  return {
-    type: keyActions.SET_KEY_TYPES,
-    keyTypes,
-  };
-};
-
-const keyReducer: Reducer<KeyState, any> = (state = initialState, action) => {
+const keyReducer: Reducer<KeyState, KeyAction> = (state = initialState, action) => {
   switch (action.type) {
-    case keyActions.SET_KEYS:
-      return { ...{}, ...state, keys: action.keys };
-    case keyActions.SET_KEY_TYPES:
-      return { ...{}, ...state, keyTypes: action.keyTypes };
-    case keyActions.TOGGLE_MODAL:
-      return { ...{}, ...state, modalOpen: action.val };
+    case SET_KEYS:
+      return { ...{}, ...state, keys: action.payload.keys };
+    case SET_KEY_TYPES:
+      return { ...{}, ...state, keyTypes: action.payload.keyTypes };
+    case TOGGLE_KEY_MODAL:
+      return { ...{}, ...state, modalOpen: action.payload.value };
     default:
       return state;
   }

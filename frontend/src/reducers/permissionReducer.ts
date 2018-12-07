@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import PermissionService from "../services/PermissionService";
-import { deAuthenticateUser } from "./authenticationReducer";
+import { deAuthenticateUser } from "./actions/authenticationActions";
 import { errorMessage } from "./notificationReducer";
 
 export interface PermissionState {

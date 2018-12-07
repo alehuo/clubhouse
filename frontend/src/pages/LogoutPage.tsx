@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { deAuthenticateUser } from "./../reducers/authenticationReducer";
+import { deAuthenticateUser } from "./../reducers/actions/authenticationActions";
 import { successMessage } from "./../reducers/notificationReducer";
 import { setWatchCheckInterval } from "./../reducers/sessionReducer";
 

@@ -20,7 +20,7 @@ import Session from "./pages/Session";
 import StudentUnionsPage from "./pages/StudentUnionsPage";
 import UserListPage from "./pages/UserListPage";
 import UserProfilePage from "./pages/UserProfilePage";
-import { authenticateUser } from "./reducers/authenticationReducer";
+import { authenticateUser } from "./reducers/actions/authenticationActions";
 import { getUserPerms } from "./reducers/permissionReducer";
 import {
   fetchOwnWatchStatus,

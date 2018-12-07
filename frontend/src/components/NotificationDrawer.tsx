@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { RootState } from "../reduxStore";
 import Notification from "./Notification";
 
 const NotificationDrawer: React.SFC<any> = ({ notifications }) => (
@@ -21,7 +22,7 @@ const NotificationDrawer: React.SFC<any> = ({ notifications }) => (
   </React.Fragment>
 );
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   notifications: state.notification.notifications,
 });
 

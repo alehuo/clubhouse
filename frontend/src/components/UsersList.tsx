@@ -6,6 +6,7 @@ import { deleteUser, fetchUsers } from "./../reducers/userReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import { RootState } from "../reduxStore";
 
 export class UsersList extends React.Component<any, any> {
   public componentDidMount() {
@@ -77,7 +78,7 @@ export class UsersList extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
   perms: state.permission.userPerms,
 });

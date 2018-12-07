@@ -6,6 +6,7 @@ import { deleteStudentUnion } from "./../reducers/studentUnionReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import { RootState } from "../reduxStore";
 
 const StudentUnionsList: React.SFC<any> = ({
   perms,
@@ -56,7 +57,7 @@ const StudentUnionsList: React.SFC<any> = ({
   </Table>
 );
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
   perms: state.permission.userPerms,
 });
