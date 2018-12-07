@@ -3,10 +3,10 @@ import { ThunkDispatch } from "redux-thunk";
 import StudentUnionService from "../services/StudentUnionService";
 import { errorMessage, successMessage } from "./notificationReducer";
 
-interface StudentUnionState {
-  studentUnions: any[];
-  isAdding: boolean;
-  modalOpen: boolean;
+export interface StudentUnionState {
+  readonly studentUnions: any[];
+  readonly isAdding: boolean;
+  readonly modalOpen: boolean;
 }
 
 const initialState = {

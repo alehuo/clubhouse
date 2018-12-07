@@ -23,6 +23,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.1.2",
     "typed.js": "^2.0.8",
+    "typesafe-actions": "^2.0.4",
     "uuid": "^3.3.2",
     "validator": "^10.9.0"
   },

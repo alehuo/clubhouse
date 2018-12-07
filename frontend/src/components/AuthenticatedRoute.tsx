@@ -9,10 +9,7 @@ interface AuthenticatedRouteProps {
 const AuthenticatedRoute: React.SFC<AuthenticatedRouteProps & RouteProps> = ({
   component: Component,
   isAuthenticated,
-  // FIXME: TSLint / TypeScript bug.
-  // The object spread operator confuses the linter as a trailing comma is not allowed after the rest operator
-  // @ts-ignore
-  ...rest,
+  ...rest
 }) => (
   <Route
     {...rest}
@@ -20,12 +17,7 @@ const AuthenticatedRoute: React.SFC<AuthenticatedRouteProps & RouteProps> = ({
       return localStorage.getItem("token") ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location },
-          }}
-        />
+        <div>You must be logged in to view this page.</div>
       );
     }}
   />

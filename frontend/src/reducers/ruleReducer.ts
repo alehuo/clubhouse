@@ -2,9 +2,9 @@ import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import RuleService from "./../services/RuleService";
 
-interface RuleState {
-  rules: any[];
-  editMode: boolean;
+export interface RuleState {
+  readonly rules: any[];
+  readonly editMode: boolean;
 }
 
 const initialState = {

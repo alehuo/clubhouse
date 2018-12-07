@@ -3,11 +3,11 @@ import { ThunkDispatch } from "redux-thunk";
 import KeyService from "./../services/KeyService";
 import { errorMessage } from "./notificationReducer";
 
-interface KeyState {
-  keys: any[];
-  keyTypes: any[];
-  isAdding: boolean;
-  modalOpen: boolean;
+export interface KeyState {
+  readonly keys: any[];
+  readonly keyTypes: any[];
+  readonly isAdding: boolean;
+  readonly modalOpen: boolean;
 }
 
 const initialState = {

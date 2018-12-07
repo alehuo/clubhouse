@@ -3,7 +3,7 @@ import { ThunkDispatch } from "redux-thunk";
 import uuidv1 from "uuid/v1";
 
 export interface NotificationState {
-  notifications: Notification[];
+  readonly  notifications: Notification[];
 }
 
 export interface Notification {

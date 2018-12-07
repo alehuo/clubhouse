@@ -1,12 +1,12 @@
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import UserService from "../services/UserService";
-import { authenticateUser, setIsLoggingIn } from "./authenticationReducer";
+import { authenticateUser, setIsLoggingIn } from "./actions/authenticationActions";
 import { errorMessage, successMessage } from "./notificationReducer";
 import { getUserPerms } from "./permissionReducer";
 import { fetchOwnWatchStatus } from "./sessionReducer";
 
-interface UserState {
+export interface UserState {
   token: string;
   users: any[];
   userData: any;
@@ -27,7 +27,6 @@ export const userActions = {
   LOGOUT: "LOGOUT",
   SET_TOKEN: "SET_TOKEN",
   SET_USERS: "SET_USERS",
-  ADD_USER_FORM_MODAL_OPEN: "ADD_USER_FORM_MODAL_OPEN",
   REMOVE_USER: "REMOVE_USER",
   SET_USER_DATA: "SET_USER_DATA",
   CLEAR_USER_DATA: "CLEAR_USER_DATA",
@@ -135,13 +134,6 @@ export const fetchUserData = (token: string) => {
   };
 };
 
-export const addFormModalOpen = (status: boolean) => {
-  return {
-    type: userActions.ADD_USER_FORM_MODAL_OPEN,
-    status,
-  };
-};
-
 export const addUser = (user: any) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
@@ -168,8 +160,6 @@ const userReducer: Reducer<UserState, any> = (state = initialState, action) => {
       return { ...{}, ...state, ...{ token: action.token } };
     case userActions.SET_USERS:
       return { ...{}, ...state, ...{ users: action.users } };
-    case userActions.ADD_USER_FORM_MODAL_OPEN:
-      return { ...{}, ...state, ...{ modalOpen: action.status } };
     case userActions.REMOVE_USER:
       return {
         ...{},

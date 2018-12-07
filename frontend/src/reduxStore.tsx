@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { reducer as formReducer } from "redux-form";
 import thunk from "redux-thunk";
+import { StateType } from "typesafe-actions";
 import authenticationReducer from "./reducers/authenticationReducer";
 import calendarReducer from "./reducers/calendarReducer";
 import keyReducer from "./reducers/keyReducer";
@@ -13,8 +14,7 @@ import sessionReducer from "./reducers/sessionReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
 import userReducer from "./reducers/userReducer";
 
-// Combine reducers
-const reducer = combineReducers({
+const reducerObj = {
   calendar: calendarReducer,
   auth: authenticationReducer,
   user: userReducer,
@@ -26,7 +26,12 @@ const reducer = combineReducers({
   form: formReducer,
   rule: ruleReducer,
   news: newsReducer,
-});
+};
+
+// Combine reducers
+const reducer = combineReducers(reducerObj);
+
+export type RootState = StateType<typeof reducer>;
 
 const middleware =
   process.env.NODE_ENV !== "production" ? [thunk, logger] : [thunk];

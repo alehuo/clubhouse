@@ -1,8 +1,15 @@
 import { Reducer } from "redux";
+import { ActionType } from "typesafe-actions";
+import * as actions from "./actions/authenticationActions";
+import {
+  AUTHENTICATE_USER,
+  DEAUTHENTICATE_USER,
+  SET_IS_LOGGING_IN,
+} from "./constants/authenticationConstants";
 
-interface AuthenticationState {
-  isLoggingIn: boolean;
-  isAuthenticated: boolean;
+export interface AuthenticationState {
+  readonly isLoggingIn: boolean;
+  readonly isAuthenticated: boolean;
 }
 
 const initialState = {
@@ -10,40 +17,20 @@ const initialState = {
   isAuthenticated: false,
 };
 
-export const authenticationActions = {
-  SET_IS_LOGGING_IN: "SET_IS_LOGGING_IN",
-  AUTHENTICATE_USER: "AUTHENTICATE_USER",
-  DEAUTHENTICATE_USER: "DEAUTHENTICATE_USER",
-};
-
-export const authenticateUser = () => {
-  return {
-    type: authenticationActions.AUTHENTICATE_USER,
-  };
-};
-
-export const deAuthenticateUser = () => {
-  return {
-    type: authenticationActions.DEAUTHENTICATE_USER,
-  };
-};
-
-export const setIsLoggingIn = (isLoggingIn: boolean) => {
-  return {
-    type: authenticationActions.SET_IS_LOGGING_IN,
-    isLoggingIn,
-  };
-};
+export type AuthenticationAction = ActionType<typeof actions>;
 
 // TODO: Action typings
-const authenticationReducer: Reducer<AuthenticationState, any> = (state = initialState, action) => {
+const authenticationReducer: Reducer<
+  AuthenticationState,
+  AuthenticationAction
+> = (state = initialState, action) => {
   switch (action.type) {
-    case authenticationActions.AUTHENTICATE_USER:
+    case AUTHENTICATE_USER:
       return { ...{}, ...state, isAuthenticated: true };
-    case authenticationActions.DEAUTHENTICATE_USER:
+    case DEAUTHENTICATE_USER:
       return { ...{}, ...state, isAuthenticated: false };
-    case authenticationActions.SET_IS_LOGGING_IN:
-      return { ...{}, ...state, isLoggingIn: action.isLoggingIn };
+    case SET_IS_LOGGING_IN:
+      return { ...{}, ...state, isLoggingIn: action.payload.isLoggingIn };
     default:
       return state;
   }

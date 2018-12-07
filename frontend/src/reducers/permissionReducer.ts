@@ -4,8 +4,8 @@ import PermissionService from "../services/PermissionService";
 import { deAuthenticateUser } from "./authenticationReducer";
 import { errorMessage } from "./notificationReducer";
 
-interface PermissionState {
-  userPerms: number;
+export interface PermissionState {
+  readonly userPerms: number;
 }
 
 const initialState = {

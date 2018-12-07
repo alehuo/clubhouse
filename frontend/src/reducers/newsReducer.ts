@@ -3,13 +3,13 @@ import { ThunkDispatch } from "redux-thunk";
 import NewsService from "../services/NewsService";
 import { errorMessage, successMessage } from "./notificationReducer";
 
-interface NewsState {
-  newsPosts: NewsPost[];
-  editId: number;
-  isAdding: boolean;
-  isEditing: boolean;
-  addModalOpen: boolean;
-  editModalOpen: boolean;
+export interface NewsState {
+  readonly newsPosts: NewsPost[];
+  readonly editId: number;
+  readonly isAdding: boolean;
+  readonly isEditing: boolean;
+  readonly addModalOpen: boolean;
+  readonly editModalOpen: boolean;
 }
 
 export interface NewsPost {
@@ -86,8 +86,17 @@ export const setNewsposts = (newsPosts: NewsPost[]) => {
 
 export const fetchNewsposts = (token: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
-    const posts = await NewsService.getNewsposts(token);
-    dispatch(setNewsposts(posts));
+    try {
+      const posts = await NewsService.getNewsposts(token);
+      dispatch(setNewsposts(posts));
+    } catch (err) {
+      if (err.response && err.response.data.error) {
+        dispatch(errorMessage(err.response.data.error));
+      } else {
+        // If the response doesn't contain an error key, the back-end might be down
+        dispatch(errorMessage("Failed to fetch newsposts"));
+      }
+    }
   };
 };
 

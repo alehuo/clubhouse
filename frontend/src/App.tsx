@@ -85,27 +85,27 @@ class App extends React.Component<any, any> {
               </Alert>
             )}
             <React.Fragment>
-              <Route exact={true} path="/" component={MainPage} />
+              <Route exact path="/" component={MainPage} />
               <Route
-                exact={true}
+                exact
                 path="/studentunions"
                 component={StudentUnionsPage}
               />
-              <Route exact={true} path="/keys" component={KeysPage} />
-              <Route exact={true} path="/calendar" component={CalendarPage} />
-              <Route exact={true} path="/rules" component={RulesPage} />
-              <Route exact={true} path="/news" component={NewsPage} />
-              <Route exact={true} path="/login" component={LoginPage} />
-              <Route exact={true} path="/register" component={RegisterPage} />
+              <Route exact path="/keys" component={KeysPage} />
+              <Route exact path="/calendar" component={CalendarPage} />
+              <Route exact path="/rules" component={RulesPage} />
+              <Route exact path="/news" component={NewsPage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={RegisterPage} />
               <AuthenticatedRoute
                 isAuthenticated={this.props.isAuthenticated}
-                exact={true}
+                exact
                 path="/session"
                 component={Session}
               />
               <AuthenticatedRoute
                 isAuthenticated={this.props.isAuthenticated}
-                exact={true}
+                exact
                 path="/logout"
                 component={LogoutPage}
               />
@@ -116,7 +116,7 @@ class App extends React.Component<any, any> {
               />
               <AuthenticatedRoute
                 isAuthenticated={this.props.isAuthenticated}
-                exact={true}
+                exact
                 path="/users"
                 component={UserListPage}
               />

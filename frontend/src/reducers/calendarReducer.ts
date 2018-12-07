@@ -3,8 +3,8 @@ import { ThunkDispatch } from "redux-thunk";
 import CalendarService from "./../services/CalendarService";
 import { errorMessage } from "./notificationReducer";
 
-interface CalendarState {
-  events: any[];
+export interface CalendarState {
+  readonly events: any[];
 }
 
 const initialState = {

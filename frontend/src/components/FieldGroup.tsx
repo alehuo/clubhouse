@@ -13,8 +13,7 @@ export const FieldGroup: React.SFC<any> = ({
   label,
   help,
   meta: { touched, error, warning },
-  // @ts-ignore
-  ...props,
+  ...props
 }) => (
   <FormGroup controlId={id}>
     <ControlLabel>{label}</ControlLabel>

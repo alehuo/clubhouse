@@ -3,16 +3,16 @@ import { ThunkDispatch } from "redux-thunk";
 import watchService from "../services/SessionService";
 import { errorMessage, successMessage } from "./notificationReducer";
 
-interface SessionState {
-  watchPage: boolean;
-  ownWatchRunning: boolean;
-  ownWatchPeopleCount: number;
-  watchCheckInterval: any;
-  endWatchModalOpen: boolean;
-  startWatchModalOpen: boolean;
-  sendMessageModalOpen: boolean;
-  isEnding: boolean;
-  isStarting: boolean;
+export interface SessionState {
+  readonly watchPage: boolean;
+  readonly ownWatchRunning: boolean;
+  readonly ownWatchPeopleCount: number;
+  readonly watchCheckInterval: any;
+  readonly endWatchModalOpen: boolean;
+  readonly startWatchModalOpen: boolean;
+  readonly sendMessageModalOpen: boolean;
+  readonly isEnding: boolean;
+  readonly isStarting: boolean;
 }
 
 const initialState = {
