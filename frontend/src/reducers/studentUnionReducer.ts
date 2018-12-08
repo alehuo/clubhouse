@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import StudentUnionService from "../services/StudentUnionService";
-import { errorMessage, successMessage } from "./notificationReducer";
+import { errorMessage, successMessage } from "./actions/notificationActions";
 
 export interface StudentUnionState {
   readonly studentUnions: any[];

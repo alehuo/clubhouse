@@ -1,8 +1,8 @@
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import CalendarService from "../../services/CalendarService";
+import { errorMessage } from "../actions/notificationActions";
 import * as calendarActions from "../constants";
-import { errorMessage } from "../notificationReducer";
 
 export const setEvents = (events: any) =>
   action(calendarActions.SET_EVENTS, { events });

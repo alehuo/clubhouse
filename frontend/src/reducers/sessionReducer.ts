@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import watchService from "../services/SessionService";
-import { errorMessage, successMessage } from "./notificationReducer";
+import { errorMessage, successMessage } from "./actions/notificationActions";
 
 export interface SessionState {
   readonly watchPage: boolean;

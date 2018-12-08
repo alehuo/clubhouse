@@ -1,92 +1,46 @@
 import { Reducer } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import uuidv1 from "uuid/v1";
+import { ActionType } from "typesafe-actions";
+import * as notificationActions from "./actions/notificationActions";
+import { ADD_NOTIFICATION, CLEAR_NOTIFICATION } from "./constants";
 
+// Initial notification reducer state
 export interface NotificationState {
-  readonly  notifications: Notification[];
+  readonly notifications: Notification[];
 }
 
 export interface Notification {
-  id: string;
-  notificationType: string;
-  text: string;
+  readonly id: string;
+  readonly notificationType: string;
+  readonly text: string;
 }
 
-const initialState: NotificationState = {
+const initialState = {
   notifications: [],
 };
 
-export const notificationActions = {
-  SUCCESS_MESSAGE: "SUCCESS_MESSAGE",
-  ERROR_MESSAGE: "ERROR_MESSAGE",
-  CLEAR_NOTIFICATION: "CLEAR_NOTIFICATION",
-  ADD_NOTIFICATION: "ADD_NOTIFICATION",
-};
+type NotificationAction = ActionType<typeof notificationActions>;
 
-type NotificationType = "ERROR" | "SUCCESS" | "INFO" | "WARNING";
-
-export const successMessage = (text: string, timeout = 4000) => {
-  return async (dispatch: ThunkDispatch<any, any, any>) => {
-    const id = uuidv1();
-    dispatch(addNotification(id, text, "SUCCESS"));
-    await wait(timeout);
-    dispatch(clearNotification(id));
-  };
-};
-
-export const errorMessage = (text: string, timeout = 4000) => {
-  return async (dispatch: ThunkDispatch<any, any, any>) => {
-    const id = uuidv1();
-    dispatch(addNotification(id, text, "ERROR"));
-    await wait(timeout);
-    dispatch(clearNotification(id));
-  };
-};
-
-export const clearNotification = (id: string) => {
-  return {
-    type: notificationActions.CLEAR_NOTIFICATION,
-    id,
-  };
-};
-
-const wait = (timeout: number) =>
-  new Promise((resolve) => setTimeout(resolve, timeout));
-
-export const addNotification = (
-  id: string,
-  text: string,
-  notificationType: NotificationType,
-) => {
-  return {
-    type: notificationActions.ADD_NOTIFICATION,
-    id,
-    text,
-    notificationType,
-  };
-};
-
-const notificationReducer: Reducer<NotificationState, any> = (
+const notificationReducer: Reducer<NotificationState, NotificationAction> = (
   state = initialState,
-  action: any,
+  action,
 ) => {
   switch (action.type) {
-    case notificationActions.ADD_NOTIFICATION:
+    case ADD_NOTIFICATION:
       return {
         ...{},
         ...state,
         notifications: [
           ...state.notifications,
           {
-            id: action.id,
-            notificationType: action.notificationType,
-            text: action.text,
+            id: action.payload.id,
+            notificationType: action.payload.notificationType,
+            text: action.payload.text,
           },
         ],
       };
-    case notificationActions.CLEAR_NOTIFICATION:
+    case CLEAR_NOTIFICATION:
       const notifications = state.notifications.filter(
-        (notification: any) => notification.id !== action.id,
+        (notification: any) => notification.id !== action.payload.id,
       );
       return { ...{}, ...state, ...{ notifications } };
     default:

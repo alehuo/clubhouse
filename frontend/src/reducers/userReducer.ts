@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import UserService from "../services/UserService";
 import { authenticateUser, setIsLoggingIn } from "./actions/authenticationActions";
-import { errorMessage, successMessage } from "./notificationReducer";
+import { errorMessage, successMessage } from "./actions/notificationActions";
 import { getUserPerms } from "./permissionReducer";
 import { fetchOwnWatchStatus } from "./sessionReducer";
 

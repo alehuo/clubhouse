@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { deAuthenticateUser } from "./../reducers/actions/authenticationActions";
-import { successMessage } from "./../reducers/notificationReducer";
+import { successMessage } from "./../reducers/actions/notificationActions";
 import { setWatchCheckInterval } from "./../reducers/sessionReducer";
 
 export class LogoutPage extends React.Component<any, any> {

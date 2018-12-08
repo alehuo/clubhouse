@@ -6,8 +6,9 @@ import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../reduxStore";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
-import { fetchEvents } from "./../reducers/calendarReducer";
+import { fetchEvents } from "./../reducers/actions/calendarActions";
 import { eventMapper } from "./../services/CalendarService";
 import PermissionUtils from "./../utils/PermissionUtils";
 
@@ -78,7 +79,7 @@ class CalendarPage extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   events: state.calendar.events,
   perms: state.permission.userPerms,
   token: state.user.token,

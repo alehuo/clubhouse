@@ -1,6 +1,7 @@
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import NewsService from "../../services/NewsService";
+import { errorMessage, successMessage } from "../actions/notificationActions";
 import {
   ADD_NEWSPOST_TO_LIST,
   DELETE_NEWSPOST_FROM_LIST,
@@ -12,7 +13,6 @@ import {
   TOGGLE_EDIT_NEWSPOST_MODAL,
 } from "../constants";
 import { NewsPost } from "../newsReducer";
-import { errorMessage, successMessage } from "../notificationReducer";
 
 export const addNewspostToList = (newspost: NewsPost) =>
   action(ADD_NEWSPOST_TO_LIST, { newspost });

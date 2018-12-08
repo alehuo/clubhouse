@@ -3,8 +3,8 @@ import { ThunkDispatch } from "redux-thunk";
 import { ActionType } from "typesafe-actions";
 import KeyService from "./../services/KeyService";
 import * as keyActions from "./actions/keyActions";
+import { errorMessage } from "./actions/notificationActions";
 import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "./constants";
-import { errorMessage } from "./notificationReducer";
 
 // Initial key reducer state
 export interface KeyState {
