@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-import { addUser } from "./../reducers/userReducer";
+import { addUser } from "./../reducers/actions/userActions";
 
+import { RootState } from "../reduxStore";
 import RegisterForm from "./../forms/RegisterForm";
 
 export class RegisterPage extends React.Component<any> {
@@ -31,7 +32,7 @@ export class RegisterPage extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   isRegistering: state.user.isRegistering,
 });
 

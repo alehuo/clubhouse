@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import { Container } from "./components/Container";
 import { Navigation } from "./components/Navigation";
@@ -21,13 +21,13 @@ import StudentUnionsPage from "./pages/StudentUnionsPage";
 import UserListPage from "./pages/UserListPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import { authenticateUser } from "./reducers/actions/authenticationActions";
+import { setToken } from "./reducers/actions/userActions";
+import { fetchUserData } from "./reducers/actions/userActions";
 import { getUserPerms } from "./reducers/permissionReducer";
 import {
   fetchOwnWatchStatus,
   setWatchCheckInterval,
 } from "./reducers/sessionReducer";
-import { setToken } from "./reducers/userReducer";
-import { fetchUserData } from "./reducers/userReducer";
 import { RootState } from "./reduxStore";
 
 interface StateProps {

@@ -25,3 +25,11 @@ export const SUCCESS_MESSAGE = "SUCCESS_MESSAGE";
 export const ERROR_MESSAGE = "ERROR_MESSAGE";
 export const CLEAR_NOTIFICATION = "CLEAR_NOTIFICATION";
 export const ADD_NOTIFICATION = "ADD_NOTIFICATION";
+// User reducer
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const SET_TOKEN = "SET_TOKEN";
+export const SET_USERS = "SET_USERS";
+export const REMOVE_USER = "REMOVE_USER";
+export const SET_USER_DATA = "SET_USER_DATA";
+export const CLEAR_USER_DATA = "CLEAR_USER_DATA";
