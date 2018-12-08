@@ -5,7 +5,15 @@ import StartWatchForm from "../../forms/StartSessionForm";
 import { startWatch } from "../../reducers/sessionReducer";
 import { RootState } from "../../reduxStore";
 
-export class StartSession extends React.Component<any> {
+interface Props {
+  token: string;
+  isAdding: boolean;
+  show: boolean;
+  onHide: any;
+  startWatch: any;
+}
+
+export class StartSession extends React.Component<Props> {
   public handleSubmit = (values: any) => {
     this.props.startWatch(this.props.token, values.startMessage);
   }
