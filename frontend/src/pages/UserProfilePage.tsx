@@ -1,3 +1,4 @@
+import { UserModel } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Col, Nav, NavItem, PageHeader, Row } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
@@ -6,14 +7,17 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, Route } from "react-router-dom";
 import { RootState } from "../reduxStore";
 import UserHistory from "./subpages/UserHistory";
-import UserInformation, { UserData } from "./subpages/UserInformation";
+import UserInformation from "./subpages/UserInformation";
 import UserKeys from "./subpages/UserKeys";
 
 interface Props {
-  userData: UserData;
+  userData: UserModel | null;
 }
 
 const UserProfilePage: React.SFC<Props> = (props) => {
+  if (!props.userData) {
+    return <div>Failed to display user data</div>;
+  }
   return (
     <React.Fragment>
       <PageHeader>
@@ -66,9 +70,6 @@ const mapStateToProps = (state: RootState) => ({
   userData: state.user.userData,
 });
 
-const mapDispatchToProps = {};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(UserProfilePage);

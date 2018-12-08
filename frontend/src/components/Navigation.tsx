@@ -1,3 +1,4 @@
+import { UserModel } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
@@ -12,9 +13,7 @@ interface NavButton {
 interface NavigationProps {
   navButtons: NavButton[];
   isAuthenticated: boolean;
-  userData: {
-    email: string;
-  };
+  userData: UserModel | null;
 }
 
 const Navigation: React.SFC<NavigationProps> = ({
@@ -59,7 +58,7 @@ const Navigation: React.SFC<NavigationProps> = ({
               title={
                 <React.Fragment>
                   <FontAwesome name="user" />{" "}
-                  <span>{userData.email || ""}</span>
+                  <span>{userData && (userData.email || "")}</span>
                 </React.Fragment>
               }
               id="basic-nav-dropdown"

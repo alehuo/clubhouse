@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import { Alert, PageHeader } from "react-bootstrap";
 import { connect } from "react-redux";
 import UsersList from "./../components/UsersList";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-import { Permissions } from "@alehuo/clubhouse-shared";
+import { Permissions, UserModel } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
 interface Props {
   perms: number;
-  users: any;
+  users: UserModel[];
 }
 
 export class UserListPage extends React.Component<Props> {
