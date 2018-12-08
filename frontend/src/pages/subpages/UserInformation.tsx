@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
-interface UserData {
+export interface UserData {
   email: string;
   firstName: string;
   lastName: string;

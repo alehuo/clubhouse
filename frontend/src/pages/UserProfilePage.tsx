@@ -4,11 +4,16 @@ import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, Route } from "react-router-dom";
+import { RootState } from "../reduxStore";
 import UserHistory from "./subpages/UserHistory";
-import UserInformation from "./subpages/UserInformation";
+import UserInformation, { UserData } from "./subpages/UserInformation";
 import UserKeys from "./subpages/UserKeys";
 
-const UserProfilePage: React.SFC<any> = (props) => {
+interface Props {
+  userData: UserData;
+}
+
+const UserProfilePage: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
       <PageHeader>
@@ -56,7 +61,7 @@ const UserProfilePage: React.SFC<any> = (props) => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   perms: state.permission.userPerms,
   userData: state.user.userData,
 });

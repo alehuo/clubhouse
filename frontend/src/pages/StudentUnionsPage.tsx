@@ -1,18 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
-import StudentUnionsList from "./../components/StudentUnionsList";
+import StudentUnionsList, {
+  StudentUnion,
+} from "./../components/StudentUnionsList";
 import {
   addFormModalOpen,
   fetchStudentUnions,
-} from "./../reducers/studentUnionReducer";
+} from "./../reducers/actions/studentUnionActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 import AddStudentUnion from "./subpages/AddStudentUnion";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import { RootState } from "../reduxStore";
 
-export class StudentUnionsPage extends React.Component<any> {
+interface Props {
+  token: string;
+  fetchStudentUnions: any;
+  perms: number;
+  addFormModalOpen: any;
+  studentUnions: StudentUnion[];
+  modalOpen: boolean;
+}
+
+export class StudentUnionsPage extends React.Component<Props> {
   public componentDidMount() {
     this.props.fetchStudentUnions(this.props.token);
   }
@@ -55,7 +67,7 @@ export class StudentUnionsPage extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   studentUnions: state.studentUnion.studentUnions,
   modalOpen: state.studentUnion.modalOpen,
   perms: state.permission.userPerms,

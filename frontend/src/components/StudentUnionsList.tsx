@@ -2,13 +2,26 @@ import React from "react";
 import { Button, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
-import { deleteStudentUnion } from "./../reducers/studentUnionReducer";
+import { deleteStudentUnion } from "./../reducers/actions/studentUnionActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
-const StudentUnionsList: React.SFC<any> = ({
+export interface StudentUnion {
+  unionId: number;
+  name: string;
+  description: string;
+}
+
+interface Props {
+  perms: number;
+  stdus: StudentUnion[];
+  deleteStdu: any;
+  token: string;
+}
+
+const StudentUnionsList: React.SFC<Props> = ({
   perms,
   stdus,
   deleteStdu,
@@ -28,7 +41,7 @@ const StudentUnionsList: React.SFC<any> = ({
     </thead>
     <tbody>
       {stdus ? (
-        stdus.map((union: any) => (
+        stdus.map((union) => (
           <tr key={union.unionId}>
             <td>{union.unionId}</td>
             <td>{union.name}</td>
@@ -40,7 +53,15 @@ const StudentUnionsList: React.SFC<any> = ({
               <td>
                 <Button
                   bsStyle="danger"
-                  onClick={() => deleteStdu(union.unionId, token)}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "Do you want to really delete the student union?",
+                      )
+                    ) {
+                      deleteStdu(union.unionId, token);
+                    }
+                  }}
                 >
                   <FontAwesome name="trash" /> Delete
                 </Button>

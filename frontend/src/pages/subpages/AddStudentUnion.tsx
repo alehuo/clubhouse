@@ -2,10 +2,17 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import AddStudentUnionForm from "../../forms/AddStudentUnionForm";
-import { addStudentUnion } from "../../reducers/studentUnionReducer";
+import { addStudentUnion } from "../../reducers/actions/studentUnionActions";
 import { RootState } from "../../reduxStore";
 
-export class AddStudentUnion extends React.Component<any> {
+interface Props {
+  addStudentUnion: any;
+  token: string;
+  show: boolean;
+  onHide: any;
+}
+
+export class AddStudentUnion extends React.Component<Props> {
   public handleSubmit = (values: any) => {
     this.props.addStudentUnion(
       {
@@ -38,4 +45,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = { addStudentUnion };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddStudentUnion);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddStudentUnion);
