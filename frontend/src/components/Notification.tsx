@@ -1,7 +1,12 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 
-const Notification: React.SFC<any> = ({ text, type }) => (
+interface Props {
+  text: string;
+  type: string;
+}
+
+const Notification: React.SFC<Props> = ({ text, type }) => (
   <Alert bsStyle={type}>
     <p>{text}</p>
   </Alert>

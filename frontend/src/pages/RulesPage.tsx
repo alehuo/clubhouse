@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Alert, Button, PageHeader, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
@@ -6,6 +6,8 @@ import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 import { Rule } from "../components/Rule";
+import { RootState } from "../reduxStore";
+import { Rule as RuleModel } from "../services/RuleService";
 import {
   fetchRules,
   moveRuleDown,
@@ -13,7 +15,17 @@ import {
   toggleEditMode,
 } from "./../reducers/ruleReducer";
 
-export class RulesPage extends React.Component<any> {
+interface Props {
+  editMode: boolean;
+  fetchRules: any;
+  toggleEditMode: any;
+  perms: number;
+  rules: RuleModel[];
+  moveRuleUp: any;
+  moveRuleDown: any;
+}
+
+export class RulesPage extends React.Component<Props> {
   public componentDidMount() {
     this.props.fetchRules();
   }
@@ -70,7 +82,7 @@ export class RulesPage extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   perms: state.permission.userPerms,
   rules: state.rule.rules,
   editMode: state.rule.editMode,

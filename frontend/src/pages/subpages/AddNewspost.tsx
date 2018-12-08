@@ -6,7 +6,14 @@ import AddNewspostForm from "../../forms/AddNewspostForm";
 import { addNewspost } from "../../reducers/actions/newsActions";
 import { RootState } from "../../reduxStore";
 
-export class AddNewspost extends React.Component<any> {
+interface Props {
+  token: string;
+  show: boolean;
+  onHide: any;
+  addNewspost: any;
+}
+
+export class AddNewspost extends React.Component<Props> {
   public handleSubmit = (values: any) => {
     this.props.addNewspost(
       this.props.token,

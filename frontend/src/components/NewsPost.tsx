@@ -2,7 +2,17 @@ import React from "react";
 import { Button, Panel } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 
-const NewsPost: React.SFC<any> = ({
+interface Props {
+  title: string;
+  message: string;
+  author: number;
+  date: string;
+  onDelete: any;
+  onEdit: any;
+  hasEditDeletePermissions: boolean;
+}
+
+const NewsPost: React.SFC<Props> = ({
   title,
   message,
   author,
@@ -31,7 +41,7 @@ const NewsPost: React.SFC<any> = ({
     </Panel.Heading>
     <Panel.Body>{message}</Panel.Body>
     <Panel.Footer>
-      By <strong>{author.name}</strong> on <i>{date}</i>
+      By #<strong>{author}</strong> on <i>{date}</i>
     </Panel.Footer>
   </Panel>
 );

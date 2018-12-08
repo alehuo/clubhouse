@@ -1,11 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import EndWatchForm from "../../forms/EndSessionForm";
 import { endWatch } from "../../reducers/sessionReducer";
 import { RootState } from "../../reduxStore";
 
-export class EndSession extends React.Component<any> {
+interface Props {
+  token: string;
+  endWatch: any;
+  show: boolean;
+  onHide: any;
+  isEnding: boolean;
+}
+
+export class EndSession extends React.Component<Props> {
   public handleSubmit = (values: any) => {
     this.props.endWatch(this.props.token, values.endMessage);
   }

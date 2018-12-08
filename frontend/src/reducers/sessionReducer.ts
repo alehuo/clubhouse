@@ -7,7 +7,8 @@ export interface SessionState {
   readonly watchPage: boolean;
   readonly ownWatchRunning: boolean;
   readonly ownWatchPeopleCount: number;
-  readonly watchCheckInterval: any;
+  readonly ownWatchStartTime: Date | null;
+  readonly watchCheckInterval: NodeJS.Timeout | null;
   readonly endWatchModalOpen: boolean;
   readonly startWatchModalOpen: boolean;
   readonly sendMessageModalOpen: boolean;
@@ -19,6 +20,7 @@ const initialState = {
   watchPage: false,
   ownWatchRunning: false,
   ownWatchPeopleCount: 0,
+  ownWatchStartTime: null,
   watchCheckInterval: null,
   endWatchModalOpen: false,
   startWatchModalOpen: false,

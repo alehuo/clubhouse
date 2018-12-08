@@ -1,13 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { RootState } from "../reduxStore";
 import { deAuthenticateUser } from "./../reducers/actions/authenticationActions";
 import { successMessage } from "./../reducers/actions/notificationActions";
 import { setWatchCheckInterval } from "./../reducers/sessionReducer";
 
-export class LogoutPage extends React.Component<any, any> {
-  public componentWillMount = () => {
-    clearInterval(this.props.watchInterval);
+interface Props {
+  watchInterval: NodeJS.Timeout | null;
+  setWatchCheckInterval: any;
+  deAuthenticateUser: any;
+  successMessage: any;
+}
+
+export class LogoutPage extends React.Component<Props> {
+  public componentWillMount() {
+    if (this.props.watchInterval) {
+      clearInterval(this.props.watchInterval);
+    }
     this.props.setWatchCheckInterval(null);
     localStorage.clear();
     this.props.deAuthenticateUser();
@@ -19,7 +29,7 @@ export class LogoutPage extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   watchInterval: state.watch.watchCheckInterval,
 });
 
@@ -29,4 +39,7 @@ const mapDispatchToProps = {
   setWatchCheckInterval,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogoutPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LogoutPage);

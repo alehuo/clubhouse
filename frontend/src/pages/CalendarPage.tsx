@@ -9,14 +9,21 @@ import styled from "styled-components";
 import { RootState } from "../reduxStore";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/actions/calendarActions";
-import { eventMapper } from "./../services/CalendarService";
+import { CalendarEvent, eventMapper } from "./../services/CalendarService";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 const Calendar = styled<any>(BigCalendar)`
   height: 800px !important;
 `;
 
-class CalendarPage extends React.Component<any, any> {
+interface Props {
+  token: string;
+  fetchEvents: any;
+  perms: number;
+  events: CalendarEvent[];
+}
+
+class CalendarPage extends React.Component<Props> {
   public componentDidMount() {
     this.props.fetchEvents(this.props.token);
   }

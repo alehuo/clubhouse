@@ -2,7 +2,12 @@ import axios from "axios";
 
 const getRules = async () => axios.get("api/v1/rules");
 
-const ruleList = [
+export interface Rule {
+  id: number;
+  text: string;
+}
+
+const ruleList: Rule[] = [
   {
     id: 1,
     text:

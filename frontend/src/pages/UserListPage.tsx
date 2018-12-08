@@ -5,8 +5,14 @@ import UsersList from "./../components/UsersList";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import { RootState } from "../reduxStore";
 
-export class UserListPage extends React.Component<any> {
+interface Props {
+  perms: number;
+  users: any;
+}
+
+export class UserListPage extends React.Component<Props> {
   public render() {
     return (
       <React.Fragment>
@@ -27,7 +33,7 @@ export class UserListPage extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   studentUnions: state.studentUnion.studentUnions,
   perms: state.permission.userPerms,
   users: state.user.users,

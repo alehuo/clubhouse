@@ -4,9 +4,15 @@ import { connect } from "react-redux";
 import AddKeyHolderForm from "../../forms/AddKeyHolderForm";
 import { RootState } from "../../reduxStore";
 
-export class AddKeyHolder extends React.Component<any, any> {
+interface Props {
+  show: boolean;
+  onHide: any;
+  keyTypes: any[];
+  users: any[];
+}
+
+export class AddKeyHolder extends React.Component<Props> {
   public handleSubmit = (values: any) => {
-    // tslint:disable-next-line:no-console
     console.log("Submitted");
   }
   public render() {

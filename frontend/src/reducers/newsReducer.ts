@@ -27,7 +27,7 @@ export interface NewsPost {
   author: number;
   title: string;
   message: string;
-  created_at: string | Date;
+  created_at: string;
 }
 
 const initialState = {

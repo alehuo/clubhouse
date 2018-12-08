@@ -1,8 +1,19 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
+import { Rule as RuleType } from "../services/RuleService";
 
-export const Rule: React.SFC<any> = ({
+interface Props {
+  id: number;
+  rule: RuleType;
+  editMode: boolean;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
+  onMoveUpClick: any;
+  onMoveDownClick: any;
+}
+
+export const Rule: React.SFC<Props> = ({
   id,
   rule,
   editMode,

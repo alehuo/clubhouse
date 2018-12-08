@@ -4,9 +4,16 @@ import { Redirect } from "react-router-dom";
 
 import { login } from "./../reducers/actions/userActions";
 
+import { RootState } from "../reduxStore";
 import LoginForm from "./../forms/LoginForm";
 
-export class LoginPage extends React.Component<any, any> {
+interface Props {
+  isAuthenticated: boolean;
+  isLoggingIn: boolean;
+  login: any;
+}
+
+export class LoginPage extends React.Component<Props> {
   public submitLogin = (values: any) => {
     this.props.login(values.email, values.password);
   }
@@ -27,7 +34,7 @@ export class LoginPage extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   isAuthenticated: state.auth.isAuthenticated,
   isLoggingIn: state.auth.isLoggingIn,
 });

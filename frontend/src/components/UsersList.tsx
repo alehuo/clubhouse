@@ -6,9 +6,18 @@ import { deleteUser, fetchUsers } from "./../reducers/actions/userActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import { UserData } from "../pages/subpages/UserInformation";
 import { RootState } from "../reduxStore";
 
-export class UsersList extends React.Component<any, any> {
+interface Props {
+  token: string;
+  fetchUsers: any;
+  perms: number;
+  users: UserData[];
+  deleteUser: any;
+}
+
+export class UsersList extends React.Component<Props> {
   public componentDidMount() {
     this.props.fetchUsers(this.props.token);
   }

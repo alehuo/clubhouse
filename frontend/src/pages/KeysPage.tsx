@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
@@ -12,7 +12,20 @@ import AddKeyHolder from "./subpages/AddKeyHolder";
 import { Permissions } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
-export class KeysPage extends React.Component<any> {
+interface Props {
+  token: string;
+  fetchKeys: any;
+  fetchKeyTypes: any;
+  fetchUsers: any;
+  perms: number;
+  toggleModal: any;
+  keys: any;
+  modalOpen: boolean;
+  keyTypes: any;
+  users: any;
+}
+
+export class KeysPage extends React.Component<Props> {
   public componentDidMount() {
     this.props.fetchKeys(this.props.token);
     this.props.fetchKeyTypes(this.props.token);

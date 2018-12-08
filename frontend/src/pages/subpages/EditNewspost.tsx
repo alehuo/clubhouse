@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import EditNewspostForm from "../../forms/EditNewspostForm";
 import { RootState } from "../../reduxStore";
 
-export class EditNewspost extends React.Component<any, any> {
+interface Props {
+  show: boolean;
+  onHide: any;
+}
+
+export class EditNewspost extends React.Component<Props> {
   public handleSubmit = (values: any) => {
-    // tslint:disable-next-line:no-console
     console.log(values);
   }
   public render() {

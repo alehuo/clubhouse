@@ -3,10 +3,18 @@ import { connect } from "react-redux";
 import { RootState } from "../reduxStore";
 import Notification from "./Notification";
 
-const NotificationDrawer: React.SFC<any> = ({ notifications }) => (
+interface Props {
+  notifications: Array<{
+    id: string;
+    text: string;
+    notificationType: string;
+  }>;
+}
+
+const NotificationDrawer: React.SFC<Props> = ({ notifications }) => (
   <React.Fragment>
     {notifications &&
-      notifications.map((notification: any) => (
+      notifications.map((notification) => (
         <Notification
           key={notification.id}
           text={notification.text}
@@ -26,9 +34,4 @@ const mapStateToProps = (state: RootState) => ({
   notifications: state.notification.notifications,
 });
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(NotificationDrawer);
+export default connect(mapStateToProps)(NotificationDrawer);

@@ -15,10 +15,24 @@ import {
   toggleNewsEditModal,
 } from "../reducers/actions/newsActions";
 import { NewsPost as NewsPostType } from "../reducers/newsReducer";
+import { RootState } from "../reduxStore";
 import AddNewspost from "./subpages/AddNewspost";
 import EditNewspost from "./subpages/EditNewspost";
 
-export class NewsPage extends React.Component<any> {
+interface Props {
+  token: string;
+  perms: number;
+  fetchNewsposts: any;
+  toggleNewsAddModal: any;
+  newsPosts: NewsPostType[];
+  deleteNewspost: any;
+  setEditId: any;
+  toggleNewsEditModal: any;
+  addModalOpen: any;
+  editModalOpen: any;
+}
+
+export class NewsPage extends React.Component<Props> {
   public componentDidMount() {
     this.props.fetchNewsposts(this.props.token);
   }
@@ -89,7 +103,7 @@ export class NewsPage extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   perms: state.permission.userPerms,
   newsPosts: state.news.newsPosts,
   addModalOpen: state.news.addModalOpen,

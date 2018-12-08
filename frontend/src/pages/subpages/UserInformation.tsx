@@ -8,13 +8,11 @@ export interface UserData {
   created_at: string;
 }
 
-interface UserInformationProps {
+interface Props {
   userData: UserData;
 }
 
-const UserInformation: React.SFC<UserInformationProps> = (
-  props: UserInformationProps,
-) => {
+const UserInformation: React.SFC<Props> = (props) => {
   return (
     <React.Fragment>
       <h2>User information</h2>

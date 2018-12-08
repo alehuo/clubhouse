@@ -6,7 +6,13 @@ import { addUser } from "./../reducers/actions/userActions";
 import { RootState } from "../reduxStore";
 import RegisterForm from "./../forms/RegisterForm";
 
-export class RegisterPage extends React.Component<any> {
+interface Props {
+  addUser: any;
+  token: string;
+  isRegistering: boolean;
+}
+
+export class RegisterPage extends React.Component<Props> {
   public handleSubmit = (values: any) => {
     this.props.addUser(
       {

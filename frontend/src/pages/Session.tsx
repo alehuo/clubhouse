@@ -10,12 +10,26 @@ import {
   toggleStartWatchModal,
   toggleWatchPage,
 } from "../reducers/sessionReducer";
+import { RootState } from "../reduxStore";
 import EndSession from "./subpages/EndSession";
 import StartSession from "./subpages/StartSession";
 // @ts-ignore
 momentDurationFormat(moment);
 
-export class Session extends React.Component<any, any> {
+interface Props {
+  token: string;
+  endWatchModalOpen: boolean;
+  startWatchModalOpen: boolean;
+  toggleWatchPage: any;
+  fetchOwnWatchStatus: any;
+  toggleEndWatchModal: any;
+  toggleStartWatchModal: any;
+  watchRunning: boolean;
+  startTime: Date | null;
+  peopleCount: number;
+}
+
+export class Session extends React.Component<Props> {
   public componentDidMount() {
     this.props.toggleWatchPage(true);
     this.props.fetchOwnWatchStatus(this.props.token);
@@ -42,7 +56,7 @@ export class Session extends React.Component<any, any> {
           Session status{" "}
           <p>
             <small>
-              {this.props.watchRunning ? (
+              {this.props.watchRunning && this.props.startTime ? (
                 <span>
                   Session started{" "}
                   {moment
@@ -158,7 +172,7 @@ export class Session extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   perms: state.permission.userPerms,
   token: state.user.token,
   endWatchModalOpen: state.watch.endWatchModalOpen,

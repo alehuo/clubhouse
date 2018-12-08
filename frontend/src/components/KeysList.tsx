@@ -1,9 +1,19 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-import { connect } from "react-redux";
-import { RootState } from "../reduxStore";
 
-const KeyList: React.SFC<any> = ({ keys }) => (
+interface Key {
+  id: number;
+  name: string;
+  studentUnion: string;
+  date: Date;
+  keyDesc: string;
+}
+
+interface Props {
+  keys: Key[];
+}
+
+const KeyList: React.SFC<Props> = ({ keys }) => (
   <Table striped bordered condensed hover responsive>
     <thead>
       <tr>
@@ -16,7 +26,7 @@ const KeyList: React.SFC<any> = ({ keys }) => (
     </thead>
     <tbody>
       {keys ? (
-        keys.map((key: any) => (
+        keys.map((key) => (
           <tr key={key.id}>
             <td>{key.id}</td>
             <td>{key.name}</td>
@@ -34,11 +44,4 @@ const KeyList: React.SFC<any> = ({ keys }) => (
   </Table>
 );
 
-const mapStateToProps = (state: RootState) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(KeyList);
+export default KeyList;
