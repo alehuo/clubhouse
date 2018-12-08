@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, compose, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import { reducer as formReducer } from "redux-form";
 import thunk from "redux-thunk";
 import { StateType } from "typesafe-actions";

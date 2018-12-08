@@ -5,8 +5,9 @@ import {
   AUTHENTICATE_USER,
   DEAUTHENTICATE_USER,
   SET_IS_LOGGING_IN,
-} from "./constants/authenticationConstants";
+} from "./constants";
 
+// Initial authentication reducer state
 export interface AuthenticationState {
   readonly isLoggingIn: boolean;
   readonly isAuthenticated: boolean;
@@ -19,7 +20,6 @@ const initialState = {
 
 export type AuthenticationAction = ActionType<typeof actions>;
 
-// TODO: Action typings
 const authenticationReducer: Reducer<
   AuthenticationState,
   AuthenticationAction

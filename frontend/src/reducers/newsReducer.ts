@@ -4,14 +4,15 @@ import * as newsActions from "./actions/newsActions";
 import {
   ADD_NEWSPOST_TO_LIST,
   DELETE_NEWSPOST_FROM_LIST,
-  SET_EDIT_ID,
-  SET_IS_ADDING,
-  SET_IS_EDITING,
+  SET_IS_ADDING_NEWSPOST,
+  SET_IS_EDITING_NEWSPOST,
+  SET_NEWSPOST_EDIT_ID,
   SET_NEWSPOSTS,
-  TOGGLE_ADD_MODAL,
-  TOGGLE_EDIT_MODAL,
-} from "./constants/newsConstants";
+  TOGGLE_ADD_NEWSPOST_MODAL,
+  TOGGLE_EDIT_NEWSPOST_MODAL,
+} from "./constants";
 
+// Initial newspost reducer state
 export interface NewsState {
   readonly newsPosts: NewsPost[];
   readonly editId: number;
@@ -45,9 +46,9 @@ const newsReducer: Reducer<NewsState, AuthenticationAction> = (
   action,
 ) => {
   switch (action.type) {
-    case TOGGLE_ADD_MODAL:
+    case TOGGLE_ADD_NEWSPOST_MODAL:
       return { ...state, addModalOpen: action.payload.val };
-    case TOGGLE_EDIT_MODAL:
+    case TOGGLE_EDIT_NEWSPOST_MODAL:
       return { ...state, editModalOpen: action.payload.val };
     case SET_NEWSPOSTS:
       return { ...state, ...{ newsPosts: action.payload.newsPosts } };
@@ -65,17 +66,17 @@ const newsReducer: Reducer<NewsState, AuthenticationAction> = (
           ),
         ],
       };
-    case SET_IS_ADDING:
+    case SET_IS_ADDING_NEWSPOST:
       return {
         ...state,
         isAdding: action.payload.val,
       };
-    case SET_IS_EDITING:
+    case SET_IS_EDITING_NEWSPOST:
       return {
         ...state,
         isEditing: action.payload.val,
       };
-    case SET_EDIT_ID:
+    case SET_NEWSPOST_EDIT_ID:
       return {
         ...state,
         editId: action.payload.id,

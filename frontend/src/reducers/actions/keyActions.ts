@@ -1,5 +1,5 @@
 import { action } from "typesafe-actions";
-import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "../constants/keyConstants";
+import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "../constants";
 
 export const toggleModal = (value: boolean) =>
   action(TOGGLE_KEY_MODAL, { value });

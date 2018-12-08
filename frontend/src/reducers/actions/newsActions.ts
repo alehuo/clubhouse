@@ -4,13 +4,13 @@ import NewsService from "../../services/NewsService";
 import {
   ADD_NEWSPOST_TO_LIST,
   DELETE_NEWSPOST_FROM_LIST,
-  SET_EDIT_ID,
-  SET_IS_ADDING,
-  SET_IS_EDITING,
+  SET_IS_ADDING_NEWSPOST,
+  SET_IS_EDITING_NEWSPOST,
+  SET_NEWSPOST_EDIT_ID,
   SET_NEWSPOSTS,
-  TOGGLE_ADD_MODAL,
-  TOGGLE_EDIT_MODAL,
-} from "../constants/newsConstants";
+  TOGGLE_ADD_NEWSPOST_MODAL,
+  TOGGLE_EDIT_NEWSPOST_MODAL,
+} from "../constants";
 import { NewsPost } from "../newsReducer";
 import { errorMessage, successMessage } from "../notificationReducer";
 
@@ -21,16 +21,18 @@ export const deleteNewspostFromList = (id: number) =>
   action(DELETE_NEWSPOST_FROM_LIST, { id });
 
 export const toggleNewsAddModal = (val: boolean) =>
-  action(TOGGLE_ADD_MODAL, { val });
+  action(TOGGLE_ADD_NEWSPOST_MODAL, { val });
 
-export const setEditId = (id: number) => action(SET_EDIT_ID, { id });
+export const setEditId = (id: number) => action(SET_NEWSPOST_EDIT_ID, { id });
 
 export const toggleNewsEditModal = (val: boolean) =>
-  action(TOGGLE_EDIT_MODAL, { val });
+  action(TOGGLE_EDIT_NEWSPOST_MODAL, { val });
 
-export const setIsAdding = (val: boolean) => action(SET_IS_ADDING, { val });
+export const setIsAdding = (val: boolean) =>
+  action(SET_IS_ADDING_NEWSPOST, { val });
 
-export const setIsEditing = (val: boolean) => action(SET_IS_EDITING, { val });
+export const setIsEditing = (val: boolean) =>
+  action(SET_IS_EDITING_NEWSPOST, { val });
 
 export const setNewsposts = (newsPosts: NewsPost[]) =>
   action(SET_NEWSPOSTS, { newsPosts });

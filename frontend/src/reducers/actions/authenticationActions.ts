@@ -1,5 +1,5 @@
 import { action } from "typesafe-actions";
-import * as authenticationActions from "../constants/authenticationConstants";
+import * as authenticationActions from "../constants";
 
 export const authenticateUser = () =>
   action(authenticationActions.AUTHENTICATE_USER);

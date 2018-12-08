@@ -3,9 +3,10 @@ import { ThunkDispatch } from "redux-thunk";
 import { ActionType } from "typesafe-actions";
 import KeyService from "./../services/KeyService";
 import * as keyActions from "./actions/keyActions";
-import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "./constants/keyConstants";
+import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "./constants";
 import { errorMessage } from "./notificationReducer";
 
+// Initial key reducer state
 export interface KeyState {
   readonly keys: any[];
   readonly keyTypes: any[];
@@ -54,7 +55,10 @@ export const fetchKeyTypes = (token: string) => {
   };
 };
 
-const keyReducer: Reducer<KeyState, KeyAction> = (state = initialState, action) => {
+const keyReducer: Reducer<KeyState, KeyAction> = (
+  state = initialState,
+  action,
+) => {
   switch (action.type) {
     case SET_KEYS:
       return { ...{}, ...state, keys: action.payload.keys };
