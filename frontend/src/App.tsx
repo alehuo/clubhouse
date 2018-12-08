@@ -28,11 +28,33 @@ import {
 } from "./reducers/sessionReducer";
 import { setToken } from "./reducers/userReducer";
 import { fetchUserData } from "./reducers/userReducer";
+import { RootState } from "./reduxStore";
 
-class App extends React.Component<any, any> {
+interface StateProps {
+  watchInterval: any;
+  userData: any;
+  watchPage: boolean;
+  watchRunning: boolean;
+  isAuthenticated: boolean;
+  peopleCount: number;
+  token: string;
+}
+
+interface DispatchProps {
+  setToken: typeof setToken;
+  getUserPerms: typeof getUserPerms;
+  authenticateUser: typeof authenticateUser;
+  fetchOwnWatchStatus: typeof fetchOwnWatchStatus;
+  fetchUserData: typeof fetchUserData;
+  setWatchCheckInterval: typeof setWatchCheckInterval;
+}
+
+type Props = DispatchProps & StateProps;
+
+class App extends React.Component<Props> {
   public componentDidMount() {
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+    if (token) {
       this.props.setToken(token);
       this.props.getUserPerms(token);
       this.props.authenticateUser();
@@ -128,7 +150,7 @@ class App extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   isAuthenticated: state.auth.isAuthenticated,
   token: state.user.token,
   watchPage: state.watch.watchPage,
@@ -150,4 +172,5 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
+  // @ts-ignore
 )(App);

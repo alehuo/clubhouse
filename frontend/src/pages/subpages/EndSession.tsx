@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import EndWatchForm from "../../forms/EndSessionForm";
 import { endWatch } from "../../reducers/sessionReducer";
+import { RootState } from "../../reduxStore";
 
 export class EndSession extends React.Component<any> {
   public handleSubmit = (values: any) => {
@@ -26,7 +27,7 @@ export class EndSession extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
   isEnding: state.watch.isEnding,
 });

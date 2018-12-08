@@ -2,6 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import AddKeyHolderForm from "../../forms/AddKeyHolderForm";
+import { RootState } from "../../reduxStore";
 
 export class AddKeyHolder extends React.Component<any, any> {
   public handleSubmit = (values: any) => {
@@ -27,7 +28,7 @@ export class AddKeyHolder extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
 });
 

@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import AddNewspostForm from "../../forms/AddNewspostForm";
 
-import { addNewspost } from "../../reducers/newsReducer";
+import { addNewspost } from "../../reducers/actions/newsActions";
+import { RootState } from "../../reduxStore";
 
 export class AddNewspost extends React.Component<any> {
   public handleSubmit = (values: any) => {
@@ -30,7 +31,7 @@ export class AddNewspost extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
   isAdding: state.news.isAdding,
 });

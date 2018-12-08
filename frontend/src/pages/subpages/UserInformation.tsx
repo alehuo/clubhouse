@@ -1,7 +1,20 @@
 import React from "react";
 import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
-const UserInformation = (props: any) => {
+interface UserData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  created_at: string;
+}
+
+interface UserInformationProps {
+  userData: UserData;
+}
+
+const UserInformation: React.SFC<UserInformationProps> = (
+  props: UserInformationProps,
+) => {
   return (
     <React.Fragment>
       <h2>User information</h2>

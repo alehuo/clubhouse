@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import EditNewspostForm from "../../forms/EditNewspostForm";
+import { RootState } from "../../reduxStore";
 
 export class EditNewspost extends React.Component<any, any> {
   public handleSubmit = (values: any) => {
@@ -25,7 +26,7 @@ export class EditNewspost extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
   isEditing: state.news.isEditing,
 });

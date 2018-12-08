@@ -30,9 +30,11 @@
 | 1.12.2018 | 5.0h  | Upgraded dependencies. Switched to TypeScript. Added typings to various components and reducers. Splitting components into smaller parts. Added styled-components dependency.                                                                                     |
 | 2.12.2018 | 1.0h  | Newspost page improvements. Implemented Newspost service functionality.                                                                                                                                                                                           |
 | 3.12.2018 | 2.0h  | Created Dockerfiles for production and development environments. Improved error handling so that the application won't crash when back-end is down.                                                                                                               |
+| 8.12.2018 | 2.0h  | Implemented better typings to various reducer and started using state types in mapStateToProps. Actions are now created by typesafe-actions module.                                                                                                               |
+| 8.12.2018 | 0.5h | Updated News reducer to use new reducer pattern. Additional typing implementations |
 
 Total:
 
 25.5 h (Part 1)
 
-18.0 h (Part 2)
+20.5 h (Part 2)

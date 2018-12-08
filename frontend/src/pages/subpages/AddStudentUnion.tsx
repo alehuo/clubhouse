@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import AddStudentUnionForm from "../../forms/AddStudentUnionForm";
 import { addStudentUnion } from "../../reducers/studentUnionReducer";
+import { RootState } from "../../reduxStore";
 
 export class AddStudentUnion extends React.Component<any> {
   public handleSubmit = (values: any) => {
@@ -31,7 +32,7 @@ export class AddStudentUnion extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
 });
 

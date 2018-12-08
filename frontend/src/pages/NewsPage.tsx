@@ -10,11 +10,11 @@ import { Permissions } from "@alehuo/clubhouse-shared";
 import {
   deleteNewspost,
   fetchNewsposts,
-  NewsPost as NewsPostType,
   setEditId,
   toggleNewsAddModal,
   toggleNewsEditModal,
-} from "../reducers/newsReducer";
+} from "../reducers/actions/newsActions";
+import { NewsPost as NewsPostType } from "../reducers/newsReducer";
 import AddNewspost from "./subpages/AddNewspost";
 import EditNewspost from "./subpages/EditNewspost";
 
