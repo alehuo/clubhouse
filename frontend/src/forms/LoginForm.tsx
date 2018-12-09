@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Field, FormProps, InjectedFormProps, reduxForm } from "redux-form";
+import { compose } from "redux";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { FieldGroup } from "../components/FieldGroup";
 import { isEmpty } from "../utils/FormValidators";
 
@@ -12,8 +13,11 @@ interface LoginFormProps {
   handleSubmit: any;
 }
 
-const LoginForm: React.StatelessComponent<LoginFormProps> = (props) => (
-  <form onSubmit={props.handleSubmit}>
+const LoginForm: React.SFC<LoginFormProps> = ({
+  handleSubmit,
+  isLoggingIn,
+}) => (
+  <form onSubmit={handleSubmit}>
     <Field
       name="email"
       id="formControlEmail"
@@ -35,8 +39,8 @@ const LoginForm: React.StatelessComponent<LoginFormProps> = (props) => (
       component={FieldGroup}
       validate={[passwordEmpty]}
     />
-    <Button type="submit" bsStyle="success" disabled={props.isLoggingIn}>
-      {props.isLoggingIn ? "Logging in.." : "Login"}
+    <Button type="submit" bsStyle="success" disabled={isLoggingIn}>
+      {isLoggingIn ? "Logging in.." : "Login"}
     </Button>
   </form>
 );

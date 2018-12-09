@@ -4,6 +4,12 @@ import { connect } from "react-redux";
 import AddKeyHolderForm from "../../forms/AddKeyHolderForm";
 import { RootState } from "../../reduxStore";
 
+interface FormValues {
+  user: string;
+  keyType: number;
+  studentUnionPermission: boolean;
+}
+
 interface Props {
   show: boolean;
   onHide: any;
@@ -12,8 +18,8 @@ interface Props {
 }
 
 export class AddKeyHolder extends React.Component<Props> {
-  public handleSubmit = (values: any) => {
-    console.log("Submitted");
+  public handleSubmit = (values: FormValues) => {
+    console.log(values);
   }
   public render() {
     return (
@@ -24,7 +30,7 @@ export class AddKeyHolder extends React.Component<Props> {
         <Modal.Body>
           <AddKeyHolderForm
             handleClose={this.props.onHide}
-            onSubmit={this.handleSubmit}
+            onSubmit={(values: FormValues) => this.handleSubmit(values)}
             keyTypes={this.props.keyTypes}
             users={this.props.users}
           />
@@ -38,9 +44,4 @@ const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
 });
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AddKeyHolder);
+export default connect(mapStateToProps)(AddKeyHolder);

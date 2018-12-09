@@ -12,8 +12,13 @@ interface Props {
   onHide: any;
 }
 
+interface FormValues {
+  studentUnionName: string;
+  studentUnionDescription: string;
+}
+
 export class AddStudentUnion extends React.Component<Props> {
-  public handleSubmit = (values: any) => {
+  public handleSubmit = (values: FormValues) => {
     this.props.addStudentUnion(
       {
         name: values.studentUnionName,
@@ -31,7 +36,7 @@ export class AddStudentUnion extends React.Component<Props> {
         <Modal.Body>
           <AddStudentUnionForm
             handleClose={this.props.onHide}
-            onSubmit={this.handleSubmit}
+            onSubmit={(values: FormValues) => this.handleSubmit(values)}
           />
         </Modal.Body>
       </Modal>

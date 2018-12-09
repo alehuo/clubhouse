@@ -1,11 +1,11 @@
 import React from "react";
-import { Redirect, Route, RouteProps } from "react-router-dom";
+import { Route, RouteProps } from "react-router-dom";
 
 interface AuthenticatedRouteProps {
   component: React.ComponentType;
   isAuthenticated: boolean;
 }
-// TODO: Proper generic typings
+
 const AuthenticatedRoute: React.SFC<AuthenticatedRouteProps & RouteProps> = ({
   component: Component,
   isAuthenticated,

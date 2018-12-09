@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { Button, HelpBlock } from "react-bootstrap";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 
+import { UserModel } from "@alehuo/clubhouse-shared";
+import { RootState } from "../reduxStore";
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked } from "./../utils/FormValidators";
 
@@ -17,7 +19,22 @@ const userFilter = (users: any, id: number) => {
 
 const confirmed = checked("You must have the permission to add a key");
 
-const AddKeyHolderForm: React.SFC<any> = ({
+interface Key {
+  id: number;
+  title: string;
+}
+
+interface Props {
+  handleSubmit: any;
+  handleClose: any;
+  selectedKey: number;
+  selectedUser: number;
+  isAdding: boolean;
+  users: UserModel[];
+  keyTypes: Key[];
+}
+
+const AddKeyHolderForm: React.SFC<Props> = ({
   handleSubmit,
   users,
   keyTypes,
@@ -47,7 +64,7 @@ const AddKeyHolderForm: React.SFC<any> = ({
       label="Key type"
     >
       {keyTypes &&
-        keyTypes.map((keyType: any) => (
+        keyTypes.map((keyType) => (
           <option key={keyType.id} value={keyType.id}>
             {keyType.title}
           </option>
@@ -69,8 +86,8 @@ const AddKeyHolderForm: React.SFC<any> = ({
             <b>
               {
                 keyTypes.find(
-                  (keyType: any) => Number(keyType.id) === Number(selectedKey),
-                ).title
+                  (keyType) => Number(keyType.id) === Number(selectedKey),
+                )!.title
               }{" "}
               key
             </b>{" "}
@@ -89,13 +106,13 @@ const AddKeyHolderForm: React.SFC<any> = ({
   </form>
 );
 
-const AddKeyHolderFormRx = reduxForm<{}, any, string>({
+const AddKeyHolderFormRx = reduxForm<FormData, any, string>({
   form: "keyHolder",
 })(AddKeyHolderForm);
 
 const selector = formValueSelector("keyHolder");
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     initialValues: {
       keyType: 1,
@@ -104,7 +121,7 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(
+export default connect<{ selectedUser: number; selectedKey: number }>(
   (state) => ({
     selectedUser: selector(state, "user"),
     selectedKey: selector(state, "keyType"),

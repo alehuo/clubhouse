@@ -32,9 +32,10 @@
 | 3.12.2018 | 2.0h  | Created Dockerfiles for production and development environments. Improved error handling so that the application won't crash when back-end is down.                                                                                                               |
 | 8.12.2018 | 2.0h  | Implemented better typings to various reducer and started using state types in mapStateToProps. Actions are now created by typesafe-actions module.                                                                                                               |
 | 8.12.2018 | 2.5h  | Updated many reducers to use new reducer pattern. Additional typing improvements. Almost all components now have prop interfaces enabled.                                                                                                                         |
+| 9.12.2018 | 1.0h  | Fixed student union form submitting. Improved typings for forms                                                                                                                                                                                                   |
 
 Total:
 
 25.5 h (Part 1)
 
-22.5 h (Part 2)
+23.5 h (Part 2)
