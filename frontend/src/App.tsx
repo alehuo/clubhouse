@@ -1,3 +1,4 @@
+import { UserModel } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -21,8 +22,8 @@ import StudentUnionsPage from "./pages/StudentUnionsPage";
 import UserListPage from "./pages/UserListPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import { authenticateUser } from "./reducers/actions/authenticationActions";
-import { setToken } from "./reducers/actions/userActions";
 import { fetchUserData } from "./reducers/actions/userActions";
+import { setToken } from "./reducers/actions/userActions";
 import { getUserPerms } from "./reducers/permissionReducer";
 import {
   fetchOwnWatchStatus,
@@ -30,26 +31,21 @@ import {
 } from "./reducers/sessionReducer";
 import { RootState } from "./reduxStore";
 
-interface StateProps {
+interface Props {
   watchInterval: any;
-  userData: any;
+  userData?: UserModel;
   watchPage: boolean;
   watchRunning: boolean;
   isAuthenticated: boolean;
   peopleCount: number;
   token: string;
+  setToken: any;
+  getUserPerms: any;
+  authenticateUser: any;
+  fetchOwnWatchStatus: any;
+  fetchUserData: any;
+  setWatchCheckInterval: any;
 }
-
-interface DispatchProps {
-  setToken: typeof setToken;
-  getUserPerms: typeof getUserPerms;
-  authenticateUser: typeof authenticateUser;
-  fetchOwnWatchStatus: typeof fetchOwnWatchStatus;
-  fetchUserData: typeof fetchUserData;
-  setWatchCheckInterval: typeof setWatchCheckInterval;
-}
-
-type Props = DispatchProps & StateProps;
 
 class App extends React.Component<Props> {
   public componentDidMount() {
@@ -172,5 +168,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  // @ts-ignore
 )(App);

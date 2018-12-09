@@ -13,7 +13,7 @@ interface NavButton {
 interface NavigationProps {
   navButtons: NavButton[];
   isAuthenticated: boolean;
-  userData: UserModel | null;
+  userData?: UserModel;
 }
 
 const Navigation: React.SFC<NavigationProps> = ({

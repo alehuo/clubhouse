@@ -10,7 +10,7 @@ export interface UserData {
 }
 
 interface Props {
-  userData: UserModel | null;
+  userData?: UserModel;
 }
 
 const UserInformation: React.SFC<Props> = (props) => {

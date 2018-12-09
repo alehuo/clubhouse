@@ -11,7 +11,7 @@ import UserInformation from "./subpages/UserInformation";
 import UserKeys from "./subpages/UserKeys";
 
 interface Props {
-  userData: UserModel | null;
+  userData?: UserModel;
 }
 
 const UserProfilePage: React.SFC<Props> = (props) => {
