@@ -2,12 +2,12 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import EndWatchForm from "../../forms/EndSessionForm";
-import { endWatch } from "../../reducers/sessionReducer";
+import { endSession } from "../../reducers/actions/sessionActions";
 import { RootState } from "../../reduxStore";
 
 interface Props {
   token: string;
-  endWatch: any;
+  endSession: any;
   show: boolean;
   onHide: any;
   isEnding: boolean;
@@ -15,7 +15,7 @@ interface Props {
 
 export class EndSession extends React.Component<Props> {
   public handleSubmit = (values: any) => {
-    this.props.endWatch(this.props.token, values.endMessage);
+    this.props.endSession(this.props.token, values.endMessage);
   }
   public render() {
     return (
@@ -37,11 +37,11 @@ export class EndSession extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
-  isEnding: state.watch.isEnding,
+  isEnding: state.session.isEnding,
 });
 
 const mapDispatchToProps = {
-  endWatch,
+  endSession,
 };
 
 export default connect(

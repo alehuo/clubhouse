@@ -27,9 +27,11 @@ interface Props {
 
 export class KeysPage extends React.Component<Props> {
   public componentDidMount() {
-    this.props.fetchKeys(this.props.token);
-    this.props.fetchKeyTypes(this.props.token);
-    this.props.fetchUsers(this.props.token);
+    if (this.props.token !== "") {
+      this.props.fetchKeys(this.props.token);
+      this.props.fetchKeyTypes(this.props.token);
+      this.props.fetchUsers(this.props.token);
+    }
   }
   public render() {
     return (

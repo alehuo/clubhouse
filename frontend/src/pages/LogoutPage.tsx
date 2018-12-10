@@ -4,21 +4,21 @@ import { Redirect } from "react-router-dom";
 import { RootState } from "../reduxStore";
 import { deAuthenticateUser } from "./../reducers/actions/authenticationActions";
 import { successMessage } from "./../reducers/actions/notificationActions";
-import { setWatchCheckInterval } from "./../reducers/sessionReducer";
+import { setSessionCheckInterval } from "./../reducers/actions/sessionActions";
 
 interface Props {
-  watchInterval: NodeJS.Timeout | null;
-  setWatchCheckInterval: any;
+  sessionInterval?: NodeJS.Timeout;
+  setSessionCheckInterval: any;
   deAuthenticateUser: any;
   successMessage: any;
 }
 
 export class LogoutPage extends React.Component<Props> {
   public componentWillMount() {
-    if (this.props.watchInterval) {
-      clearInterval(this.props.watchInterval);
+    if (this.props.sessionInterval) {
+      clearInterval(this.props.sessionInterval);
     }
-    this.props.setWatchCheckInterval(null);
+    this.props.setSessionCheckInterval(undefined);
     localStorage.clear();
     this.props.deAuthenticateUser();
     this.props.successMessage("You have been logged out.");
@@ -30,13 +30,13 @@ export class LogoutPage extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  watchInterval: state.watch.watchCheckInterval,
+  sessionInterval: state.session.sessionCheckInterval,
 });
 
 const mapDispatchToProps = {
   deAuthenticateUser,
   successMessage,
-  setWatchCheckInterval,
+  setSessionCheckInterval,
 };
 
 export default connect(

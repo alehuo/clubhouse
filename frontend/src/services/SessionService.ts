@@ -1,16 +1,22 @@
 import customAxios from "./custom-axios";
 
-const startWatch = async (token: string, startMessage: string) =>
-  customAxios(token).post("api/v1/watch/start", {
+const startSession = async (token: string, startMessage: string) => {
+  const res = await customAxios(token).post("api/v1/session/start", {
     startMessage,
   });
+  return res.data;
+};
 
-const stopWatch = async (token: string, endMessage: string) =>
-  customAxios(token).post("api/v1/watch/stop", {
+const stopSession = async (token: string, endMessage: string) => {
+  const res = await customAxios(token).post("api/v1/session/stop", {
     endMessage,
   });
+  return res.data;
+};
 
-const getOwnWatchStatus = (token: string) =>
-  customAxios(token).get("api/v1/watch/ownstatus");
+const getOwnSessionStatus = async (token: string) => {
+  const res = await customAxios(token).get("api/v1/session/ownstatus");
+  return res.data;
+};
 
-export default { startWatch, stopWatch, getOwnWatchStatus };
+export { startSession, stopSession, getOwnSessionStatus };
