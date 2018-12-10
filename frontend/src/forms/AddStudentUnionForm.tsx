@@ -4,10 +4,23 @@ import { connect } from "react-redux";
 import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
+import { RootState } from "../reduxStore";
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked, isEmpty } from "./../utils/FormValidators";
 
-const AddStudentUnionForm: React.SFC<any> = ({
+const emptyName = isEmpty("Student union name");
+const emptyDesc = isEmpty("Student union description");
+const stduPermission = checked(
+  "You must have the permission from the student union",
+);
+
+interface Props {
+  handleSubmit: any;
+  handleClose: any;
+  isAdding: boolean;
+}
+
+const AddStudentUnionForm: React.SFC<Props> = ({
   handleSubmit,
   handleClose,
   isAdding,
@@ -21,7 +34,7 @@ const AddStudentUnionForm: React.SFC<any> = ({
       placeholder="Name"
       autocomplete="off"
       component={FieldGroup}
-      validate={[isEmpty]}
+      validate={[emptyName]}
       autoFocus={true}
     />
     <Field
@@ -32,7 +45,7 @@ const AddStudentUnionForm: React.SFC<any> = ({
       placeholder="Description"
       autoComplete="off"
       component={FieldGroup}
-      validate={[isEmpty]}
+      validate={[emptyDesc]}
     />
     <Well>
       <FormGroup controlId="studentUnionPermission">
@@ -40,7 +53,7 @@ const AddStudentUnionForm: React.SFC<any> = ({
           name="studentUnionPermission"
           component="input"
           type="checkbox"
-          validate={[checked]}
+          validate={[stduPermission]}
         />{" "}
         <b>
           I have the permission from the student union to save their information
@@ -68,12 +81,12 @@ const AddStudentUnionForm: React.SFC<any> = ({
   </form>
 );
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   isAdding: state.studentUnion.isAdding,
 });
 
-export default reduxForm({
-  // a unique name for the form
+const RxForm = reduxForm<{}, any, string>({
   form: "studentUnion",
-  // @ts-ignore
-})(connect(mapStateToProps)(AddStudentUnionForm));
+})(AddStudentUnionForm);
+
+export default connect(mapStateToProps)(RxForm);

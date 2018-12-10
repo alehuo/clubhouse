@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import StartWatchForm from "../../forms/StartSessionForm";
-import { startWatch } from "../../reducers/sessionReducer";
+import { startSession } from "../../reducers/actions/sessionActions";
 import { RootState } from "../../reduxStore";
 
 interface Props {
@@ -10,12 +10,12 @@ interface Props {
   isAdding: boolean;
   show: boolean;
   onHide: any;
-  startWatch: any;
+  startSession: any;
 }
 
 export class StartSession extends React.Component<Props> {
   public handleSubmit = (values: any) => {
-    this.props.startWatch(this.props.token, values.startMessage);
+    this.props.startSession(this.props.token, values.startMessage);
   }
   public render() {
     return (
@@ -41,7 +41,7 @@ const mapStateToProps = (state: RootState, ownProps: any) => ({
 });
 
 const mapDispatchToProps = {
-  startWatch,
+  startSession,
 };
 
 export default connect(

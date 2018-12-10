@@ -5,11 +5,11 @@ import { Button, Label, PageHeader, Panel } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import {
-  fetchOwnWatchStatus,
-  toggleEndWatchModal,
-  toggleStartWatchModal,
-  toggleWatchPage,
-} from "../reducers/sessionReducer";
+  fetchOwnSessionStatus,
+  toggleEndSessionModal,
+  toggleSessionPage,
+  toggleStartSessionModal,
+} from "../reducers/actions/sessionActions";
 import { RootState } from "../reduxStore";
 import EndSession from "./subpages/EndSession";
 import StartSession from "./subpages/StartSession";
@@ -18,38 +18,38 @@ momentDurationFormat(moment);
 
 interface Props {
   token: string;
-  endWatchModalOpen: boolean;
-  startWatchModalOpen: boolean;
-  toggleWatchPage: any;
-  fetchOwnWatchStatus: any;
-  toggleEndWatchModal: any;
-  toggleStartWatchModal: any;
+  endSessionModalOpen: boolean;
+  startSessionModalOpen: boolean;
+  toggleSessionPage: any;
+  fetchOwnSessionStatus: any;
+  toggleEndSessionModal: any;
+  toggleStartSessionModal: any;
   watchRunning: boolean;
-  startTime: Date | null;
+  startTime?: Date;
   peopleCount: number;
 }
 
 export class Session extends React.Component<Props> {
   public componentDidMount() {
-    this.props.toggleWatchPage(true);
-    this.props.fetchOwnWatchStatus(this.props.token);
+    this.props.toggleSessionPage(true);
+    this.props.fetchOwnSessionStatus(this.props.token);
   }
   public componentWillUnmount() {
-    this.props.toggleWatchPage(false);
+    this.props.toggleSessionPage(false);
   }
   public render() {
     return (
       <React.Fragment>
-        {this.props.endWatchModalOpen && (
+        {this.props.endSessionModalOpen && (
           <EndSession
-            show={this.props.endWatchModalOpen}
-            onHide={() => this.props.toggleEndWatchModal(false)}
+            show={this.props.endSessionModalOpen}
+            onHide={() => this.props.toggleEndSessionModal(false)}
           />
         )}
-        {this.props.startWatchModalOpen && (
+        {this.props.startSessionModalOpen && (
           <StartSession
-            show={this.props.startWatchModalOpen}
-            onHide={() => this.props.toggleStartWatchModal(false)}
+            show={this.props.startSessionModalOpen}
+            onHide={() => this.props.toggleStartSessionModal(false)}
           />
         )}
         <PageHeader>
@@ -73,7 +73,7 @@ export class Session extends React.Component<Props> {
             {this.props.watchRunning && (
               <Button
                 bsStyle="warning"
-                onClick={() => this.props.toggleEndWatchModal(true)}
+                onClick={() => this.props.toggleEndSessionModal(true)}
               >
                 <FontAwesome name="hourglass" /> End session
               </Button>
@@ -81,7 +81,7 @@ export class Session extends React.Component<Props> {
             {!this.props.watchRunning && (
               <Button
                 bsStyle="success"
-                onClick={() => this.props.toggleStartWatchModal(true)}
+                onClick={() => this.props.toggleStartSessionModal(true)}
               >
                 <FontAwesome name="play" /> Start session
               </Button>
@@ -175,18 +175,18 @@ export class Session extends React.Component<Props> {
 const mapStateToProps = (state: RootState) => ({
   perms: state.permission.userPerms,
   token: state.user.token,
-  endWatchModalOpen: state.watch.endWatchModalOpen,
-  startWatchModalOpen: state.watch.startWatchModalOpen,
-  watchRunning: state.watch.ownWatchRunning,
-  peopleCount: state.watch.ownWatchPeopleCount,
-  startTime: state.watch.ownWatchStartTime,
+  endSessionModalOpen: state.session.endSessionModalOpen,
+  startSessionModalOpen: state.session.startSessionModalOpen,
+  watchRunning: state.session.ownSessionRunning,
+  peopleCount: state.session.ownSessionPeopleCount,
+  startTime: state.session.ownSessionStartTime,
 });
 
 const mapDispatchToProps = {
-  toggleWatchPage,
-  toggleEndWatchModal,
-  toggleStartWatchModal,
-  fetchOwnWatchStatus,
+  toggleSessionPage,
+  toggleEndSessionModal,
+  toggleStartSessionModal,
+  fetchOwnSessionStatus,
 };
 
 export default connect(

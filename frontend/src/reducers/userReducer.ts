@@ -1,11 +1,13 @@
+import { UserModel } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as userActions from "./actions/userActions";
 import { CLEAR_USER_DATA, REMOVE_USER, SET_TOKEN, SET_USER_DATA, SET_USERS } from "./constants";
+
 export interface UserState {
   token: string;
-  users: any[];
-  userData: any;
+  users: UserModel[];
+  userData?: UserModel;
   modalOpen: boolean;
   isRegistering: boolean;
 }
@@ -13,7 +15,7 @@ export interface UserState {
 const initialState = {
   token: "",
   users: [],
-  userData: {},
+  userData: undefined,
   modalOpen: false,
   isRegistering: false,
 };

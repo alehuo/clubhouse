@@ -22,7 +22,7 @@ const reducerObj = {
   key: keyReducer,
   studentUnion: studentUnionReducer,
   permission: permissionReducer,
-  watch: sessionReducer,
+  session: sessionReducer,
   form: formReducer,
   rule: ruleReducer,
   news: newsReducer,

@@ -45,8 +45,6 @@ export const addStudentUnion = (stdu: any, token: string) => {
       const res = await StudentUnionService.addStudentUnion(stdu, token);
       const addedUnion = res.data;
       dispatch(addStudentUnionToList(addedUnion));
-      dispatch(setAdding(false));
-      dispatch(addFormModalOpen(false));
       dispatch(successMessage("New student union added successfully"));
     } catch (err) {
       if (err.response && err.response.data.error) {
@@ -56,6 +54,8 @@ export const addStudentUnion = (stdu: any, token: string) => {
         dispatch(errorMessage("Error adding student union"));
       }
     }
+    dispatch(setAdding(false));
+    dispatch(addFormModalOpen(false));
   };
 };
 

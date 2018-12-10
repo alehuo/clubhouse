@@ -1,9 +1,9 @@
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import UserService from "../../services/UserService";
+import { fetchOwnSessionStatus } from "../actions/sessionActions";
 import { CLEAR_USER_DATA, REMOVE_USER, SET_TOKEN, SET_USER_DATA, SET_USERS } from "../constants";
 import { getUserPerms } from "../permissionReducer";
-import { fetchOwnWatchStatus } from "../sessionReducer";
 import { authenticateUser, setIsLoggingIn } from "./authenticationActions";
 import { errorMessage, successMessage } from "./notificationActions";
 
@@ -12,14 +12,15 @@ export const login = (email: string, password: string) => {
     try {
       dispatch(setIsLoggingIn(true));
       const loginResponse = await UserService.login(email, password);
-      dispatch(setToken(loginResponse.data.token));
-      localStorage.setItem("token", loginResponse.data.token);
-      dispatch(fetchOwnWatchStatus(localStorage.getItem("token") || ""));
-      dispatch(getUserPerms(loginResponse.data.token));
+      const token: string = loginResponse.data.token;
+      localStorage.setItem("token", token);
+      dispatch(setToken(token));
+      dispatch(fetchOwnSessionStatus(token));
+      dispatch(getUserPerms(token));
+      dispatch(fetchUserData(token));
       dispatch(authenticateUser());
       dispatch(successMessage("Successfully logged in"));
       dispatch(setIsLoggingIn(false));
-      dispatch(fetchUserData(loginResponse.data.token));
     } catch (err) {
       dispatch(setIsLoggingIn(false));
       if (err.response && err.response.data.error) {

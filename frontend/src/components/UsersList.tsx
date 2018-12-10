@@ -5,15 +5,14 @@ import { connect } from "react-redux";
 import { deleteUser, fetchUsers } from "./../reducers/actions/userActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-import { Permissions } from "@alehuo/clubhouse-shared";
-import { UserData } from "../pages/subpages/UserInformation";
+import { Permissions, UserModel } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
 interface Props {
   token: string;
   fetchUsers: any;
   perms: number;
-  users: UserData[];
+  users: UserModel[];
   deleteUser: any;
 }
 

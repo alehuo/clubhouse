@@ -1,3 +1,4 @@
+import { UserModel } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
@@ -9,10 +10,13 @@ export interface UserData {
 }
 
 interface Props {
-  userData: UserData;
+  userData?: UserModel;
 }
 
 const UserInformation: React.SFC<Props> = (props) => {
+  if (!props.userData) {
+    return <div>Failed to display user data</div>;
+  }
   return (
     <React.Fragment>
       <h2>User information</h2>
