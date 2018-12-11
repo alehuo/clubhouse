@@ -1,10 +1,11 @@
+import { CalendarEvent } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import CalendarService from "../../services/CalendarService";
 import { errorMessage } from "../actions/notificationActions";
 import * as calendarActions from "../constants";
 
-export const setEvents = (events: any) =>
+export const setEvents = (events: CalendarEvent[]) =>
   action(calendarActions.SET_EVENTS, { events });
 
 export const fetchEvents = (token: string) => async (

@@ -4,11 +4,13 @@ import PermissionService from "../services/PermissionService";
 import { deAuthenticateUser } from "./actions/authenticationActions";
 import { errorMessage } from "./actions/notificationActions";
 
+// TODO: Use typesafe-actions
+
 export interface PermissionState {
   readonly userPerms: number;
 }
 
-const initialState = {
+const initialState: PermissionState = {
   userPerms: 0,
 };
 

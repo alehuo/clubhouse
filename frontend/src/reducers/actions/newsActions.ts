@@ -1,3 +1,5 @@
+import { Newspost } from "@alehuo/clubhouse-shared";
+import moment from "moment";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import NewsService from "../../services/NewsService";
@@ -12,9 +14,8 @@ import {
   TOGGLE_ADD_NEWSPOST_MODAL,
   TOGGLE_EDIT_NEWSPOST_MODAL,
 } from "../constants";
-import { NewsPost } from "../newsReducer";
 
-export const addNewspostToList = (newspost: NewsPost) =>
+export const addNewspostToList = (newspost: Newspost) =>
   action(ADD_NEWSPOST_TO_LIST, { newspost });
 
 export const deleteNewspostFromList = (id: number) =>
@@ -34,7 +35,7 @@ export const setIsAdding = (val: boolean) =>
 export const setIsEditing = (val: boolean) =>
   action(SET_IS_EDITING_NEWSPOST, { val });
 
-export const setNewsposts = (newsPosts: NewsPost[]) =>
+export const setNewsposts = (newsPosts: Newspost[]) =>
   action(SET_NEWSPOSTS, { newsPosts });
 
 export const fetchNewsposts = (token: string) => {
@@ -82,7 +83,7 @@ export const addNewspost = (token: string, title: string, message: string) => {
           author: res.author,
           title: res.title,
           message: res.message,
-          created_at: new Date().toISOString(),
+          created_at: moment().toISOString(),
         }),
       );
       dispatch(successMessage("Newspost added"));

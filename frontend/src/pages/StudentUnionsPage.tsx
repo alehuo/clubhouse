@@ -2,9 +2,7 @@ import React from "react";
 import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
-import StudentUnionsList, {
-  StudentUnion,
-} from "./../components/StudentUnionsList";
+import StudentUnionsList from "./../components/StudentUnionsList";
 import {
   addFormModalOpen,
   fetchStudentUnions,
@@ -12,7 +10,7 @@ import {
 import PermissionUtils from "./../utils/PermissionUtils";
 import AddStudentUnion from "./subpages/AddStudentUnion";
 
-import { Permissions } from "@alehuo/clubhouse-shared";
+import { Permissions, StudentUnion } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
 interface Props {

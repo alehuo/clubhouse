@@ -1,3 +1,4 @@
+import { StudentUnion } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as studentUnionActions from "./actions/studentUnionActions";
@@ -10,12 +11,12 @@ import {
 } from "./constants";
 
 export interface StudentUnionState {
-  readonly studentUnions: any[];
+  readonly studentUnions: StudentUnion[];
   readonly isAdding: boolean;
   readonly modalOpen: boolean;
 }
 
-const initialState = {
+const initialState: StudentUnionState = {
   studentUnions: [],
   isAdding: false,
   modalOpen: false,

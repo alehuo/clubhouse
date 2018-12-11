@@ -7,7 +7,7 @@ export interface RuleState {
   readonly editMode: boolean;
 }
 
-const initialState = {
+const initialState: RuleState = {
   rules: [],
   editMode: false,
 };

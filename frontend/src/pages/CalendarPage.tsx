@@ -1,6 +1,6 @@
-import { Permissions } from "@alehuo/clubhouse-shared";
+import { CalendarEvent, Permissions } from "@alehuo/clubhouse-shared";
 import moment from "moment";
-import React, { Component } from "react";
+import React from "react";
 import BigCalendar from "react-big-calendar";
 import { Alert, Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { RootState } from "../reduxStore";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/actions/calendarActions";
-import { CalendarEvent, eventMapper } from "./../services/CalendarService";
+import {eventMapper } from "./../services/CalendarService";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 const Calendar = styled<any>(BigCalendar)`

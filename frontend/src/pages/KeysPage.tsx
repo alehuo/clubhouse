@@ -4,8 +4,8 @@ import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import KeysList from "./../components/KeysList";
 import { toggleModal } from "./../reducers/actions/keyActions";
+import { fetchKeys, fetchKeyTypes } from "./../reducers/actions/keyActions";
 import { fetchUsers } from "./../reducers/actions/userActions";
-import { fetchKeys, fetchKeyTypes } from "./../reducers/keyReducer";
 import PermissionUtils from "./../utils/PermissionUtils";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 

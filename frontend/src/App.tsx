@@ -1,4 +1,7 @@
 import { User } from "@alehuo/clubhouse-shared";
+import moment from "moment";
+import "moment/locale/fi";
+moment.locale("fi");
 import React from "react";
 import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";

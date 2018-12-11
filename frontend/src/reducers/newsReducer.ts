@@ -1,3 +1,4 @@
+import { Newspost } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as newsActions from "./actions/newsActions";
@@ -14,7 +15,7 @@ import {
 
 // Initial newspost reducer state
 export interface NewsState {
-  readonly newsPosts: NewsPost[];
+  readonly newsPosts: Newspost[];
   readonly editId: number;
   readonly isAdding: boolean;
   readonly isEditing: boolean;
@@ -22,15 +23,7 @@ export interface NewsState {
   readonly editModalOpen: boolean;
 }
 
-export interface NewsPost {
-  postId: number;
-  author: number;
-  title: string;
-  message: string;
-  created_at: string;
-}
-
-const initialState = {
+const initialState: NewsState = {
   newsPosts: [],
   editId: 1,
   isAdding: false,
@@ -62,7 +55,7 @@ const newsReducer: Reducer<NewsState, AuthenticationAction> = (
         ...state,
         newsPosts: [
           ...state.newsPosts.filter(
-            (newsPost: NewsPost) => newsPost.postId !== action.payload.id,
+            (newsPost) => newsPost.postId !== action.payload.id,
           ),
         ],
       };

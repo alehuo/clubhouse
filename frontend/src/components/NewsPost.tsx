@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { Button, Panel } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
@@ -6,7 +7,7 @@ interface Props {
   title: string;
   message: string;
   author: number;
-  date: string;
+  date?: string;
   onDelete: any;
   onEdit: any;
   hasEditDeletePermissions: boolean;
@@ -41,7 +42,8 @@ const NewsPost: React.SFC<Props> = ({
     </Panel.Heading>
     <Panel.Body>{message}</Panel.Body>
     <Panel.Footer>
-      By #<strong>{author}</strong> on <i>{date}</i>
+      By #<strong>{author}</strong> on{" "}
+      <i>{date ? moment(date).format("LLL") : "N/A"}</i>
     </Panel.Footer>
   </Panel>
 );

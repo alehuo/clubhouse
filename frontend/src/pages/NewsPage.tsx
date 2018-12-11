@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Alert, Button, PageHeader } from "react-bootstrap";
 import { connect } from "react-redux";
 import NewsPost from "../components/NewsPost";
@@ -6,7 +6,7 @@ import PermissionUtils from "./../utils/PermissionUtils";
 
 import FontAwesome from "react-fontawesome";
 
-import { Permissions } from "@alehuo/clubhouse-shared";
+import { Newspost, Permissions } from "@alehuo/clubhouse-shared";
 import {
   deleteNewspost,
   fetchNewsposts,
@@ -14,7 +14,6 @@ import {
   toggleNewsAddModal,
   toggleNewsEditModal,
 } from "../reducers/actions/newsActions";
-import { NewsPost as NewsPostType } from "../reducers/newsReducer";
 import { RootState } from "../reduxStore";
 import AddNewspost from "./subpages/AddNewspost";
 import EditNewspost from "./subpages/EditNewspost";
@@ -24,7 +23,7 @@ interface Props {
   perms: number;
   fetchNewsposts: any;
   toggleNewsAddModal: any;
-  newsPosts: NewsPostType[];
+  newsPosts: Newspost[];
   deleteNewspost: any;
   setEditId: any;
   toggleNewsEditModal: any;
@@ -62,7 +61,7 @@ export class NewsPage extends React.Component<Props> {
         </PageHeader>
         {viewPermissions ? (
           this.props.newsPosts &&
-          this.props.newsPosts.map((newsPost: NewsPostType) => (
+          this.props.newsPosts.map((newsPost) => (
             <NewsPost
               key={newsPost.postId}
               title={newsPost.title}

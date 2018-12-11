@@ -5,14 +5,8 @@ import { connect } from "react-redux";
 import { deleteStudentUnion } from "./../reducers/actions/studentUnionActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-import { Permissions } from "@alehuo/clubhouse-shared";
+import { Permissions, StudentUnion } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
-
-export interface StudentUnion {
-  unionId: number;
-  name: string;
-  description: string;
-}
 
 interface Props {
   perms: number;

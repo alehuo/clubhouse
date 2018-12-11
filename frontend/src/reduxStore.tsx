@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
 import thunk from "redux-thunk";
 import { StateType } from "typesafe-actions";
@@ -37,4 +38,7 @@ const middleware =
   process.env.NODE_ENV !== "production" ? [thunk, logger] : [thunk];
 
 // Create store
-export const reduxStore = createStore(reducer, applyMiddleware(...middleware));
+export const reduxStore = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(...middleware)),
+);

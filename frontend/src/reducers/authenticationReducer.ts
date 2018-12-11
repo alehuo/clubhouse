@@ -13,7 +13,7 @@ export interface AuthenticationState {
   readonly isAuthenticated: boolean;
 }
 
-const initialState = {
+const initialState: AuthenticationState = {
   isLoggingIn: false,
   isAuthenticated: false,
 };

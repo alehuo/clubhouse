@@ -1,3 +1,4 @@
+import { CalendarEvent } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions/calendarActions";
@@ -5,10 +6,10 @@ import { SET_EVENTS } from "./constants";
 
 // Initial calendar reducer state
 export interface CalendarState {
-  readonly events: any[];
+  readonly events: CalendarEvent[];
 }
 
-const initialState = {
+const initialState: CalendarState = {
   events: [],
 };
 

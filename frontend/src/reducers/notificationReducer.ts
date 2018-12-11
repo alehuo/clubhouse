@@ -14,7 +14,7 @@ export interface Notification {
   readonly text: string;
 }
 
-const initialState = {
+const initialState: NotificationState = {
   notifications: [],
 };
 

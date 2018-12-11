@@ -12,7 +12,7 @@ export interface UserState {
   isRegistering: boolean;
 }
 
-const initialState = {
+const initialState: UserState = {
   token: "",
   users: [],
   userData: undefined,
