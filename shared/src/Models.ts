@@ -9,8 +9,8 @@ export interface User {
   firstName: string;
   lastName: string;
   permissions?: number;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface CalendarEvent {
@@ -19,20 +19,20 @@ export interface CalendarEvent {
   description: string;
   locationId?: number;
   restricted: boolean;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   addedBy: number;
   unionId: number;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Location {
   locationId?: number;
   name: string;
   address: string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Message {
@@ -40,8 +40,8 @@ export interface Message {
   userId: number;
   title?: string;
   message: string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Newspost {
@@ -49,29 +49,29 @@ export interface Newspost {
   author: number;
   title: string;
   message: string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Permission {
   permissionId?: number;
   name: string;
   value: number;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Session {
   sessionId?: number;
   userId?: number;
-  startTime?: Date;
-  endTime?: Date;
+  startTime?: string;
+  endTime?: string;
   startMessage?: string;
   endMessage?: string;
   started?: boolean;
   ended?: boolean;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Statistics {
@@ -87,8 +87,8 @@ export interface StudentUnion {
   unionId?: number;
   name: string;
   description: string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface UserStatistics {
