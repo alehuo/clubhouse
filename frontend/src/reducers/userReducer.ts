@@ -1,4 +1,4 @@
-import { UserModel } from "@alehuo/clubhouse-shared";
+import { User } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as userActions from "./actions/userActions";
@@ -6,8 +6,8 @@ import { CLEAR_USER_DATA, REMOVE_USER, SET_TOKEN, SET_USER_DATA, SET_USERS } fro
 
 export interface UserState {
   token: string;
-  users: UserModel[];
-  userData?: UserModel;
+  users: User[];
+  userData?: User;
   modalOpen: boolean;
   isRegistering: boolean;
 }

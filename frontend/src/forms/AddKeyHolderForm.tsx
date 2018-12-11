@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, HelpBlock } from "react-bootstrap";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 
-import { UserModel } from "@alehuo/clubhouse-shared";
+import { User } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked } from "./../utils/FormValidators";
@@ -30,7 +30,7 @@ interface Props {
   selectedKey: number;
   selectedUser: number;
   isAdding: boolean;
-  users: UserModel[];
+  users: User[];
   keyTypes: Key[];
 }
 

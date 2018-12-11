@@ -1,7 +1,7 @@
 import axios from "axios";
 import customAxios from "./custom-axios";
 
-interface UserModel {
+interface User {
   email: string;
   password: string;
   firstName: string;
@@ -21,7 +21,7 @@ const login = async (email: string, password: string) =>
     },
   );
 
-const register = async (user: UserModel) =>
+const register = async (user: User) =>
   axios.post(
     "api/v1/users",
     {

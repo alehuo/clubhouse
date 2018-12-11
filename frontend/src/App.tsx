@@ -1,4 +1,4 @@
-import { UserModel } from "@alehuo/clubhouse-shared";
+import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -33,7 +33,7 @@ import { RootState } from "./reduxStore";
 
 interface Props {
   sessionInterval?: NodeJS.Timeout;
-  userData?: UserModel;
+  userData?: User;
   sessionPage: boolean;
   sessionRunning: boolean;
   peopleCount: number;

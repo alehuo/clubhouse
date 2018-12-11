@@ -1,4 +1,4 @@
-import { UserModel } from "@alehuo/clubhouse-shared";
+import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
@@ -13,7 +13,7 @@ interface NavButton {
 interface NavigationProps {
   navButtons: NavButton[];
   isAuthenticated: boolean;
-  userData?: UserModel;
+  userData?: User;
 }
 
 const Navigation: React.SFC<NavigationProps> = ({

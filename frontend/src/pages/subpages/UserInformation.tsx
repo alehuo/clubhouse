@@ -1,4 +1,4 @@
-import { UserModel } from "@alehuo/clubhouse-shared";
+import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
@@ -10,7 +10,7 @@ export interface UserData {
 }
 
 interface Props {
-  userData?: UserModel;
+  userData?: User;
 }
 
 const UserInformation: React.SFC<Props> = (props) => {

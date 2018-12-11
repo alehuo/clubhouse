@@ -1,4 +1,4 @@
-import { UserModel } from "@alehuo/clubhouse-shared";
+import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Col, Nav, NavItem, PageHeader, Row } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
@@ -11,7 +11,7 @@ import UserInformation from "./subpages/UserInformation";
 import UserKeys from "./subpages/UserKeys";
 
 interface Props {
-  userData?: UserModel;
+  userData?: User;
 }
 
 const UserProfilePage: React.SFC<Props> = (props) => {
