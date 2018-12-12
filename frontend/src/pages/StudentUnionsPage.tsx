@@ -24,9 +24,14 @@ interface Props {
 
 export class StudentUnionsPage extends React.Component<Props> {
   public componentDidMount() {
-    this.props.fetchStudentUnions(this.props.token);
+    if (this.props.token !== "") {
+      this.props.fetchStudentUnions(this.props.token);
+    }
   }
   public render() {
+    if (!this.props.token) {
+      return <div />;
+    }
     return (
       <React.Fragment>
         <PageHeader>

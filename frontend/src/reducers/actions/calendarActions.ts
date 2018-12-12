@@ -8,11 +8,11 @@ import * as calendarActions from "../constants";
 export const setEvents = (events: CalendarEvent[]) =>
   action(calendarActions.SET_EVENTS, { events });
 
-export const fetchEvents = (token: string) => async (
+export const fetchEvents = () => async (
   dispatch: ThunkDispatch<any, any, any>,
 ) => {
   try {
-    const events = await CalendarService.getEvents(token);
+    const events = await CalendarService.getEvents();
     dispatch(setEvents(events.data));
   } catch (err) {
     if (err.response && err.response.data.error) {

@@ -12,9 +12,9 @@ export const eventMapper = (event: CalendarEvent) => {
   };
 };
 
-const getEvents = async (token: string) =>
-  customAxios(token).get<CalendarEvent[]>("/api/v1/calendar");
-const getEvent = async (id: number, token: string) =>
-  customAxios(token).get<CalendarEvent>("/api/v1/calendar/" + id);
+const getEvents = async () =>
+  customAxios.withoutToken().get<CalendarEvent[]>("/api/v1/calendar");
+const getEvent = async (id: number) =>
+  customAxios.withoutToken().get<CalendarEvent>("/api/v1/calendar/" + id);
 
 export default { getEvents, getEvent };

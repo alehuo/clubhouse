@@ -33,16 +33,12 @@ interface Props {
 
 export class NewsPage extends React.Component<Props> {
   public componentDidMount() {
-    this.props.fetchNewsposts(this.props.token);
+    this.props.fetchNewsposts();
   }
   public render() {
     const editDeletePermissions = PermissionUtils.hasPermission(
       this.props.perms,
       Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value,
-    );
-    const viewPermissions = PermissionUtils.hasPermission(
-      this.props.perms,
-      Permissions.ALLOW_VIEW_POSTS.value,
     );
     return (
       <React.Fragment>
@@ -59,8 +55,7 @@ export class NewsPage extends React.Component<Props> {
             )}
           </p>
         </PageHeader>
-        {viewPermissions ? (
-          this.props.newsPosts &&
+        {this.props.newsPosts &&
           this.props.newsPosts.map((newsPost) => (
             <NewsPost
               key={newsPost.postId}
@@ -82,13 +77,7 @@ export class NewsPage extends React.Component<Props> {
               }}
               hasEditDeletePermissions={editDeletePermissions}
             />
-          ))
-        ) : (
-          <Alert bsStyle="warning">
-            <h4>No permission to view news</h4>
-            <p>You don't have correct permissions to view news.</p>
-          </Alert>
-        )}
+          ))}
         <AddNewspost
           show={this.props.addModalOpen}
           onHide={() => this.props.toggleNewsAddModal(false)}

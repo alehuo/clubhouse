@@ -4,13 +4,15 @@ import customAxios from "./custom-axios";
 
 const apiEndpoint = "api/v1/newspost";
 
-const getNewsposts = async (token: string) => {
-  const response = await customAxios(token).get<Newspost[]>(apiEndpoint);
+const getNewsposts = async () => {
+  const response = await customAxios
+    .withoutToken()
+    .get<Newspost[]>(apiEndpoint);
   return response.data;
 };
 
 const addNewspost = async (token: string, title: string, message: string) => {
-  const result = await customAxios(token).post(
+  const result = await customAxios.withToken(token).post(
     apiEndpoint,
     {
       title,
@@ -31,7 +33,7 @@ const editNewspost = async (
 ) => Promise.resolve({ id, title, text });
 
 const deleteNewspost = async (token: string, id: number) => {
-  const res = await customAxios(token).delete(apiEndpoint + "/" + id);
+  const res = await customAxios.withToken(token).delete(apiEndpoint + "/" + id);
   return res.data;
 };
 

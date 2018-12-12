@@ -2,7 +2,6 @@ import React from "react";
 import { Alert, Button, PageHeader, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
-import PermissionUtils from "./../utils/PermissionUtils";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
 import { Rule } from "../components/Rule";
@@ -14,6 +13,7 @@ import {
   moveRuleUp,
   toggleEditMode,
 } from "./../reducers/ruleReducer";
+import PermissionUtils from "./../utils/PermissionUtils";
 
 interface Props {
   editMode: boolean;
@@ -34,48 +34,49 @@ export class RulesPage extends React.Component<Props> {
       <React.Fragment>
         <PageHeader>Rules</PageHeader>
         <p>
-          <Button
-            bsStyle={!this.props.editMode ? "success" : "danger"}
-            onClick={() => this.props.toggleEditMode()}
-          >
-            {!this.props.editMode ? (
-              <React.Fragment>
-                <FontAwesome name="lock" /> Edit
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <FontAwesome name="lock-open" /> Finish editing
-              </React.Fragment>
-            )}
-          </Button>
+          {PermissionUtils.hasPermission(
+            this.props.perms,
+            Permissions.ALLOW_ADD_EDIT_REMOVE_RULES.value,
+          ) && (
+            <React.Fragment>
+              <Button
+                bsStyle={!this.props.editMode ? "info" : "danger"}
+                onClick={() => this.props.toggleEditMode()}
+              >
+                {!this.props.editMode ? (
+                  <React.Fragment>
+                    <FontAwesome name="lock" /> Edit rules
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <FontAwesome name="lock-open" /> Finish editing
+                  </React.Fragment>
+                )}
+              </Button>
+              {"  "}
+              <Button onClick={() => console.log("Todo")} bsStyle="success">
+                <FontAwesome name="plus" /> Add new rule
+              </Button>
+            </React.Fragment>
+          )}
         </p>
-        {PermissionUtils.hasPermission(
-          this.props.perms,
-          Permissions.ALLOW_VIEW_RULES.value,
-        ) ? (
-          this.props.rules && (
-            <Table responsive striped>
-              <tbody>
-                {this.props.rules.map((rule: any, i: number) => (
-                  <Rule
-                    id={i + 1}
-                    key={i}
-                    rule={rule}
-                    canMoveUp={i === 0}
-                    canMoveDown={i === this.props.rules.length - 1}
-                    onMoveUpClick={() => this.props.moveRuleUp(rule.id)}
-                    onMoveDownClick={() => this.props.moveRuleDown(rule.id)}
-                    editMode={this.props.editMode}
-                  />
-                ))}
-              </tbody>
-            </Table>
-          )
-        ) : (
-          <Alert bsStyle="warning">
-            <h4>No permission to view rules</h4>
-            <p>You don't have correct permissions to view rules.</p>
-          </Alert>
+        {this.props.rules && (
+          <Table responsive striped>
+            <tbody>
+              {this.props.rules.map((rule: any, i: number) => (
+                <Rule
+                  id={i + 1}
+                  key={i}
+                  rule={rule}
+                  canMoveUp={i === 0}
+                  canMoveDown={i === this.props.rules.length - 1}
+                  onMoveUpClick={() => this.props.moveRuleUp(rule.id)}
+                  onMoveDownClick={() => this.props.moveRuleDown(rule.id)}
+                  editMode={this.props.editMode}
+                />
+              ))}
+            </tbody>
+          </Table>
         )}
       </React.Fragment>
     );

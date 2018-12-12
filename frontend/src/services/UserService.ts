@@ -1,10 +1,9 @@
 import { DbUser, User } from "@alehuo/clubhouse-shared";
-import axios from "axios";
 import customAxios from "./custom-axios";
 
 // User service
 const login = async (email: string, password: string) =>
-  axios.post(
+  customAxios.withoutToken().post(
     "api/v1/authenticate",
     {
       email,
@@ -16,7 +15,7 @@ const login = async (email: string, password: string) =>
   );
 
 const register = async (user: DbUser) =>
-  axios.post(
+  customAxios.withoutToken().post(
     "api/v1/users",
     {
       email: user.email,
@@ -30,11 +29,12 @@ const register = async (user: DbUser) =>
   );
 
 const remove = async (userId: number, token: string) =>
-  customAxios(token).delete("api/v1/users/" + Number(userId));
+  customAxios.withToken(token).delete("api/v1/users/" + Number(userId));
 
-const getUsers = (token: string) => customAxios(token).get<User[]>("api/v1/users");
+const getUsers = (token: string) =>
+  customAxios.withToken(token).get<User[]>("api/v1/users");
 
 const getOwnData = async (token: string) =>
-  customAxios(token).get("api/v1/users/ownData");
+  customAxios.withToken(token).get("api/v1/users/ownData");
 
 export default { login, register, getUsers, remove, getOwnData };

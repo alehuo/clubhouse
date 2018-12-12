@@ -107,7 +107,12 @@ class App extends React.Component<Props> {
                 path="/studentunions"
                 component={StudentUnionsPage}
               />
-              <Route exact path="/keys" component={KeysPage} />
+              <Route
+                exact
+                path="/keys"
+                token={this.props.token}
+                component={KeysPage}
+              />
               <Route exact path="/calendar" component={CalendarPage} />
               <Route exact path="/rules" component={RulesPage} />
               <Route exact path="/news" component={NewsPage} />

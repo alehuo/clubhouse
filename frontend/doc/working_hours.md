@@ -35,9 +35,10 @@
 | 9.12.2018  | 1.0h  | Fixed student union form submitting. Improved typings for forms                                                                                                                                                                                                   |
 | 10.12.2018 | 1.5h  | Renamed watch related services and actions. Refactoring.                                                                                                                                                                                                          |
 | 11.12.2018 | 1.0h  | Updated shared library. Added more typings to reducers and services. Added Redux Devtools extension. Started using moment.js library to format dates.                                                                                                             |
+| 13.12.2018 | 1.0h  | UI improvements (Work in progress). Removed token from newspost and rule controllers as everyone should be able to read the news and rules.                                                                                                                                          |
 
 Total:
 
 25.5 h (Part 1)
 
-24.5 h (Part 2)
+25.5 h (Part 2)

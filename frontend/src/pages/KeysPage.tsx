@@ -26,14 +26,27 @@ interface Props {
 }
 
 export class KeysPage extends React.Component<Props> {
-  public componentDidMount() {
-    if (this.props.token !== "") {
+  public componentWillMount() {
+    this.fetchKeys();
+  }
+  public fetchKeys = () => {
+    if (
+      this.props.token !== "" &&
+      this.props.perms &&
+      PermissionUtils.hasPermission(
+        this.props.perms,
+        Permissions.ALLOW_VIEW_KEYS.value,
+      )
+    ) {
       this.props.fetchKeys(this.props.token);
       this.props.fetchKeyTypes(this.props.token);
       this.props.fetchUsers(this.props.token);
     }
   }
   public render() {
+    if (this.props.token === "") {
+      return <div />;
+    }
     return (
       <React.Fragment>
         <PageHeader>

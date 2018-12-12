@@ -38,10 +38,10 @@ export const setIsEditing = (val: boolean) =>
 export const setNewsposts = (newsPosts: Newspost[]) =>
   action(SET_NEWSPOSTS, { newsPosts });
 
-export const fetchNewsposts = (token: string) => {
+export const fetchNewsposts = () => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
-      const posts = await NewsService.getNewsposts(token);
+      const posts = await NewsService.getNewsposts();
       dispatch(setNewsposts(posts));
     } catch (err) {
       if (err.response && err.response.data.error) {

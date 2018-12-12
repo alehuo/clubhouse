@@ -39,9 +39,4 @@ const mapStateToProps = (state: RootState) => ({
   users: state.user.users,
 });
 
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(UserListPage);
+export default connect(mapStateToProps)(UserListPage);

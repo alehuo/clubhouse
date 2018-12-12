@@ -3,12 +3,7 @@ import React from "react";
 import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { LinkContainer } from "react-router-bootstrap";
-
-interface NavButton {
-  url: string;
-  icon: string;
-  text: string;
-}
+import { NavButton } from "../navButtons";
 
 interface NavigationProps {
   navButtons: NavButton[];
@@ -30,17 +25,18 @@ const Navigation: React.SFC<NavigationProps> = ({
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav>
-        {isAuthenticated && (
-          <NavDropdown title={"Menu"} id="1" onSelect={() => null}>
-            {navButtons.map((navButton) => (
-              <LinkContainer to={navButton.url} key={navButton.url}>
-                <NavItem eventKey={1}>
-                  <FontAwesome name={navButton.icon} /> {navButton.text}
-                </NavItem>
-              </LinkContainer>
-            ))}
-          </NavDropdown>
-        )}
+        <NavDropdown title={"Menu"} id="1" onSelect={() => null}>
+          {navButtons.map(
+            (navButton) =>
+              !(navButton.auth && !isAuthenticated) && (
+                <LinkContainer to={navButton.url} key={navButton.url}>
+                  <NavItem eventKey={1}>
+                    <FontAwesome name={navButton.icon} /> {navButton.text}
+                  </NavItem>
+                </LinkContainer>
+              ),
+          )}
+        </NavDropdown>
       </Nav>
       <Nav pullRight>
         {isAuthenticated ? (

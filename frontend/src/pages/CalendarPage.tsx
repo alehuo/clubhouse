@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { RootState } from "../reduxStore";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/actions/calendarActions";
-import {eventMapper } from "./../services/CalendarService";
+import { eventMapper } from "./../services/CalendarService";
 import PermissionUtils from "./../utils/PermissionUtils";
 
 const Calendar = styled<any>(BigCalendar)`
@@ -25,7 +25,7 @@ interface Props {
 
 class CalendarPage extends React.Component<Props> {
   public componentDidMount() {
-    this.props.fetchEvents(this.props.token);
+    this.props.fetchEvents();
   }
   public render() {
     return (
@@ -58,28 +58,18 @@ class CalendarPage extends React.Component<Props> {
             </small>
           </p>
         )}
-        {PermissionUtils.hasPermission(
-          this.props.perms,
-          Permissions.ALLOW_VIEW_EVENTS.value,
-        ) ? (
-          <Calendar
-            localizer={BigCalendar.momentLocalizer(moment)}
-            events={this.props.events.map(eventMapper)}
-            step={60}
-            views={Object.keys(BigCalendar.Views).map(
-              // @ts-ignore
-              (k) => BigCalendar.Views[k],
-            )}
-            timeslots={1}
-            showMultiDayTimes
-            defaultDate={new Date()}
-          />
-        ) : (
-          <Alert bsStyle="warning">
-            <h4>No permission to view calendar events.</h4>
-            <p>You don't have correct permissions to view calendar events.</p>
-          </Alert>
-        )}
+        <Calendar
+          localizer={BigCalendar.momentLocalizer(moment)}
+          events={this.props.events.map(eventMapper)}
+          step={60}
+          views={Object.keys(BigCalendar.Views).map(
+            // @ts-ignore
+            (k) => BigCalendar.Views[k],
+          )}
+          timeslots={1}
+          showMultiDayTimes
+          defaultDate={new Date()}
+        />
         <div style={{ height: 50 }} />
       </React.Fragment>
     );
