@@ -9,15 +9,15 @@ exports.isDbUser = (x) => {
         return false;
     }
     const usr = x;
-    if (usr.created_at &&
-        usr.email &&
-        usr.firstName &&
-        usr.lastName &&
-        usr.permissions &&
-        usr.updated_at &&
-        usr.userId &&
-        usr.password &&
-        usr.hidden) {
+    if (usr.created_at !== undefined &&
+        usr.email !== undefined &&
+        usr.firstName !== undefined &&
+        usr.lastName !== undefined &&
+        usr.permissions !== undefined &&
+        usr.updated_at !== undefined &&
+        usr.userId !== undefined &&
+        usr.password !== undefined &&
+        usr.hidden !== undefined) {
         if (exports.isString(usr.created_at) &&
             exports.isString(usr.email) &&
             exports.isString(usr.firstName) &&
@@ -26,8 +26,7 @@ exports.isDbUser = (x) => {
             exports.isString(usr.updated_at) &&
             exports.isNumber(usr.userId) &&
             exports.isString(usr.password) &&
-            exports.isNumber(usr.hidden) &&
-            (usr.hidden === 1 || usr.hidden === 0)) {
+            (exports.isNumber(usr.hidden) && (usr.hidden === 1 || usr.hidden === 0))) {
             return true;
         }
         else {
@@ -41,13 +40,13 @@ exports.isUser = (x) => {
         return false;
     }
     const usr = x;
-    if (usr.created_at &&
-        usr.email &&
-        usr.firstName &&
-        usr.lastName &&
-        usr.permissions &&
-        usr.updated_at &&
-        usr.userId) {
+    if (usr.created_at !== undefined &&
+        usr.email !== undefined &&
+        usr.firstName !== undefined &&
+        usr.lastName !== undefined &&
+        usr.permissions !== undefined &&
+        usr.updated_at !== undefined &&
+        usr.userId !== undefined) {
         if (exports.isString(usr.created_at) &&
             exports.isString(usr.email) &&
             exports.isString(usr.firstName) &&
@@ -99,7 +98,11 @@ exports.isLocation = (x) => {
         return false;
     }
     const l = x;
-    if (l.address && l.created_at && l.locationId && l.name && l.updated_at) {
+    if (l.address !== undefined &&
+        l.created_at !== undefined &&
+        l.locationId !== undefined &&
+        l.name !== undefined &&
+        l.updated_at !== undefined) {
         if (exports.isString(l.address) &&
             exports.isString(l.created_at) &&
             exports.isNumber(l.locationId) &&
@@ -116,12 +119,12 @@ exports.isMessage = (x) => {
         return false;
     }
     const m = x;
-    if (m.created_at &&
-        m.message &&
-        m.messageId &&
-        m.title &&
-        m.updated_at &&
-        m.userId) {
+    if (m.created_at !== undefined &&
+        m.message !== undefined &&
+        m.messageId !== undefined &&
+        m.title !== undefined &&
+        m.updated_at !== undefined &&
+        m.userId !== undefined) {
         if (exports.isString(m.created_at) &&
             exports.isString(m.message) &&
             exports.isNumber(m.messageId) &&
@@ -139,12 +142,12 @@ exports.isNewspost = (x) => {
         return false;
     }
     const n = x;
-    if (n.author &&
-        n.created_at &&
-        n.message &&
-        n.postId &&
-        n.title &&
-        n.updated_at) {
+    if (n.author !== undefined &&
+        n.created_at !== undefined &&
+        n.message !== undefined &&
+        n.postId !== undefined &&
+        n.title !== undefined &&
+        n.updated_at !== undefined) {
         if (exports.isString(n.author) &&
             exports.isString(n.created_at) &&
             exports.isString(n.message) &&
@@ -162,7 +165,11 @@ exports.isPermission = (x) => {
         return false;
     }
     const p = x;
-    if (p.created_at && p.name && p.permissionId && p.updated_at && p.value) {
+    if (p.created_at !== undefined &&
+        p.name !== undefined &&
+        p.permissionId !== undefined &&
+        p.updated_at !== undefined &&
+        p.value !== undefined) {
         if (exports.isString(p.created_at) &&
             exports.isString(p.name) &&
             exports.isNumber(p.permissionId) &&
@@ -210,12 +217,12 @@ exports.isStatistics = (x) => {
         return false;
     }
     const s = x;
-    if (s.eventCount &&
-        s.hoursOnWatch &&
-        s.messageCount &&
-        s.newspostCount &&
-        s.userCount &&
-        s.watchCount) {
+    if (s.eventCount !== undefined &&
+        s.hoursOnWatch !== undefined &&
+        s.messageCount !== undefined &&
+        s.newspostCount !== undefined &&
+        s.userCount !== undefined &&
+        s.watchCount !== undefined) {
         if (exports.isNumber(s.eventCount) &&
             exports.isNumber(s.hoursOnWatch) &&
             exports.isNumber(s.messageCount) &&
@@ -233,7 +240,11 @@ exports.isStudentUnion = (x) => {
         return false;
     }
     const s = x;
-    if (s.created_at && s.description && s.name && s.unionId && s.updated_at) {
+    if (s.created_at !== undefined &&
+        s.description !== undefined &&
+        s.name !== undefined &&
+        s.unionId !== undefined &&
+        s.updated_at !== undefined) {
         if (exports.isString(s.created_at) &&
             exports.isString(s.description) &&
             exports.isNumber(s.unionId) &&
@@ -249,11 +260,11 @@ exports.isUserStatistics = (x) => {
         return false;
     }
     const s = x;
-    if (s.eventCount &&
-        s.hoursOnWatch &&
-        s.messageCount &&
-        s.newspostCount &&
-        s.watchCount) {
+    if (s.eventCount !== undefined &&
+        s.hoursOnWatch !== undefined &&
+        s.messageCount !== undefined &&
+        s.newspostCount !== undefined &&
+        s.watchCount !== undefined) {
         if (exports.isNumber(s.eventCount) &&
             exports.isNumber(s.hoursOnWatch) &&
             exports.isNumber(s.messageCount) &&

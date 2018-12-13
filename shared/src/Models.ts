@@ -16,15 +16,15 @@ export const isDbUser: Validator<DbUser> = (x): x is DbUser => {
   }
   const usr = x as DbUser;
   if (
-    usr.created_at &&
-    usr.email &&
-    usr.firstName &&
-    usr.lastName &&
-    usr.permissions &&
-    usr.updated_at &&
-    usr.userId &&
-    usr.password &&
-    usr.hidden
+    usr.created_at !== undefined &&
+    usr.email !== undefined &&
+    usr.firstName !== undefined &&
+    usr.lastName !== undefined &&
+    usr.permissions !== undefined &&
+    usr.updated_at !== undefined &&
+    usr.userId !== undefined &&
+    usr.password !== undefined &&
+    usr.hidden !== undefined
   ) {
     if (
       isString(usr.created_at) &&
@@ -35,8 +35,7 @@ export const isDbUser: Validator<DbUser> = (x): x is DbUser => {
       isString(usr.updated_at) &&
       isNumber(usr.userId) &&
       isString(usr.password) &&
-      isNumber(usr.hidden) &&
-      (usr.hidden === 1 || usr.hidden === 0)
+      (isNumber(usr.hidden) && (usr.hidden === 1 || usr.hidden === 0))
     ) {
       return true;
     } else {
@@ -62,13 +61,13 @@ export const isUser: Validator<User> = (x): x is User => {
   }
   const usr = x as User;
   if (
-    usr.created_at &&
-    usr.email &&
-    usr.firstName &&
-    usr.lastName &&
-    usr.permissions &&
-    usr.updated_at &&
-    usr.userId
+    usr.created_at !== undefined &&
+    usr.email !== undefined &&
+    usr.firstName !== undefined &&
+    usr.lastName !== undefined &&
+    usr.permissions !== undefined &&
+    usr.updated_at !== undefined &&
+    usr.userId !== undefined
   ) {
     if (
       isString(usr.created_at) &&
@@ -153,7 +152,13 @@ export const isLocation: Validator<Location> = (x): x is Location => {
     return false;
   }
   const l = x as Location;
-  if (l.address && l.created_at && l.locationId && l.name && l.updated_at) {
+  if (
+    l.address !== undefined &&
+    l.created_at !== undefined &&
+    l.locationId !== undefined &&
+    l.name !== undefined &&
+    l.updated_at !== undefined
+  ) {
     if (
       isString(l.address) &&
       isString(l.created_at) &&
@@ -183,12 +188,12 @@ export const isMessage: Validator<Message> = (x): x is Message => {
   }
   const m = x as Message;
   if (
-    m.created_at &&
-    m.message &&
-    m.messageId &&
-    m.title &&
-    m.updated_at &&
-    m.userId
+    m.created_at !== undefined &&
+    m.message !== undefined &&
+    m.messageId !== undefined &&
+    m.title !== undefined &&
+    m.updated_at !== undefined &&
+    m.userId !== undefined
   ) {
     if (
       isString(m.created_at) &&
@@ -220,12 +225,12 @@ export const isNewspost: Validator<Newspost> = (x): x is Newspost => {
   }
   const n = x as Newspost;
   if (
-    n.author &&
-    n.created_at &&
-    n.message &&
-    n.postId &&
-    n.title &&
-    n.updated_at
+    n.author !== undefined &&
+    n.created_at !== undefined &&
+    n.message !== undefined &&
+    n.postId !== undefined &&
+    n.title !== undefined &&
+    n.updated_at !== undefined
   ) {
     if (
       isString(n.author) &&
@@ -255,7 +260,13 @@ export const isPermission: Validator<Permission> = (x): x is Permission => {
     return false;
   }
   const p = x as Permission;
-  if (p.created_at && p.name && p.permissionId && p.updated_at && p.value) {
+  if (
+    p.created_at !== undefined &&
+    p.name !== undefined &&
+    p.permissionId !== undefined &&
+    p.updated_at !== undefined &&
+    p.value !== undefined
+  ) {
     if (
       isString(p.created_at) &&
       isString(p.name) &&
@@ -334,12 +345,12 @@ export const isStatistics: Validator<Statistics> = (x): x is Statistics => {
   }
   const s = x as Statistics;
   if (
-    s.eventCount &&
-    s.hoursOnWatch &&
-    s.messageCount &&
-    s.newspostCount &&
-    s.userCount &&
-    s.watchCount
+    s.eventCount !== undefined &&
+    s.hoursOnWatch !== undefined &&
+    s.messageCount !== undefined &&
+    s.newspostCount !== undefined &&
+    s.userCount !== undefined &&
+    s.watchCount !== undefined
   ) {
     if (
       isNumber(s.eventCount) &&
@@ -371,7 +382,13 @@ export const isStudentUnion: Validator<StudentUnion> = (
     return false;
   }
   const s = x as StudentUnion;
-  if (s.created_at && s.description && s.name && s.unionId && s.updated_at) {
+  if (
+    s.created_at !== undefined &&
+    s.description !== undefined &&
+    s.name !== undefined &&
+    s.unionId !== undefined &&
+    s.updated_at !== undefined
+  ) {
     if (
       isString(s.created_at) &&
       isString(s.description) &&
@@ -401,11 +418,11 @@ export const isUserStatistics: Validator<UserStatistics> = (
   }
   const s = x as UserStatistics;
   if (
-    s.eventCount &&
-    s.hoursOnWatch &&
-    s.messageCount &&
-    s.newspostCount &&
-    s.watchCount
+    s.eventCount !== undefined &&
+    s.hoursOnWatch !== undefined &&
+    s.messageCount !== undefined &&
+    s.newspostCount !== undefined &&
+    s.watchCount !== undefined
   ) {
     if (
       isNumber(s.eventCount) &&
