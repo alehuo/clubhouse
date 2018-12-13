@@ -1,9 +1,10 @@
 import React from "react";
-import { Alert, Button, PageHeader, Table } from "react-bootstrap";
+import { Button, PageHeader, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import CustomOverlay from "../components/CustomOverlay";
 import { Rule } from "../components/Rule";
 import { RootState } from "../reduxStore";
 import { Rule as RuleModel } from "../services/RuleService";
@@ -39,24 +40,31 @@ export class RulesPage extends React.Component<Props> {
             Permissions.ALLOW_ADD_EDIT_REMOVE_RULES.value,
           ) && (
             <React.Fragment>
-              <Button
-                bsStyle={!this.props.editMode ? "info" : "danger"}
-                onClick={() => this.props.toggleEditMode()}
+              <CustomOverlay
+                id="editRuleTooltip"
+                text="Lock or unlock rule editing."
               >
-                {!this.props.editMode ? (
-                  <React.Fragment>
-                    <FontAwesome name="lock" /> Edit rules
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <FontAwesome name="lock-open" /> Finish editing
-                  </React.Fragment>
-                )}
-              </Button>
+                <Button
+                  bsStyle={!this.props.editMode ? "info" : "danger"}
+                  onClick={() => this.props.toggleEditMode()}
+                >
+                  {!this.props.editMode ? (
+                    <React.Fragment>
+                      <FontAwesome name="lock" /> Edit rules
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      <FontAwesome name="lock-open" /> Finish editing
+                    </React.Fragment>
+                  )}
+                </Button>
+              </CustomOverlay>
               {"  "}
-              <Button onClick={() => console.log("Todo")} bsStyle="success">
-                <FontAwesome name="plus" /> Add new rule
-              </Button>
+              <CustomOverlay id="addRuleTooltip" text="Add a new rule.">
+                <Button onClick={() => console.log("Todo")} bsStyle="success">
+                  <FontAwesome name="plus" /> Add new rule
+                </Button>
+              </CustomOverlay>
             </React.Fragment>
           )}
         </p>

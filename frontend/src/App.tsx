@@ -9,6 +9,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import { Container } from "./components/Container";
+import CustomOverlay from "./components/CustomOverlay";
 import { Navigation } from "./components/Navigation";
 import NotificationDrawer from "./components/NotificationDrawer";
 import { navButtons } from "./navButtons";
@@ -95,7 +96,12 @@ class App extends React.Component<Props> {
                   <br />
                   <br />
                   <LinkContainer to="/session">
-                    <Button bsStyle="primary">View current session</Button>
+                    <CustomOverlay
+                      id="currentSessionInfo"
+                      text="View current session info."
+                    >
+                      <Button bsStyle="primary">View current session</Button>
+                    </CustomOverlay>
                   </LinkContainer>
                 </h5>
               </Alert>

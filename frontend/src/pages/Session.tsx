@@ -1,16 +1,10 @@
 import moment from "moment";
 import momentDurationFormat from "moment-duration-format";
 import React from "react";
-import {
-  Button,
-  Label,
-  OverlayTrigger,
-  PageHeader,
-  Panel,
-  Tooltip,
-} from "react-bootstrap";
+import { Button, Label, PageHeader, Panel, Tooltip } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
+import CustomOverlay from "../components/CustomOverlay";
 import {
   fetchOwnSessionStatus,
   toggleEndSessionModal,
@@ -22,20 +16,6 @@ import EndSession from "./subpages/EndSession";
 import StartSession from "./subpages/StartSession";
 // @ts-ignore
 momentDurationFormat(moment);
-
-const startSessionTooltip = (
-  <Tooltip id="startSessionooltip">This will start a new session.</Tooltip>
-);
-
-const endSessionTooltip = (
-  <Tooltip id="endSessionooltip">This will end your session.</Tooltip>
-);
-
-const sendMessageTooltip = (
-  <Tooltip id="sendMessageTooltip">
-    Sends a message to all verified keyholders.
-  </Tooltip>
-);
 
 interface Props {
   token: string;
@@ -92,31 +72,40 @@ export class Session extends React.Component<Props> {
           </p>
           <p>
             {this.props.watchRunning && (
-              <OverlayTrigger placement="bottom" overlay={endSessionTooltip}>
+              <CustomOverlay
+                id="endSessionTooltip"
+                text="This will end your current session."
+              >
                 <Button
                   bsStyle="warning"
                   onClick={() => this.props.toggleEndSessionModal(true)}
                 >
                   <FontAwesome name="hourglass" /> End session
                 </Button>
-              </OverlayTrigger>
+              </CustomOverlay>
             )}
             {!this.props.watchRunning && (
-              <OverlayTrigger placement="bottom" overlay={startSessionTooltip}>
+              <CustomOverlay
+                id="startSessionTooltip"
+                text="This will start a new session"
+              >
                 <Button
                   bsStyle="success"
                   onClick={() => this.props.toggleStartSessionModal(true)}
                 >
                   <FontAwesome name="play" /> Start session
                 </Button>
-              </OverlayTrigger>
+              </CustomOverlay>
             )}
             {"  "}
-            <OverlayTrigger placement="bottom" overlay={sendMessageTooltip}>
+            <CustomOverlay
+              id="sendMessageTooltip"
+              text="Sends a message to all verified keyholders."
+            >
               <Button bsStyle="info">
                 <FontAwesome name="envelope" /> Send message
               </Button>
-            </OverlayTrigger>
+            </CustomOverlay>
           </p>
         </PageHeader>
         <p>

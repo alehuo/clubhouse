@@ -2,10 +2,11 @@ import { CalendarEvent, Permissions } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
 import BigCalendar from "react-big-calendar";
-import { Alert, Button, PageHeader } from "react-bootstrap";
+import { Button, PageHeader } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import CustomOverlay from "../components/CustomOverlay";
 import { RootState } from "../reduxStore";
 import "./../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/actions/calendarActions";
@@ -37,9 +38,14 @@ class CalendarPage extends React.Component<Props> {
               this.props.perms,
               Permissions.ALLOW_ADD_EDIT_REMOVE_EVENTS.value,
             ) && (
-              <Button bsStyle="success">
-                <FontAwesome name="plus" /> Add an event
-              </Button>
+              <CustomOverlay
+                id="addCalendarEvent"
+                text="Add a new calendar event."
+              >
+                <Button bsStyle="success">
+                  <FontAwesome name="plus" /> Add an event
+                </Button>
+              </CustomOverlay>
             )}
           </p>
         </PageHeader>

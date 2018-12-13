@@ -10,6 +10,7 @@ import PermissionUtils from "./../utils/PermissionUtils";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 
 import { Permissions } from "@alehuo/clubhouse-shared";
+import CustomOverlay from "../components/CustomOverlay";
 import { RootState } from "../reduxStore";
 
 interface Props {
@@ -56,18 +57,25 @@ export class KeysPage extends React.Component<Props> {
               this.props.perms,
               Permissions.ALLOW_ADD_REMOVE_KEYS.value,
             ) && (
-              <Button
-                bsStyle="success"
-                onClick={() => this.props.toggleModal(true)}
-              >
-                <FontAwesome name="plus" /> Add a keyholder
-              </Button>
+              <CustomOverlay id="addKey" text="Add a new keyholder.">
+                <Button
+                  bsStyle="success"
+                  onClick={() => this.props.toggleModal(true)}
+                >
+                  <FontAwesome name="plus" /> Add a keyholder
+                </Button>
+              </CustomOverlay>
             )}
             {"  "}
             {
-              <Button bsStyle="info">
-                <FontAwesome name="envelope" /> Send an email to keyholder(s)
-              </Button>
+              <CustomOverlay
+                id="sendEmail"
+                text="Send an email to all verified keyholders in the system."
+              >
+                <Button bsStyle="info">
+                  <FontAwesome name="envelope" /> Send an email to keyholder(s)
+                </Button>
+              </CustomOverlay>
             }
           </p>
         </PageHeader>
@@ -78,10 +86,8 @@ export class KeysPage extends React.Component<Props> {
           <KeysList keys={this.props.keys} />
         ) : (
           <Alert bsStyle="warning">
-            <p>
-              No permission to view keyholders.{" "}
-              <b>Please contact an administrator.</b>
-            </p>
+            <h4>No permission to view keys</h4>
+            <p>You don't have correct permissions to view keys.</p>
           </Alert>
         )}
         <AddKeyHolder
