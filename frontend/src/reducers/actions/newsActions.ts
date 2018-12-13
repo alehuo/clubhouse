@@ -84,6 +84,7 @@ export const addNewspost = (token: string, title: string, message: string) => {
           title: res.title,
           message: res.message,
           created_at: moment().toISOString(),
+          updated_at: moment().toISOString(),
         }),
       );
       dispatch(successMessage("Newspost added"));
