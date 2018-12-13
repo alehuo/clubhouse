@@ -319,7 +319,7 @@ export const isSession: Validator<Session> = (x): x is Session => {
       isNumber(s.sessionId) &&
       isString(s.startMessage) &&
       isString(s.startTime) &&
-      isString(s.started) &&
+      isNumber(s.started) &&
       isString(s.updated_at) &&
       isNumber(s.userId)
     ) {

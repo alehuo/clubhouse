@@ -203,7 +203,7 @@ exports.isSession = (x) => {
             exports.isNumber(s.sessionId) &&
             exports.isString(s.startMessage) &&
             exports.isString(s.startTime) &&
-            exports.isString(s.started) &&
+            exports.isNumber(s.started) &&
             exports.isString(s.updated_at) &&
             exports.isNumber(s.userId)) {
             return true;
