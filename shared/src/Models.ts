@@ -274,23 +274,22 @@ export const isSession: Validator<Session> = (x): x is Session => {
   }
   const s = x as Session;
   if (
-    s.created_at &&
-    s.endMessage &&
-    s.endTime &&
-    s.ended &&
-    s.sessionId &&
-    s.startMessage &&
-    s.startTime &&
-    s.started &&
-    s.updated_at &&
-    s.userId
+    s.created_at !== undefined &&
+    s.endMessage !== undefined &&
+    s.endTime !== undefined &&
+    s.ended !== undefined &&
+    s.sessionId !== undefined &&
+    s.startMessage !== undefined &&
+    s.startTime !== undefined &&
+    s.started !== undefined &&
+    s.updated_at !== undefined &&
+    s.userId !== undefined
   ) {
     if (
       isString(s.created_at) &&
       isString(s.endMessage) &&
       isString(s.endTime) &&
-      isNumber(s.ended) &&
-      (s.ended === 1 || s.ended === 0) &&
+      (isNumber(s.ended) && (s.ended === 1 || s.ended === 0)) &&
       isNumber(s.sessionId) &&
       isString(s.startMessage) &&
       isString(s.startTime) &&
