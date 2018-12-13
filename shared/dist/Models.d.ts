@@ -1,7 +1,7 @@
 export declare type Validator<T> = (x: unknown) => x is T;
 export interface DbUser extends User {
     password: string;
-    hidden: boolean;
+    hidden: 0 | 1;
 }
 export declare const isString: (x: unknown) => x is string;
 export declare const isNumber: (x: unknown) => x is number;
@@ -23,7 +23,7 @@ export interface CalendarEvent {
     name: string;
     description: string;
     locationId: number;
-    restricted: boolean;
+    restricted: 0 | 1;
     startTime: string;
     endTime: string;
     addedBy: number;
@@ -73,8 +73,8 @@ export interface Session {
     endTime: string;
     startMessage: string;
     endMessage: string;
-    started: boolean;
-    ended: boolean;
+    started: 0 | 1;
+    ended: 0 | 1;
     created_at: string;
     updated_at: string;
 }

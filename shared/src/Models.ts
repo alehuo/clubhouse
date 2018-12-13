@@ -2,7 +2,7 @@ export type Validator<T> = (x: unknown) => x is T;
 
 export interface DbUser extends User {
   password: string;
-  hidden: boolean;
+  hidden: 0 | 1;
 }
 
 export const isString = (x: unknown): x is string => typeof x === "string";
@@ -35,7 +35,8 @@ export const isDbUser: Validator<DbUser> = (x): x is DbUser => {
       isString(usr.updated_at) &&
       isNumber(usr.userId) &&
       isString(usr.password) &&
-      isBoolean(usr.hidden)
+      isNumber(usr.hidden) &&
+      (usr.hidden === 1 || usr.hidden === 0)
     ) {
       return true;
     } else {
@@ -90,7 +91,7 @@ export interface CalendarEvent {
   name: string;
   description: string;
   locationId: number;
-  restricted: boolean;
+  restricted: 0 | 1;
   startTime: string;
   endTime: string;
   addedBy: number;
@@ -261,8 +262,8 @@ export interface Session {
   endTime: string;
   startMessage: string;
   endMessage: string;
-  started: boolean;
-  ended: boolean;
+  started: 0 | 1;
+  ended: 0 | 1;
   created_at: string;
   updated_at: string;
 }
@@ -288,7 +289,8 @@ export const isSession: Validator<Session> = (x): x is Session => {
       isString(s.created_at) &&
       isString(s.endMessage) &&
       isString(s.endTime) &&
-      isBoolean(s.ended) &&
+      isNumber(s.ended) &&
+      (s.ended === 1 || s.ended === 0) &&
       isNumber(s.sessionId) &&
       isString(s.startMessage) &&
       isString(s.startTime) &&

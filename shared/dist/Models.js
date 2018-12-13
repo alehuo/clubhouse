@@ -26,7 +26,8 @@ exports.isDbUser = (x) => {
             exports.isString(usr.updated_at) &&
             exports.isNumber(usr.userId) &&
             exports.isString(usr.password) &&
-            exports.isBoolean(usr.hidden)) {
+            exports.isNumber(usr.hidden) &&
+            (usr.hidden === 1 || usr.hidden === 0)) {
             return true;
         }
         else {
@@ -178,7 +179,8 @@ exports.isSession = (x) => {
         if (exports.isString(s.created_at) &&
             exports.isString(s.endMessage) &&
             exports.isString(s.endTime) &&
-            exports.isBoolean(s.ended) &&
+            exports.isNumber(s.ended) &&
+            (s.ended === 1 || s.ended === 0) &&
             exports.isNumber(s.sessionId) &&
             exports.isString(s.startMessage) &&
             exports.isString(s.startTime) &&
