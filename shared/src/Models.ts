@@ -108,19 +108,34 @@ export const isCalendarEvent: Validator<CalendarEvent> = (
   }
   const cal = x as CalendarEvent;
   if (
-    cal.addedBy &&
-    cal.created_at &&
-    cal.description &&
-    cal.endTime &&
-    cal.eventId &&
-    cal.locationId &&
-    cal.name &&
-    cal.restricted &&
-    cal.startTime &&
-    cal.unionId &&
-    cal.updated_at
+    cal.addedBy !== undefined &&
+    cal.created_at !== undefined &&
+    cal.description !== undefined &&
+    cal.endTime !== undefined &&
+    cal.eventId !== undefined &&
+    cal.locationId !== undefined &&
+    cal.name !== undefined &&
+    cal.restricted !== undefined &&
+    cal.startTime !== undefined &&
+    cal.unionId !== undefined &&
+    cal.updated_at !== undefined
   ) {
-    return true;
+    if (
+      isNumber(cal.addedBy) &&
+      isString(cal.created_at) &&
+      isString(cal.description) &&
+      isString(cal.endTime) &&
+      isNumber(cal.eventId) &&
+      isNumber(cal.locationId) &&
+      isString(cal.name) &&
+      isNumber(cal.restricted) &&
+      isString(cal.startTime) &&
+      isNumber(cal.unionId) &&
+      isString(cal.updated_at)
+    ) {
+      return true;
+    }
+    return false;
   }
   return false;
 };

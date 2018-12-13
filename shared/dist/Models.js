@@ -66,18 +66,31 @@ exports.isCalendarEvent = (x) => {
         return false;
     }
     const cal = x;
-    if (cal.addedBy &&
-        cal.created_at &&
-        cal.description &&
-        cal.endTime &&
-        cal.eventId &&
-        cal.locationId &&
-        cal.name &&
-        cal.restricted &&
-        cal.startTime &&
-        cal.unionId &&
-        cal.updated_at) {
-        return true;
+    if (cal.addedBy !== undefined &&
+        cal.created_at !== undefined &&
+        cal.description !== undefined &&
+        cal.endTime !== undefined &&
+        cal.eventId !== undefined &&
+        cal.locationId !== undefined &&
+        cal.name !== undefined &&
+        cal.restricted !== undefined &&
+        cal.startTime !== undefined &&
+        cal.unionId !== undefined &&
+        cal.updated_at !== undefined) {
+        if (exports.isNumber(cal.addedBy) &&
+            exports.isString(cal.created_at) &&
+            exports.isString(cal.description) &&
+            exports.isString(cal.endTime) &&
+            exports.isNumber(cal.eventId) &&
+            exports.isNumber(cal.locationId) &&
+            exports.isString(cal.name) &&
+            exports.isNumber(cal.restricted) &&
+            exports.isString(cal.startTime) &&
+            exports.isNumber(cal.unionId) &&
+            exports.isString(cal.updated_at)) {
+            return true;
+        }
+        return false;
     }
     return false;
 };
@@ -166,21 +179,20 @@ exports.isSession = (x) => {
         return false;
     }
     const s = x;
-    if (s.created_at &&
-        s.endMessage &&
-        s.endTime &&
-        s.ended &&
-        s.sessionId &&
-        s.startMessage &&
-        s.startTime &&
-        s.started &&
-        s.updated_at &&
-        s.userId) {
+    if (s.created_at !== undefined &&
+        s.endMessage !== undefined &&
+        s.endTime !== undefined &&
+        s.ended !== undefined &&
+        s.sessionId !== undefined &&
+        s.startMessage !== undefined &&
+        s.startTime !== undefined &&
+        s.started !== undefined &&
+        s.updated_at !== undefined &&
+        s.userId !== undefined) {
         if (exports.isString(s.created_at) &&
             exports.isString(s.endMessage) &&
             exports.isString(s.endTime) &&
-            exports.isNumber(s.ended) &&
-            (s.ended === 1 || s.ended === 0) &&
+            (exports.isNumber(s.ended) && (s.ended === 1 || s.ended === 0)) &&
             exports.isNumber(s.sessionId) &&
             exports.isString(s.startMessage) &&
             exports.isString(s.startTime) &&
