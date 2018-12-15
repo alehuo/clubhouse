@@ -2,7 +2,6 @@ export type Validator<T> = (x: unknown) => x is T;
 
 export interface DbUser extends User {
   password: string;
-  hidden: 0 | 1;
 }
 
 export const isString = (x: unknown): x is string => typeof x === "string";
@@ -23,8 +22,7 @@ export const isDbUser: Validator<DbUser> = (x): x is DbUser => {
     usr.permissions !== undefined &&
     usr.updated_at !== undefined &&
     usr.userId !== undefined &&
-    usr.password !== undefined &&
-    usr.hidden !== undefined
+    usr.password !== undefined
   ) {
     if (
       isString(usr.created_at) &&
@@ -34,8 +32,7 @@ export const isDbUser: Validator<DbUser> = (x): x is DbUser => {
       isNumber(usr.permissions) &&
       isString(usr.updated_at) &&
       isNumber(usr.userId) &&
-      isString(usr.password) &&
-      (isNumber(usr.hidden) && (usr.hidden === 1 || usr.hidden === 0))
+      isString(usr.password)
     ) {
       return true;
     } else {
