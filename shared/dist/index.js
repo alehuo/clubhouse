@@ -1,15 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Permissions_1 = require("./Permissions");
-exports.CalendarPermissions = Permissions_1.CalendarPermissions;
-exports.KeyPermissions = Permissions_1.KeyPermissions;
-exports.LocationPermissions = Permissions_1.LocationPermissions;
-exports.MessagePermissions = Permissions_1.MessagePermissions;
-exports.MiscPermissions = Permissions_1.MiscPermissions;
-exports.NewspostPermissions = Permissions_1.NewspostPermissions;
-exports.RulePermissions = Permissions_1.RulePermissions;
-exports.StudentUnionPermissions = Permissions_1.StudentUnionPermissions;
-exports.UserPermissions = Permissions_1.UserPermissions;
+exports.Permissions = Permissions_1.Permissions;
 const Validators_1 = require("./Validators");
 exports.isBoolean = Validators_1.isBoolean;
 exports.isDbUser = Validators_1.isDbUser;

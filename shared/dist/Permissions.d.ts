@@ -1,36 +1,20 @@
-export declare enum UserPermissions {
+export declare enum Permissions {
     ALLOW_REMOVE_USER,
-    ALLOW_VIEW_USERS
-}
-export declare enum KeyPermissions {
+    ALLOW_VIEW_USERS,
     ALLOW_ADD_REMOVE_KEYS,
-    ALLOW_VIEW_KEYS
-}
-export declare enum StudentUnionPermissions {
+    ALLOW_VIEW_KEYS,
     ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
-    ALLOW_VIEW_STUDENT_UNIONS
-}
-export declare enum CalendarPermissions {
+    ALLOW_VIEW_STUDENT_UNIONS,
     ALLOW_ADD_EDIT_REMOVE_EVENTS,
-    ALLOW_VIEW_EVENTS
-}
-export declare enum RulePermissions {
+    ALLOW_VIEW_EVENTS,
     ALLOW_ADD_EDIT_REMOVE_RULES,
-    ALLOW_VIEW_RULES
-}
-export declare enum NewspostPermissions {
+    ALLOW_VIEW_RULES,
     ALLOW_ADD_EDIT_REMOVE_POSTS,
-    ALLOW_VIEW_POSTS
-}
-export declare enum LocationPermissions {
+    ALLOW_VIEW_POSTS,
     ALLOW_ADD_EDIT_REMOVE_LOCATIONS,
-    ALLOW_VIEW_LOCATIONS
-}
-export declare enum MessagePermissions {
+    ALLOW_VIEW_LOCATIONS,
     ALLOW_ADD_EDIT_REMOVE_MESSAGES,
-    ALLOW_VIEW_LOCATIONS
-}
-export declare enum MiscPermissions {
+    ALLOW_VIEW_MESSAGES,
     ALLOW_ADD_EDIT_REMOVE_PERMISSIONS,
     ALLOW_VIEW_PERMISSIONS
 }
