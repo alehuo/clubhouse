@@ -7,8 +7,8 @@ import { statisticsFilter } from "../../src/Filters";
 import { Statistics } from "../../src/Models";
 const should: Chai.Should = chai.should();
 
-describe("UserStatistics", () => {
-  it("should get and set user statistics correctly", (done: Mocha.Done) => {
+describe("Statistics", () => {
+  it("should get and set statistics correctly", (done: Mocha.Done) => {
     const stats: Statistics = {
       eventCount: 55,
       hoursOnWatch: 225,
