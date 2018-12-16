@@ -1,6 +1,6 @@
 {
   "name": "@alehuo/clubhouse-shared",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Shared libraries for Clubhouse front-end and back-end.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
