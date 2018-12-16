@@ -17,7 +17,17 @@ import {
   User,
   UserStatistics,
 } from "./Models";
-import Permissions from "./Permissions";
+import {
+  CalendarPermissions,
+  KeyPermissions,
+  LocationPermissions,
+  MessagePermissions,
+  MiscPermissions,
+  NewspostPermissions,
+  RulePermissions,
+  StudentUnionPermissions,
+  UserPermissions,
+} from "./Permissions";
 import {
   isBoolean,
   isDbUser,
@@ -35,7 +45,6 @@ import {
 } from "./Validators";
 
 export {
-  Permissions,
   DbUser,
   User,
   CalendarEvent,
@@ -63,4 +72,13 @@ export {
   ApiResponse,
   ApiMessage,
   ApiError,
+  CalendarPermissions,
+  KeyPermissions,
+  LocationPermissions,
+  MessagePermissions,
+  MiscPermissions,
+  NewspostPermissions,
+  RulePermissions,
+  StudentUnionPermissions,
+  UserPermissions,
 };
