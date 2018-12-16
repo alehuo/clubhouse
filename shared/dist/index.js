@@ -1,5 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const Filters_1 = require("./Filters");
+exports.calendarEventFilter = Filters_1.calendarEventFilter;
+exports.locationFilter = Filters_1.locationFilter;
+exports.messageFilter = Filters_1.messageFilter;
+exports.newsPostFilter = Filters_1.newsPostFilter;
+exports.sessionFilter = Filters_1.sessionFilter;
+exports.statisticsFilter = Filters_1.statisticsFilter;
+exports.studentUnionFilter = Filters_1.studentUnionFilter;
+exports.timestampFilter = Filters_1.timestampFilter;
+exports.userFilter = Filters_1.userFilter;
+exports.userStatisticsFilter = Filters_1.userStatisticsFilter;
 const Permissions_1 = require("./Permissions");
 exports.Permission = Permissions_1.Permission;
 const Validators_1 = require("./Validators");

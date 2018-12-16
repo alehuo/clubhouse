@@ -5,6 +5,18 @@
 
 import { ApiError, ApiMessage, ApiResponse } from "./ApiUtils";
 import {
+  calendarEventFilter,
+  locationFilter,
+  messageFilter,
+  newsPostFilter,
+  sessionFilter,
+  statisticsFilter,
+  studentUnionFilter,
+  timestampFilter,
+  userFilter,
+  userStatisticsFilter,
+} from "./Filters";
+import {
   CalendarEvent,
   DbUser,
   Location,
@@ -59,4 +71,14 @@ export {
   ApiMessage,
   ApiError,
   Permission,
+  calendarEventFilter,
+  locationFilter,
+  messageFilter,
+  newsPostFilter,
+  sessionFilter,
+  statisticsFilter,
+  studentUnionFilter,
+  timestampFilter,
+  userFilter,
+  userStatisticsFilter,
 };
