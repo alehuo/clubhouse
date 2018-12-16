@@ -9,7 +9,7 @@ import { Newspost } from "../../src/Models";
 const should: Chai.Should = chai.should();
 
 describe("NewsPost", () => {
-  it("should get and set newspost correctly", (done: Mocha.Done) => {
+  it("should get and set newspost correctly", (done) => {
     const post: Newspost = {
       author: 225,
       created_at: moment(new Date(2018, 1, 2, 13, 44)).toISOString(),
@@ -38,7 +38,7 @@ describe("NewsPost", () => {
     done();
   });
 
-  it("should filter newspost correctly", (done: Mocha.Done) => {
+  it("should filter newspost correctly", (done) => {
     const post1: Newspost = {
       author: 225,
       created_at: moment(new Date(2018, 1, 2, 13, 44)).toISOString(),
@@ -70,7 +70,7 @@ describe("NewsPost", () => {
     done();
   });
 
-  it("should get and set newspost correctly", (done: Mocha.Done) => {
+  it("should get and set newspost correctly", (done) => {
     const post: Newspost = {
       author: 225,
       created_at: moment(new Date(2018, 1, 2, 13, 44)).toISOString(),

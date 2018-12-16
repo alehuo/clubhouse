@@ -9,7 +9,7 @@ import { Location } from "../../src/Models";
 const should: Chai.Should = chai.should();
 
 describe("Location", () => {
-  it("should get and set properties correctly", (done: Mocha.Done) => {
+  it("should get and set properties correctly", (done) => {
     const location: Location = {
       address: "Test Address",
       created_at: moment(new Date(2017, 2, 12, 23, 55)).toISOString(),
@@ -40,7 +40,7 @@ describe("Location", () => {
     done();
   });
 
-  it("Location filter should filter properties properties correctly", (done: Mocha.Done) => {
+  it("Location filter should filter properties properties correctly", (done) => {
     const tmpLocation: Location = {
       address: "Test Address",
       created_at: moment(new Date(2017, 2, 12, 23, 55)).toISOString(),

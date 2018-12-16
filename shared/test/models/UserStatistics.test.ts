@@ -7,7 +7,7 @@ import { UserStatistics } from "../../src/Models";
 const should: Chai.Should = chai.should();
 
 describe("UserStatistics", () => {
-  it("should get and set user statistics correctly", (done: Mocha.Done) => {
+  it("should get and set user statistics correctly", (done) => {
     const post: UserStatistics = {
       eventCount: 55,
       hoursOnWatch: 225,
@@ -29,7 +29,7 @@ describe("UserStatistics", () => {
     done();
   });
 
-  it("should filter user statistics correctly", (done: Mocha.Done) => {
+  it("should filter user statistics correctly", (done) => {
     const post1: UserStatistics = {
       eventCount: 55,
       hoursOnWatch: 225,

@@ -9,7 +9,7 @@ import { CalendarEvent } from "../../src/Models";
 const should: Chai.Should = chai.should();
 
 describe("CalendarEvent", () => {
-  it("should get and set properties correctly", (done: Mocha.Done) => {
+  it("should get and set properties correctly", (done) => {
     const calendarEvent: CalendarEvent = {
       addedBy: 1,
       created_at: moment(new Date(2016, 1, 1, 22, 12)).toISOString(),
@@ -59,7 +59,7 @@ describe("CalendarEvent", () => {
     done();
   });
 
-  it("should filter event correctly", (done: Mocha.Done) => {
+  it("should filter event correctly", (done) => {
     const calendarEvent1: CalendarEvent = {
       addedBy: 1,
       created_at: moment(new Date(2016, 1, 1, 22, 12)).toISOString(),

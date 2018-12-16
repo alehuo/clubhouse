@@ -7,7 +7,7 @@ import { timestampFilter } from "../../src/Filters";
 const should: Chai.Should = chai.should();
 
 describe("Filters", () => {
-  it("should filter timestamps correctly", (done: Mocha.Done) => {
+  it("should filter timestamps correctly", (done) => {
     const obj = {
       something: "hello",
       created_at: moment(new Date()).toISOString(),
@@ -21,7 +21,7 @@ describe("Filters", () => {
     done();
   });
 
-  it("should not filter if either if the timestamps are missing", (done: Mocha.Done) => {
+  it("should not filter if either if the timestamps are missing", (done) => {
     const obj = {
       something: "hello",
       created_at: moment(new Date()).toISOString(),

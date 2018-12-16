@@ -8,7 +8,7 @@ import { Message } from "../../src/Models";
 const should: Chai.Should = chai.should();
 
 describe("Message", () => {
-  it("should get and set message correctly", (done: Mocha.Done) => {
+  it("should get and set message correctly", (done) => {
     const message: Message = {
       message: "HelloWorld",
       userId: 1,
@@ -20,7 +20,7 @@ describe("Message", () => {
     expect(message.message).to.equal("HelloWorld");
     done();
   });
-  it("should get and set userid correctly", (done: Mocha.Done) => {
+  it("should get and set userid correctly", (done) => {
     const message: Message = {
       message: "HelloWorld",
       userId: 1,
@@ -32,7 +32,7 @@ describe("Message", () => {
     expect(message.userId).to.equal(1);
     done();
   });
-  it("should get and set messageId correctly", (done: Mocha.Done) => {
+  it("should get and set messageId correctly", (done) => {
     const message: Message = {
       message: "HelloWorld",
       userId: 1,
@@ -46,7 +46,7 @@ describe("Message", () => {
     done();
   });
 
-  it("should filter message correctly", (done: Mocha.Done) => {
+  it("should filter message correctly", (done) => {
     const message1: Message = {
       message: "HelloWorld",
       userId: 1,
