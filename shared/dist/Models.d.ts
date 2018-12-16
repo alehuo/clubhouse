@@ -1,12 +1,6 @@
-export declare type Validator<T> = (x: unknown) => x is T;
 export interface DbUser extends User {
     password: string;
 }
-export declare const isString: (x: unknown) => x is string;
-export declare const isNumber: (x: unknown) => x is number;
-export declare const isBoolean: (x: unknown) => x is boolean;
-export declare const isObject: (x: unknown) => x is object;
-export declare const isDbUser: Validator<DbUser>;
 export interface User {
     userId: number;
     email: string;
@@ -16,7 +10,6 @@ export interface User {
     created_at: string;
     updated_at: string;
 }
-export declare const isUser: Validator<User>;
 export interface CalendarEvent {
     eventId: number;
     name: string;
@@ -30,7 +23,6 @@ export interface CalendarEvent {
     created_at: string;
     updated_at: string;
 }
-export declare const isCalendarEvent: Validator<CalendarEvent>;
 export interface Location {
     locationId: number;
     name: string;
@@ -38,7 +30,6 @@ export interface Location {
     created_at: string;
     updated_at: string;
 }
-export declare const isLocation: Validator<Location>;
 export interface Message {
     messageId: number;
     userId: number;
@@ -47,7 +38,6 @@ export interface Message {
     created_at: string;
     updated_at: string;
 }
-export declare const isMessage: Validator<Message>;
 export interface Newspost {
     postId: number;
     author: number;
@@ -56,7 +46,6 @@ export interface Newspost {
     created_at: string;
     updated_at: string;
 }
-export declare const isNewspost: Validator<Newspost>;
 export interface Permission {
     permissionId: number;
     name: string;
@@ -64,7 +53,6 @@ export interface Permission {
     created_at: string;
     updated_at: string;
 }
-export declare const isPermission: Validator<Permission>;
 export interface Session {
     sessionId: number;
     userId: number;
@@ -77,7 +65,6 @@ export interface Session {
     created_at: string;
     updated_at: string;
 }
-export declare const isSession: Validator<Session>;
 export interface Statistics {
     newspostCount: number;
     messageCount: number;
@@ -86,7 +73,6 @@ export interface Statistics {
     hoursOnWatch: number;
     eventCount: number;
 }
-export declare const isStatistics: Validator<Statistics>;
 export interface StudentUnion {
     unionId: number;
     name: string;
@@ -94,7 +80,6 @@ export interface StudentUnion {
     created_at: string;
     updated_at: string;
 }
-export declare const isStudentUnion: Validator<StudentUnion>;
 export interface UserStatistics {
     newspostCount: number;
     messageCount: number;
@@ -102,5 +87,4 @@ export interface UserStatistics {
     hoursOnWatch: number;
     eventCount: number;
 }
-export declare const isUserStatistics: Validator<UserStatistics>;
 //# sourceMappingURL=Models.d.ts.map

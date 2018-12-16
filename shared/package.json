@@ -1,6 +1,6 @@
 {
   "name": "@alehuo/clubhouse-shared",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "Shared libraries for Clubhouse front-end and back-end.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -15,6 +15,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "clean": "rimraf dist/*.d.ts dist/*.js dist/*.d.ts.map"
+    "clean": "rimraf dist/*.d.ts dist/*.js dist/*.d.ts.map dist/*.js.map"
   }
 }

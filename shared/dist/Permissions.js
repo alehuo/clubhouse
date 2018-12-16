@@ -1,77 +1,50 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const userCrud = {
-    ALLOW_REMOVE_USER: { name: "ALLOW_REMOVE_USER", value: Math.pow(2, 0) },
-    ALLOW_VIEW_USERS: { name: "ALLOW_VIEW_USERS", value: Math.pow(2, 1) },
-};
-const keyCrud = {
-    ALLOW_ADD_REMOVE_KEYS: {
-        name: "ALLOW_ADD_REMOVE_KEYS",
-        value: Math.pow(2, 2),
-    },
-    ALLOW_VIEW_KEYS: { name: "ALLOW_VIEW_KEYS", value: Math.pow(2, 3) },
-};
-const studentUnionCrud = {
-    ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS: {
-        name: "ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS",
-        value: Math.pow(2, 4),
-    },
-    ALLOW_VIEW_STUDENT_UNIONS: {
-        name: "ALLOW_VIEW_STUDENT_UNIONS",
-        value: Math.pow(2, 5),
-    },
-};
-const calendarCrud = {
-    ALLOW_ADD_EDIT_REMOVE_EVENTS: {
-        name: "ALLOW_ADD_EDIT_REMOVE_EVENTS",
-        value: Math.pow(2, 6),
-    },
-    ALLOW_VIEW_EVENTS: { name: "ALLOW_VIEW_EVENTS", value: Math.pow(2, 7) },
-};
-const ruleCrud = {
-    ALLOW_ADD_EDIT_REMOVE_RULES: {
-        name: "ALLOW_ADD_EDIT_REMOVE_RULES",
-        value: Math.pow(2, 8),
-    },
-    ALLOW_VIEW_RULES: { name: "ALLOW_VIEW_RULES", value: Math.pow(2, 9) },
-};
-const newspostCrud = {
-    ALLOW_ADD_EDIT_REMOVE_POSTS: {
-        name: "ALLOW_ADD_EDIT_REMOVE_POSTS",
-        value: Math.pow(2, 10),
-    },
-    ALLOW_VIEW_POSTS: { name: "ALLOW_VIEW_POSTS", value: Math.pow(2, 11) },
-};
-const locationCrud = {
-    ALLOW_ADD_EDIT_REMOVE_LOCATIONS: {
-        name: "ALLOW_ADD_EDIT_REMOVE_LOCATIONS",
-        value: Math.pow(2, 12),
-    },
-    ALLOW_VIEW_LOCATIONS: {
-        name: "ALLOW_VIEW_LOCATIONS",
-        value: Math.pow(2, 13),
-    },
-};
-const messageCrud = {
-    ALLOW_ADD_EDIT_REMOVE_MESSAGES: {
-        name: "ALLOW_ADD_EDIT_REMOVE_MESSAGES",
-        value: Math.pow(2, 14),
-    },
-    ALLOW_VIEW_LOCATIONS: {
-        name: "ALLOW_VIEW_MESSAGES",
-        value: Math.pow(2, 15),
-    },
-};
-const permissionCrud = {
-    ALLOW_ADD_EDIT_REMOVE_PERMISSIONS: {
-        name: "ALLOW_ADD_EDIT_REMOVE_PERMISSIONS",
-        value: Math.pow(2, 16),
-    },
-    ALLOW_VIEW_PERMISSIONS: {
-        name: "ALLOW_VIEW_PERMISSIONS",
-        value: Math.pow(2, 17),
-    },
-};
-const permissions = Object.assign({}, userCrud, keyCrud, studentUnionCrud, calendarCrud, ruleCrud, newspostCrud, locationCrud, messageCrud, permissionCrud);
+var UserPermissions;
+(function (UserPermissions) {
+    UserPermissions[UserPermissions["ALLOW_REMOVE_USER"] = Math.pow(2, 0)] = "ALLOW_REMOVE_USER";
+    UserPermissions[UserPermissions["ALLOW_VIEW_USERS"] = Math.pow(2, 1)] = "ALLOW_VIEW_USERS";
+})(UserPermissions || (UserPermissions = {}));
+var KeyPermissions;
+(function (KeyPermissions) {
+    KeyPermissions[KeyPermissions["ALLOW_ADD_REMOVE_KEYS"] = Math.pow(2, 2)] = "ALLOW_ADD_REMOVE_KEYS";
+    KeyPermissions[KeyPermissions["ALLOW_VIEW_KEYS"] = Math.pow(2, 3)] = "ALLOW_VIEW_KEYS";
+})(KeyPermissions || (KeyPermissions = {}));
+var StudentUnionPermissions;
+(function (StudentUnionPermissions) {
+    StudentUnionPermissions[StudentUnionPermissions["ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS"] = Math.pow(2, 4)] = "ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS";
+    StudentUnionPermissions[StudentUnionPermissions["ALLOW_VIEW_STUDENT_UNIONS"] = Math.pow(2, 5)] = "ALLOW_VIEW_STUDENT_UNIONS";
+})(StudentUnionPermissions || (StudentUnionPermissions = {}));
+var CalendarPermissions;
+(function (CalendarPermissions) {
+    CalendarPermissions[CalendarPermissions["ALLOW_ADD_EDIT_REMOVE_EVENTS"] = Math.pow(2, 6)] = "ALLOW_ADD_EDIT_REMOVE_EVENTS";
+    CalendarPermissions[CalendarPermissions["ALLOW_VIEW_EVENTS"] = Math.pow(2, 7)] = "ALLOW_VIEW_EVENTS";
+})(CalendarPermissions || (CalendarPermissions = {}));
+var RulePermissions;
+(function (RulePermissions) {
+    RulePermissions[RulePermissions["ALLOW_ADD_EDIT_REMOVE_RULES"] = Math.pow(2, 8)] = "ALLOW_ADD_EDIT_REMOVE_RULES";
+    RulePermissions[RulePermissions["ALLOW_VIEW_RULES"] = Math.pow(2, 9)] = "ALLOW_VIEW_RULES";
+})(RulePermissions || (RulePermissions = {}));
+var NewspostPermissions;
+(function (NewspostPermissions) {
+    NewspostPermissions[NewspostPermissions["ALLOW_ADD_EDIT_REMOVE_POSTS"] = Math.pow(2, 10)] = "ALLOW_ADD_EDIT_REMOVE_POSTS";
+    NewspostPermissions[NewspostPermissions["ALLOW_VIEW_POSTS"] = Math.pow(2, 11)] = "ALLOW_VIEW_POSTS";
+})(NewspostPermissions || (NewspostPermissions = {}));
+var LocationPermissions;
+(function (LocationPermissions) {
+    LocationPermissions[LocationPermissions["ALLOW_ADD_EDIT_REMOVE_LOCATIONS"] = Math.pow(2, 12)] = "ALLOW_ADD_EDIT_REMOVE_LOCATIONS";
+    LocationPermissions[LocationPermissions["ALLOW_VIEW_LOCATIONS"] = Math.pow(2, 13)] = "ALLOW_VIEW_LOCATIONS";
+})(LocationPermissions || (LocationPermissions = {}));
+var MessagePermissions;
+(function (MessagePermissions) {
+    MessagePermissions[MessagePermissions["ALLOW_ADD_EDIT_REMOVE_MESSAGES"] = Math.pow(2, 14)] = "ALLOW_ADD_EDIT_REMOVE_MESSAGES";
+    MessagePermissions[MessagePermissions["ALLOW_VIEW_LOCATIONS"] = Math.pow(2, 15)] = "ALLOW_VIEW_LOCATIONS";
+})(MessagePermissions || (MessagePermissions = {}));
+var MiscPermissions;
+(function (MiscPermissions) {
+    MiscPermissions[MiscPermissions["ALLOW_ADD_EDIT_REMOVE_PERMISSIONS"] = Math.pow(2, 16)] = "ALLOW_ADD_EDIT_REMOVE_PERMISSIONS";
+    MiscPermissions[MiscPermissions["ALLOW_VIEW_PERMISSIONS"] = Math.pow(2, 17)] = "ALLOW_VIEW_PERMISSIONS";
+})(MiscPermissions || (MiscPermissions = {}));
+const permissions = Object.assign({}, UserPermissions, KeyPermissions, StudentUnionPermissions, CalendarPermissions, RulePermissions, NewspostPermissions, LocationPermissions, MessagePermissions, MiscPermissions);
 exports.default = permissions;
 //# sourceMappingURL=Permissions.js.map
