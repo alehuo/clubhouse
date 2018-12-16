@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
-import RuleService from "./../services/RuleService";
+import RuleService, { Rule } from "./../services/RuleService";
 
 export interface RuleState {
   readonly rules: any[];
@@ -20,7 +20,7 @@ export const ruleActions = {
   TOGGLE_SINGLE_RULE_EDIT_MODE: "TOGGLE_SINGLE_RULE_EDIT_MODE",
 };
 
-export const setRules = (rules: any[]) => {
+export const setRules = (rules: Rule[]) => {
   return {
     type: ruleActions.SET_RULES,
     rules,
@@ -35,8 +35,17 @@ export const toggleEditMode = () => {
 
 export const fetchRules = () => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
-    const rules = await RuleService.getRulesMock();
-    dispatch(setRules(rules));
+    try {
+      const res = await RuleService.getRulesMock();
+      if (res.payload !== undefined) {
+        dispatch(setRules(res.payload));
+      } else {
+        console.error("Response payload was undefined.");
+      }
+    } catch (err) {
+      // TODO: Proper error handling
+      console.error(err);
+    }
   };
 };
 

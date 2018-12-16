@@ -1,3 +1,4 @@
+import { ApiResponse, isStudentUnion } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import StudentUnionService from "../../services/StudentUnionService";
@@ -14,10 +15,22 @@ export const fetchStudentUnions = (token: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
       const res = await StudentUnionService.getStudentUnions(token);
-      dispatch(setStudentUnions(res.data));
+      if (res.payload !== undefined) {
+        const stdus = res.payload;
+        if (stdus.every(isStudentUnion)) {
+          dispatch(setStudentUnions(stdus));
+        } else {
+          dispatch(errorMessage("Back-end returned invalid student unions"));
+        }
+      } else {
+        console.error("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error fetching student unions"));
@@ -43,12 +56,25 @@ export const addStudentUnion = (stdu: any, token: string) => {
     dispatch(setAdding(true));
     try {
       const res = await StudentUnionService.addStudentUnion(stdu, token);
-      const addedUnion = res.data;
-      dispatch(addStudentUnionToList(addedUnion));
-      dispatch(successMessage("New student union added successfully"));
+      if (res.payload !== undefined) {
+        const addedUnion = res.payload;
+        if (isStudentUnion(addedUnion)) {
+          dispatch(addStudentUnionToList(addedUnion));
+          dispatch(successMessage("New student union added successfully"));
+        } else {
+          dispatch(
+            errorMessage("Back-end returned a malformed student union."),
+          );
+        }
+      } else {
+        console.log("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error adding student union"));
@@ -69,8 +95,11 @@ export const deleteStudentUnion = (unionId: number, token: string) => {
       dispatch(deleteStudentUnionFromList(unionId));
       dispatch(successMessage("Student union deleted successfully"));
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error deleting student union"));

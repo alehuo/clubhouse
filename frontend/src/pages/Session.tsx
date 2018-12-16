@@ -26,7 +26,7 @@ interface Props {
   toggleEndSessionModal: any;
   toggleStartSessionModal: any;
   watchRunning: boolean;
-  startTime?: Date;
+  startTime?: string;
   peopleCount: number;
 }
 
@@ -189,7 +189,7 @@ export class Session extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
   token: state.user.token,
   endSessionModalOpen: state.session.endSessionModalOpen,
   startSessionModalOpen: state.session.startSessionModalOpen,

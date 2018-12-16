@@ -37,9 +37,10 @@
 | 11.12.2018 | 1.0h  | Updated shared library. Added more typings to reducers and services. Added Redux Devtools extension. Started using moment.js library to format dates.                                                                                                             |
 | 13.12.2018 | 1.0h  | UI improvements (Work in progress). Removed token from newspost and rule controllers as everyone should be able to read the news and rules.                                                                                                                       |
 | 13.12.2018 | 1.0h  | Added CustomOverlay component to show UI tooltips.                                                                                                                                                                                                                |
+| 16.12.2018 | 1.0h  | Updated shared module. Updated services to have response typings and added additional validation for data returned from the back-end. Removed PermissionReducer.                                                                                                  |
 
 Total:
 
 25.5 h (Part 1)
 
-26.5 h (Part 2)
+27.5 h (Part 2)

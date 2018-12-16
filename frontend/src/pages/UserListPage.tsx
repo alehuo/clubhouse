@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import UsersList from "./../components/UsersList";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-import { Permissions, User } from "@alehuo/clubhouse-shared";
+import { Permission, User } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
 interface Props {
@@ -19,7 +19,7 @@ export class UserListPage extends React.Component<Props> {
         <PageHeader>Users</PageHeader>
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_USERS.value,
+          Permission.ALLOW_VIEW_USERS,
         ) ? (
           <UsersList users={this.props.users} />
         ) : (
@@ -35,7 +35,7 @@ export class UserListPage extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   studentUnions: state.studentUnion.studentUnions,
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
   users: state.user.users,
 });
 

@@ -9,7 +9,6 @@ import keyReducer from "./reducers/keyReducer";
 import { logger } from "./reducers/middleware";
 import newsReducer from "./reducers/newsReducer";
 import notificationReducer from "./reducers/notificationReducer";
-import permissionReducer from "./reducers/permissionReducer";
 import ruleReducer from "./reducers/ruleReducer";
 import sessionReducer from "./reducers/sessionReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
@@ -22,7 +21,6 @@ const reducerObj = {
   notification: notificationReducer,
   key: keyReducer,
   studentUnion: studentUnionReducer,
-  permission: permissionReducer,
   session: sessionReducer,
   form: formReducer,
   rule: ruleReducer,

@@ -1,3 +1,4 @@
+import { ApiResponse } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import * as sessionService from "../../services/SessionService";
@@ -34,16 +35,24 @@ export const fetchOwnSessionStatus = (token: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
       const ownSessionStatus = await sessionService.getOwnSessionStatus(token);
-      dispatch(
-        setOwnSessionStatus(
-          ownSessionStatus.running,
-          ownSessionStatus.peopleCount,
-          ownSessionStatus.startTime,
-        ),
-      );
+      if (ownSessionStatus.payload !== undefined) {
+        const session = ownSessionStatus.payload;
+        dispatch(
+          setOwnSessionStatus(
+            session.running,
+            session.peopleCount,
+            session.startTime,
+          ),
+        );
+      } else {
+        console.error("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error fetching watch status"));
@@ -55,7 +64,7 @@ export const fetchOwnSessionStatus = (token: string) => {
 export const setOwnSessionStatus = (
   ownSessionRunning: boolean,
   ownSessionPeopleCount: number,
-  ownSessionStartTime: Date,
+  ownSessionStartTime: string,
 ) =>
   action(SET_OWN_SESSION_STATUS, {
     ownSessionRunning,
@@ -70,8 +79,8 @@ export const endSession = (token: string, endMessage: string) => {
       await sessionService.stopSession(token, endMessage);
       dispatch(successMessage("Your session has ended."));
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        dispatch(errorMessage(err.response.data));
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error ending session"));
@@ -90,8 +99,11 @@ export const startSession = (token: string, startMessage: string) => {
       await sessionService.startSession(token, startMessage);
       dispatch(successMessage("Your session has started."));
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error starting session"));

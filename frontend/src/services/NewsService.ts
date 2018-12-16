@@ -1,5 +1,5 @@
 // Newspost service
-import { Newspost } from "@alehuo/clubhouse-shared";
+import { ApiResponse, Newspost } from "@alehuo/clubhouse-shared";
 import customAxios from "./custom-axios";
 
 const apiEndpoint = "api/v1/newspost";
@@ -7,12 +7,12 @@ const apiEndpoint = "api/v1/newspost";
 const getNewsposts = async () => {
   const response = await customAxios
     .withoutToken()
-    .get<Newspost[]>(apiEndpoint);
+    .get<ApiResponse<Newspost[]>>(apiEndpoint);
   return response.data;
 };
 
 const addNewspost = async (token: string, title: string, message: string) => {
-  const result = await customAxios.withToken(token).post(
+  const result = await customAxios.withToken(token).post<ApiResponse<Newspost>>(
     apiEndpoint,
     {
       title,

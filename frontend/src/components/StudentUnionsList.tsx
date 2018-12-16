@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { deleteStudentUnion } from "./../reducers/actions/studentUnionActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-import { Permissions, StudentUnion } from "@alehuo/clubhouse-shared";
+import { Permission, StudentUnion } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
 interface Props {
@@ -29,7 +29,7 @@ const StudentUnionsList: React.SFC<Props> = ({
         <th>Description</th>
         {PermissionUtils.hasPermission(
           perms,
-          Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value,
+          Permission.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
         ) && <th>Actions</th>}
       </tr>
     </thead>
@@ -42,7 +42,7 @@ const StudentUnionsList: React.SFC<Props> = ({
             <td>{union.description}</td>
             {PermissionUtils.hasPermission(
               perms,
-              Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value,
+              Permission.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
             ) && (
               <td>
                 <Button
@@ -74,7 +74,7 @@ const StudentUnionsList: React.SFC<Props> = ({
 
 const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
 });
 
 const mapDispatchToProps = {

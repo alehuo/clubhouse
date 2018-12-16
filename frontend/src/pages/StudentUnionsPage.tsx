@@ -10,7 +10,7 @@ import {
 import PermissionUtils from "./../utils/PermissionUtils";
 import AddStudentUnion from "./subpages/AddStudentUnion";
 
-import { Permissions, StudentUnion } from "@alehuo/clubhouse-shared";
+import { Permission, StudentUnion } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
 interface Props {
@@ -39,7 +39,7 @@ export class StudentUnionsPage extends React.Component<Props> {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS.value,
+              Permission.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
             ) && (
               <Button
                 bsStyle="success"
@@ -52,7 +52,7 @@ export class StudentUnionsPage extends React.Component<Props> {
         </PageHeader>
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_STUDENT_UNIONS.value,
+          Permission.ALLOW_VIEW_STUDENT_UNIONS,
         ) ? (
           <StudentUnionsList stdus={this.props.studentUnions} />
         ) : (
@@ -73,7 +73,7 @@ export class StudentUnionsPage extends React.Component<Props> {
 const mapStateToProps = (state: RootState) => ({
   studentUnions: state.studentUnion.studentUnions,
   modalOpen: state.studentUnion.modalOpen,
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
   token: state.user.token,
 });
 

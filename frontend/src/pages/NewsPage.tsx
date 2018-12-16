@@ -6,7 +6,7 @@ import PermissionUtils from "./../utils/PermissionUtils";
 
 import FontAwesome from "react-fontawesome";
 
-import { Newspost, Permissions } from "@alehuo/clubhouse-shared";
+import { Newspost, Permission } from "@alehuo/clubhouse-shared";
 import {
   deleteNewspost,
   fetchNewsposts,
@@ -38,7 +38,7 @@ export class NewsPage extends React.Component<Props> {
   public render() {
     const editDeletePermissions = PermissionUtils.hasPermission(
       this.props.perms,
-      Permissions.ALLOW_ADD_EDIT_REMOVE_POSTS.value,
+      Permission.ALLOW_ADD_EDIT_REMOVE_POSTS,
     );
     return (
       <React.Fragment>
@@ -92,7 +92,7 @@ export class NewsPage extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
   newsPosts: state.news.newsPosts,
   addModalOpen: state.news.addModalOpen,
   editModalOpen: state.news.editModalOpen,

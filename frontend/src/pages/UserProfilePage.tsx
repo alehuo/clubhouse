@@ -66,10 +66,8 @@ const UserProfilePage: React.SFC<Props> = (props) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
   userData: state.user.userData,
 });
 
-export default connect(
-  mapStateToProps,
-)(UserProfilePage);
+export default connect(mapStateToProps)(UserProfilePage);

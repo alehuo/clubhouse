@@ -1,5 +1,5 @@
 // Calendar events
-import { CalendarEvent } from "@alehuo/clubhouse-shared";
+import { ApiResponse, CalendarEvent } from "@alehuo/clubhouse-shared";
 import customAxios from "./custom-axios";
 
 export const eventMapper = (event: CalendarEvent) => {
@@ -12,9 +12,17 @@ export const eventMapper = (event: CalendarEvent) => {
   };
 };
 
-const getEvents = async () =>
-  customAxios.withoutToken().get<CalendarEvent[]>("/api/v1/calendar");
-const getEvent = async (id: number) =>
-  customAxios.withoutToken().get<CalendarEvent>("/api/v1/calendar/" + id);
+const getEvents = async () => {
+  const res = await customAxios
+    .withoutToken()
+    .get<ApiResponse<CalendarEvent[]>>("/api/v1/calendar");
+  return res.data;
+};
+const getEvent = async (id: number) => {
+  const res = await customAxios
+    .withoutToken()
+    .get<ApiResponse<CalendarEvent>>("/api/v1/calendar/" + id);
+  return res.data;
+};
 
 export default { getEvents, getEvent };

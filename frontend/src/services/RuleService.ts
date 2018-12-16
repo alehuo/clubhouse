@@ -1,22 +1,29 @@
+import { ApiResponse } from "@alehuo/clubhouse-shared";
 import axios from "axios";
 
-const getRules = async () => axios.get("api/v1/rules");
+const getRules = async () => {
+  const res = await axios.get<ApiResponse<Rule[]>>("api/v1/rules");
+  return res.data;
+};
 
 export interface Rule {
-  id: number;
+  ruleId: number;
+  order: number;
   text: string;
 }
 
 const ruleList: Rule[] = [
   {
-    id: 1,
+    ruleId: 1,
+    order: 3,
     text:
       "Every person who visits the clubhouse for the first time must go through a detailed walkthrough" +
       " of these rules to make sure that he/she understands the basic measurements that are made to ensure the" +
       " safety of others and him/herself.",
   },
   {
-    id: 2,
+    ruleId: 2,
+    order: 2,
     text:
       "Quis et in sunt consequat duis et. Cillum ipsum" +
       " ad consequat et in eu ipsum adipisicing. Adipisicing aute dolore " +
@@ -26,7 +33,8 @@ const ruleList: Rule[] = [
       " Pariatur voluptate laborum reprehenderit et eiusmod non quis minim anim exercitation eu sit cillum.",
   },
   {
-    id: 3,
+    ruleId: 3,
+    order: 1,
     text:
       "Excepteur irure quis magna cillum ex. Minim" +
       " commodo esse ut et nulla esse culpa duis velit pariatur sint consequat." +
@@ -35,7 +43,8 @@ const ruleList: Rule[] = [
       "Proident voluptate laboris eu commodo nulla amet veniam.",
   },
   {
-    id: 4,
+    ruleId: 4,
+    order: 4,
     text:
       "Et non fugiat excepteur excepteur eu sint enim " +
       "reprehenderit eiusmod laboris in minim est consequat. Irure excepteur " +
@@ -43,7 +52,8 @@ const ruleList: Rule[] = [
       "id cillum. Consequat do non do sint esse tempor et proident consectetur.",
   },
   {
-    id: 5,
+    ruleId: 5,
+    order: 5,
     text:
       "Qui ex occaecat exercitation dolore adipisicing " +
       "commodo ullamco aliquip excepteur culpa mollit velit consectetur dolor. " +
@@ -60,6 +70,12 @@ const ruleList: Rule[] = [
   },
 ];
 
-const getRulesMock = () => Promise.resolve(ruleList);
+const getRulesMock = () => {
+  const response: ApiResponse<Rule[]> = {
+    payload: ruleList,
+    success: true,
+  };
+  return Promise.resolve(response);
+};
 
 export default { getRules, getRulesMock };

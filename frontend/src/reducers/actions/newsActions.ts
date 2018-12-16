@@ -1,4 +1,4 @@
-import { Newspost } from "@alehuo/clubhouse-shared";
+import { ApiResponse, isNewspost, Newspost } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
@@ -42,10 +42,22 @@ export const fetchNewsposts = () => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
       const posts = await NewsService.getNewsposts();
-      dispatch(setNewsposts(posts));
+      if (posts.payload !== undefined) {
+        const newsposts = posts.payload;
+        if (newsposts.every(isNewspost)) {
+          dispatch(setNewsposts(newsposts));
+        } else {
+          dispatch(errorMessage("Back-end returned malformed newsposts"));
+        }
+      } else {
+        console.error("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Failed to fetch newsposts"));
@@ -61,8 +73,11 @@ export const deleteNewspost = (token: string, id: number) => {
       dispatch(deleteNewspostFromList(id));
       dispatch(successMessage("Newspost deleted"));
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Failed to delete newspost"));
@@ -76,21 +91,32 @@ export const addNewspost = (token: string, title: string, message: string) => {
     dispatch(setIsAdding(true));
     try {
       const res = await NewsService.addNewspost(token, title, message);
-      // TODO: Hook to back-end
-      dispatch(
-        addNewspostToList({
-          postId: res.postId,
-          author: res.author,
-          title: res.title,
-          message: res.message,
-          created_at: moment().toISOString(),
-          updated_at: moment().toISOString(),
-        }),
-      );
-      dispatch(successMessage("Newspost added"));
+      if (res.payload !== undefined) {
+        const newspost = res.payload;
+        if (isNewspost(newspost)) {
+          dispatch(
+            addNewspostToList({
+              postId: newspost.postId,
+              author: newspost.author,
+              title: newspost.title,
+              message: newspost.message,
+              created_at: moment().toISOString(), // TODO: Replace with timestamp returning from back-end
+              updated_at: moment().toISOString(), // TODO: Replace with timestamp returning from back-end
+            }),
+          );
+          dispatch(successMessage("Newspost added"));
+        } else {
+          dispatch(errorMessage("Back-end returned a malformed newspost"));
+        }
+      } else {
+        console.error("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Failed to add newspost"));
@@ -111,11 +137,13 @@ export const editNewspost = (
     dispatch(setIsEditing(true));
     try {
       await NewsService.editNewspost(token, id, title, message);
-      // TODO: Hook to back-end
       dispatch(successMessage("Newspost edited"));
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Failed to edit newspost"));

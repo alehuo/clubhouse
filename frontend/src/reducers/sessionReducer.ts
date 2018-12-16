@@ -15,7 +15,7 @@ export interface SessionState {
   readonly sessionPage: boolean;
   readonly ownSessionRunning: boolean;
   readonly ownSessionPeopleCount: number;
-  readonly ownSessionStartTime?: Date;
+  readonly ownSessionStartTime?: string;
   readonly sessionCheckInterval?: NodeJS.Timeout;
   readonly endSessionModalOpen: boolean;
   readonly startSessionModalOpen: boolean;

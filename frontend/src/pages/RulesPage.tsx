@@ -3,7 +3,7 @@ import { Button, PageHeader, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 
-import { Permissions } from "@alehuo/clubhouse-shared";
+import { Permission } from "@alehuo/clubhouse-shared";
 import CustomOverlay from "../components/CustomOverlay";
 import { Rule } from "../components/Rule";
 import { RootState } from "../reduxStore";
@@ -37,7 +37,7 @@ export class RulesPage extends React.Component<Props> {
         <p>
           {PermissionUtils.hasPermission(
             this.props.perms,
-            Permissions.ALLOW_ADD_EDIT_REMOVE_RULES.value,
+            Permission.ALLOW_ADD_EDIT_REMOVE_RULES,
           ) && (
             <React.Fragment>
               <CustomOverlay
@@ -92,7 +92,7 @@ export class RulesPage extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
   rules: state.rule.rules,
   editMode: state.rule.editMode,
 });

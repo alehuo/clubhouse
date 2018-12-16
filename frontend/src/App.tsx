@@ -30,9 +30,8 @@ import {
   fetchOwnSessionStatus,
   setSessionCheckInterval,
 } from "./reducers/actions/sessionActions";
-import { fetchUserData } from "./reducers/actions/userActions";
+import { fetchUserData, getUserPerms } from "./reducers/actions/userActions";
 import { setToken } from "./reducers/actions/userActions";
-import { getUserPerms } from "./reducers/permissionReducer";
 import { RootState } from "./reduxStore";
 
 interface Props {

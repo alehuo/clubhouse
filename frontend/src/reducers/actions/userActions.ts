@@ -1,10 +1,22 @@
+import { ApiResponse, isUser } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
+import PermissionService from "../../services/PermissionService";
 import UserService from "../../services/UserService";
 import { fetchOwnSessionStatus } from "../actions/sessionActions";
-import { CLEAR_USER_DATA, REMOVE_USER, SET_TOKEN, SET_USER_DATA, SET_USERS } from "../constants";
-import { getUserPerms } from "../permissionReducer";
-import { authenticateUser, setIsLoggingIn } from "./authenticationActions";
+import {
+  CLEAR_USER_DATA,
+  REMOVE_USER,
+  SET_TOKEN,
+  SET_USER_DATA,
+  SET_USER_PERMS,
+  SET_USERS,
+} from "../constants";
+import {
+  authenticateUser,
+  deAuthenticateUser,
+  setIsLoggingIn,
+} from "./authenticationActions";
 import { errorMessage, successMessage } from "./notificationActions";
 
 export const login = (email: string, password: string) => {
@@ -12,19 +24,26 @@ export const login = (email: string, password: string) => {
     try {
       dispatch(setIsLoggingIn(true));
       const loginResponse = await UserService.login(email, password);
-      const token: string = loginResponse.data.token;
-      localStorage.setItem("token", token);
-      dispatch(setToken(token));
-      dispatch(fetchOwnSessionStatus(token));
-      dispatch(getUserPerms(token));
-      dispatch(fetchUserData(token));
-      dispatch(authenticateUser());
-      dispatch(successMessage("Successfully logged in"));
+      if (loginResponse.payload !== undefined) {
+        const token: string = loginResponse.payload.token;
+        localStorage.setItem("token", token);
+        dispatch(setToken(token));
+        dispatch(fetchOwnSessionStatus(token));
+        dispatch(getUserPerms(token));
+        dispatch(fetchUserData(token));
+        dispatch(authenticateUser());
+        dispatch(successMessage("Successfully logged in"));
+      } else {
+        console.error("Response payload was undefined.");
+      }
       dispatch(setIsLoggingIn(false));
     } catch (err) {
       dispatch(setIsLoggingIn(false));
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error logging in"));
@@ -44,8 +63,11 @@ export const deleteUser = (userId: number, token: string) => {
       dispatch(successMessage("Successfully deleted user"));
       dispatch(removeUserFromList(userId));
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error deleting user"));
@@ -61,10 +83,22 @@ export const fetchUsers = (token: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
       const res = await UserService.getUsers(token);
-      dispatch(setUsers(res.data));
+      if (res.payload !== undefined) {
+        const users = res.payload;
+        if (users.every(isUser)) {
+          dispatch(setUsers(users));
+        } else {
+          dispatch(errorMessage("Back-end returned malformed users."));
+        }
+      } else {
+        console.error("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error fetching users"));
@@ -79,10 +113,17 @@ export const fetchUserData = (token: string) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
       const res = await UserService.getOwnData(token);
-      dispatch(setUserData(res.data));
+      if (res.payload !== undefined) {
+        dispatch(setUserData(res.payload));
+      } else {
+        console.error("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error fetching user data"));
@@ -94,15 +135,22 @@ export const fetchUserData = (token: string) => {
 export const addUser = (user: any) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
-      await UserService.register(user);
-      dispatch(
-        successMessage(
-          "User successfully registered. Please use your email and password to login.",
-        ),
-      );
+      const res = await UserService.register(user);
+      if (res.payload !== undefined) {
+        dispatch(
+          successMessage(
+            "User successfully registered. Please use your email and password to login.",
+          ),
+        );
+      } else {
+        console.log("Response payload was undefined.");
+      }
     } catch (err) {
-      if (err.response && err.response.data.error) {
-        dispatch(errorMessage(err.response.data.error));
+      if (err.response && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
       } else {
         // If the response doesn't contain an error key, the back-end might be down
         dispatch(errorMessage("Error registering user"));
@@ -112,3 +160,29 @@ export const addUser = (user: any) => {
 };
 
 export const clearUserData = () => action(CLEAR_USER_DATA);
+
+export const setUserPerms = (permissions: number) =>
+  action(SET_USER_PERMS, { permissions });
+
+export const getUserPerms = (token: string) => {
+  return async (dispatch: ThunkDispatch<any, any, any>) => {
+    try {
+      const res = await PermissionService.getUserPermissions(token);
+      if (res.payload !== undefined) {
+        dispatch(setUserPerms(res.payload.permissions));
+      } else {
+        console.error("Response payload was undefined.");
+      }
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data) {
+        const res = err.response.data as ApiResponse<undefined>;
+        if (res.error !== undefined) {
+          dispatch(errorMessage(res.error.message));
+        }
+      } else {
+        dispatch(errorMessage("Error fetching user permissions"));
+      }
+      dispatch(deAuthenticateUser());
+    }
+  };
+};

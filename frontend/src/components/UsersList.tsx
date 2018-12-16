@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { deleteUser, fetchUsers } from "./../reducers/actions/userActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-import { Permissions, User } from "@alehuo/clubhouse-shared";
+import { Permission, User } from "@alehuo/clubhouse-shared";
 import { RootState } from "../reduxStore";
 
 interface Props {
@@ -30,7 +30,7 @@ export class UsersList extends React.Component<Props> {
             <th>Email</th>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_REMOVE_USER.value,
+              Permission.ALLOW_REMOVE_USER,
             ) && <th>Actions</th>}
           </tr>
         </thead>
@@ -45,12 +45,12 @@ export class UsersList extends React.Component<Props> {
                 <td>{user.email}</td>
                 {PermissionUtils.hasPermission(
                   this.props.perms,
-                  Permissions.ALLOW_REMOVE_USER.value,
+                  Permission.ALLOW_REMOVE_USER,
                 ) && (
                   <td>
                     {PermissionUtils.hasPermission(
                       this.props.perms,
-                      Permissions.ALLOW_REMOVE_USER.value,
+                      Permission.ALLOW_REMOVE_USER,
                     ) && (
                       <Button
                         bsStyle="danger"
@@ -88,7 +88,7 @@ export class UsersList extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
 });
 
 const mapDispatchToProps = {

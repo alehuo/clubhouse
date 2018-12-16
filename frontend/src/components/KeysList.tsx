@@ -1,13 +1,7 @@
+import moment from "moment";
 import React from "react";
 import { Table } from "react-bootstrap";
-
-interface Key {
-  id: number;
-  name: string;
-  studentUnion: string;
-  date: Date;
-  keyDesc: string;
-}
+import { Key } from "../services/KeyService";
 
 interface Props {
   keys: Key[];
@@ -20,19 +14,21 @@ const KeyList: React.SFC<Props> = ({ keys }) => (
         <th>#</th>
         <th>Name</th>
         <th>Student union</th>
-        <th>Date assigned</th>
         <th>Key type</th>
+        <th>Notes</th>
+        <th>Date assigned</th>
       </tr>
     </thead>
     <tbody>
       {keys ? (
         keys.map((key) => (
-          <tr key={key.id}>
-            <td>{key.id}</td>
-            <td>{key.name}</td>
-            <td>{key.studentUnion}</td>
-            <td>{key.date.toLocaleString()}</td>
-            <td>{key.keyDesc}</td>
+          <tr key={key.keyId}>
+            <td>{key.keyId}</td>
+            <td>#{key.userId}</td>
+            <td>#{key.unionId}</td>
+            <td>#{key.keyType}</td>
+            <td>{key.description === "" ? "-" : key.description}</td>
+            <td>{moment(key.dateAssigned).toISOString()}</td>
           </tr>
         ))
       ) : (

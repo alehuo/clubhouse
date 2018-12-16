@@ -1,35 +1,74 @@
 // Key service
+import { ApiResponse } from "@alehuo/clubhouse-shared";
+import moment from "moment";
 
-const keyHolders = [
+// TODO: Move to shared lib
+export interface Key {
+  keyId: number; // Key id
+  keyType: number; // Key type
+  userId: number; // User id the key is assigned to
+  unionId: number; // Student union the key is assigned to
+  description: string; // Additional information of the key
+  dateAssigned: string; // Assigned date
+  created_at: string; // Created at date
+  modified_at: string; // Modified at date
+}
+
+// Mocked key data
+const keys: Key[] = [
   {
-    id: 1,
-    name: "John Doe",
-    date: new Date(2018, 3, 7),
-    studentUnion: "Student union",
-    keyDesc: "24 hr",
+    keyId: 1,
+    keyType: 1,
+    userId: 1,
+    unionId: 1,
+    description: "",
+    dateAssigned: moment(new Date(2015, 3, 7)).toISOString(),
+    created_at: moment(new Date(2015, 3, 7)).toISOString(),
+    modified_at: moment().toISOString(),
   },
   {
-    id: 2,
-    name: "Test User",
-    date: new Date(2014, 3, 7),
-    studentUnion: "Student union",
-    keyDesc: "24 hr",
+    keyId: 2,
+    keyType: 1,
+    userId: 2,
+    unionId: 1,
+    description: "",
+    dateAssigned: moment(new Date(2014, 3, 7)).toISOString(),
+    created_at: moment(new Date(2014, 3, 7)).toISOString(),
+    modified_at: moment().toISOString(),
   },
 ];
 
-const keyTypes = [
+// TODO: Move to shared lib
+export interface KeyType {
+  keyTypeId: number;
+  title: string;
+}
+
+const keyTypes: KeyType[] = [
   {
-    id: 1,
+    keyTypeId: 1,
     title: "24h",
   },
   {
-    id: 2,
+    keyTypeId: 2,
     title: "Day",
   },
 ];
 
-const getKeys = async (token: string) => Promise.resolve(keyHolders);
+const getKeys = async (token: string) => {
+  const response: ApiResponse<Key[]> = {
+    payload: keys,
+    success: true,
+  };
+  return Promise.resolve(response);
+};
 
-const getKeyTypes = async (token: string) => Promise.resolve(keyTypes);
+const getKeyTypes = async (token: string) => {
+  const response: ApiResponse<KeyType[]> = {
+    payload: keyTypes,
+    success: true,
+  };
+  return Promise.resolve(response);
+};
 
 export default { getKeys, getKeyTypes };

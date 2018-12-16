@@ -9,7 +9,7 @@ import { fetchUsers } from "./../reducers/actions/userActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 
-import { Permissions } from "@alehuo/clubhouse-shared";
+import { Permission } from "@alehuo/clubhouse-shared";
 import CustomOverlay from "../components/CustomOverlay";
 import { RootState } from "../reduxStore";
 
@@ -36,7 +36,7 @@ export class KeysPage extends React.Component<Props> {
       this.props.perms &&
       PermissionUtils.hasPermission(
         this.props.perms,
-        Permissions.ALLOW_VIEW_KEYS.value,
+        Permission.ALLOW_VIEW_KEYS,
       )
     ) {
       this.props.fetchKeys(this.props.token);
@@ -55,7 +55,7 @@ export class KeysPage extends React.Component<Props> {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_REMOVE_KEYS.value,
+              Permission.ALLOW_ADD_REMOVE_KEYS,
             ) && (
               <CustomOverlay id="addKey" text="Add a new keyholder.">
                 <Button
@@ -81,7 +81,7 @@ export class KeysPage extends React.Component<Props> {
         </PageHeader>
         {PermissionUtils.hasPermission(
           this.props.perms,
-          Permissions.ALLOW_VIEW_KEYS.value,
+          Permission.ALLOW_VIEW_KEYS,
         ) ? (
           <KeysList keys={this.props.keys} />
         ) : (
@@ -107,7 +107,7 @@ const mapStateToProps = (state: RootState, ownProps: any) => ({
   users: state.user.users,
   keyTypes: state.key.keyTypes,
   modalOpen: state.key.modalOpen,
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
 });
 
 const mapDispatchToProps = {

@@ -1,21 +1,25 @@
-import { DbUser, User } from "@alehuo/clubhouse-shared";
+import { ApiResponse, DbUser, User } from "@alehuo/clubhouse-shared";
 import customAxios from "./custom-axios";
 
 // User service
-const login = async (email: string, password: string) =>
-  customAxios.withoutToken().post(
-    "api/v1/authenticate",
-    {
-      email,
-      password,
-    },
-    {
-      baseURL: process.env.REACT_APP_BACKEND_URL,
-    },
-  );
+const login = async (email: string, password: string) => {
+  const res = await customAxios
+    .withoutToken()
+    .post<ApiResponse<{ token: string }>>(
+      "api/v1/authenticate",
+      {
+        email,
+        password,
+      },
+      {
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+      },
+    );
+  return res.data;
+};
 
-const register = async (user: DbUser) =>
-  customAxios.withoutToken().post(
+const register = async (user: DbUser) => {
+  const res = await customAxios.withoutToken().post<ApiResponse<any>>(
     "api/v1/users",
     {
       email: user.email,
@@ -27,14 +31,24 @@ const register = async (user: DbUser) =>
       baseURL: process.env.REACT_APP_BACKEND_URL,
     },
   );
+  return res.data;
+};
 
 const remove = async (userId: number, token: string) =>
   customAxios.withToken(token).delete("api/v1/users/" + Number(userId));
 
-const getUsers = (token: string) =>
-  customAxios.withToken(token).get<User[]>("api/v1/users");
+const getUsers = async (token: string) => {
+  const res = await customAxios
+    .withToken(token)
+    .get<ApiResponse<User[]>>("api/v1/users");
+  return res.data;
+};
 
-const getOwnData = async (token: string) =>
-  customAxios.withToken(token).get("api/v1/users/ownData");
+const getOwnData = async (token: string) => {
+  const res = await customAxios
+    .withToken(token)
+    .get<ApiResponse<any>>("api/v1/users/ownData"); // TODO: Add proper typings
+  return res.data;
+};
 
 export default { login, register, getUsers, remove, getOwnData };

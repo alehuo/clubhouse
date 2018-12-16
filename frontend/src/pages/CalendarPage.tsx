@@ -1,4 +1,4 @@
-import { CalendarEvent, Permissions } from "@alehuo/clubhouse-shared";
+import { CalendarEvent, Permission } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
 import BigCalendar from "react-big-calendar";
@@ -36,7 +36,7 @@ class CalendarPage extends React.Component<Props> {
           <p>
             {PermissionUtils.hasPermission(
               this.props.perms,
-              Permissions.ALLOW_ADD_EDIT_REMOVE_EVENTS.value,
+              Permission.ALLOW_ADD_EDIT_REMOVE_EVENTS,
             ) && (
               <CustomOverlay
                 id="addCalendarEvent"
@@ -84,7 +84,7 @@ class CalendarPage extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   events: state.calendar.events,
-  perms: state.permission.userPerms,
+  perms: state.user.userPerms,
   token: state.user.token,
 });
 
