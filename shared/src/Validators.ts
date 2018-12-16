@@ -189,7 +189,7 @@ export const isNewspost: Validator<Newspost> = (x): x is Newspost => {
     n.updated_at !== undefined
   ) {
     if (
-      isString(n.author) &&
+      isNumber(n.author) &&
       isString(n.created_at) &&
       isString(n.message) &&
       isNumber(n.postId) &&
