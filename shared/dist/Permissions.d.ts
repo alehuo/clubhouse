@@ -1,4 +1,4 @@
-export declare enum Permissions {
+export declare enum Permission {
     ALLOW_REMOVE_USER,
     ALLOW_VIEW_USERS,
     ALLOW_ADD_REMOVE_KEYS,

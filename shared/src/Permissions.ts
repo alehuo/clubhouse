@@ -1,4 +1,4 @@
-export enum Permissions {
+export enum Permission {
   ALLOW_REMOVE_USER = Math.pow(2, 0),
   ALLOW_VIEW_USERS = Math.pow(2, 1),
 

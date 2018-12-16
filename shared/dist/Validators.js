@@ -158,27 +158,6 @@ exports.isNewspost = (x) => {
     }
     return false;
 };
-exports.isPermission = (x) => {
-    if (!exports.isObject(x)) {
-        return false;
-    }
-    const p = x;
-    if (p.created_at !== undefined &&
-        p.name !== undefined &&
-        p.permissionId !== undefined &&
-        p.updated_at !== undefined &&
-        p.value !== undefined) {
-        if (exports.isString(p.created_at) &&
-            exports.isString(p.name) &&
-            exports.isNumber(p.permissionId) &&
-            exports.isString(p.updated_at) &&
-            exports.isNumber(p.value)) {
-            return true;
-        }
-        return false;
-    }
-    return false;
-};
 exports.isSession = (x) => {
     if (!exports.isObject(x)) {
         return false;

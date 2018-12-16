@@ -4,7 +4,6 @@ import {
   Location,
   Message,
   Newspost,
-  Permission,
   Session,
   Statistics,
   StudentUnion,
@@ -196,32 +195,6 @@ export const isNewspost: Validator<Newspost> = (x): x is Newspost => {
       isNumber(n.postId) &&
       isString(n.title) &&
       isString(n.updated_at)
-    ) {
-      return true;
-    }
-    return false;
-  }
-  return false;
-};
-
-export const isPermission: Validator<Permission> = (x): x is Permission => {
-  if (!isObject(x)) {
-    return false;
-  }
-  const p = x as Permission;
-  if (
-    p.created_at !== undefined &&
-    p.name !== undefined &&
-    p.permissionId !== undefined &&
-    p.updated_at !== undefined &&
-    p.value !== undefined
-  ) {
-    if (
-      isString(p.created_at) &&
-      isString(p.name) &&
-      isNumber(p.permissionId) &&
-      isString(p.updated_at) &&
-      isNumber(p.value)
     ) {
       return true;
     }

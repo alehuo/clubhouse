@@ -46,13 +46,6 @@ export interface Newspost {
     created_at: string;
     updated_at: string;
 }
-export interface Permission {
-    permissionId: number;
-    name: string;
-    value: number;
-    created_at: string;
-    updated_at: string;
-}
 export interface Session {
     sessionId: number;
     userId: number;

@@ -10,14 +10,13 @@ import {
   Location,
   Message,
   Newspost,
-  Permission,
   Session,
   Statistics,
   StudentUnion,
   User,
   UserStatistics,
 } from "./Models";
-import { Permissions } from "./Permissions";
+import { Permission } from "./Permissions";
 import {
   isBoolean,
   isDbUser,
@@ -26,7 +25,6 @@ import {
   isNewspost,
   isNumber,
   isObject,
-  isPermission,
   isSession,
   isStatistics,
   isString,
@@ -41,7 +39,6 @@ export {
   Location,
   Message,
   Newspost,
-  Permission,
   Session,
   Statistics,
   StudentUnion,
@@ -53,7 +50,6 @@ export {
   isNewspost,
   isNumber,
   isObject,
-  isPermission,
   isSession,
   isStatistics,
   isString,
@@ -62,5 +58,5 @@ export {
   ApiResponse,
   ApiMessage,
   ApiError,
-  Permissions,
+  Permission,
 };
