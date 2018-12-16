@@ -146,7 +146,7 @@ exports.isNewspost = (x) => {
         n.postId !== undefined &&
         n.title !== undefined &&
         n.updated_at !== undefined) {
-        if (exports.isString(n.author) &&
+        if (exports.isNumber(n.author) &&
             exports.isString(n.created_at) &&
             exports.isString(n.message) &&
             exports.isNumber(n.postId) &&
