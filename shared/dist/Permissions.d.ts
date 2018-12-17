@@ -17,5 +17,6 @@ export declare const Permission: {
     ALLOW_VIEW_MESSAGES: number;
     ALLOW_ADD_EDIT_REMOVE_PERMISSIONS: number;
     ALLOW_VIEW_PERMISSIONS: number;
+    ACCESS_SPOTIFY_API: number;
 };
 //# sourceMappingURL=Permissions.d.ts.map

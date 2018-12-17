@@ -19,5 +19,6 @@ exports.Permission = {
     ALLOW_VIEW_MESSAGES: Math.pow(2, 15),
     ALLOW_ADD_EDIT_REMOVE_PERMISSIONS: Math.pow(2, 16),
     ALLOW_VIEW_PERMISSIONS: Math.pow(2, 17),
+    ACCESS_SPOTIFY_API: Math.pow(2, 18),
 };
 //# sourceMappingURL=Permissions.js.map
