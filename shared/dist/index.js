@@ -5,6 +5,7 @@ exports.calendarEventFilter = Filters_1.calendarEventFilter;
 exports.locationFilter = Filters_1.locationFilter;
 exports.messageFilter = Filters_1.messageFilter;
 exports.newsPostFilter = Filters_1.newsPostFilter;
+exports.ruleFilter = Filters_1.ruleFilter;
 exports.sessionFilter = Filters_1.sessionFilter;
 exports.statisticsFilter = Filters_1.statisticsFilter;
 exports.studentUnionFilter = Filters_1.studentUnionFilter;
