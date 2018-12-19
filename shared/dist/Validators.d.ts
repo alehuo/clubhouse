@@ -14,5 +14,5 @@ export declare const isSession: Validator<Session>;
 export declare const isStatistics: Validator<Statistics>;
 export declare const isStudentUnion: Validator<StudentUnion>;
 export declare const isUserStatistics: Validator<UserStatistics>;
-export declare const ruleValidator: Validator<Rule>;
+export declare const isRule: Validator<Rule>;
 //# sourceMappingURL=Validators.d.ts.map

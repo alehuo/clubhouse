@@ -323,7 +323,7 @@ export const isUserStatistics: Validator<UserStatistics> = (
   return false;
 };
 
-export const ruleValidator: Validator<Rule> = (x: unknown): x is Rule => {
+export const isRule: Validator<Rule> = (x: unknown): x is Rule => {
   if (!isObject(x)) {
     return false;
   }

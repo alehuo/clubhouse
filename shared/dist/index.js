@@ -22,6 +22,7 @@ exports.isMessage = Validators_1.isMessage;
 exports.isNewspost = Validators_1.isNewspost;
 exports.isNumber = Validators_1.isNumber;
 exports.isObject = Validators_1.isObject;
+exports.isRule = Validators_1.isRule;
 exports.isSession = Validators_1.isSession;
 exports.isStatistics = Validators_1.isStatistics;
 exports.isString = Validators_1.isString;

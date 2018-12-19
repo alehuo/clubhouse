@@ -253,7 +253,7 @@ exports.isUserStatistics = (x) => {
     }
     return false;
 };
-exports.ruleValidator = (x) => {
+exports.isRule = (x) => {
     if (!exports.isObject(x)) {
         return false;
     }
