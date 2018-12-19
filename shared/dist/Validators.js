@@ -253,4 +253,17 @@ exports.isUserStatistics = (x) => {
     }
     return false;
 };
+exports.ruleValidator = (x) => {
+    if (!exports.isObject(x)) {
+        return false;
+    }
+    const s = x;
+    if (s.order !== undefined && s.ruleId !== undefined && s.text !== undefined) {
+        if (exports.isNumber(s.ruleId) && exports.isNumber(s.order) && exports.isString(s.text)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+};
 //# sourceMappingURL=Validators.js.map

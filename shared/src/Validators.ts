@@ -4,6 +4,7 @@ import {
   Location,
   Message,
   Newspost,
+  Rule,
   Session,
   Statistics,
   StudentUnion,
@@ -315,6 +316,20 @@ export const isUserStatistics: Validator<UserStatistics> = (
       isNumber(s.newspostCount) &&
       isNumber(s.watchCount)
     ) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+};
+
+export const ruleValidator: Validator<Rule> = (x: unknown): x is Rule => {
+  if (!isObject(x)) {
+    return false;
+  }
+  const s = x as Rule;
+  if (s.order !== undefined && s.ruleId !== undefined && s.text !== undefined) {
+    if (isNumber(s.ruleId) && isNumber(s.order) && isString(s.text)) {
       return true;
     }
     return false;

@@ -4,6 +4,7 @@ import {
   Location,
   Message,
   Newspost,
+  Rule,
   Session,
   Statistics,
   StudentUnion,
@@ -11,7 +12,7 @@ import {
   UserStatistics,
 } from "./Models";
 
-export const timestampFilter: (entity: any) => any = (entity: any): any => {
+export const timestampFilter = (entity: any): any => {
   if (entity.updated_at && entity.created_at) {
     const entity2: any = { ...entity };
     delete entity2.created_at;
@@ -21,9 +22,7 @@ export const timestampFilter: (entity: any) => any = (entity: any): any => {
   return entity;
 };
 
-export const sessionFilter: (session: Session) => Session = (
-  session: Session,
-): Session => {
+export const sessionFilter = (session: Session): Session => {
   if (!session.ended) {
     delete session.endTime;
   }
@@ -37,11 +36,10 @@ export const sessionFilter: (session: Session) => Session = (
   return session;
 };
 
-export const userStatisticsFilter: (stats: UserStatistics) => UserStatistics = (
-  stats: UserStatistics,
-): UserStatistics => stats;
+export const userStatisticsFilter = (stats: UserStatistics): UserStatistics =>
+  stats;
 
-export const userFilter: (user: DbUser) => User = (user: DbUser): User => {
+export const userFilter = (user: DbUser): User => {
   return {
     userId: user.userId,
     email: user.email,
@@ -53,26 +51,17 @@ export const userFilter: (user: DbUser) => User = (user: DbUser): User => {
   };
 };
 
-export const studentUnionFilter: (stdu: StudentUnion) => StudentUnion = (
-  stdu: StudentUnion,
-): StudentUnion => stdu;
+export const studentUnionFilter = (stdu: StudentUnion): StudentUnion => stdu;
 
-export const statisticsFilter: (stats: Statistics) => Statistics = (
-  stats: Statistics,
-): Statistics => stats;
+export const statisticsFilter = (stats: Statistics): Statistics => stats;
 
-export const newsPostFilter: (post: Newspost) => Newspost = (
-  post: Newspost,
-): Newspost => post;
+export const newsPostFilter = (post: Newspost): Newspost => post;
 
-export const messageFilter: (message: Message) => Message = (
-  message: Message,
-): Message => message;
+export const messageFilter = (message: Message): Message => message;
 
-export const locationFilter: (location: Location) => Location = (
-  location: Location,
-): Location => location;
+export const locationFilter = (location: Location): Location => location;
 
-export const calendarEventFilter: (event: CalendarEvent) => CalendarEvent = (
-  event: CalendarEvent,
-): CalendarEvent => event;
+export const calendarEventFilter = (event: CalendarEvent): CalendarEvent =>
+  event;
+
+export const ruleFilter = (rule: Rule): Rule => rule;

@@ -80,4 +80,9 @@ export interface UserStatistics {
     hoursOnWatch: number;
     eventCount: number;
 }
+export interface Rule {
+    ruleId: number;
+    order: number;
+    text: string;
+}
 //# sourceMappingURL=Models.d.ts.map

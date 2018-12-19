@@ -38,4 +38,5 @@ exports.newsPostFilter = (post) => post;
 exports.messageFilter = (message) => message;
 exports.locationFilter = (location) => location;
 exports.calendarEventFilter = (event) => event;
+exports.ruleFilter = (rule) => rule;
 //# sourceMappingURL=Filters.js.map
