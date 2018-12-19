@@ -328,8 +328,20 @@ export const ruleValidator: Validator<Rule> = (x: unknown): x is Rule => {
     return false;
   }
   const s = x as Rule;
-  if (s.order !== undefined && s.ruleId !== undefined && s.text !== undefined) {
-    if (isNumber(s.ruleId) && isNumber(s.order) && isString(s.text)) {
+  if (
+    s.order !== undefined &&
+    s.ruleId !== undefined &&
+    s.text !== undefined &&
+    s.created_at !== undefined &&
+    s.updated_at !== undefined
+  ) {
+    if (
+      isNumber(s.ruleId) &&
+      isNumber(s.order) &&
+      isString(s.text) &&
+      isString(s.created_at) &&
+      isString(s.updated_at)
+    ) {
       return true;
     }
     return false;

@@ -84,5 +84,7 @@ export interface Rule {
     ruleId: number;
     order: number;
     text: string;
+    created_at: string;
+    updated_at: string;
 }
 //# sourceMappingURL=Models.d.ts.map

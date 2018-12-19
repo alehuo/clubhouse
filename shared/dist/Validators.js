@@ -258,8 +258,16 @@ exports.ruleValidator = (x) => {
         return false;
     }
     const s = x;
-    if (s.order !== undefined && s.ruleId !== undefined && s.text !== undefined) {
-        if (exports.isNumber(s.ruleId) && exports.isNumber(s.order) && exports.isString(s.text)) {
+    if (s.order !== undefined &&
+        s.ruleId !== undefined &&
+        s.text !== undefined &&
+        s.created_at !== undefined &&
+        s.updated_at !== undefined) {
+        if (exports.isNumber(s.ruleId) &&
+            exports.isNumber(s.order) &&
+            exports.isString(s.text) &&
+            exports.isString(s.created_at) &&
+            exports.isString(s.updated_at)) {
             return true;
         }
         return false;

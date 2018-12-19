@@ -94,4 +94,6 @@ export interface Rule {
   ruleId: number;
   order: number;
   text: string;
+  created_at: string;
+  updated_at: string;
 }
