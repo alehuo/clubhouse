@@ -3,11 +3,10 @@ import { Button, PageHeader, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 
-import { Permission } from "@alehuo/clubhouse-shared";
+import { Permission, Rule } from "@alehuo/clubhouse-shared";
 import CustomOverlay from "../components/CustomOverlay";
-import { Rule } from "../components/Rule";
+import { SingleRule } from "../components/SingleRule";
 import { RootState } from "../reduxStore";
-import { Rule as RuleModel } from "../services/RuleService";
 import {
   fetchRules,
   moveRuleDown,
@@ -21,7 +20,7 @@ interface Props {
   fetchRules: any;
   toggleEditMode: any;
   perms: number;
-  rules: RuleModel[];
+  rules: Rule[];
   moveRuleUp: any;
   moveRuleDown: any;
 }
@@ -72,7 +71,7 @@ export class RulesPage extends React.Component<Props> {
           <Table responsive striped>
             <tbody>
               {this.props.rules.map((rule: any, i: number) => (
-                <Rule
+                <SingleRule
                   id={i + 1}
                   key={i}
                   rule={rule}

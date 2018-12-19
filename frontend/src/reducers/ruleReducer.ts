@@ -1,9 +1,11 @@
+import { isRule, Rule } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ThunkDispatch } from "redux-thunk";
-import RuleService, { Rule } from "./../services/RuleService";
+import RuleService from "./../services/RuleService";
+import { errorMessage } from "./actions/notificationActions";
 
 export interface RuleState {
-  readonly rules: any[];
+  readonly rules: Rule[];
   readonly editMode: boolean;
 }
 
@@ -36,9 +38,14 @@ export const toggleEditMode = () => {
 export const fetchRules = () => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
-      const res = await RuleService.getRulesMock();
+      const res = await RuleService.getRules();
       if (res.payload !== undefined) {
-        dispatch(setRules(res.payload));
+        const rules = res.payload;
+        if (rules.every(isRule)) {
+          dispatch(setRules(res.payload));
+        } else {
+          dispatch(errorMessage("Back-end returned malformed rules"));
+        }
       } else {
         console.error("Response payload was undefined.");
       }
@@ -68,14 +75,16 @@ const ruleReducer: Reducer<RuleState, any> = (state = initialState, action) => {
     case ruleActions.SET_RULES:
       return { ...{}, ...state, ...{ rules: action.rules } };
     case ruleActions.MOVE_DOWN:
-      const downIndex = state.rules.findIndex((rule) => rule.id === action.id);
+      const downIndex = state.rules.findIndex(
+        (rule) => rule.ruleId === action.id,
+      );
       const rules = [...state.rules];
       const tmp1 = rules[downIndex + 1];
       rules[downIndex + 1] = rules[downIndex];
       rules[downIndex] = tmp1;
       return { ...state, ...{ rules } };
     case ruleActions.MOVE_UP:
-      const upIndex = state.rules.findIndex((rule) => rule.id === action.id);
+      const upIndex = state.rules.findIndex((rule) => rule.ruleId === action.id);
       const rules1 = [...state.rules];
       const tmp2 = rules1[upIndex - 1];
       rules1[upIndex - 1] = rules1[upIndex];

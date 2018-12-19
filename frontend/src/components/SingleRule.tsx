@@ -1,12 +1,12 @@
+import { Rule } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
-import { Rule as RuleType } from "../services/RuleService";
 import CustomOverlay from "./CustomOverlay";
 
 interface Props {
   id: number;
-  rule: RuleType;
+  rule: Rule;
   editMode: boolean;
   canMoveUp: boolean;
   canMoveDown: boolean;
@@ -14,7 +14,7 @@ interface Props {
   onMoveDownClick: any;
 }
 
-export const Rule: React.SFC<Props> = ({
+export const SingleRule: React.SFC<Props> = ({
   id,
   rule,
   editMode,
@@ -40,10 +40,10 @@ export const Rule: React.SFC<Props> = ({
             <Button bsStyle="success" bsSize="small">
               <FontAwesome name="edit" /> Edit
             </Button>
-            </CustomOverlay>
+          </CustomOverlay>
         </td>
         <td>
-        <CustomOverlay
+          <CustomOverlay
             id="moveRuleUp"
             text="Move the currently selected rule up in the list."
           >
