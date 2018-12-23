@@ -1,6 +1,8 @@
 import {
   CalendarEvent,
   DbUser,
+  Key,
+  KeyType,
   Location,
   Message,
   Newspost,
@@ -341,6 +343,62 @@ export const isRule: Validator<Rule> = (x: unknown): x is Rule => {
       isString(s.text) &&
       isString(s.created_at) &&
       isString(s.updated_at)
+    ) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+};
+
+export const isKeyType: Validator<KeyType> = (x: unknown): x is KeyType => {
+  if (!isObject(x)) {
+    return false;
+  }
+  const k = x as KeyType;
+  if (
+    k.keyTypeId !== undefined &&
+    k.title !== undefined &&
+    k.created_at !== undefined &&
+    k.updated_at !== undefined
+  ) {
+    if (
+      isNumber(k.keyTypeId) &&
+      isString(k.title) &&
+      isString(k.created_at) &&
+      isString(k.updated_at)
+    ) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+};
+
+export const isKey: Validator<Key> = (x: unknown): x is Key => {
+  if (!isObject(x)) {
+    return false;
+  }
+  const k = x as Key;
+  if (
+    k.userId !== undefined &&
+    k.keyId !== undefined &&
+    k.keyTypeId !== undefined &&
+    k.unionId !== undefined &&
+    k.dateAssigned !== undefined &&
+    k.created_at !== undefined &&
+    k.updated_at !== undefined &&
+    k.description !== undefined
+  ) {
+    if (
+      isNumber(k.userId) &&
+      isNumber(k.keyId) &&
+      isNumber(k.keyTypeId) &&
+      isNumber(k.unionId) &&
+      isString(k.dateAssigned) &&
+      isString(k.created_at) &&
+      isString(k.updated_at) &&
+      isString(k.description)
     ) {
       return true;
     }

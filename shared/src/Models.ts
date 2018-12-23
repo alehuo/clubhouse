@@ -97,3 +97,21 @@ export interface Rule {
   created_at: string;
   updated_at: string;
 }
+
+export interface KeyType {
+  keyTypeId: number;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Key {
+  keyId: number;
+  keyTypeId: number;
+  userId: number;
+  unionId: number;
+  description: string;
+  dateAssigned: string;
+  created_at: string;
+  updated_at: string;
+}

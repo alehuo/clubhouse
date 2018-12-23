@@ -274,4 +274,50 @@ exports.isRule = (x) => {
     }
     return false;
 };
+exports.isKeyType = (x) => {
+    if (!exports.isObject(x)) {
+        return false;
+    }
+    const k = x;
+    if (k.keyTypeId !== undefined &&
+        k.title !== undefined &&
+        k.created_at !== undefined &&
+        k.updated_at !== undefined) {
+        if (exports.isNumber(k.keyTypeId) &&
+            exports.isString(k.title) &&
+            exports.isString(k.created_at) &&
+            exports.isString(k.updated_at)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+};
+exports.isKey = (x) => {
+    if (!exports.isObject(x)) {
+        return false;
+    }
+    const k = x;
+    if (k.userId !== undefined &&
+        k.keyId !== undefined &&
+        k.keyTypeId !== undefined &&
+        k.unionId !== undefined &&
+        k.dateAssigned !== undefined &&
+        k.created_at !== undefined &&
+        k.updated_at !== undefined &&
+        k.description !== undefined) {
+        if (exports.isNumber(k.userId) &&
+            exports.isNumber(k.keyId) &&
+            exports.isNumber(k.keyTypeId) &&
+            exports.isNumber(k.unionId) &&
+            exports.isString(k.dateAssigned) &&
+            exports.isString(k.created_at) &&
+            exports.isString(k.updated_at) &&
+            exports.isString(k.description)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+};
 //# sourceMappingURL=Validators.js.map
