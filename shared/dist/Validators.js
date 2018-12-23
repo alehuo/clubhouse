@@ -300,7 +300,7 @@ exports.isKey = (x) => {
     const k = x;
     if (k.userId !== undefined &&
         k.keyId !== undefined &&
-        k.keyTypeId !== undefined &&
+        k.keyType !== undefined &&
         k.unionId !== undefined &&
         k.dateAssigned !== undefined &&
         k.created_at !== undefined &&
@@ -308,7 +308,7 @@ exports.isKey = (x) => {
         k.description !== undefined) {
         if (exports.isNumber(k.userId) &&
             exports.isNumber(k.keyId) &&
-            exports.isNumber(k.keyTypeId) &&
+            exports.isNumber(k.keyType) &&
             exports.isNumber(k.unionId) &&
             exports.isString(k.dateAssigned) &&
             exports.isString(k.created_at) &&

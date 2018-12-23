@@ -95,7 +95,7 @@ export interface KeyType {
 }
 export interface Key {
     keyId: number;
-    keyTypeId: number;
+    keyType: number;
     userId: number;
     unionId: number;
     description: string;

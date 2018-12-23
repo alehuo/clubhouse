@@ -383,7 +383,7 @@ export const isKey: Validator<Key> = (x: unknown): x is Key => {
   if (
     k.userId !== undefined &&
     k.keyId !== undefined &&
-    k.keyTypeId !== undefined &&
+    k.keyType !== undefined &&
     k.unionId !== undefined &&
     k.dateAssigned !== undefined &&
     k.created_at !== undefined &&
@@ -393,7 +393,7 @@ export const isKey: Validator<Key> = (x: unknown): x is Key => {
     if (
       isNumber(k.userId) &&
       isNumber(k.keyId) &&
-      isNumber(k.keyTypeId) &&
+      isNumber(k.keyType) &&
       isNumber(k.unionId) &&
       isString(k.dateAssigned) &&
       isString(k.created_at) &&
