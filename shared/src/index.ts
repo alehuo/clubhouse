@@ -35,6 +35,7 @@ import {
 import { Permission } from "./Permissions";
 import {
   isBoolean,
+  isCalendarEvent,
   isDbUser,
   isKey,
   isKeyType,
@@ -76,6 +77,7 @@ export {
   isStatistics,
   isString,
   isStudentUnion,
+  isCalendarEvent,
   isUser,
   isRule,
   isKey,

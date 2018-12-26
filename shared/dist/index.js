@@ -16,6 +16,7 @@ const Permissions_1 = require("./Permissions");
 exports.Permission = Permissions_1.Permission;
 const Validators_1 = require("./Validators");
 exports.isBoolean = Validators_1.isBoolean;
+exports.isCalendarEvent = Validators_1.isCalendarEvent;
 exports.isDbUser = Validators_1.isDbUser;
 exports.isKey = Validators_1.isKey;
 exports.isKeyType = Validators_1.isKeyType;
