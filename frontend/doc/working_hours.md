@@ -39,9 +39,10 @@
 | 13.12.2018 | 1.0h  | Added CustomOverlay component to show UI tooltips.                                                                                                                                                                                                                |
 | 16.12.2018 | 1.0h  | Updated shared module. Updated services to have response typings and added additional validation for data returned from the back-end. Removed PermissionReducer.                                                                                                  |
 | 16.12.2018 | 0.5h  | Updated shared library. Implemented fetching rules from the back-end.                                                                                                                                                                                             |
+| 26.12.2018 | 0.5h  | Upgraded dependencies.                                                                                                                                                                                                                                            |
 
 Total:
 
 25.5 h (Part 1)
 
-28.0 h (Part 2)
+28.5 h (Part 2)
