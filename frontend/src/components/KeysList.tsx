@@ -1,7 +1,7 @@
+import { Key } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
 import { Table } from "react-bootstrap";
-import { Key } from "../services/KeyService";
 
 interface Props {
   keys: Key[];

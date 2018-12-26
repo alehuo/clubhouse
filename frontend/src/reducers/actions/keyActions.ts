@@ -1,4 +1,4 @@
-import { ApiResponse } from "@alehuo/clubhouse-shared";
+import { ApiResponse, Key, KeyType } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import KeyService from "../../services/KeyService";
@@ -8,9 +8,9 @@ import { errorMessage } from "./notificationActions";
 export const toggleModal = (value: boolean) =>
   action(TOGGLE_KEY_MODAL, { value });
 
-export const setKeys = (keys: any[]) => action(SET_KEYS, { keys });
+export const setKeys = (keys: Key[]) => action(SET_KEYS, { keys });
 
-export const setKeyTypes = (keyTypes: any[]) =>
+export const setKeyTypes = (keyTypes: KeyType[]) =>
   action(SET_KEY_TYPES, { keyTypes });
 
 export const fetchKeys = (token: string) => {

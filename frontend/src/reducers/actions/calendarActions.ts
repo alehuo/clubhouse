@@ -1,5 +1,4 @@
-import { ApiResponse, CalendarEvent } from "@alehuo/clubhouse-shared";
-import { isCalendarEvent } from "@alehuo/clubhouse-shared/dist/Validators";
+import { ApiResponse, CalendarEvent, isCalendarEvent } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import CalendarService from "../../services/CalendarService";

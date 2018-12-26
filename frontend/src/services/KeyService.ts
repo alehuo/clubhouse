@@ -1,18 +1,6 @@
 // Key service
-import { ApiResponse } from "@alehuo/clubhouse-shared";
+import { ApiResponse, Key, KeyType } from "@alehuo/clubhouse-shared";
 import moment from "moment";
-
-// TODO: Move to shared lib
-export interface Key {
-  keyId: number; // Key id
-  keyType: number; // Key type
-  userId: number; // User id the key is assigned to
-  unionId: number; // Student union the key is assigned to
-  description: string; // Additional information of the key
-  dateAssigned: string; // Assigned date
-  created_at: string; // Created at date
-  modified_at: string; // Modified at date
-}
 
 // Mocked key data
 const keys: Key[] = [
@@ -24,7 +12,7 @@ const keys: Key[] = [
     description: "",
     dateAssigned: moment(new Date(2015, 3, 7)).toISOString(),
     created_at: moment(new Date(2015, 3, 7)).toISOString(),
-    modified_at: moment().toISOString(),
+    updated_at: moment().toISOString(),
   },
   {
     keyId: 2,
@@ -34,24 +22,22 @@ const keys: Key[] = [
     description: "",
     dateAssigned: moment(new Date(2014, 3, 7)).toISOString(),
     created_at: moment(new Date(2014, 3, 7)).toISOString(),
-    modified_at: moment().toISOString(),
+    updated_at: moment().toISOString(),
   },
 ];
-
-// TODO: Move to shared lib
-export interface KeyType {
-  keyTypeId: number;
-  title: string;
-}
 
 const keyTypes: KeyType[] = [
   {
     keyTypeId: 1,
     title: "24h",
+    created_at: moment(new Date(2014, 3, 7)).toISOString(),
+    updated_at: moment(new Date(2014, 3, 7)).toISOString(),
   },
   {
     keyTypeId: 2,
     title: "Day",
+    created_at: moment(new Date(2014, 3, 7)).toISOString(),
+    updated_at: moment(new Date(2014, 3, 7)).toISOString(),
   },
 ];
 

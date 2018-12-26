@@ -1,3 +1,4 @@
+import { Key, KeyType } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as keyActions from "./actions/keyActions";
@@ -5,8 +6,8 @@ import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "./constants";
 
 // Initial key reducer state
 export interface KeyState {
-  readonly keys: any[];
-  readonly keyTypes: any[];
+  readonly keys: Key[];
+  readonly keyTypes: KeyType[];
   readonly isAdding: boolean;
   readonly modalOpen: boolean;
 }
