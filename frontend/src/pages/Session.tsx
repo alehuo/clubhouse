@@ -1,7 +1,6 @@
 import moment from "moment";
-import momentDurationFormat from "moment-duration-format";
 import React from "react";
-import { Button, Label, PageHeader, Panel, Tooltip } from "react-bootstrap";
+import { Button, Label, PageHeader, Panel } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import CustomOverlay from "../components/CustomOverlay";
@@ -14,8 +13,6 @@ import {
 import { RootState } from "../reduxStore";
 import EndSession from "./subpages/EndSession";
 import StartSession from "./subpages/StartSession";
-// @ts-ignore
-momentDurationFormat(moment);
 
 interface Props {
   token: string;
@@ -59,11 +56,9 @@ export class Session extends React.Component<Props> {
             <small>
               {this.props.watchRunning && this.props.startTime ? (
                 <span>
-                  Session started{" "}
-                  {moment
-                    .duration(moment().diff(moment(this.props.startTime)))
-                    .format()}{" "}
-                  ago
+                  Session started
+                  {" " +
+                    moment(this.props.startTime).format("DD.MM.YYYY HH:mm:ss")}
                 </span>
               ) : (
                 <span>You are not currently in a session.</span>
