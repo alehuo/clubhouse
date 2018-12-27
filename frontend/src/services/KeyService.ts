@@ -1,60 +1,29 @@
 // Key service
 import { ApiResponse, Key, KeyType } from "@alehuo/clubhouse-shared";
-import moment from "moment";
+import customAxios from "./custom-axios";
 
-// Mocked key data
-const keys: Key[] = [
-  {
-    keyId: 1,
-    keyType: 1,
-    userId: 1,
-    unionId: 1,
-    description: "",
-    dateAssigned: moment(new Date(2015, 3, 7)).toISOString(),
-    created_at: moment(new Date(2015, 3, 7)).toISOString(),
-    updated_at: moment().toISOString(),
-  },
-  {
-    keyId: 2,
-    keyType: 1,
-    userId: 2,
-    unionId: 1,
-    description: "",
-    dateAssigned: moment(new Date(2014, 3, 7)).toISOString(),
-    created_at: moment(new Date(2014, 3, 7)).toISOString(),
-    updated_at: moment().toISOString(),
-  },
-];
-
-const keyTypes: KeyType[] = [
-  {
-    keyTypeId: 1,
-    title: "24h",
-    created_at: moment(new Date(2014, 3, 7)).toISOString(),
-    updated_at: moment(new Date(2014, 3, 7)).toISOString(),
-  },
-  {
-    keyTypeId: 2,
-    title: "Day",
-    created_at: moment(new Date(2014, 3, 7)).toISOString(),
-    updated_at: moment(new Date(2014, 3, 7)).toISOString(),
-  },
-];
+const keyEndpoint = "api/v1/key";
+const keyTypeEndpoint = "api/v1/keyType";
 
 const getKeys = async (token: string) => {
-  const response: ApiResponse<Key[]> = {
-    payload: keys,
-    success: true,
-  };
-  return Promise.resolve(response);
+  const res = await customAxios
+    .withToken(token)
+    .get<ApiResponse<Key[]>>(keyEndpoint);
+  return res.data;
+};
+
+const addKey = async (token: string, userId: number, unionId: number, keyType: number, description: string) => {
+  const res = await customAxios.withToken(token).post<ApiResponse<Key>>(keyEndpoint, {
+    userId, unionId, keyType, description,
+  });
+  return res.data;
 };
 
 const getKeyTypes = async (token: string) => {
-  const response: ApiResponse<KeyType[]> = {
-    payload: keyTypes,
-    success: true,
-  };
-  return Promise.resolve(response);
+  const res = await customAxios
+    .withToken(token)
+    .get<ApiResponse<KeyType[]>>(keyTypeEndpoint);
+  return res.data;
 };
 
-export default { getKeys, getKeyTypes };
+export default { getKeys, getKeyTypes, addKey };

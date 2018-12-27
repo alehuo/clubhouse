@@ -9,8 +9,15 @@ import { fetchUsers } from "./../reducers/actions/userActions";
 import PermissionUtils from "./../utils/PermissionUtils";
 import AddKeyHolder from "./subpages/AddKeyHolder";
 
-import { Permission } from "@alehuo/clubhouse-shared";
+import {
+  Key,
+  KeyType,
+  Permission,
+  StudentUnion,
+  User,
+} from "@alehuo/clubhouse-shared";
 import CustomOverlay from "../components/CustomOverlay";
+import { fetchStudentUnions } from "../reducers/actions/studentUnionActions";
 import { RootState } from "../reduxStore";
 
 interface Props {
@@ -18,12 +25,14 @@ interface Props {
   fetchKeys: any;
   fetchKeyTypes: any;
   fetchUsers: any;
+  fetchStudentUnions: any;
   perms: number;
   toggleModal: any;
-  keys: any;
+  keys: Key[];
   modalOpen: boolean;
-  keyTypes: any;
-  users: any;
+  keyTypes: KeyType[];
+  users: User[];
+  studentUnions: StudentUnion[];
 }
 
 export class KeysPage extends React.Component<Props> {
@@ -42,6 +51,7 @@ export class KeysPage extends React.Component<Props> {
       this.props.fetchKeys(this.props.token);
       this.props.fetchKeyTypes(this.props.token);
       this.props.fetchUsers(this.props.token);
+      this.props.fetchStudentUnions(this.props.token);
     }
   }
   public render() {
@@ -83,7 +93,12 @@ export class KeysPage extends React.Component<Props> {
           this.props.perms,
           Permission.ALLOW_VIEW_KEYS,
         ) ? (
-          <KeysList keys={this.props.keys} />
+          <KeysList
+            keys={this.props.keys}
+            studentUnions={this.props.studentUnions}
+            keyTypes={this.props.keyTypes}
+            users={this.props.users}
+          />
         ) : (
           <Alert bsStyle="warning">
             <h4>No permission to view keys</h4>
@@ -95,6 +110,7 @@ export class KeysPage extends React.Component<Props> {
           onHide={() => this.props.toggleModal(false)}
           keyTypes={this.props.keyTypes}
           users={this.props.users}
+          studentUnions={this.props.studentUnions}
         />
       </React.Fragment>
     );
@@ -108,6 +124,7 @@ const mapStateToProps = (state: RootState, ownProps: any) => ({
   keyTypes: state.key.keyTypes,
   modalOpen: state.key.modalOpen,
   perms: state.user.userPerms,
+  studentUnions: state.studentUnion.studentUnions,
 });
 
 const mapDispatchToProps = {
@@ -115,6 +132,7 @@ const mapDispatchToProps = {
   fetchKeys,
   fetchKeyTypes,
   fetchUsers,
+  fetchStudentUnions,
 };
 
 export default connect(

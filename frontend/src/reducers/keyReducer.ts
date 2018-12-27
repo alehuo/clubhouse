@@ -2,7 +2,7 @@ import { Key, KeyType } from "@alehuo/clubhouse-shared";
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as keyActions from "./actions/keyActions";
-import { SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "./constants";
+import { ADD_KEY_TO_LIST, SET_KEY_TYPES, SET_KEYS, TOGGLE_KEY_MODAL } from "./constants";
 
 // Initial key reducer state
 export interface KeyState {
@@ -32,6 +32,8 @@ const keyReducer: Reducer<KeyState, KeyAction> = (
       return { ...{}, ...state, keyTypes: action.payload.keyTypes };
     case TOGGLE_KEY_MODAL:
       return { ...{}, ...state, modalOpen: action.payload.value };
+      case ADD_KEY_TO_LIST:
+      return {...{}, ...state, keys: [...state.keys, action.payload.key]};
     default:
       return state;
   }

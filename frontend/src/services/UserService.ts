@@ -1,7 +1,6 @@
 import { ApiResponse, DbUser, User } from "@alehuo/clubhouse-shared";
 import customAxios from "./custom-axios";
 
-// User service
 const login = async (email: string, password: string) => {
   const res = await customAxios
     .withoutToken()

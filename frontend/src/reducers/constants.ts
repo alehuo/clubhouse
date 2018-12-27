@@ -11,6 +11,7 @@ export const SET_IS_EDITING_NEWSPOST = "SET_IS_EDITING_NEWSPOST";
 export const SET_NEWSPOST_EDIT_ID = "SET_NEWSPOST_EDIT_ID";
 // Key reducer
 export const ADD_KEY = "ADD_KEY";
+export const ADD_KEY_TO_LIST = "ADD_KEY_TO_LIST";
 export const SET_KEYS = "SET_KEYS";
 export const SET_KEY_TYPES = "SET_KEY_TYPES";
 export const TOGGLE_KEY_MODAL = "TOGGLE_KEY_MODAL";

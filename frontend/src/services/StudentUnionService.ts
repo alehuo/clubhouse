@@ -1,4 +1,3 @@
-// Student union service
 import { ApiResponse, StudentUnion } from "@alehuo/clubhouse-shared";
 import customAxios from "./custom-axios";
 
