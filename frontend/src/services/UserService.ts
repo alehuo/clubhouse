@@ -17,14 +17,19 @@ const login = async (email: string, password: string) => {
   return res.data;
 };
 
-const register = async (user: DbUser) => {
-  const res = await customAxios.withoutToken().post<ApiResponse<any>>(
+const register = async (
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
+) => {
+  const res = await customAxios.withoutToken().post<ApiResponse<User>>(
     "api/v1/users",
     {
-      email: user.email,
-      password: user.password,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      email,
+      password,
+      firstName,
+      lastName,
     },
     {
       baseURL: process.env.REACT_APP_BACKEND_URL,

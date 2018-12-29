@@ -1,4 +1,9 @@
-import { ApiResponse, isUser } from "@alehuo/clubhouse-shared";
+import {
+  ApiResponse,
+  DbUser,
+  isString,
+  isUser,
+} from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
 import PermissionService from "../../services/PermissionService";
@@ -132,18 +137,32 @@ export const fetchUserData = (token: string) => {
   };
 };
 
-export const addUser = (user: any) => {
+export const addUser = (user: Partial<DbUser>) => {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
     try {
-      const res = await UserService.register(user);
-      if (res.payload !== undefined) {
-        dispatch(
-          successMessage(
-            "User successfully registered. Please use your email and password to login.",
-          ),
-        );
+      if (
+        !isString(user.email) ||
+        !isString(user.firstName) ||
+        !isString(user.lastName) ||
+        !isString(user.password)
+      ) {
+        dispatch(errorMessage("Malformed form data"));
       } else {
-        console.log("Response payload was undefined.");
+        const res = await UserService.register(
+          user.email,
+          user.firstName,
+          user.lastName,
+          user.password,
+        );
+        if (res.payload !== undefined) {
+          dispatch(
+            successMessage(
+              "User successfully registered. Please use your email and password to login.",
+            ),
+          );
+        } else {
+          console.log("Response payload was undefined.");
+        }
       }
     } catch (err) {
       if (err.response && err.response.data) {

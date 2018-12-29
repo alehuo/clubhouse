@@ -17,6 +17,7 @@ const lastNameEmpty = isEmpty("Last name");
 const emailEmpty = isEmpty("E-mail address");
 const passwordEmpty = isEmpty("Password");
 const passwordValid = passwd(8);
+const check = checked("User permission");
 
 const RegisterForm: React.SFC<any> = (props) => (
   <form onSubmit={props.handleSubmit}>
@@ -64,7 +65,7 @@ const RegisterForm: React.SFC<any> = (props) => (
       label="Confirm password"
       placeholder="Confirm password"
       component={FieldGroup}
-      validate={validatePasswords}
+      validate={[validatePasswords]}
     />
     <Well>
       <FormGroup controlId="studentUnionPermission">
@@ -72,7 +73,7 @@ const RegisterForm: React.SFC<any> = (props) => (
           name="userPermission"
           component="input"
           type="checkbox"
-          validate={[checked]}
+          validate={[check]}
         />{" "}
         <b>
           I give my consent for the service to store my data to the server as
@@ -87,6 +88,6 @@ const RegisterForm: React.SFC<any> = (props) => (
   </form>
 );
 // TODO: Props
-export default reduxForm<{}, any, string>({
+export default reduxForm<any, any, any>({
   form: "registerForm",
 })(RegisterForm);

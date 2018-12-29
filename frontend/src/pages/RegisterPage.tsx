@@ -12,8 +12,17 @@ interface Props {
   isRegistering: boolean;
 }
 
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  passwordAgain: string;
+  userPermission: boolean;
+}
+
 export class RegisterPage extends React.Component<Props> {
-  public handleSubmit = (values: any) => {
+  public handleSubmit = (values: FormValues) => {
     this.props.addUser(
       {
         email: values.email,
