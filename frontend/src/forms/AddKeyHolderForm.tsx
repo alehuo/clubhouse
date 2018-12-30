@@ -92,7 +92,7 @@ const AddKeyHolderForm: React.SFC<Props> = ({
       By checking this checkbox you agree you have the permission to add the
       following key:
       <p>
-        {selectedKey && selectedUser && (
+        {selectedKey && selectedUser && keyTypes && (
           <span>
             <b>
               {
