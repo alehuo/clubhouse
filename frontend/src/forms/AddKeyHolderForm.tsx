@@ -80,7 +80,12 @@ const AddKeyHolderForm: React.SFC<Props> = ({
           </option>
         ))}
     </Field>
-    <Field name="description" type="text" label="Key description" component={FieldGroup}/>
+    <Field
+      name="description"
+      type="text"
+      label="Key description"
+      component={FieldGroup}
+    />
     <Field
       name="studentUnionPermission"
       type="checkbox"
@@ -95,11 +100,10 @@ const AddKeyHolderForm: React.SFC<Props> = ({
         {selectedKey && selectedUser && keyTypes && (
           <span>
             <b>
-              {
+              {keyTypes &&
                 keyTypes.find(
                   (keyType) => Number(keyType.keyTypeId) === Number(selectedKey),
-                )!.title
-              }{" "}
+                )!.title}{" "}
               key
             </b>{" "}
             for user <b>{userFilter(users, selectedUser)}</b>
