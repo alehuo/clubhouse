@@ -32,9 +32,9 @@ const initialState: NewsState = {
   editModalOpen: false,
 };
 
-export type AuthenticationAction = ActionType<typeof newsActions>;
+export type NewsAction = ActionType<typeof newsActions>;
 
-const newsReducer: Reducer<NewsState, AuthenticationAction> = (
+const newsReducer: Reducer<NewsState, NewsAction> = (
   state = initialState,
   action,
 ) => {
