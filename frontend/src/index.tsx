@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
+import { AppCrashHandler } from "./components/AppCrashHandler";
 import { reduxStore } from "./reduxStore";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <Provider store={reduxStore}>
-    <App />
+    <AppCrashHandler>
+      <App />
+    </AppCrashHandler>
   </Provider>,
   document.getElementById("root"),
 );

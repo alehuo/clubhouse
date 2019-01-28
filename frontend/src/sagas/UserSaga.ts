@@ -38,7 +38,6 @@ import PermissionService from "../services/PermissionService";
 import UserService from "../services/UserService";
 
 function* userSaga_login(action: ReturnType<typeof login>) {
-  console.log(action);
   try {
     yield put(setIsLoggingIn(true));
     const loginResponse = yield call(

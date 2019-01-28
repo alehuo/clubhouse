@@ -7,9 +7,11 @@ import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Dispatch } from "redux";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import { Container } from "./components/Container";
 import CustomOverlay from "./components/CustomOverlay";
+import { LoadingScreen } from "./components/LoadingScreen";
 import { Navigation } from "./components/Navigation";
 import NotificationDrawer from "./components/NotificationDrawer";
 import { navButtons } from "./navButtons";
@@ -25,13 +27,7 @@ import Session from "./pages/Session";
 import StudentUnionsPage from "./pages/StudentUnionsPage";
 import UserListPage from "./pages/UserListPage";
 import UserProfilePage from "./pages/UserProfilePage";
-import { authenticateUser } from "./reducers/actions/authenticationActions";
-import {
-  fetchOwnSessionStatus,
-  setSessionCheckInterval,
-} from "./reducers/actions/sessionActions";
-import { fetchUserData, getUserPerms } from "./reducers/actions/userActions";
-import { setToken } from "./reducers/actions/userActions";
+import { INIT_APP } from "./reducers/constants";
 import { RootState } from "./reduxStore";
 
 interface Props {
@@ -41,39 +37,26 @@ interface Props {
   sessionRunning: boolean;
   peopleCount: number;
   token: string;
-  setToken: any;
-  getUserPerms: any;
-  authenticateUser: any;
-  fetchOwnSessionStatus: any;
-  fetchUserData: any;
-  setSessionCheckInterval: any;
+  appLoading: boolean;
+  initApp: () => void;
 }
 
 class App extends React.Component<Props> {
   public componentDidMount() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      this.props.setToken(token);
-      this.props.getUserPerms(token);
-      this.props.fetchOwnSessionStatus(token);
-      this.props.fetchUserData(token);
-      /*const watchInterval = setInterval(() => {
-        this.props.fetchOwnWatchStatus(localStorage.getItem("token"));
-      }, 10000);
-      this.props.setWatchCheckInterval(watchInterval);*/
-      this.props.authenticateUser();
-    }
-  }
-
-  public componentWillUnmount() {
-    if (this.props.sessionInterval) {
-      clearInterval(this.props.sessionInterval);
-      this.props.setSessionCheckInterval(null);
-    }
+    this.props.initApp();
   }
 
   public render() {
-    const { userData, sessionPage, sessionRunning, peopleCount } = this.props;
+    const {
+      userData,
+      sessionPage,
+      sessionRunning,
+      peopleCount,
+      appLoading,
+    } = this.props;
+    if (appLoading) {
+      return <LoadingScreen />;
+    }
     return (
       <Router>
         <React.Fragment>
@@ -156,6 +139,7 @@ class App extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   token: state.user.token,
+  appLoading: state.root.appLoading,
   sessionPage: state.session.sessionPage,
   sessionRunning: state.session.ownSessionRunning,
   peopleCount: state.session.ownSessionPeopleCount,
@@ -163,14 +147,9 @@ const mapStateToProps = (state: RootState) => ({
   userData: state.user.userData,
 });
 
-const mapDispatchToProps = {
-  authenticateUser,
-  getUserPerms,
-  setToken,
-  fetchOwnSessionStatus,
-  setSessionCheckInterval,
-  fetchUserData,
-};
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  initApp: () => dispatch({ type: INIT_APP }),
+});
 
 export default connect(
   mapStateToProps,

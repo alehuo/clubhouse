@@ -10,6 +10,7 @@ import keyReducer from "./reducers/keyReducer";
 import { logger } from "./reducers/middleware";
 import newsReducer from "./reducers/newsReducer";
 import notificationReducer from "./reducers/notificationReducer";
+import rootReducer from "./reducers/rootReducer";
 import ruleReducer from "./reducers/ruleReducer";
 import sessionReducer from "./reducers/sessionReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
@@ -19,6 +20,7 @@ import rootSaga from "./sagas/RootSaga";
 import userSaga from "./sagas/UserSaga";
 
 const reducerObj = {
+  root: rootReducer,
   calendar: calendarReducer,
   auth: authenticationReducer,
   user: userReducer,

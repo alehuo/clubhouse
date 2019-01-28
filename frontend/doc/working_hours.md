@@ -41,9 +41,12 @@
 | 16.12.2018 | 0.5h  | Updated shared library. Implemented fetching rules from the back-end.                                                                                                                                                                                             |
 | 26.12.2018 | 0.5h  | Upgraded dependencies.                                                                                                                                                                                                                                            |
 | 27.12.2018 | 1.0h  | Adding keyholders is now working. Improved key listing component.                                                                                                                                                                                                 |
+| 28.1.2019  | 2.0h  | Added redux-saga dependency. Refactored Thunk actions in UserReducer to UserSaga. The plan is to get rid of Redux thunk in favor of Redux Saga.                                                                                                                   |
 
 Total:
 
 25.5 h (Part 1)
 
 29.5 h (Part 2)
+
+2.0 h (Post-course)

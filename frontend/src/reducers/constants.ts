@@ -1,3 +1,6 @@
+// Init app
+export const INIT_APP = "INIT_APP";
+export const SET_APP_LOADED = "SET_APP_LOADED";
 // Newspost reducer
 export const TOGGLE_ADD_NEWSPOST_MODAL = "TOGGLE_ADD_NEWSPOST_MODAL";
 export const TOGGLE_EDIT_NEWSPOST_MODAL = "TOGGLE_EDIT_NEWSPOST_MODAL";
