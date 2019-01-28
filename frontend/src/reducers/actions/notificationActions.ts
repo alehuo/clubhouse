@@ -15,6 +15,6 @@ export const addNotification = (
 export const clearNotification = (id: string) =>
   action(CLEAR_NOTIFICATION, { id });
 
-export const successMessage = (text: string, timeout = 4000) => action(SUCCESS_MESSAGE, { text, timeout });
+export const successMessage = (text: string, timeout?: number) => action(SUCCESS_MESSAGE, { text, timeout });
 
-export const errorMessage = (text: string, timeout = 4000) => action(ERROR_MESSAGE, { text, timeout });
+export const errorMessage = (text: string, timeout?: number) => action(ERROR_MESSAGE, { text, timeout });

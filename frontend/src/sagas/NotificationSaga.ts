@@ -1,36 +1,40 @@
-import { delay, put, takeEvery } from "redux-saga/effects";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
 import uuidv1 from "uuid/v1";
 import {
   addNotification,
   clearNotification,
   errorMessage,
+  NotificationType,
   successMessage,
 } from "../reducers/actions/notificationActions";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../reducers/constants";
 
 function* successMessageGenerator(action: ReturnType<typeof successMessage>) {
-  const id = uuidv1();
-  yield put(
-    addNotification(
-    id,
-      action.payload.text,
-      "SUCCESS",
-    ),
+  yield call(
+    generateNotification,
+    action.payload.text,
+    "SUCCESS",
+    action.payload.timeout,
   );
-  yield delay(action.payload.timeout || 4000);
-  yield put(clearNotification(id));
 }
 
 function* errorMessageGenerator(action: ReturnType<typeof errorMessage>) {
-  const id = uuidv1();
-  yield put(
-    addNotification(
-    id,
-      action.payload.text,
-      "ERROR",
-    ),
+  yield call(
+    generateNotification,
+    action.payload.text,
+    "ERROR",
+    action.payload.timeout,
   );
-  yield delay(action.payload.timeout || 4000);
+}
+
+function* generateNotification(
+  text: string,
+  type: NotificationType,
+  timeout?: number,
+) {
+  const id = uuidv1();
+  yield put(addNotification(id, text, type));
+  yield delay(timeout || 4000);
   yield put(clearNotification(id));
 }
 
