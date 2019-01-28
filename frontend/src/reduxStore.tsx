@@ -16,6 +16,7 @@ import studentUnionReducer from "./reducers/studentUnionReducer";
 import userReducer from "./reducers/userReducer";
 import notificationSaga from "./sagas/NotificationSaga";
 import rootSaga from "./sagas/RootSaga";
+import userSaga from "./sagas/UserSaga";
 
 const reducerObj = {
   calendar: calendarReducer,
@@ -48,5 +49,6 @@ const reduxStore = createStore(
 
 sagaMiddleware.run(rootSaga);
 sagaMiddleware.run(notificationSaga);
+sagaMiddleware.run(userSaga);
 
 export { reduxStore };

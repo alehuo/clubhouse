@@ -2,6 +2,8 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { setEvents } from "../reducers/actions/calendarActions";
 import { setKeys } from "../reducers/actions/keyActions";
 import { setNewsposts } from "../reducers/actions/newsActions";
+import { errorMessage } from "../reducers/actions/notificationActions";
+import { setOwnSessionStatus } from "../reducers/actions/sessionActions";
 import { setToken, setUserPerms } from "../reducers/actions/userActions";
 import { setRules } from "../reducers/ruleReducer";
 import CalendarService from "../services/CalendarService";
@@ -45,18 +47,13 @@ function* fetchProtectedData(token: string) {
         // @ts-ignore
         yield put(setUserPerms, userPerms.payload);
         const sessions = yield call(SessionService.getOwnSessionStatus, token);
+        // @ts-ignore
+        yield put(setOwnSessionStatus, sessions.payload);
       } catch (e) {
-        // yield put(errorMessage(e.message));
+        yield put(errorMessage(e.message));
       }
 }
 
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
 function* rootSaga() {
   yield takeEvery("INIT_APP", initApp);
 }
