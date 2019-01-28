@@ -34,7 +34,7 @@ function* initApp() {
     }
 
   } catch (e) {
-    // yield put(errorMessage(e.message));
+    yield put(errorMessage(e.message));
   }
 }
 

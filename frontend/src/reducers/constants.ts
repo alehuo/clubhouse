@@ -35,6 +35,7 @@ export const REMOVE_USER = "REMOVE_USER";
 export const SET_USER_DATA = "SET_USER_DATA";
 export const CLEAR_USER_DATA = "CLEAR_USER_DATA";
 export const SET_USER_PERMS = "SET_USER_PERMS";
+export const DELETE_USER = "DELETE_USER";
 // Student union
 export const ADD_STUDENT_UNION = "ADD_STUDENT_UNION";
 export const DELETE_STUDENT_UNION = "DELETE_STUDENT_UNION";

@@ -10,14 +10,16 @@ import {
 } from "../reducers/actions/notificationActions";
 import { fetchOwnSessionStatus, setOwnSessionStatus } from "../reducers/actions/sessionActions";
 import {
+  deleteUser,
   fetchUserData,
   getUserPerms,
   login,
+  removeUserFromList,
   setToken,
   setUserData,
   setUserPerms,
 } from "../reducers/actions/userActions";
-import { LOGIN } from "../reducers/constants";
+import { DELETE_USER, LOGIN } from "../reducers/constants";
 import UserService from "../services/UserService";
 
 function* userLogin(action: ReturnType<typeof login>) {
@@ -70,8 +72,27 @@ function* userLogin(action: ReturnType<typeof login>) {
   }
 }
 
+function* userDeletion(action: ReturnType<typeof deleteUser>) {
+  try {
+    yield call(UserService.remove, action.payload.userId, action.payload.token);
+    yield put(successMessage("Successfully deleted user"));
+    yield put(removeUserFromList(action.payload.userId));
+  } catch (err) {
+    if (err.response && err.response.data) {
+      const res = err.response.data as ApiResponse<undefined>;
+      if (res.error !== undefined) {
+        yield put(errorMessage(res.error.message));
+      }
+    } else {
+      // If the response doesn't contain an error key, the back-end might be down
+      yield put(errorMessage("Error deleting user"));
+    }
+  }
+}
+
 function* userSaga() {
   yield takeEvery(LOGIN, userLogin);
+  yield takeEvery(DELETE_USER, userDeletion);
 }
 
 export default userSaga;
