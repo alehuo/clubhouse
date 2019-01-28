@@ -1,3 +1,4 @@
+import createSagaMiddleware from "@redux-saga/core";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
@@ -13,6 +14,7 @@ import ruleReducer from "./reducers/ruleReducer";
 import sessionReducer from "./reducers/sessionReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
 import userReducer from "./reducers/userReducer";
+import rootSaga from "./sagas/RootSaga";
 
 const reducerObj = {
   calendar: calendarReducer,
@@ -32,11 +34,17 @@ const reducer = combineReducers(reducerObj);
 
 export type RootState = StateType<typeof reducer>;
 
+const sagaMiddleware = createSagaMiddleware();
+
 const middleware =
-  process.env.NODE_ENV !== "production" ? [thunk, logger] : [thunk];
+  process.env.NODE_ENV !== "production" ? [thunk, sagaMiddleware, logger] : [thunk, sagaMiddleware];
 
 // Create store
-export const reduxStore = createStore(
+const reduxStore = createStore(
   reducer,
   composeWithDevTools(applyMiddleware(...middleware)),
 );
+
+sagaMiddleware.run(rootSaga);
+
+export { reduxStore };
