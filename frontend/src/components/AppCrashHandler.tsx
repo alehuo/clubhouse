@@ -2,8 +2,10 @@ import React from "react";
 import FontAwesome from "react-fontawesome";
 import styled from "styled-components";
 
+const bugReportUrl = "https://github.com/alehuo/clubhouse-frontend/issues/new";
+
 const AppCrashScreenWrapper = styled.div`
-  height: 100vw;
+  height: 100vh;
   width: 100vw;
   color: #ff8484;
   text-align: center;
@@ -29,11 +31,17 @@ class AppCrashHandler extends React.Component<{}, State> {
   }
 
   public render() {
-    if (this.state.errorInfo) {
+    if (!this.state.errorInfo) {
       return (
         <AppCrashScreenWrapper>
           <FontAwesome name={"frown"} size={"4x"} />
           <h3>The application has crashed.</h3>
+          <p>
+            Please report the bug at{" "}
+            <a href={bugReportUrl} target="__blank">
+              {bugReportUrl}
+            </a>
+          </p>
         </AppCrashScreenWrapper>
       );
     }
