@@ -1,7 +1,7 @@
 import { ApiResponse } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
-import * as sessionService from "../../services/SessionService";
+import sessionService from "../../services/SessionService";
 import {
   SET_OWN_SESSION_STATUS,
   SET_SESSION_CHECK_INTERVAL,

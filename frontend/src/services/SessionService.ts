@@ -28,4 +28,4 @@ const getOwnSessionStatus = async (token: string) => {
   return res.data;
 };
 
-export { startSession, stopSession, getOwnSessionStatus };
+export default { startSession, stopSession, getOwnSessionStatus };

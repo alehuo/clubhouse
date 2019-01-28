@@ -14,6 +14,7 @@ import ruleReducer from "./reducers/ruleReducer";
 import sessionReducer from "./reducers/sessionReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
 import userReducer from "./reducers/userReducer";
+import notificationSaga from "./sagas/NotificationSaga";
 import rootSaga from "./sagas/RootSaga";
 
 const reducerObj = {
@@ -46,5 +47,6 @@ const reduxStore = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(notificationSaga);
 
 export { reduxStore };
