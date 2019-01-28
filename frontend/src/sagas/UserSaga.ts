@@ -1,29 +1,44 @@
-import { ApiResponse } from "@alehuo/clubhouse-shared";
+import { ApiResponse, isString, isUser } from "@alehuo/clubhouse-shared";
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
   authenticateUser,
+  deAuthenticateUser,
   setIsLoggingIn,
 } from "../reducers/actions/authenticationActions";
 import {
   errorMessage,
   successMessage,
 } from "../reducers/actions/notificationActions";
-import { fetchOwnSessionStatus, setOwnSessionStatus } from "../reducers/actions/sessionActions";
 import {
+  fetchOwnSessionStatus,
+  setOwnSessionStatus,
+} from "../reducers/actions/sessionActions";
+import {
+  addUser,
   deleteUser,
   fetchUserData,
+  fetchUsers,
   getUserPerms,
   login,
   removeUserFromList,
   setToken,
   setUserData,
   setUserPerms,
+  setUsers,
 } from "../reducers/actions/userActions";
-import { DELETE_USER, LOGIN } from "../reducers/constants";
+import {
+  ADD_USER,
+  DELETE_USER,
+  FETCH_USER_DATA,
+  FETCH_USERS,
+  GET_USER_PERMS,
+  LOGIN,
+} from "../reducers/constants";
+import PermissionService from "../services/PermissionService";
 import UserService from "../services/UserService";
 
-function* userLogin(action: ReturnType<typeof login>) {
-    console.log(action);
+function* userSaga_login(action: ReturnType<typeof login>) {
+  console.log(action);
   try {
     yield put(setIsLoggingIn(true));
     const loginResponse = yield call(
@@ -72,7 +87,7 @@ function* userLogin(action: ReturnType<typeof login>) {
   }
 }
 
-function* userDeletion(action: ReturnType<typeof deleteUser>) {
+function* userSaga_deleteUser(action: ReturnType<typeof deleteUser>) {
   try {
     yield call(UserService.remove, action.payload.userId, action.payload.token);
     yield put(successMessage("Successfully deleted user"));
@@ -90,9 +105,122 @@ function* userDeletion(action: ReturnType<typeof deleteUser>) {
   }
 }
 
+function* userSaga_fetchUsers(action: ReturnType<typeof fetchUsers>) {
+  try {
+    const res = yield call(UserService.getUsers, action.payload.token);
+    if (res.payload !== undefined) {
+      const users = res.payload;
+      if (users.every(isUser)) {
+        yield put(setUsers(users));
+      } else {
+        yield put(errorMessage("Back-end returned malformed users."));
+      }
+    } else {
+      yield put(errorMessage("Response payload was undefined."));
+    }
+  } catch (err) {
+    if (err.response && err.response.data) {
+      const res = err.response.data as ApiResponse<undefined>;
+      if (res.error !== undefined) {
+        yield put(errorMessage(res.error.message));
+      }
+    } else {
+      // If the response doesn't contain an error key, the back-end might be down
+      yield put(errorMessage("Error fetching users"));
+    }
+  }
+}
+
+function* userSaga_addUser(action: ReturnType<typeof addUser>) {
+  try {
+    const user = action.payload.user;
+    if (
+      !isString(user.email) ||
+      !isString(user.firstName) ||
+      !isString(user.lastName) ||
+      !isString(user.password)
+    ) {
+      yield put(errorMessage("Malformed form data"));
+    } else {
+      const res = yield call(
+        UserService.register,
+        user.email,
+        user.firstName,
+        user.lastName,
+        user.password,
+      );
+      if (res.payload !== undefined) {
+        yield put(
+          successMessage(
+            "User successfully registered. Please use your email and password to login.",
+          ),
+        );
+      } else {
+        yield put(errorMessage("Response payload was undefined."));
+      }
+    }
+  } catch (err) {
+    if (err.response && err.response.data) {
+      const res = err.response.data as ApiResponse<undefined>;
+      if (res.error !== undefined) {
+        yield put(errorMessage(res.error.message));
+      }
+    } else {
+      // If the response doesn't contain an error key, the back-end might be down
+      yield put(errorMessage("Error registering user"));
+    }
+  }
+}
+
+function* userSaga_fetchUserData(action: ReturnType<typeof fetchUserData>) {
+  try {
+    const res = yield call(UserService.getOwnData, action.payload.token);
+    if (res.payload !== undefined) {
+      yield put(setUserData(res.payload));
+    } else {
+      yield put(errorMessage("Response payload was undefined."));
+    }
+  } catch (err) {
+    if (err.response && err.response.data) {
+      const res = err.response.data as ApiResponse<undefined>;
+      if (res.error !== undefined) {
+        yield put(errorMessage(res.error.message));
+      }
+    } else {
+      // If the response doesn't contain an error key, the back-end might be down
+      yield put(errorMessage("Error fetching user data"));
+    }
+  }
+}
+
+function* userSaga_getUserPerms(action: ReturnType<typeof getUserPerms>) {
+  try {
+    const res = yield call(PermissionService.getUserPermissions, action.payload.token);
+    if (res.payload !== undefined) {
+      yield put(setUserPerms(res.payload.permissions));
+    } else {
+      yield put(errorMessage("Response payload was undefined."));
+    }
+  } catch (err) {
+    if (err.response && err.response.data && err.response.data) {
+      const res = err.response.data as ApiResponse<undefined>;
+      if (res.error !== undefined) {
+        yield put(errorMessage(res.error.message));
+      }
+    } else {
+      yield put(errorMessage("Error fetching user permissions"));
+    }
+    yield put(deAuthenticateUser());
+  }
+}
+
 function* userSaga() {
-  yield takeEvery(LOGIN, userLogin);
-  yield takeEvery(DELETE_USER, userDeletion);
+  yield takeEvery(LOGIN, userSaga_login);
+  yield takeEvery(DELETE_USER, userSaga_deleteUser);
+  yield takeEvery(FETCH_USERS, userSaga_fetchUsers);
+  yield takeEvery(ADD_USER, userSaga_addUser);
+  yield takeEvery(FETCH_USER_DATA, userSaga_fetchUserData);
+  yield takeEvery(GET_USER_PERMS, userSaga_getUserPerms);
 }
 
 export default userSaga;
