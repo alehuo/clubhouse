@@ -57,7 +57,7 @@ function* fetchProtectedData(token: string) {
     // Fetch & set user permissions
     const userPerms = yield call(PermissionService.getUserPermissions, token);
     // @ts-ignore
-    yield put(setUserPerms, userPerms.payload);
+    yield put(setUserPerms, userPerms.payload.permissions);
 
     // Fetch & set sessions
     const sessions = yield call(SessionService.getOwnSessionStatus, token);

@@ -31,7 +31,7 @@ class AppCrashHandler extends React.Component<{}, State> {
   }
 
   public render() {
-    if (!this.state.errorInfo) {
+    if (this.state.errorInfo) {
       return (
         <AppCrashScreenWrapper>
           <FontAwesome name={"frown"} size={"4x"} />
