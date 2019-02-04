@@ -9,8 +9,8 @@ import { RootState } from "../reduxStore";
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked } from "./../utils/FormValidators";
 
-const userFilter = (users: any, id: number) => {
-  const user = users.find((usr: any) => Number(usr.userId) === Number(id));
+const userFilter = (users: User[], id: number) => {
+  const user = users.find((usr) => usr.userId === id);
   if (!user) {
     return "N/A";
   }
@@ -102,7 +102,7 @@ const AddKeyHolderForm: React.SFC<Props> = ({
             <b>
               {keyTypes &&
                 keyTypes.find(
-                  (keyType) => Number(keyType.keyTypeId) === Number(selectedKey),
+                  (keyType) => keyType.keyTypeId === selectedKey,
                 )!.title}{" "}
               key
             </b>{" "}

@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap";
 
 interface Props {
   text: string;
-  type: string;
+  type: "success" | "warning" | "danger" | "info";
 }
 
 const Notification: React.SFC<Props> = ({ text, type }) => (

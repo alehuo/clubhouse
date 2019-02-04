@@ -19,7 +19,12 @@ const passwordEmpty = isEmpty("Password");
 const passwordValid = passwd(8);
 const check = checked("User permission");
 
-const RegisterForm: React.SFC<any> = (props) => (
+interface Props {
+  handleSubmit: any;
+  isRegistering: boolean;
+}
+
+const RegisterForm: React.SFC<Props> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       name="firstName"

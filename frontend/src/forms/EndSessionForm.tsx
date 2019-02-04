@@ -11,7 +11,14 @@ const confirmationChecked = checked(
   "You must agree that you have made the required steps before ending a session",
 );
 
-const EndSessionForm: React.SFC<any> = (props) => (
+interface Props {
+  handleSubmit: any;
+  handleClose: any;
+  isAdding: boolean;
+  isEnding: boolean;
+}
+
+const EndSessionForm: React.SFC<Props> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       autoFocus={true}

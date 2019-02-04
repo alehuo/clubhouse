@@ -3,7 +3,6 @@ import React from "react";
 import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
-import { any } from "prop-types";
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked, isEmpty } from "./../utils/FormValidators";
 
@@ -12,7 +11,14 @@ const confirmationChecked = checked(
   "You must agree to the rules of the clubhouse before starting a session",
 );
 
-const StartSessionForm: React.SFC<any> = (props) => (
+interface Props {
+  handleSubmit: any;
+  handleClose: any;
+  isAdding: boolean;
+  isEnding: boolean;
+}
+
+const StartSessionForm: React.SFC<Props> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       autoFocus={true}
