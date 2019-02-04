@@ -2,12 +2,12 @@ import { shallow } from "enzyme";
 import React from "react";
 import { AppCrashHandler, AppCrashScreenWrapper } from "./AppCrashHandler";
 
-it("AppCrashHandler renders without crashing", () => {
+it("AppCrashHandler matches snapshot", () => {
   const cmpnt = shallow(<AppCrashHandler />);
   expect(cmpnt).toMatchSnapshot();
 });
 
-it("AppCrashScreenWrapper renders without crashing", () => {
+it("AppCrashScreenWrapper matches snapshot", () => {
   const cmpnt = shallow(<AppCrashScreenWrapper />);
   expect(cmpnt).toMatchSnapshot();
 });

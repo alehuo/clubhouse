@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AppCrashHandler matches snapshot 1`] = `
+exports[`AuthenticatedRoute matches snapshot (authenticated) 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <AppCrashHandler />,
+  Symbol(enzyme.__unrendered__): <AuthenticatedRoute
+    component={[Function]}
+    isAuthenticated={true}
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -13,9 +16,29 @@ ShallowWrapper {
     "simulateEvent": [Function],
     "unmount": [Function],
   },
-  Symbol(enzyme.__node__): undefined,
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "render": [Function],
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
   Symbol(enzyme.__nodes__): Array [
-    undefined,
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "render": [Function],
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
   ],
   Symbol(enzyme.__options__): Object {
     "adapter": ReactSixteenAdapter {
@@ -41,10 +64,13 @@ ShallowWrapper {
 }
 `;
 
-exports[`AppCrashScreenWrapper matches snapshot 1`] = `
+exports[`AuthenticatedRoute matches snapshot (not authenticated) 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ForwardRef />,
+  Symbol(enzyme.__unrendered__): <AuthenticatedRoute
+    component={[Function]}
+    isAuthenticated={false}
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -59,32 +85,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "forwardedComponent": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "attrs": Array [],
-        "componentStyle": ComponentStyle {
-          "componentId": "sc-bdVaJa",
-          "isStatic": true,
-          "rules": Array [
-            "
-  height: 100vh;
-  width: 100vw;
-  color: #ff8484;
-  text-align: center;
-  padding-top: 50px;
-",
-          ],
-        },
-        "displayName": "styled.div",
-        "foldedComponentIds": Array [],
-        "render": [Function],
-        "styledComponentId": "sc-bdVaJa",
-        "target": "div",
-        "toString": [Function],
-        "warnTooManyClasses": [Function],
-        "withComponent": [Function],
-      },
-      "forwardedRef": null,
+      "render": [Function],
     },
     "ref": null,
     "rendered": null,
@@ -96,32 +97,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "forwardedComponent": Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "attrs": Array [],
-          "componentStyle": ComponentStyle {
-            "componentId": "sc-bdVaJa",
-            "isStatic": true,
-            "rules": Array [
-              "
-  height: 100vh;
-  width: 100vw;
-  color: #ff8484;
-  text-align: center;
-  padding-top: 50px;
-",
-            ],
-          },
-          "displayName": "styled.div",
-          "foldedComponentIds": Array [],
-          "render": [Function],
-          "styledComponentId": "sc-bdVaJa",
-          "target": "div",
-          "toString": [Function],
-          "warnTooManyClasses": [Function],
-          "withComponent": [Function],
-        },
-        "forwardedRef": null,
+        "render": [Function],
       },
       "ref": null,
       "rendered": null,
