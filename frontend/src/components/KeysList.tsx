@@ -28,7 +28,7 @@ const KeyList: React.SFC<Props> = ({
       </tr>
     </thead>
     <tbody>
-      {keys ? (
+      {(keys && keys.length > 0) ? (
         keys.map((key) => (
           <tr key={key.keyId}>
             <td>{key.keyId}</td>

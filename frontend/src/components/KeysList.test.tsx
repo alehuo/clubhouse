@@ -49,7 +49,19 @@ const users: User[] = [
 
 it("KeyList matches snapshot", () => {
   const cmpnt = shallow(
-    <KeyList keys={keys} studentUnions={studentUnions} keyTypes={keyTypes} users={users} />,
+    <KeyList
+      keys={keys}
+      studentUnions={studentUnions}
+      keyTypes={keyTypes}
+      users={users}
+    />,
+  );
+  expect(cmpnt).toMatchSnapshot();
+});
+
+it("KeyList matches snapshot", () => {
+  const cmpnt = shallow(
+    <KeyList keys={[]} studentUnions={[]} keyTypes={[]} users={[]} />,
   );
   expect(cmpnt).toMatchSnapshot();
 });
