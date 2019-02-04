@@ -17,4 +17,4 @@ const LoadingScreen = () => (
   </LoadingScreenWrapper>
 );
 
-export { LoadingScreen };
+export { LoadingScreen, LoadingScreenWrapper };

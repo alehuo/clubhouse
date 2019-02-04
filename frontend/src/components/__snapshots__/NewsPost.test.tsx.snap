@@ -1,0 +1,1125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsPost matches snapshot (has permissions) 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NewsPost
+    author={1}
+    date="2019-12-30 13:00:00"
+    hasEditDeletePermissions={true}
+    message="Hello World!"
+    onDelete={[Function]}
+    onEdit={[Function]}
+    title="Test title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "bsStyle": "primary",
+      "children": Array [
+        <PanelHeading
+          bsClass="panel"
+          componentClass="div"
+        >
+          <PanelTitle
+            bsClass="panel"
+            componentClass="div"
+          >
+            <b>
+              Test title
+            </b>
+            <React.Fragment>
+                 
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="danger"
+                disabled={false}
+                onClick={[Function]}
+              >
+                <FontAwesome
+                  name="trash"
+                />
+                 Delete
+              </Button>
+                 
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="success"
+                disabled={false}
+                onClick={[Function]}
+              >
+                <FontAwesome
+                  name="edit"
+                />
+                 Edit
+              </Button>
+            </React.Fragment>
+          </PanelTitle>
+        </PanelHeading>,
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          Hello World!
+        </PanelBody>,
+        <PanelFooter
+          bsClass="panel"
+        >
+          By #
+          <strong>
+            1
+          </strong>
+           on
+           
+          <i>
+            December 30, 2019 1:00 PM
+          </i>
+        </PanelFooter>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "bsClass": "panel",
+          "children": <PanelTitle
+            bsClass="panel"
+            componentClass="div"
+          >
+            <b>
+              Test title
+            </b>
+            <React.Fragment>
+                 
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="danger"
+                disabled={false}
+                onClick={[Function]}
+              >
+                <FontAwesome
+                  name="trash"
+                />
+                 Delete
+              </Button>
+                 
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="success"
+                disabled={false}
+                onClick={[Function]}
+              >
+                <FontAwesome
+                  name="edit"
+                />
+                 Edit
+              </Button>
+            </React.Fragment>
+          </PanelTitle>,
+          "componentClass": "div",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": Array [
+              <b>
+                Test title
+              </b>,
+              <React.Fragment>
+                   
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="danger"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  <FontAwesome
+                    name="trash"
+                  />
+                   Delete
+                </Button>
+                   
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="success"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  <FontAwesome
+                    name="edit"
+                  />
+                   Edit
+                </Button>
+              </React.Fragment>,
+            ],
+            "componentClass": "div",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Test title",
+              },
+              "ref": null,
+              "rendered": "Test title",
+              "type": "b",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": Array [
+                  "   ",
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="danger"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FontAwesome
+                      name="trash"
+                    />
+                     Delete
+                  </Button>,
+                  "   ",
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="success"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FontAwesome
+                      name="edit"
+                    />
+                     Edit
+                  </Button>,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                "   ",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "active": false,
+                    "block": false,
+                    "bsClass": "btn",
+                    "bsStyle": "danger",
+                    "children": Array [
+                      <FontAwesome
+                        name="trash"
+                      />,
+                      " Delete",
+                    ],
+                    "disabled": false,
+                    "onClick": [Function],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "name": "trash",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    " Delete",
+                  ],
+                  "type": [Function],
+                },
+                "   ",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "active": false,
+                    "block": false,
+                    "bsClass": "btn",
+                    "bsStyle": "success",
+                    "children": Array [
+                      <FontAwesome
+                        name="edit"
+                      />,
+                      " Edit",
+                    ],
+                    "disabled": false,
+                    "onClick": [Function],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "name": "edit",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    " Edit",
+                  ],
+                  "type": [Function],
+                },
+              ],
+              "type": Symbol(react.fragment),
+            },
+          ],
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "bsClass": "panel",
+          "children": "Hello World!",
+          "collapsible": false,
+        },
+        "ref": null,
+        "rendered": "Hello World!",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "bsClass": "panel",
+          "children": Array [
+            "By #",
+            <strong>
+              1
+            </strong>,
+            " on",
+            " ",
+            <i>
+              December 30, 2019 1:00 PM
+            </i>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "By #",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": 1,
+            },
+            "ref": null,
+            "rendered": 1,
+            "type": "strong",
+          },
+          " on",
+          " ",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "December 30, 2019 1:00 PM",
+            },
+            "ref": null,
+            "rendered": "December 30, 2019 1:00 PM",
+            "type": "i",
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "bsStyle": "primary",
+        "children": Array [
+          <PanelHeading
+            bsClass="panel"
+            componentClass="div"
+          >
+            <PanelTitle
+              bsClass="panel"
+              componentClass="div"
+            >
+              <b>
+                Test title
+              </b>
+              <React.Fragment>
+                   
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="danger"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  <FontAwesome
+                    name="trash"
+                  />
+                   Delete
+                </Button>
+                   
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="success"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  <FontAwesome
+                    name="edit"
+                  />
+                   Edit
+                </Button>
+              </React.Fragment>
+            </PanelTitle>
+          </PanelHeading>,
+          <PanelBody
+            bsClass="panel"
+            collapsible={false}
+          >
+            Hello World!
+          </PanelBody>,
+          <PanelFooter
+            bsClass="panel"
+          >
+            By #
+            <strong>
+              1
+            </strong>
+             on
+             
+            <i>
+              December 30, 2019 1:00 PM
+            </i>
+          </PanelFooter>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": <PanelTitle
+              bsClass="panel"
+              componentClass="div"
+            >
+              <b>
+                Test title
+              </b>
+              <React.Fragment>
+                   
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="danger"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  <FontAwesome
+                    name="trash"
+                  />
+                   Delete
+                </Button>
+                   
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="success"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  <FontAwesome
+                    name="edit"
+                  />
+                   Edit
+                </Button>
+              </React.Fragment>
+            </PanelTitle>,
+            "componentClass": "div",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "bsClass": "panel",
+              "children": Array [
+                <b>
+                  Test title
+                </b>,
+                <React.Fragment>
+                     
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="danger"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FontAwesome
+                      name="trash"
+                    />
+                     Delete
+                  </Button>
+                     
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="success"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FontAwesome
+                      name="edit"
+                    />
+                     Edit
+                  </Button>
+                </React.Fragment>,
+              ],
+              "componentClass": "div",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Test title",
+                },
+                "ref": null,
+                "rendered": "Test title",
+                "type": "b",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "children": Array [
+                    "   ",
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="danger"
+                      disabled={false}
+                      onClick={[Function]}
+                    >
+                      <FontAwesome
+                        name="trash"
+                      />
+                       Delete
+                    </Button>,
+                    "   ",
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="success"
+                      disabled={false}
+                      onClick={[Function]}
+                    >
+                      <FontAwesome
+                        name="edit"
+                      />
+                       Edit
+                    </Button>,
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  "   ",
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "active": false,
+                      "block": false,
+                      "bsClass": "btn",
+                      "bsStyle": "danger",
+                      "children": Array [
+                        <FontAwesome
+                          name="trash"
+                        />,
+                        " Delete",
+                      ],
+                      "disabled": false,
+                      "onClick": [Function],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "name": "trash",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      " Delete",
+                    ],
+                    "type": [Function],
+                  },
+                  "   ",
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "active": false,
+                      "block": false,
+                      "bsClass": "btn",
+                      "bsStyle": "success",
+                      "children": Array [
+                        <FontAwesome
+                          name="edit"
+                        />,
+                        " Edit",
+                      ],
+                      "disabled": false,
+                      "onClick": [Function],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "name": "edit",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      " Edit",
+                    ],
+                    "type": [Function],
+                  },
+                ],
+                "type": Symbol(react.fragment),
+              },
+            ],
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": "Hello World!",
+            "collapsible": false,
+          },
+          "ref": null,
+          "rendered": "Hello World!",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": Array [
+              "By #",
+              <strong>
+                1
+              </strong>,
+              " on",
+              " ",
+              <i>
+                December 30, 2019 1:00 PM
+              </i>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "By #",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": 1,
+              },
+              "ref": null,
+              "rendered": 1,
+              "type": "strong",
+            },
+            " on",
+            " ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "December 30, 2019 1:00 PM",
+              },
+              "ref": null,
+              "rendered": "December 30, 2019 1:00 PM",
+              "type": "i",
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`NewsPost matches snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NewsPost
+    author={1}
+    date="2019-12-30 12:00:00"
+    hasEditDeletePermissions={false}
+    message="Hello World!"
+    onDelete={[Function]}
+    onEdit={[Function]}
+    title="Test title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "bsStyle": "primary",
+      "children": Array [
+        <PanelHeading
+          bsClass="panel"
+          componentClass="div"
+        >
+          <PanelTitle
+            bsClass="panel"
+            componentClass="div"
+          >
+            <b>
+              Test title
+            </b>
+          </PanelTitle>
+        </PanelHeading>,
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          Hello World!
+        </PanelBody>,
+        <PanelFooter
+          bsClass="panel"
+        >
+          By #
+          <strong>
+            1
+          </strong>
+           on
+           
+          <i>
+            December 30, 2019 12:00 PM
+          </i>
+        </PanelFooter>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "bsClass": "panel",
+          "children": <PanelTitle
+            bsClass="panel"
+            componentClass="div"
+          >
+            <b>
+              Test title
+            </b>
+          </PanelTitle>,
+          "componentClass": "div",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": Array [
+              <b>
+                Test title
+              </b>,
+              false,
+            ],
+            "componentClass": "div",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Test title",
+              },
+              "ref": null,
+              "rendered": "Test title",
+              "type": "b",
+            },
+            false,
+          ],
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "bsClass": "panel",
+          "children": "Hello World!",
+          "collapsible": false,
+        },
+        "ref": null,
+        "rendered": "Hello World!",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "bsClass": "panel",
+          "children": Array [
+            "By #",
+            <strong>
+              1
+            </strong>,
+            " on",
+            " ",
+            <i>
+              December 30, 2019 12:00 PM
+            </i>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "By #",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": 1,
+            },
+            "ref": null,
+            "rendered": 1,
+            "type": "strong",
+          },
+          " on",
+          " ",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "December 30, 2019 12:00 PM",
+            },
+            "ref": null,
+            "rendered": "December 30, 2019 12:00 PM",
+            "type": "i",
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "bsStyle": "primary",
+        "children": Array [
+          <PanelHeading
+            bsClass="panel"
+            componentClass="div"
+          >
+            <PanelTitle
+              bsClass="panel"
+              componentClass="div"
+            >
+              <b>
+                Test title
+              </b>
+            </PanelTitle>
+          </PanelHeading>,
+          <PanelBody
+            bsClass="panel"
+            collapsible={false}
+          >
+            Hello World!
+          </PanelBody>,
+          <PanelFooter
+            bsClass="panel"
+          >
+            By #
+            <strong>
+              1
+            </strong>
+             on
+             
+            <i>
+              December 30, 2019 12:00 PM
+            </i>
+          </PanelFooter>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": <PanelTitle
+              bsClass="panel"
+              componentClass="div"
+            >
+              <b>
+                Test title
+              </b>
+            </PanelTitle>,
+            "componentClass": "div",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "bsClass": "panel",
+              "children": Array [
+                <b>
+                  Test title
+                </b>,
+                false,
+              ],
+              "componentClass": "div",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Test title",
+                },
+                "ref": null,
+                "rendered": "Test title",
+                "type": "b",
+              },
+              false,
+            ],
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": "Hello World!",
+            "collapsible": false,
+          },
+          "ref": null,
+          "rendered": "Hello World!",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "panel",
+            "children": Array [
+              "By #",
+              <strong>
+                1
+              </strong>,
+              " on",
+              " ",
+              <i>
+                December 30, 2019 12:00 PM
+              </i>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "By #",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": 1,
+              },
+              "ref": null,
+              "rendered": 1,
+              "type": "strong",
+            },
+            " on",
+            " ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "December 30, 2019 12:00 PM",
+              },
+              "ref": null,
+              "rendered": "December 30, 2019 12:00 PM",
+              "type": "i",
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

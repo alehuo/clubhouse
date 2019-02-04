@@ -1,19 +1,17 @@
+import { Newspost } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
 import { Button, Panel } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 
 interface Props {
-  title: string;
-  message: string;
-  author: number;
   date?: string;
   onDelete: any;
   onEdit: any;
   hasEditDeletePermissions: boolean;
 }
 
-const NewsPost: React.SFC<Props> = ({
+const NewsPost: React.SFC<Pick<Newspost, "title" | "author" | "message"> & Props> = ({
   title,
   message,
   author,
