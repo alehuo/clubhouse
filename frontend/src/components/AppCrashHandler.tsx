@@ -49,4 +49,4 @@ class AppCrashHandler extends React.Component<{}, State> {
   }
 }
 
-export { AppCrashHandler };
+export { AppCrashHandler, AppCrashScreenWrapper };
