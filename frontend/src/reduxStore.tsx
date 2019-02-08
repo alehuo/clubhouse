@@ -17,6 +17,7 @@ import studentUnionReducer from "./reducers/studentUnionReducer";
 import userReducer from "./reducers/userReducer";
 import notificationSaga from "./sagas/NotificationSaga";
 import rootSaga from "./sagas/RootSaga";
+import sessionSaga from "./sagas/SessionSaga";
 import userSaga from "./sagas/UserSaga";
 
 const reducerObj = {
@@ -52,5 +53,6 @@ const reduxStore = createStore(
 sagaMiddleware.run(rootSaga);
 sagaMiddleware.run(notificationSaga);
 sagaMiddleware.run(userSaga);
+sagaMiddleware.run(sessionSaga);
 
 export { reduxStore };

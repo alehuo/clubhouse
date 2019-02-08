@@ -11,7 +11,6 @@ import {
 } from "../reducers/actions/notificationActions";
 import {
   fetchOwnSessionStatus,
-  setOwnSessionStatus,
 } from "../reducers/actions/sessionActions";
 import {
   addUser,
@@ -50,13 +49,11 @@ function* userSaga_login(action: ReturnType<typeof login>) {
       localStorage.setItem("token", token);
       // @ts-ignore
       yield put(setToken(token));
-      const sessionStatus = yield call(fetchOwnSessionStatus, token);
+      yield put(fetchOwnSessionStatus(token));
+      const userPerms = yield call(PermissionService.getUserPermissions, token);
       // @ts-ignore
-      yield put(setOwnSessionStatus, sessionStatus.payload);
-      const userPerms = yield call(getUserPerms, token);
-      // @ts-ignore
-      yield put(setUserPerms, userPerms.payload);
-      const userdata = yield call(fetchUserData, token);
+      yield put(setUserPerms(userPerms.payload.permissions));
+      const userdata = yield call(UserService.getOwnData, token);
       // @ts-ignore
       yield put(setUserData(userdata.payload));
       // @ts-ignore
@@ -194,7 +191,10 @@ function* userSaga_fetchUserData(action: ReturnType<typeof fetchUserData>) {
 
 function* userSaga_getUserPerms(action: ReturnType<typeof getUserPerms>) {
   try {
-    const res = yield call(PermissionService.getUserPermissions, action.payload.token);
+    const res = yield call(
+      PermissionService.getUserPermissions,
+      action.payload.token,
+    );
     if (res.payload !== undefined) {
       yield put(setUserPerms(res.payload.permissions));
     } else {

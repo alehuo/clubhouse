@@ -1,3 +1,4 @@
+import { ApiResponse } from "@alehuo/clubhouse-shared";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { authenticateUser } from "../reducers/actions/authenticationActions";
 import { setEvents } from "../reducers/actions/calendarActions";
@@ -52,17 +53,26 @@ function* fetchProtectedData(token: string) {
     // Fetch & set keys
     const keys = yield call(KeyService.getKeys, token);
     // @ts-ignore
-    yield put(setKeys, keys.payload);
+    yield put(setKeys(keys.payload));
 
     // Fetch & set user permissions
-    const userPerms = yield call(PermissionService.getUserPermissions, token);
+    const userPerms: ApiResponse<any> = yield call(
+      PermissionService.getUserPermissions,
+      token,
+    );
     // @ts-ignore
-    yield put(setUserPerms, userPerms.payload.permissions);
+    yield put(setUserPerms(userPerms.payload.permissions));
 
     // Fetch & set sessions
     const sessions = yield call(SessionService.getOwnSessionStatus, token);
     // @ts-ignore
-    yield put(setOwnSessionStatus, sessions.payload);
+    yield put(
+      setOwnSessionStatus(
+        sessions.payload.running,
+        sessions.payload.peopleCount,
+        sessions.payload.startTime,
+      ),
+    );
 
     // Fetch & set user data
   } catch (e) {
