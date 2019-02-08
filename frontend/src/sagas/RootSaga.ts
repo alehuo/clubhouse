@@ -1,4 +1,4 @@
-import { ApiResponse } from "@alehuo/clubhouse-shared";
+import { ApiResponse, Key } from "@alehuo/clubhouse-shared";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { authenticateUser } from "../reducers/actions/authenticationActions";
 import { setEvents } from "../reducers/actions/calendarActions";
@@ -51,30 +51,46 @@ function* initApp() {
 function* fetchProtectedData(token: string) {
   try {
     // Fetch & set keys
-    const keys = yield call(KeyService.getKeys, token);
-    // @ts-ignore
-    yield put(setKeys(keys.payload));
+    const keys: ApiResponse<Key[]> = yield call(KeyService.getKeys, token);
+    if (keys.payload !== undefined) {
+      yield put(setKeys(keys.payload));
+    } else {
+      yield put(errorMessage("getKeys(): Response payload was undefined"));
+    }
 
     // Fetch & set user permissions
-    const userPerms: ApiResponse<any> = yield call(
-      PermissionService.getUserPermissions,
-      token,
-    );
-    // @ts-ignore
-    yield put(setUserPerms(userPerms.payload.permissions));
+    const userPerms: ApiResponse<{
+      permissions: number;
+      permission_list: string[];
+    }> = yield call(PermissionService.getUserPermissions, token);
+
+    if (userPerms.payload !== undefined) {
+      yield put(setUserPerms(userPerms.payload.permissions));
+    } else {
+      yield put(
+        errorMessage("getUserPermissions): Response payload was undefined"),
+      );
+    }
 
     // Fetch & set sessions
-    const sessions = yield call(SessionService.getOwnSessionStatus, token);
-    // @ts-ignore
-    yield put(
-      setOwnSessionStatus(
-        sessions.payload.running,
-        sessions.payload.peopleCount,
-        sessions.payload.startTime,
-      ),
-    );
-
-    // Fetch & set user data
+    const sessions: ApiResponse<{
+      running: boolean;
+      peopleCount: number;
+      startTime: string;
+    }> = yield call(SessionService.getOwnSessionStatus, token);
+    if (sessions.payload !== undefined) {
+      yield put(
+        setOwnSessionStatus(
+          sessions.payload.running,
+          sessions.payload.peopleCount,
+          sessions.payload.startTime,
+        ),
+      );
+    } else {
+      yield put(
+        errorMessage("setOwnSessionStatus()): Response payload was undefined"),
+      );
+    }
   } catch (e) {
     yield put(errorMessage(e.message));
   }
