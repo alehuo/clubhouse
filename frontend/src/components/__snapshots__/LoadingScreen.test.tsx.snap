@@ -23,7 +23,7 @@ ShallowWrapper {
           Loading...
         </h3>,
         <ForwardRef(render)
-          active={true}
+          animated={true}
           now={100}
         />,
       ],
@@ -46,7 +46,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "active": true,
+          "animated": true,
           "now": 100,
         },
         "ref": null,
@@ -97,7 +97,7 @@ ShallowWrapper {
             Loading...
           </h3>,
           <ForwardRef(render)
-            active={true}
+            animated={true}
             now={100}
           />,
         ],
@@ -120,7 +120,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "active": true,
+            "animated": true,
             "now": 100,
           },
           "ref": null,

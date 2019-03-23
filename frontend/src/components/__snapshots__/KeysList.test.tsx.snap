@@ -114,7 +114,6 @@ ShallowWrapper {
           </tr>
         </tbody>,
       ],
-      "condensed": true,
       "hover": true,
       "responsive": true,
       "striped": true,
@@ -451,7 +450,6 @@ ShallowWrapper {
             </tr>
           </tbody>,
         ],
-        "condensed": true,
         "hover": true,
         "responsive": true,
         "striped": true,
@@ -819,7 +817,6 @@ ShallowWrapper {
           </tr>
         </tbody>,
       ],
-      "condensed": true,
       "hover": true,
       "responsive": true,
       "striped": true,
@@ -1043,7 +1040,6 @@ ShallowWrapper {
             </tr>
           </tbody>,
         ],
-        "condensed": true,
         "hover": true,
         "responsive": true,
         "striped": true,

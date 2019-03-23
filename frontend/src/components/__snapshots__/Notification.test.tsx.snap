@@ -21,13 +21,13 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "bsStyle": "danger",
       "children": <p>
         Hello World
       </p>,
       "closeLabel": "Close alert",
       "show": true,
       "transition": [Function],
+      "variant": "danger",
     },
     "ref": null,
     "rendered": Object {
@@ -70,13 +70,13 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "bsStyle": "danger",
         "children": <p>
           Hello World
         </p>,
         "closeLabel": "Close alert",
         "show": true,
         "transition": [Function],
+        "variant": "danger",
       },
       "ref": null,
       "rendered": Object {

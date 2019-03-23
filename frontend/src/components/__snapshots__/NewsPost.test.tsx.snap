@@ -24,62 +24,51 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "bsStyle": "primary",
+      "as": "div",
+      "bg": "primary",
+      "body": false,
       "children": Array [
-        <PanelHeading
-          bsClass="panel"
-          componentClass="div"
-        >
-          <PanelTitle
-            bsClass="panel"
-            componentClass="div"
-          >
+        <ForwardRef>
+          <ForwardRef>
             <b>
               Test title
             </b>
             <React.Fragment>
                  
-              <Button
+              <ForwardRef
                 active={false}
-                block={false}
-                bsClass="btn"
-                bsStyle="danger"
                 disabled={false}
                 onClick={[Function]}
+                type="button"
+                variant="danger"
               >
                 <FontAwesome
                   name="trash"
                 />
                  Delete
-              </Button>
+              </ForwardRef>
                  
-              <Button
+              <ForwardRef
                 active={false}
-                block={false}
-                bsClass="btn"
-                bsStyle="success"
                 disabled={false}
                 onClick={[Function]}
+                type="button"
+                variant="success"
               >
                 <FontAwesome
                   name="edit"
                 />
                  Edit
-              </Button>
+              </ForwardRef>
             </React.Fragment>
-          </PanelTitle>
-        </PanelHeading>,
-        <PanelBody
-          bsClass="panel"
-          collapsible={false}
-        >
+          </ForwardRef>
+        </ForwardRef>,
+        <ForwardRef>
           Hello World!
-        </PanelBody>,
-        <PanelFooter
-          bsClass="panel"
-        >
+        </ForwardRef>,
+        <ForwardRef>
           By #
           <strong>
             1
@@ -89,7 +78,7 @@ ShallowWrapper {
           <i>
             December 30, 2019 1:00 PM
           </i>
-        </PanelFooter>,
+        </ForwardRef>,
       ],
     },
     "ref": null,
@@ -97,92 +86,81 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "bsClass": "panel",
-          "children": <PanelTitle
-            bsClass="panel"
-            componentClass="div"
-          >
+          "children": <ForwardRef>
             <b>
               Test title
             </b>
             <React.Fragment>
                  
-              <Button
+              <ForwardRef
                 active={false}
-                block={false}
-                bsClass="btn"
-                bsStyle="danger"
                 disabled={false}
                 onClick={[Function]}
+                type="button"
+                variant="danger"
               >
                 <FontAwesome
                   name="trash"
                 />
                  Delete
-              </Button>
+              </ForwardRef>
                  
-              <Button
+              <ForwardRef
                 active={false}
-                block={false}
-                bsClass="btn"
-                bsStyle="success"
                 disabled={false}
                 onClick={[Function]}
+                type="button"
+                variant="success"
               >
                 <FontAwesome
                   name="edit"
                 />
                  Edit
-              </Button>
+              </ForwardRef>
             </React.Fragment>
-          </PanelTitle>,
-          "componentClass": "div",
+          </ForwardRef>,
         },
         "ref": null,
         "rendered": Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
             "children": Array [
               <b>
                 Test title
               </b>,
               <React.Fragment>
                    
-                <Button
+                <ForwardRef
                   active={false}
-                  block={false}
-                  bsClass="btn"
-                  bsStyle="danger"
                   disabled={false}
                   onClick={[Function]}
+                  type="button"
+                  variant="danger"
                 >
                   <FontAwesome
                     name="trash"
                   />
                    Delete
-                </Button>
+                </ForwardRef>
                    
-                <Button
+                <ForwardRef
                   active={false}
-                  block={false}
-                  bsClass="btn"
-                  bsStyle="success"
                   disabled={false}
                   onClick={[Function]}
+                  type="button"
+                  variant="success"
                 >
                   <FontAwesome
                     name="edit"
                   />
                    Edit
-                </Button>
+                </ForwardRef>
               </React.Fragment>,
             ],
-            "componentClass": "div",
           },
           "ref": null,
           "rendered": Array [
@@ -204,33 +182,31 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   "   ",
-                  <Button
+                  <ForwardRef
                     active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="danger"
                     disabled={false}
                     onClick={[Function]}
+                    type="button"
+                    variant="danger"
                   >
                     <FontAwesome
                       name="trash"
                     />
                      Delete
-                  </Button>,
+                  </ForwardRef>,
                   "   ",
-                  <Button
+                  <ForwardRef
                     active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="success"
                     disabled={false}
                     onClick={[Function]}
+                    type="button"
+                    variant="success"
                   >
                     <FontAwesome
                       name="edit"
                     />
                      Edit
-                  </Button>,
+                  </ForwardRef>,
                 ],
               },
               "ref": null,
@@ -239,12 +215,9 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "function",
                   "props": Object {
                     "active": false,
-                    "block": false,
-                    "bsClass": "btn",
-                    "bsStyle": "danger",
                     "children": Array [
                       <FontAwesome
                         name="trash"
@@ -253,6 +226,8 @@ ShallowWrapper {
                     ],
                     "disabled": false,
                     "onClick": [Function],
+                    "type": "button",
+                    "variant": "danger",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -269,18 +244,25 @@ ShallowWrapper {
                     },
                     " Delete",
                   ],
-                  "type": [Function],
+                  "type": Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "defaultProps": Object {
+                      "active": false,
+                      "disabled": false,
+                      "type": "button",
+                      "variant": "primary",
+                    },
+                    "displayName": "Button",
+                    "render": [Function],
+                  },
                 },
                 "   ",
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "function",
                   "props": Object {
                     "active": false,
-                    "block": false,
-                    "bsClass": "btn",
-                    "bsStyle": "success",
                     "children": Array [
                       <FontAwesome
                         name="edit"
@@ -289,6 +271,8 @@ ShallowWrapper {
                     ],
                     "disabled": false,
                     "onClick": [Function],
+                    "type": "button",
+                    "variant": "success",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -305,35 +289,57 @@ ShallowWrapper {
                     },
                     " Edit",
                   ],
-                  "type": [Function],
+                  "type": Object {
+                    "$$typeof": Symbol(react.forward_ref),
+                    "defaultProps": Object {
+                      "active": false,
+                      "disabled": false,
+                      "type": "button",
+                      "variant": "primary",
+                    },
+                    "displayName": "Button",
+                    "render": [Function],
+                  },
                 },
               ],
               "type": Symbol(react.fragment),
             },
           ],
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardTitle",
+            "render": [Function],
+          },
         },
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardHeader",
+          "render": [Function],
+        },
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "bsClass": "panel",
           "children": "Hello World!",
-          "collapsible": false,
         },
         "ref": null,
         "rendered": "Hello World!",
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardBody",
+          "render": [Function],
+        },
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "bsClass": "panel",
           "children": Array [
             "By #",
             <strong>
@@ -374,71 +380,130 @@ ShallowWrapper {
             "type": "i",
           },
         ],
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardFooter",
+          "render": [Function],
+        },
       },
     ],
-    "type": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Body": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardBody",
+        "render": [Function],
+      },
+      "Footer": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardFooter",
+        "render": [Function],
+      },
+      "Header": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardHeader",
+        "render": [Function],
+      },
+      "Img": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "as": "img",
+          "variant": null,
+        },
+        "displayName": "CardImg",
+        "render": [Function],
+      },
+      "ImgOverlay": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardImgOverlay",
+        "render": [Function],
+      },
+      "Link": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardLink",
+        "render": [Function],
+      },
+      "Subtitle": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardSubtitle",
+        "render": [Function],
+      },
+      "Text": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardText",
+        "render": [Function],
+      },
+      "Title": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardTitle",
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "as": "div",
+        "body": false,
+      },
+      "displayName": "Card",
+      "render": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "bsStyle": "primary",
+        "as": "div",
+        "bg": "primary",
+        "body": false,
         "children": Array [
-          <PanelHeading
-            bsClass="panel"
-            componentClass="div"
-          >
-            <PanelTitle
-              bsClass="panel"
-              componentClass="div"
-            >
+          <ForwardRef>
+            <ForwardRef>
               <b>
                 Test title
               </b>
               <React.Fragment>
                    
-                <Button
+                <ForwardRef
                   active={false}
-                  block={false}
-                  bsClass="btn"
-                  bsStyle="danger"
                   disabled={false}
                   onClick={[Function]}
+                  type="button"
+                  variant="danger"
                 >
                   <FontAwesome
                     name="trash"
                   />
                    Delete
-                </Button>
+                </ForwardRef>
                    
-                <Button
+                <ForwardRef
                   active={false}
-                  block={false}
-                  bsClass="btn"
-                  bsStyle="success"
                   disabled={false}
                   onClick={[Function]}
+                  type="button"
+                  variant="success"
                 >
                   <FontAwesome
                     name="edit"
                   />
                    Edit
-                </Button>
+                </ForwardRef>
               </React.Fragment>
-            </PanelTitle>
-          </PanelHeading>,
-          <PanelBody
-            bsClass="panel"
-            collapsible={false}
-          >
+            </ForwardRef>
+          </ForwardRef>,
+          <ForwardRef>
             Hello World!
-          </PanelBody>,
-          <PanelFooter
-            bsClass="panel"
-          >
+          </ForwardRef>,
+          <ForwardRef>
             By #
             <strong>
               1
@@ -448,7 +513,7 @@ ShallowWrapper {
             <i>
               December 30, 2019 1:00 PM
             </i>
-          </PanelFooter>,
+          </ForwardRef>,
         ],
       },
       "ref": null,
@@ -456,92 +521,81 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
-            "children": <PanelTitle
-              bsClass="panel"
-              componentClass="div"
-            >
+            "children": <ForwardRef>
               <b>
                 Test title
               </b>
               <React.Fragment>
                    
-                <Button
+                <ForwardRef
                   active={false}
-                  block={false}
-                  bsClass="btn"
-                  bsStyle="danger"
                   disabled={false}
                   onClick={[Function]}
+                  type="button"
+                  variant="danger"
                 >
                   <FontAwesome
                     name="trash"
                   />
                    Delete
-                </Button>
+                </ForwardRef>
                    
-                <Button
+                <ForwardRef
                   active={false}
-                  block={false}
-                  bsClass="btn"
-                  bsStyle="success"
                   disabled={false}
                   onClick={[Function]}
+                  type="button"
+                  variant="success"
                 >
                   <FontAwesome
                     name="edit"
                   />
                    Edit
-                </Button>
+                </ForwardRef>
               </React.Fragment>
-            </PanelTitle>,
-            "componentClass": "div",
+            </ForwardRef>,
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
-              "bsClass": "panel",
               "children": Array [
                 <b>
                   Test title
                 </b>,
                 <React.Fragment>
                      
-                  <Button
+                  <ForwardRef
                     active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="danger"
                     disabled={false}
                     onClick={[Function]}
+                    type="button"
+                    variant="danger"
                   >
                     <FontAwesome
                       name="trash"
                     />
                      Delete
-                  </Button>
+                  </ForwardRef>
                      
-                  <Button
+                  <ForwardRef
                     active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="success"
                     disabled={false}
                     onClick={[Function]}
+                    type="button"
+                    variant="success"
                   >
                     <FontAwesome
                       name="edit"
                     />
                      Edit
-                  </Button>
+                  </ForwardRef>
                 </React.Fragment>,
               ],
-              "componentClass": "div",
             },
             "ref": null,
             "rendered": Array [
@@ -563,33 +617,31 @@ ShallowWrapper {
                 "props": Object {
                   "children": Array [
                     "   ",
-                    <Button
+                    <ForwardRef
                       active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
                       disabled={false}
                       onClick={[Function]}
+                      type="button"
+                      variant="danger"
                     >
                       <FontAwesome
                         name="trash"
                       />
                        Delete
-                    </Button>,
+                    </ForwardRef>,
                     "   ",
-                    <Button
+                    <ForwardRef
                       active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="success"
                       disabled={false}
                       onClick={[Function]}
+                      type="button"
+                      variant="success"
                     >
                       <FontAwesome
                         name="edit"
                       />
                        Edit
-                    </Button>,
+                    </ForwardRef>,
                   ],
                 },
                 "ref": null,
@@ -598,12 +650,9 @@ ShallowWrapper {
                   Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "class",
+                    "nodeType": "function",
                     "props": Object {
                       "active": false,
-                      "block": false,
-                      "bsClass": "btn",
-                      "bsStyle": "danger",
                       "children": Array [
                         <FontAwesome
                           name="trash"
@@ -612,6 +661,8 @@ ShallowWrapper {
                       ],
                       "disabled": false,
                       "onClick": [Function],
+                      "type": "button",
+                      "variant": "danger",
                     },
                     "ref": null,
                     "rendered": Array [
@@ -628,18 +679,25 @@ ShallowWrapper {
                       },
                       " Delete",
                     ],
-                    "type": [Function],
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "defaultProps": Object {
+                        "active": false,
+                        "disabled": false,
+                        "type": "button",
+                        "variant": "primary",
+                      },
+                      "displayName": "Button",
+                      "render": [Function],
+                    },
                   },
                   "   ",
                   Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "class",
+                    "nodeType": "function",
                     "props": Object {
                       "active": false,
-                      "block": false,
-                      "bsClass": "btn",
-                      "bsStyle": "success",
                       "children": Array [
                         <FontAwesome
                           name="edit"
@@ -648,6 +706,8 @@ ShallowWrapper {
                       ],
                       "disabled": false,
                       "onClick": [Function],
+                      "type": "button",
+                      "variant": "success",
                     },
                     "ref": null,
                     "rendered": Array [
@@ -664,35 +724,57 @@ ShallowWrapper {
                       },
                       " Edit",
                     ],
-                    "type": [Function],
+                    "type": Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "defaultProps": Object {
+                        "active": false,
+                        "disabled": false,
+                        "type": "button",
+                        "variant": "primary",
+                      },
+                      "displayName": "Button",
+                      "render": [Function],
+                    },
                   },
                 ],
                 "type": Symbol(react.fragment),
               },
             ],
-            "type": [Function],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "defaultProps": undefined,
+              "displayName": "CardTitle",
+              "render": [Function],
+            },
           },
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardHeader",
+            "render": [Function],
+          },
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
             "children": "Hello World!",
-            "collapsible": false,
           },
           "ref": null,
           "rendered": "Hello World!",
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardBody",
+            "render": [Function],
+          },
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
             "children": Array [
               "By #",
               <strong>
@@ -733,10 +815,80 @@ ShallowWrapper {
               "type": "i",
             },
           ],
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardFooter",
+            "render": [Function],
+          },
         },
       ],
-      "type": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "Body": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardBody",
+          "render": [Function],
+        },
+        "Footer": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardFooter",
+          "render": [Function],
+        },
+        "Header": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardHeader",
+          "render": [Function],
+        },
+        "Img": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": Object {
+            "as": "img",
+            "variant": null,
+          },
+          "displayName": "CardImg",
+          "render": [Function],
+        },
+        "ImgOverlay": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardImgOverlay",
+          "render": [Function],
+        },
+        "Link": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardLink",
+          "render": [Function],
+        },
+        "Subtitle": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardSubtitle",
+          "render": [Function],
+        },
+        "Text": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardText",
+          "render": [Function],
+        },
+        "Title": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardTitle",
+          "render": [Function],
+        },
+        "defaultProps": Object {
+          "as": "div",
+          "body": false,
+        },
+        "displayName": "Card",
+        "render": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -789,32 +941,23 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "bsStyle": "primary",
+      "as": "div",
+      "bg": "primary",
+      "body": false,
       "children": Array [
-        <PanelHeading
-          bsClass="panel"
-          componentClass="div"
-        >
-          <PanelTitle
-            bsClass="panel"
-            componentClass="div"
-          >
+        <ForwardRef>
+          <ForwardRef>
             <b>
               Test title
             </b>
-          </PanelTitle>
-        </PanelHeading>,
-        <PanelBody
-          bsClass="panel"
-          collapsible={false}
-        >
+          </ForwardRef>
+        </ForwardRef>,
+        <ForwardRef>
           Hello World!
-        </PanelBody>,
-        <PanelFooter
-          bsClass="panel"
-        >
+        </ForwardRef>,
+        <ForwardRef>
           By #
           <strong>
             1
@@ -824,7 +967,7 @@ ShallowWrapper {
           <i>
             December 30, 2019 12:00 PM
           </i>
-        </PanelFooter>,
+        </ForwardRef>,
       ],
     },
     "ref": null,
@@ -832,33 +975,26 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "bsClass": "panel",
-          "children": <PanelTitle
-            bsClass="panel"
-            componentClass="div"
-          >
+          "children": <ForwardRef>
             <b>
               Test title
             </b>
-          </PanelTitle>,
-          "componentClass": "div",
+          </ForwardRef>,
         },
         "ref": null,
         "rendered": Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
             "children": Array [
               <b>
                 Test title
               </b>,
               false,
             ],
-            "componentClass": "div",
           },
           "ref": null,
           "rendered": Array [
@@ -875,29 +1011,41 @@ ShallowWrapper {
             },
             false,
           ],
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardTitle",
+            "render": [Function],
+          },
         },
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardHeader",
+          "render": [Function],
+        },
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "bsClass": "panel",
           "children": "Hello World!",
-          "collapsible": false,
         },
         "ref": null,
         "rendered": "Hello World!",
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardBody",
+          "render": [Function],
+        },
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "bsClass": "panel",
           "children": Array [
             "By #",
             <strong>
@@ -938,41 +1086,102 @@ ShallowWrapper {
             "type": "i",
           },
         ],
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardFooter",
+          "render": [Function],
+        },
       },
     ],
-    "type": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Body": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardBody",
+        "render": [Function],
+      },
+      "Footer": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardFooter",
+        "render": [Function],
+      },
+      "Header": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardHeader",
+        "render": [Function],
+      },
+      "Img": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "as": "img",
+          "variant": null,
+        },
+        "displayName": "CardImg",
+        "render": [Function],
+      },
+      "ImgOverlay": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardImgOverlay",
+        "render": [Function],
+      },
+      "Link": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardLink",
+        "render": [Function],
+      },
+      "Subtitle": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardSubtitle",
+        "render": [Function],
+      },
+      "Text": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardText",
+        "render": [Function],
+      },
+      "Title": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "CardTitle",
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "as": "div",
+        "body": false,
+      },
+      "displayName": "Card",
+      "render": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "bsStyle": "primary",
+        "as": "div",
+        "bg": "primary",
+        "body": false,
         "children": Array [
-          <PanelHeading
-            bsClass="panel"
-            componentClass="div"
-          >
-            <PanelTitle
-              bsClass="panel"
-              componentClass="div"
-            >
+          <ForwardRef>
+            <ForwardRef>
               <b>
                 Test title
               </b>
-            </PanelTitle>
-          </PanelHeading>,
-          <PanelBody
-            bsClass="panel"
-            collapsible={false}
-          >
+            </ForwardRef>
+          </ForwardRef>,
+          <ForwardRef>
             Hello World!
-          </PanelBody>,
-          <PanelFooter
-            bsClass="panel"
-          >
+          </ForwardRef>,
+          <ForwardRef>
             By #
             <strong>
               1
@@ -982,7 +1191,7 @@ ShallowWrapper {
             <i>
               December 30, 2019 12:00 PM
             </i>
-          </PanelFooter>,
+          </ForwardRef>,
         ],
       },
       "ref": null,
@@ -990,33 +1199,26 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
-            "children": <PanelTitle
-              bsClass="panel"
-              componentClass="div"
-            >
+            "children": <ForwardRef>
               <b>
                 Test title
               </b>
-            </PanelTitle>,
-            "componentClass": "div",
+            </ForwardRef>,
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
-              "bsClass": "panel",
               "children": Array [
                 <b>
                   Test title
                 </b>,
                 false,
               ],
-              "componentClass": "div",
             },
             "ref": null,
             "rendered": Array [
@@ -1033,29 +1235,41 @@ ShallowWrapper {
               },
               false,
             ],
-            "type": [Function],
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "defaultProps": undefined,
+              "displayName": "CardTitle",
+              "render": [Function],
+            },
           },
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardHeader",
+            "render": [Function],
+          },
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
             "children": "Hello World!",
-            "collapsible": false,
           },
           "ref": null,
           "rendered": "Hello World!",
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardBody",
+            "render": [Function],
+          },
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "bsClass": "panel",
             "children": Array [
               "By #",
               <strong>
@@ -1096,10 +1310,80 @@ ShallowWrapper {
               "type": "i",
             },
           ],
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "CardFooter",
+            "render": [Function],
+          },
         },
       ],
-      "type": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "Body": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardBody",
+          "render": [Function],
+        },
+        "Footer": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardFooter",
+          "render": [Function],
+        },
+        "Header": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardHeader",
+          "render": [Function],
+        },
+        "Img": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": Object {
+            "as": "img",
+            "variant": null,
+          },
+          "displayName": "CardImg",
+          "render": [Function],
+        },
+        "ImgOverlay": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardImgOverlay",
+          "render": [Function],
+        },
+        "Link": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardLink",
+          "render": [Function],
+        },
+        "Subtitle": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardSubtitle",
+          "render": [Function],
+        },
+        "Text": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardText",
+          "render": [Function],
+        },
+        "Title": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "CardTitle",
+          "render": [Function],
+        },
+        "defaultProps": Object {
+          "as": "div",
+          "body": false,
+        },
+        "displayName": "Card",
+        "render": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {
