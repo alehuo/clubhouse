@@ -47,7 +47,7 @@ const AddStudentUnionForm: React.SFC<Props> = ({
       component={FieldGroup}
       validate={[emptyDesc]}
     />
-    <Well>
+    <div>
       <FormGroup controlId="studentUnionPermission">
         <Field
           name="studentUnionPermission"
@@ -59,13 +59,13 @@ const AddStudentUnionForm: React.SFC<Props> = ({
           I have the permission from the student union to save their information
           to the service
         </b>
-        <HelpBlock>
+        <p>
           Your answer will be saved in case a student union wants to do a data
           request, as required by the European Union General Data Protection
           Regulation.
-        </HelpBlock>
+        </p>
       </FormGroup>
-    </Well>
+    </div>
     <Button
       type="button"
       variant="danger"

@@ -2,7 +2,7 @@ import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
-import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { NavButton } from "../navButtons";
 
 interface NavigationProps {
@@ -16,22 +16,20 @@ const Navigation: React.SFC<NavigationProps> = ({
   isAuthenticated,
   userData,
 }) => (
-  <Navbar collapseOnSelect fixed="top">
-    <LinkContainer to="/">
-      <Navbar.Brand>Clubhouse management</Navbar.Brand>
-    </LinkContainer>
-    <Navbar.Toggle />
-    <Navbar.Collapse>
+  <Navbar bg="light" expand="lg" collapseOnSelect fixed="top">
+    <Navbar.Brand>Clubhouse management</Navbar.Brand>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
       <Nav>
-        <NavDropdown title={"Menu"} id="1" onSelect={() => null}>
+        <NavDropdown title="Menu" id="1" onSelect={() => null}>
           {navButtons.map(
             (navButton) =>
               !(navButton.auth && !isAuthenticated) && (
-                <LinkContainer to={navButton.url} key={navButton.url}>
+                <Link to={navButton.url} key={navButton.url}>
                   <NavDropdown.Item eventKey={1}>
                     <FontAwesome name={navButton.icon} /> {navButton.text}
                   </NavDropdown.Item>
-                </LinkContainer>
+                </Link>
               ),
           )}
         </NavDropdown>
@@ -39,14 +37,14 @@ const Navigation: React.SFC<NavigationProps> = ({
       <Nav>
         {isAuthenticated ? (
           <React.Fragment>
-            <LinkContainer to="/session">
+            <Link to="/session">
               <NavItem>
                 <FontAwesome name="beer" />{" "}
                 <span>
                   <b>Session</b>
                 </span>
               </NavItem>
-            </LinkContainer>
+            </Link>
             <NavDropdown
               eventKey={6}
               title={
@@ -57,40 +55,40 @@ const Navigation: React.SFC<NavigationProps> = ({
               }
               id="basic-nav-dropdown"
             >
-              <LinkContainer to="/user/info">
+              <Link to="/user/info">
                 <NavDropdown.Item eventKey={6.1}>
                   <FontAwesome name="user" /> My information
                 </NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/user/history">
+              </Link>
+              <Link to="/user/history">
                 <NavDropdown.Item eventKey={6.2}>
                   <FontAwesome name="history" /> My history
                 </NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/user/keys">
+              </Link>
+              <Link to="/user/keys">
                 <NavDropdown.Item eventKey={6.3}>
                   <FontAwesome name="key" /> My keys
                 </NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/logout">
+              </Link>
+              <Link to="/logout">
                 <NavDropdown.Item eventKey={6.4}>
                   <FontAwesome name="sign-out-alt" /> Logout
                 </NavDropdown.Item>
-              </LinkContainer>
+              </Link>
             </NavDropdown>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <LinkContainer to="/login">
+            <Link to="/login">
               <Nav.Item>
                 <FontAwesome name="sign-out-alt" /> Login
               </Nav.Item>
-            </LinkContainer>
-            <LinkContainer to="/register">
+            </Link>
+            <Link to="/register">
               <Nav.Item>
                 <FontAwesome name="sign-in-alt" /> Register
               </Nav.Item>
-            </LinkContainer>
+            </Link>
           </React.Fragment>
         )}
       </Nav>

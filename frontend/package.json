@@ -48,7 +48,6 @@
     "@types/node": "^11.11.6",
     "@types/react": "^16.8.8",
     "@types/react-big-calendar": "^0.20.1",
-    "@types/react-bootstrap": "^0.32.15",
     "@types/react-dom": "^16.8.3",
     "@types/react-fontawesome": "^1.6.4",
     "@types/react-redux": "^7.0.5",

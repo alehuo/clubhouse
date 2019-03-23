@@ -22,7 +22,7 @@ export class UsersList extends React.Component<Props> {
   }
   public render() {
     return (
-      <Table striped bordered condensed hover responsive>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>#</th>

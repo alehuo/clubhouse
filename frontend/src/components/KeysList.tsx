@@ -16,7 +16,7 @@ const KeyList: React.SFC<Props> = ({
   keyTypes,
   users,
 }) => (
-  <Table striped bordered condensed hover responsive>
+  <Table striped bordered hover responsive>
     <thead>
       <tr>
         <th>#</th>

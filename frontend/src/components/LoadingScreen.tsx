@@ -13,7 +13,7 @@ const LoadingScreenWrapper = styled.div`
 const LoadingScreen = () => (
   <LoadingScreenWrapper>
     <h3>Loading...</h3>
-    <ProgressBar active now={100} />
+    <ProgressBar animated now={100} />
   </LoadingScreenWrapper>
 );
 

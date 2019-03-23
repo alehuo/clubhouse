@@ -1,6 +1,6 @@
 import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
-import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 
 export interface UserData {
   email: string;
@@ -21,17 +21,17 @@ const UserInformation: React.SFC<Props> = (props) => {
     <React.Fragment>
       <h2>User information</h2>
       <ListGroup>
-        <ListGroupItem header={<strong>E-mail address</strong>}>
+        <ListGroup.Item about="E-mail address">
           {props.userData.email || ""}
-        </ListGroupItem>
-        <ListGroupItem header={<strong>Name</strong>}>
+        </ListGroup.Item>
+        <ListGroup.Item>
           {(props.userData.firstName || "") +
             " " +
             (props.userData.lastName || "")}
-        </ListGroupItem>
-        <ListGroupItem header={<strong>Registration date</strong>}>
+        </ListGroup.Item>
+        <ListGroup.Item>
           {props.userData.created_at || ""}
-        </ListGroupItem>
+        </ListGroup.Item>
       </ListGroup>
       <h2>Account removal</h2>
       <p>
