@@ -43,7 +43,7 @@ const UserInformation: React.SFC<Props> = (props) => {
         </strong>
       </p>
       <p>
-        <Button bsStyle="danger">Request account removal</Button>
+        <Button variant="danger">Request account removal</Button>
       </p>
       <hr />
       <h2>Download personal information</h2>
@@ -77,7 +77,7 @@ const UserInformation: React.SFC<Props> = (props) => {
         </li>
       </ul>
       <p>
-        <Button bsStyle="success">Download personal information</Button>
+        <Button variant="success">Download personal information</Button>
       </p>
       <hr />
     </React.Fragment>

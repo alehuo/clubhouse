@@ -42,14 +42,14 @@ const EditNewspostForm: React.SFC<EditNewspostFormProps> = (props) => (
     />
     <Button
       type="button"
-      bsStyle="danger"
+      variant="danger"
       onClick={props.handleClose}
       disabled={props.isEditing}
     >
       Cancel
     </Button>
     &nbsp;&nbsp;&nbsp;
-    <Button type="submit" bsStyle="success" disabled={props.isEditing}>
+    <Button type="submit" variant="success" disabled={props.isEditing}>
       {props.isEditing ? "Editing newspost.." : "Edit"}
     </Button>
   </form>

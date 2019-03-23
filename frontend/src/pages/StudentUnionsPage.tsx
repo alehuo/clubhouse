@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button, PageHeader } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import StudentUnionsList from "./../components/StudentUnionsList";
@@ -34,7 +34,7 @@ export class StudentUnionsPage extends React.Component<Props> {
     }
     return (
       <React.Fragment>
-        <PageHeader>
+        <div>
           Student unions
           <p>
             {PermissionUtils.hasPermission(
@@ -42,21 +42,21 @@ export class StudentUnionsPage extends React.Component<Props> {
               Permission.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
             ) && (
               <Button
-                bsStyle="success"
+                variant="success"
                 onClick={() => this.props.addFormModalOpen(true)}
               >
                 <FontAwesome name="plus" /> Add a student union
               </Button>
             )}
           </p>
-        </PageHeader>
+        </div>
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permission.ALLOW_VIEW_STUDENT_UNIONS,
         ) ? (
           <StudentUnionsList stdus={this.props.studentUnions} />
         ) : (
-          <Alert bsStyle="warning">
+          <Alert variant="warning">
             <h4>No permission to view student unions</h4>
             <p>You don't have correct permissions to view student unions.</p>
           </Alert>

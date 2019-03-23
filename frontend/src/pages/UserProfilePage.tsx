@@ -1,6 +1,6 @@
 import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
-import { Col, Nav, NavItem, PageHeader, Row } from "react-bootstrap";
+import { Col, Nav, NavItem, Row } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -20,15 +20,15 @@ const UserProfilePage: React.SFC<Props> = (props) => {
   }
   return (
     <React.Fragment>
-      <PageHeader>
+      <div>
         {(props.userData.firstName || "") +
           " " +
           (props.userData.lastName || "")}{" "}
         <small>{props.userData.email || ""}</small>
-      </PageHeader>
+      </div>
       <Row className="clearfix">
         <Col xs={3}>
-          <Nav bsStyle="pills" stacked>
+          <Nav variant="pills">
             <LinkContainer to="/user/info">
               <NavItem>
                 <FontAwesome name="user" /> My information

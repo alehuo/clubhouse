@@ -2,7 +2,7 @@ import { CalendarEvent, Permission } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
 import BigCalendar from "react-big-calendar";
-import { Button, PageHeader } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -31,7 +31,7 @@ class CalendarPage extends React.Component<Props> {
   public render() {
     return (
       <React.Fragment>
-        <PageHeader>
+        <div>
           Calendar
           <p>
             {PermissionUtils.hasPermission(
@@ -42,13 +42,13 @@ class CalendarPage extends React.Component<Props> {
                 id="addCalendarEvent"
                 text="Add a new calendar event."
               >
-                <Button bsStyle="success">
+                <Button variant="success">
                   <FontAwesome name="plus" /> Add an event
                 </Button>
               </CustomOverlay>
             )}
           </p>
-        </PageHeader>
+        </div>
         {process.env.REACT_APP_BACKEND_URL && (
           <p>
             iCal feed:{" "}

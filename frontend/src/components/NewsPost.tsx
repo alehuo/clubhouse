@@ -1,7 +1,7 @@
 import { Newspost } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
-import { Button, Panel } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 
 interface Props {
@@ -11,7 +11,9 @@ interface Props {
   hasEditDeletePermissions: boolean;
 }
 
-const NewsPost: React.SFC<Pick<Newspost, "title" | "author" | "message"> & Props> = ({
+const NewsPost: React.SFC<
+  Pick<Newspost, "title" | "author" | "message"> & Props
+> = ({
   title,
   message,
   author,
@@ -20,30 +22,30 @@ const NewsPost: React.SFC<Pick<Newspost, "title" | "author" | "message"> & Props
   onEdit,
   hasEditDeletePermissions,
 }) => (
-  <Panel bsStyle="primary">
-    <Panel.Heading>
-      <Panel.Title>
+  <Card bg="primary">
+    <Card.Header>
+      <Card.Title>
         <b>{title}</b>
         {hasEditDeletePermissions && (
           <React.Fragment>
             {"   "}
-            <Button bsStyle="danger" onClick={onDelete}>
+            <Button variant="danger" onClick={onDelete}>
               <FontAwesome name="trash" /> Delete
             </Button>
             {"   "}
-            <Button bsStyle="success" onClick={onEdit}>
+            <Button variant="success" onClick={onEdit}>
               <FontAwesome name="edit" /> Edit
             </Button>
           </React.Fragment>
         )}
-      </Panel.Title>
-    </Panel.Heading>
-    <Panel.Body>{message}</Panel.Body>
-    <Panel.Footer>
+      </Card.Title>
+    </Card.Header>
+    <Card.Body>{message}</Card.Body>
+    <Card.Footer>
       By #<strong>{author}</strong> on{" "}
       <i>{date ? moment(date).format("LLL") : "N/A"}</i>
-    </Panel.Footer>
-  </Panel>
+    </Card.Footer>
+  </Card>
 );
 
 export default NewsPost;

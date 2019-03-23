@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { Button, Label, PageHeader, Panel } from "react-bootstrap";
+import { Badge, Button, Card } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import CustomOverlay from "../components/CustomOverlay";
@@ -50,7 +50,7 @@ export class Session extends React.Component<Props> {
             onHide={() => this.props.toggleStartSessionModal(false)}
           />
         )}
-        <PageHeader>
+        <div>
           Session status{" "}
           <p>
             <small>
@@ -72,7 +72,7 @@ export class Session extends React.Component<Props> {
                 text="This will end your current session."
               >
                 <Button
-                  bsStyle="warning"
+                  variant="warning"
                   onClick={() => this.props.toggleEndSessionModal(true)}
                 >
                   <FontAwesome name="hourglass" /> End session
@@ -85,7 +85,7 @@ export class Session extends React.Component<Props> {
                 text="This will start a new session"
               >
                 <Button
-                  bsStyle="success"
+                  variant="success"
                   onClick={() => this.props.toggleStartSessionModal(true)}
                 >
                   <FontAwesome name="play" /> Start session
@@ -97,12 +97,12 @@ export class Session extends React.Component<Props> {
               id="sendMessageTooltip"
               text="Sends a message to all verified keyholders."
             >
-              <Button bsStyle="info">
+              <Button variant="info">
                 <FontAwesome name="envelope" /> Send message
               </Button>
             </CustomOverlay>
           </p>
-        </PageHeader>
+        </div>
         <p>
           There {this.props.peopleCount > 1 ? "are" : "is"} currently{" "}
           <strong>
@@ -116,9 +116,9 @@ export class Session extends React.Component<Props> {
         </p>
         <p>
           Messages have different color codes.{" "}
-          <Label bsStyle="info">Blue</Label> is session start, whereas{" "}
-          <Label bsStyle="warning">yellow</Label> is a session end.{" "}
-          <Label bsStyle="danger">Red</Label> is an incident, and white is a
+          <Badge variant="info">Blue</Badge> is session start, whereas{" "}
+          <Badge variant="warning">yellow</Badge> is a session end.{" "}
+          <Badge variant="danger">Red</Badge> is an incident, and white is a
           general message.
         </p>
         <h3>Session timeline</h3>
@@ -128,55 +128,55 @@ export class Session extends React.Component<Props> {
             height: 350,
           }}
         >
-          <Panel bsStyle="warning">
-            <Panel.Heading>
+          <Card bg="warning">
+            <Card.Header>
               <h4>
                 <b>John Doe</b> on 8.8.2017 at 22:33
               </h4>
-            </Panel.Heading>
-            <Panel.Body>
+            </Card.Header>
+            <Card.Body>
               <p>
                 I have left the building. Moved people under my supervision to
                 another keyholder.
               </p>
-            </Panel.Body>
-          </Panel>
-          <Panel bsStyle="danger">
-            <Panel.Heading>
+            </Card.Body>
+          </Card>
+          <Card bg="danger">
+            <Card.Header>
               <h4>
                 <b>John Doe</b> on 8.8.2017 at 21:02
               </h4>
-            </Panel.Heading>
-            <Panel.Body>
+            </Card.Header>
+            <Card.Body>
               <p>A glass bowl shattered as one of the students dropped it.</p>
-            </Panel.Body>
-          </Panel>
-          <Panel>
-            <Panel.Heading>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Header>
               <h4>
                 <b>John Doe</b> on 8.8.2017 at 17:33
               </h4>
-            </Panel.Heading>
-            <Panel.Body>
+            </Card.Header>
+            <Card.Body>
               <p>
                 Status update. Everything is going as expected, no incidents to
                 report!
               </p>
-            </Panel.Body>
-          </Panel>
-          <Panel bsStyle="info">
-            <Panel.Heading>
+            </Card.Body>
+          </Card>
+          <Card bg="info">
+            <Card.Header>
               <h4>
                 <b>John Doe</b> on 8.8.2017 at 10:33
               </h4>
-            </Panel.Heading>
-            <Panel.Body>
+            </Card.Header>
+            <Card.Body>
               <p>
                 Good evening, I'm taking responsibility of a few exchange
                 students.
               </p>
-            </Panel.Body>
-          </Panel>
+            </Card.Body>
+          </Card>
         </div>
       </React.Fragment>
     );

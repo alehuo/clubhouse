@@ -45,14 +45,14 @@ const AddNewspostForm: React.SFC<Props> = ({
     />
     <Button
       type="button"
-      bsStyle="danger"
+      variant="danger"
       onClick={handleClose}
       disabled={isAdding}
     >
       Cancel
     </Button>
     &nbsp;&nbsp;&nbsp;
-    <Button type="submit" bsStyle="success" disabled={isAdding}>
+    <Button type="submit" variant="success" disabled={isAdding}>
       {isAdding ? "Adding newspost.." : "Add"}
     </Button>
   </form>

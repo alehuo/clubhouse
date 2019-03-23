@@ -31,13 +31,11 @@ ShallowWrapper {
       </React.Fragment>,
       "defaultOverlayShown": false,
       "delay": 250,
-      "overlay": <Tooltip
-        bsClass="tooltip"
+      "overlay": <ForwardRef(render)
         id="test"
-        placement="right"
       >
         Testing
-      </Tooltip>,
+      </ForwardRef(render)>,
       "placement": "bottom",
       "trigger": Array [
         "hover",
@@ -69,13 +67,11 @@ ShallowWrapper {
         </React.Fragment>,
         "defaultOverlayShown": false,
         "delay": 250,
-        "overlay": <Tooltip
-          bsClass="tooltip"
+        "overlay": <ForwardRef(render)
           id="test"
-          placement="right"
         >
           Testing
-        </Tooltip>,
+        </ForwardRef(render)>,
         "placement": "bottom",
         "trigger": Array [
           "hover",

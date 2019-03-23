@@ -68,7 +68,7 @@ class App extends React.Component<Props> {
           <Container className="container">
             <NotificationDrawer />
             {!(sessionPage || !(this.props.token !== "")) && sessionRunning && (
-              <Alert bsStyle="info">
+              <Alert variant="info">
                 <h5>
                   {peopleCount > 0 && (
                     <React.Fragment>
@@ -82,7 +82,7 @@ class App extends React.Component<Props> {
                       id="currentSessionInfo"
                       text="View current session info."
                     >
-                      <Button bsStyle="primary">View current session</Button>
+                      <Button variant="primary">View current session</Button>
                     </CustomOverlay>
                   </LinkContainer>
                 </h5>

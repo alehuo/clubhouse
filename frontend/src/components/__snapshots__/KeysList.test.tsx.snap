@@ -65,10 +65,9 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "bordered": true,
-      "bsClass": "table",
       "children": Array [
         <thead>
           <tr>
@@ -391,16 +390,21 @@ ShallowWrapper {
         "type": "tbody",
       },
     ],
-    "type": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": undefined,
+      "displayName": "Bootstrap(Table)",
+      "propTypes": undefined,
+      "render": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "bordered": true,
-        "bsClass": "table",
         "children": Array [
           <thead>
             <tr>
@@ -723,7 +727,13 @@ ShallowWrapper {
           "type": "tbody",
         },
       ],
-      "type": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "Bootstrap(Table)",
+        "propTypes": undefined,
+        "render": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -773,10 +783,9 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
       "bordered": true,
-      "bsClass": "table",
       "children": Array [
         <thead>
           <tr>
@@ -986,16 +995,21 @@ ShallowWrapper {
         "type": "tbody",
       },
     ],
-    "type": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": undefined,
+      "displayName": "Bootstrap(Table)",
+      "propTypes": undefined,
+      "render": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "bordered": true,
-        "bsClass": "table",
         "children": Array [
           <thead>
             <tr>
@@ -1205,7 +1219,13 @@ ShallowWrapper {
           "type": "tbody",
         },
       ],
-      "type": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "Bootstrap(Table)",
+        "propTypes": undefined,
+        "render": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {

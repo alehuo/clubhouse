@@ -19,14 +19,15 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "bsClass": "alert",
       "bsStyle": "danger",
       "children": <p>
         Hello World
       </p>,
       "closeLabel": "Close alert",
+      "show": true,
+      "transition": [Function],
     },
     "ref": null,
     "rendered": Object {
@@ -40,20 +41,42 @@ ShallowWrapper {
       "rendered": "Hello World",
       "type": "p",
     },
-    "type": [Function],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Heading": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "AlertHeading",
+        "render": [Function],
+      },
+      "Link": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": undefined,
+        "displayName": "AlertLink",
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "closeLabel": "Close alert",
+        "show": true,
+        "transition": [Function],
+      },
+      "displayName": "Alert",
+      "render": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "bsClass": "alert",
         "bsStyle": "danger",
         "children": <p>
           Hello World
         </p>,
         "closeLabel": "Close alert",
+        "show": true,
+        "transition": [Function],
       },
       "ref": null,
       "rendered": Object {
@@ -67,7 +90,28 @@ ShallowWrapper {
         "rendered": "Hello World",
         "type": "p",
       },
-      "type": [Function],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "Heading": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "AlertHeading",
+          "render": [Function],
+        },
+        "Link": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "AlertLink",
+          "render": [Function],
+        },
+        "defaultProps": Object {
+          "closeLabel": "Close alert",
+          "show": true,
+          "transition": [Function],
+        },
+        "displayName": "Alert",
+        "render": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, PageHeader, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 
@@ -32,7 +32,7 @@ export class RulesPage extends React.Component<Props> {
   public render() {
     return (
       <React.Fragment>
-        <PageHeader>Rules</PageHeader>
+        <div>Rules</div>
         <p>
           {PermissionUtils.hasPermission(
             this.props.perms,
@@ -44,7 +44,7 @@ export class RulesPage extends React.Component<Props> {
                 text="Lock or unlock rule editing."
               >
                 <Button
-                  bsStyle={!this.props.editMode ? "info" : "danger"}
+                  variant={!this.props.editMode ? "info" : "danger"}
                   onClick={() => this.props.toggleEditMode()}
                 >
                   {!this.props.editMode ? (
@@ -60,7 +60,7 @@ export class RulesPage extends React.Component<Props> {
               </CustomOverlay>
               {"  "}
               <CustomOverlay id="addRuleTooltip" text="Add a new rule.">
-                <Button onClick={() => console.log("Todo")} bsStyle="success">
+                <Button onClick={() => console.log("Todo")} variant="success">
                   <FontAwesome name="plus" /> Add new rule
                 </Button>
               </CustomOverlay>

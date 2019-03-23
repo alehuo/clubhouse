@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
+import { Button, FormGroup } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
 import { RootState } from "../reduxStore";
@@ -68,14 +68,14 @@ const AddStudentUnionForm: React.SFC<Props> = ({
     </Well>
     <Button
       type="button"
-      bsStyle="danger"
+      variant="danger"
       onClick={handleClose}
       disabled={isAdding}
     >
       Cancel
     </Button>
     &nbsp;&nbsp;&nbsp;
-    <Button type="submit" bsStyle="success" disabled={isAdding}>
+    <Button type="submit" variant="success" disabled={isAdding}>
       {isAdding ? "Adding student union.." : "Add"}
     </Button>
   </form>

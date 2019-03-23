@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button, PageHeader } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import NewsPost from "../components/NewsPost";
 import PermissionUtils from "./../utils/PermissionUtils";
@@ -42,19 +42,19 @@ export class NewsPage extends React.Component<Props> {
     );
     return (
       <React.Fragment>
-        <PageHeader>
+        <div>
           News
           <p>
             {editDeletePermissions && (
               <Button
-                bsStyle="success"
+                variant="success"
                 onClick={() => this.props.toggleNewsAddModal(true)}
               >
                 <FontAwesome name="plus" /> Add an article
               </Button>
             )}
           </p>
-        </PageHeader>
+        </div>
         {this.props.newsPosts &&
           this.props.newsPosts.map((newsPost) => (
             <NewsPost

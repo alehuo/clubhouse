@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ControlLabel,
-  FormControl,
-  FormGroup,
-  HelpBlock,
-} from "react-bootstrap";
+import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 
 export const FieldGroup: React.SFC<any> = ({
   input,
@@ -16,9 +11,9 @@ export const FieldGroup: React.SFC<any> = ({
   ...props
 }) => (
   <FormGroup controlId={id}>
-    <ControlLabel>{label}</ControlLabel>
+    <FormLabel>{label}</FormLabel>
     <FormControl {...props} {...input} />
-    {help && <HelpBlock>{help}</HelpBlock>}
+    {help && <div>{help}</div>}
     {touched &&
       ((error && <span style={{ color: "red" }}>{error}</span>) ||
         (warning && <span>{warning}</span>))}

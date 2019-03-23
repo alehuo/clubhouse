@@ -39,7 +39,7 @@ const LoginForm: React.SFC<LoginFormProps> = ({
       component={FieldGroup}
       validate={[passwordEmpty]}
     />
-    <Button type="submit" bsStyle="success" disabled={isLoggingIn}>
+    <Button type="submit" variant="success" disabled={isLoggingIn}>
       {isLoggingIn ? "Logging in.." : "Login"}
     </Button>
   </form>

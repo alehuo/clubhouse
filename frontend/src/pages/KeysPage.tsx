@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button, PageHeader } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import KeysList from "./../components/KeysList";
@@ -60,7 +60,7 @@ export class KeysPage extends React.Component<Props> {
     }
     return (
       <React.Fragment>
-        <PageHeader>
+        <div>
           Keys
           <p>
             {PermissionUtils.hasPermission(
@@ -69,7 +69,7 @@ export class KeysPage extends React.Component<Props> {
             ) && (
               <CustomOverlay id="addKey" text="Add a new keyholder.">
                 <Button
-                  bsStyle="success"
+                  variant="success"
                   onClick={() => this.props.toggleModal(true)}
                 >
                   <FontAwesome name="plus" /> Add a keyholder
@@ -82,13 +82,13 @@ export class KeysPage extends React.Component<Props> {
                 id="sendEmail"
                 text="Send an email to all verified keyholders in the system."
               >
-                <Button bsStyle="info">
+                <Button variant="info">
                   <FontAwesome name="envelope" /> Send an email to keyholder(s)
                 </Button>
               </CustomOverlay>
             }
           </p>
-        </PageHeader>
+        </div>
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permission.ALLOW_VIEW_KEYS,
@@ -100,7 +100,7 @@ export class KeysPage extends React.Component<Props> {
             users={this.props.users}
           />
         ) : (
-          <Alert bsStyle="warning">
+          <Alert variant="warning">
             <h4>No permission to view keys</h4>
             <p>You don't have correct permissions to view keys.</p>
           </Alert>

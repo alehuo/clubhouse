@@ -37,7 +37,7 @@ export const SingleRule: React.SFC<Props> = ({
             id="editSingleRule"
             text="Edit the currently selected rule."
           >
-            <Button bsStyle="success" bsSize="small">
+            <Button variant="success" size="sm">
               <FontAwesome name="edit" /> Edit
             </Button>
           </CustomOverlay>
@@ -48,8 +48,8 @@ export const SingleRule: React.SFC<Props> = ({
             text="Move the currently selected rule up in the list."
           >
             <Button
-              bsStyle="info"
-              bsSize="small"
+              variant="info"
+              size="sm"
               disabled={canMoveUp}
               onClick={onMoveUpClick}
             >
@@ -63,8 +63,8 @@ export const SingleRule: React.SFC<Props> = ({
             text="Move the currently selected rule down in the list."
           >
             <Button
-              bsStyle="info"
-              bsSize="small"
+              variant="info"
+              size="sm"
               disabled={canMoveDown}
               onClick={onMoveDownClick}
             >
@@ -77,7 +77,7 @@ export const SingleRule: React.SFC<Props> = ({
             id="deleteSingleRule"
             text="Delete the currently selected rule."
           >
-            <Button bsStyle="danger" bsSize="small">
+            <Button variant="danger" size="sm">
               <FontAwesome name="trash-alt" /> Delete
             </Button>
           </CustomOverlay>

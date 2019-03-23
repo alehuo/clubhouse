@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Notification: React.SFC<Props> = ({ text, type }) => (
-  <Alert bsStyle={type}>
+  <Alert variant={type}>
     <p>{text}</p>
   </Alert>
 );

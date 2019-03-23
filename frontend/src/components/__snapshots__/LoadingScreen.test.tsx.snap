@@ -22,15 +22,9 @@ ShallowWrapper {
         <h3>
           Loading...
         </h3>,
-        <ProgressBar
+        <ForwardRef(render)
           active={true}
-          bsClass="progress-bar"
-          isChild={false}
-          max={100}
-          min={0}
           now={100}
-          srOnly={false}
-          striped={false}
         />,
       ],
     },
@@ -50,20 +44,20 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
           "active": true,
-          "bsClass": "progress-bar",
-          "isChild": false,
-          "max": 100,
-          "min": 0,
           "now": 100,
-          "srOnly": false,
-          "striped": false,
         },
         "ref": null,
         "rendered": null,
-        "type": [Function],
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "Bootstrap(ProgressBar)",
+          "propTypes": undefined,
+          "render": [Function],
+        },
       },
     ],
     "type": Object {
@@ -102,15 +96,9 @@ ShallowWrapper {
           <h3>
             Loading...
           </h3>,
-          <ProgressBar
+          <ForwardRef(render)
             active={true}
-            bsClass="progress-bar"
-            isChild={false}
-            max={100}
-            min={0}
             now={100}
-            srOnly={false}
-            striped={false}
           />,
         ],
       },
@@ -130,20 +118,20 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
             "active": true,
-            "bsClass": "progress-bar",
-            "isChild": false,
-            "max": 100,
-            "min": 0,
             "now": 100,
-            "srOnly": false,
-            "striped": false,
           },
           "ref": null,
           "rendered": null,
-          "type": [Function],
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "Bootstrap(ProgressBar)",
+            "propTypes": undefined,
+            "render": [Function],
+          },
         },
       ],
       "type": Object {

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Button, HelpBlock } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 
 import { KeyType, StudentUnion, User } from "@alehuo/clubhouse-shared";
@@ -93,7 +93,7 @@ const AddKeyHolderForm: React.SFC<Props> = ({
       component={FieldGroup}
       validate={[confirmed]}
     />{" "}
-    <HelpBlock>
+    <div>
       By checking this checkbox you agree you have the permission to add the
       following key:
       <p>
@@ -110,12 +110,12 @@ const AddKeyHolderForm: React.SFC<Props> = ({
           </span>
         )}
       </p>
-    </HelpBlock>
-    <Button type="button" bsStyle="danger" onClick={handleClose}>
+    </div>
+    <Button type="button" variant="danger" onClick={handleClose}>
       Cancel
     </Button>
     {"   "}
-    <Button type="submit" bsStyle="success">
+    <Button type="submit" variant="success">
       {isAdding ? "Adding key to user..." : "Add"}
     </Button>
   </form>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
+import { Button, FormGroup } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
 import { FieldGroup } from "./../components/FieldGroup";
@@ -32,7 +32,7 @@ const EndSessionForm: React.SFC<Props> = (props) => (
       componentClass="textarea"
       validate={[endMessageEmpty]}
     />
-    <Well>
+    <div>
       <FormGroup controlId="confirmation">
         <Field
           name="confirmation"
@@ -44,19 +44,19 @@ const EndSessionForm: React.SFC<Props> = (props) => (
           I confirm that I have transferred the people I was responsible for to
           another keyholder or told them to leave the building.
         </b>
-        <HelpBlock>Your answer will be saved.</HelpBlock>
+        <div>Your answer will be saved.</div>
       </FormGroup>
-    </Well>
+    </div>
     <Button
       type="button"
-      bsStyle="danger"
+      variant="danger"
       onClick={props.handleClose}
       disabled={props.isAdding}
     >
       Cancel
     </Button>
     &nbsp;&nbsp;&nbsp;
-    <Button type="submit" bsStyle="success" disabled={props.isEnding}>
+    <Button type="submit" variant="success" disabled={props.isEnding}>
       {props.isEnding ? "Ending watch.." : "End watch"}
     </Button>
   </form>

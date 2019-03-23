@@ -21,7 +21,7 @@ const StudentUnionsList: React.SFC<Props> = ({
   deleteStdu,
   token,
 }) => (
-  <Table striped bordered condensed hover responsive>
+  <Table striped bordered hover responsive>
     <thead>
       <tr>
         <th>#</th>
@@ -46,7 +46,7 @@ const StudentUnionsList: React.SFC<Props> = ({
             ) && (
               <td>
                 <Button
-                  bsStyle="danger"
+                  variant="danger"
                   onClick={() => {
                     if (
                       window.confirm(

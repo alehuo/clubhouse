@@ -53,7 +53,7 @@ export class UsersList extends React.Component<Props> {
                       Permission.ALLOW_REMOVE_USER,
                     ) && (
                       <Button
-                        bsStyle="danger"
+                        variant="danger"
                         onClick={() => {
                           if (
                             window.confirm(
