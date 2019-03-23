@@ -20,7 +20,6 @@ import PermissionService from "../services/PermissionService";
 import RuleService from "../services/RuleService";
 import SessionService from "../services/SessionService";
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* initApp() {
   try {
     yield put(setAppLoadingState(true));
