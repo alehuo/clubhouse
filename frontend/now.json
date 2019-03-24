@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "clubhouse-frontend",
+  "alias": "clubhouse.alehuo.dev",
   "builds": [
     {
       "src": "package.json",

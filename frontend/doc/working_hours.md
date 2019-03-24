@@ -44,6 +44,7 @@
 | 28.1.2019  | 2.0h  | Added redux-saga dependency. Refactored Thunk actions in UserReducer to UserSaga. The plan is to get rid of Redux thunk in favor of Redux Saga.                                                                                                                   |
 | 8.2.2019   | 0.5h  | Created SessionSaga, fixed UserSaga and cleaned up code of RootSaga                                                                                                                                                                                               |
 | 12.2.2019   | 1.0h  | Created tests for some reducer actions                                                                                                                                                                                               |
+| 23.3.2019   | 2.0h  | Updated dependencies, improving app UI                                                                                                                                                                                               |
 
 Total:
 
@@ -51,4 +52,4 @@ Total:
 
 29.5 h (Part 2)
 
-3.5 h (Post-course)
+5.5 h (Post-course)

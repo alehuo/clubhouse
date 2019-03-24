@@ -16,8 +16,10 @@ const Navigation: React.SFC<NavigationProps> = ({
   isAuthenticated,
   userData,
 }) => (
-  <Navbar bg="light" expand="lg" collapseOnSelect fixed="top">
-    <Navbar.Brand>Clubhouse management</Navbar.Brand>
+  <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+    <Navbar.Brand>
+      Clubhouse management
+    </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav>
