@@ -59,79 +59,73 @@ class App extends React.Component<Props> {
     }
     return (
       <Router>
-        <React.Fragment>
-          <Navigation
-            isAuthenticated={this.props.token !== ""}
-            navButtons={navButtons}
-            userData={userData}
-          />
-          <Container className="container">
-            <NotificationDrawer />
-            {!(sessionPage || !(this.props.token !== "")) && sessionRunning && (
-              <Alert variant="info">
-                <h5>
-                  {peopleCount > 0 && (
-                    <React.Fragment>
-                      You are currently in an ongoing session.
-                    </React.Fragment>
-                  )}
-                  <br />
-                  <br />
-                  <LinkContainer to="/session">
-                    <CustomOverlay
-                      id="currentSessionInfo"
-                      text="View current session info."
-                    >
-                      <Button variant="primary">View current session</Button>
-                    </CustomOverlay>
-                  </LinkContainer>
-                </h5>
-              </Alert>
-            )}
-            <React.Fragment>
-              <Route exact path="/" component={MainPage} />
-              <Route
-                exact
-                path="/studentunions"
-                component={StudentUnionsPage}
-              />
-              <Route
-                exact
-                path="/keys"
-                token={this.props.token}
-                component={KeysPage}
-              />
-              <Route exact path="/calendar" component={CalendarPage} />
-              <Route exact path="/rules" component={RulesPage} />
-              <Route exact path="/news" component={NewsPage} />
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/register" component={RegisterPage} />
-              <AuthenticatedRoute
-                isAuthenticated={this.props.token !== ""}
-                exact
-                path="/session"
-                component={Session}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.props.token !== ""}
-                exact
-                path="/logout"
-                component={LogoutPage}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.props.token !== ""}
-                path="/user"
-                component={UserProfilePage}
-              />
-              <AuthenticatedRoute
-                isAuthenticated={this.props.token !== ""}
-                exact
-                path="/users"
-                component={UserListPage}
-              />
-            </React.Fragment>
-          </Container>
-        </React.Fragment>
+        <Navigation
+          isAuthenticated={this.props.token !== ""}
+          navButtons={navButtons}
+          userData={userData}
+        />
+        <Container className="container" style={{paddingTop: 30}}>
+          <NotificationDrawer />
+          {!(sessionPage || !(this.props.token !== "")) && sessionRunning && (
+            <Alert variant="info">
+              <h5>
+                {peopleCount > 0 && (
+                  <React.Fragment>
+                    You are currently in an ongoing session.
+                  </React.Fragment>
+                )}
+                <br />
+                <br />
+                <LinkContainer to="/session">
+                  <CustomOverlay
+                    id="currentSessionInfo"
+                    text="View current session info."
+                  >
+                    <Button variant="primary">View current session</Button>
+                  </CustomOverlay>
+                </LinkContainer>
+              </h5>
+            </Alert>
+          )}
+          <React.Fragment>
+            <Route exact path="/" component={MainPage} />
+            <Route exact path="/studentunions" component={StudentUnionsPage} />
+            <Route
+              exact
+              path="/keys"
+              token={this.props.token}
+              component={KeysPage}
+            />
+            <Route exact path="/calendar" component={CalendarPage} />
+            <Route exact path="/rules" component={RulesPage} />
+            <Route exact path="/news" component={NewsPage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/register" component={RegisterPage} />
+            <AuthenticatedRoute
+              isAuthenticated={this.props.token !== ""}
+              exact
+              path="/session"
+              component={Session}
+            />
+            <AuthenticatedRoute
+              isAuthenticated={this.props.token !== ""}
+              exact
+              path="/logout"
+              component={LogoutPage}
+            />
+            <AuthenticatedRoute
+              isAuthenticated={this.props.token !== ""}
+              path="/user"
+              component={UserProfilePage}
+            />
+            <AuthenticatedRoute
+              isAuthenticated={this.props.token !== ""}
+              exact
+              path="/users"
+              component={UserListPage}
+            />
+          </React.Fragment>
+        </Container>
       </Router>
     );
   }

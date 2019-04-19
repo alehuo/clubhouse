@@ -13,24 +13,29 @@ interface Props {
   userData?: User;
 }
 
-const UserInformation: React.SFC<Props> = (props) => {
-  if (!props.userData) {
+const UserInformation: React.SFC<Props> = ({ userData }) => {
+  if (!userData) {
     return <div>Failed to display user data</div>;
   }
+  const { email, firstName, lastName, created_at } = userData;
   return (
     <React.Fragment>
       <h2>User information</h2>
       <ListGroup>
-        <ListGroup.Item about="E-mail address">
-          {props.userData.email || ""}
+        <ListGroup.Item>
+          <b>E-mail address</b>
+          {"  "}
+          {email}
         </ListGroup.Item>
         <ListGroup.Item>
-          {(props.userData.firstName || "") +
-            " " +
-            (props.userData.lastName || "")}
+          <b>Account owner</b>
+          {"  "}
+          {firstName} {lastName}
         </ListGroup.Item>
         <ListGroup.Item>
-          {props.userData.created_at || ""}
+          <b>Account creation date</b>
+          {"  "}
+          {created_at}
         </ListGroup.Item>
       </ListGroup>
       <h2>Account removal</h2>

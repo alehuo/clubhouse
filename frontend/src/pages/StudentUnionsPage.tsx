@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Container, Jumbotron } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import StudentUnionsList from "./../components/StudentUnionsList";
@@ -34,22 +34,24 @@ export class StudentUnionsPage extends React.Component<Props> {
     }
     return (
       <React.Fragment>
-        <div>
-          Student unions
-          <p>
-            {PermissionUtils.hasPermission(
-              this.props.perms,
-              Permission.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
-            ) && (
-              <Button
-                variant="success"
-                onClick={() => this.props.addFormModalOpen(true)}
-              >
-                <FontAwesome name="plus" /> Add a student union
-              </Button>
-            )}
-          </p>
-        </div>
+        <Jumbotron>
+          <Container>
+            <h1>Student unions</h1>
+            <p>
+              {PermissionUtils.hasPermission(
+                this.props.perms,
+                Permission.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
+              ) && (
+                <Button
+                  variant="success"
+                  onClick={() => this.props.addFormModalOpen(true)}
+                >
+                  <FontAwesome name="plus" /> Add a student union
+                </Button>
+              )}
+            </p>
+          </Container>
+        </Jumbotron>
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permission.ALLOW_VIEW_STUDENT_UNIONS,

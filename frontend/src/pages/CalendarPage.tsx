@@ -2,7 +2,7 @@ import { CalendarEvent, Permission } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
 import BigCalendar from "react-big-calendar";
-import { Button } from "react-bootstrap";
+import { Button, Container, Jumbotron } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -31,39 +31,48 @@ class CalendarPage extends React.Component<Props> {
   public render() {
     return (
       <React.Fragment>
-        <div>
-          Calendar
-          <p>
-            {PermissionUtils.hasPermission(
-              this.props.perms,
-              Permission.ALLOW_ADD_EDIT_REMOVE_EVENTS,
-            ) && (
-              <CustomOverlay
-                id="addCalendarEvent"
-                text="Add a new calendar event."
-              >
-                <Button variant="success">
-                  <FontAwesome name="plus" /> Add an event
-                </Button>
-              </CustomOverlay>
-            )}
-          </p>
-        </div>
-        {process.env.REACT_APP_BACKEND_URL && (
-          <p>
-            iCal feed:{" "}
-            <a
-              href={process.env.REACT_APP_BACKEND_URL + "/api/v1/calendar/ical"}
-              target="_blank"
-            >
-              {process.env.REACT_APP_BACKEND_URL + "/api/v1/calendar/ical"}
-            </a>
-            <br />
-            <small>
-              Please copy and paste this URL to your calendar application.
-            </small>
-          </p>
-        )}
+        <Jumbotron>
+          <Container>
+            <h1>Calendar</h1>
+            <p>
+              {PermissionUtils.hasPermission(
+                this.props.perms,
+                Permission.ALLOW_ADD_EDIT_REMOVE_EVENTS,
+              ) && (
+                <CustomOverlay
+                  id="addCalendarEvent"
+                  text="Add a new calendar event."
+                >
+                  <Button variant="success">
+                    <FontAwesome name="plus" /> Add an event
+                  </Button>
+                </CustomOverlay>
+              )}
+            </p>
+            <p>
+              {process.env.REACT_APP_BACKEND_URL && (
+                <p>
+                  iCal feed:{" "}
+                  <a
+                    href={
+                      process.env.REACT_APP_BACKEND_URL +
+                      "/api/v1/calendar/ical"
+                    }
+                    target="_blank"
+                  >
+                    {process.env.REACT_APP_BACKEND_URL +
+                      "/api/v1/calendar/ical"}
+                  </a>
+                  <br />
+                  <small>
+                    Please copy and paste this URL to your calendar application.
+                  </small>
+                </p>
+              )}
+            </p>
+          </Container>
+        </Jumbotron>
+
         <Calendar
           localizer={BigCalendar.momentLocalizer(moment)}
           events={this.props.events.map(eventMapper)}

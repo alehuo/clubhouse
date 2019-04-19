@@ -2,7 +2,7 @@ import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
-import { Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 import { NavButton } from "../navButtons";
 
 interface NavigationProps {
@@ -17,21 +17,19 @@ const Navigation: React.SFC<NavigationProps> = ({
   userData,
 }) => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
-    <Navbar.Brand>
-      Clubhouse management
-    </Navbar.Brand>
+    <Navbar.Brand><img src="icon_512x512.png" height={40}/> Clubhouse management</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav>
-        <NavDropdown title="Menu" id="1" onSelect={() => null}>
+        <NavDropdown title="Menu" id="1">
           {navButtons.map(
             (navButton) =>
               !(navButton.auth && !isAuthenticated) && (
-                <Link to={navButton.url} key={navButton.url}>
-                  <NavDropdown.Item eventKey={1}>
+                <LinkContainer to={navButton.url} key={navButton.url}>
+                  <NavDropdown.Item>
                     <FontAwesome name={navButton.icon} /> {navButton.text}
                   </NavDropdown.Item>
-                </Link>
+                </LinkContainer>
               ),
           )}
         </NavDropdown>
@@ -39,16 +37,12 @@ const Navigation: React.SFC<NavigationProps> = ({
       <Nav>
         {isAuthenticated ? (
           <React.Fragment>
-            <Link to="/session">
-              <NavItem>
-                <FontAwesome name="beer" />{" "}
-                <span>
-                  <b>Session</b>
-                </span>
-              </NavItem>
-            </Link>
+            <LinkContainer to="/session">
+              <Nav.Link>
+                <FontAwesome name="beer" /> <b>Session</b>
+              </Nav.Link>
+            </LinkContainer>
             <NavDropdown
-              eventKey={6}
               title={
                 <React.Fragment>
                   <FontAwesome name="user" />{" "}
@@ -57,40 +51,40 @@ const Navigation: React.SFC<NavigationProps> = ({
               }
               id="basic-nav-dropdown"
             >
-              <Link to="/user/info">
-                <NavDropdown.Item eventKey={6.1}>
+              <LinkContainer to="/user/info">
+                <NavDropdown.Item>
                   <FontAwesome name="user" /> My information
                 </NavDropdown.Item>
-              </Link>
-              <Link to="/user/history">
-                <NavDropdown.Item eventKey={6.2}>
+              </LinkContainer>
+              <LinkContainer to="/user/history">
+                <NavDropdown.Item>
                   <FontAwesome name="history" /> My history
                 </NavDropdown.Item>
-              </Link>
-              <Link to="/user/keys">
-                <NavDropdown.Item eventKey={6.3}>
+              </LinkContainer>
+              <LinkContainer to="/user/keys">
+                <NavDropdown.Item>
                   <FontAwesome name="key" /> My keys
                 </NavDropdown.Item>
-              </Link>
-              <Link to="/logout">
-                <NavDropdown.Item eventKey={6.4}>
+              </LinkContainer>
+              <LinkContainer to="/logout">
+                <NavDropdown.Item>
                   <FontAwesome name="sign-out-alt" /> Logout
                 </NavDropdown.Item>
-              </Link>
+              </LinkContainer>
             </NavDropdown>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Link to="/login">
-              <Nav.Item>
+            <LinkContainer to="/login">
+              <Nav.Link>
                 <FontAwesome name="sign-out-alt" /> Login
-              </Nav.Item>
-            </Link>
-            <Link to="/register">
-              <Nav.Item>
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/register">
+              <Nav.Link>
                 <FontAwesome name="sign-in-alt" /> Register
-              </Nav.Item>
-            </Link>
+              </Nav.Link>
+            </LinkContainer>
           </React.Fragment>
         )}
       </Nav>

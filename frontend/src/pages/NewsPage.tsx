@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container, Jumbotron } from "react-bootstrap";
 import { connect } from "react-redux";
 import NewsPost from "../components/NewsPost";
 import PermissionUtils from "./../utils/PermissionUtils";
@@ -42,19 +42,21 @@ export class NewsPage extends React.Component<Props> {
     );
     return (
       <React.Fragment>
-        <div>
-          News
-          <p>
-            {editDeletePermissions && (
-              <Button
-                variant="success"
-                onClick={() => this.props.toggleNewsAddModal(true)}
-              >
-                <FontAwesome name="plus" /> Add an article
-              </Button>
-            )}
-          </p>
-        </div>
+        <Jumbotron>
+          <Container>
+            <h1>News</h1>
+            <p>
+              {editDeletePermissions && (
+                <Button
+                  variant="success"
+                  onClick={() => this.props.toggleNewsAddModal(true)}
+                >
+                  <FontAwesome name="plus" /> Add an article
+                </Button>
+              )}
+            </p>
+          </Container>
+        </Jumbotron>
         {this.props.newsPosts &&
           this.props.newsPosts.map((newsPost) => (
             <NewsPost
@@ -63,7 +65,7 @@ export class NewsPage extends React.Component<Props> {
               author={newsPost.author}
               message={newsPost.message}
               date={newsPost.created_at}
-              onDelete={(event: any) => {
+              onDelete={(event) => {
                 event.preventDefault();
                 if (
                   window.confirm("Do you want to delete the selected newspost?")

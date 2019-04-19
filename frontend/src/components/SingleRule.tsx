@@ -10,8 +10,8 @@ interface Props {
   editMode: boolean;
   canMoveUp: boolean;
   canMoveDown: boolean;
-  onMoveUpClick: any;
-  onMoveDownClick: any;
+  onMoveUpClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onMoveDownClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const SingleRule: React.SFC<Props> = ({

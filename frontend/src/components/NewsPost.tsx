@@ -6,8 +6,8 @@ import FontAwesome from "react-fontawesome";
 
 interface Props {
   date?: string;
-  onDelete: any;
-  onEdit: any;
+  onDelete: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onEdit: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   hasEditDeletePermissions: boolean;
 }
 
@@ -22,29 +22,26 @@ const NewsPost: React.SFC<
   onEdit,
   hasEditDeletePermissions,
 }) => (
-  <Card bg="primary">
-    <Card.Header>
-      <Card.Title>
-        <b>{title}</b>
-        {hasEditDeletePermissions && (
-          <React.Fragment>
-            {"   "}
-            <Button variant="danger" onClick={onDelete}>
-              <FontAwesome name="trash" /> Delete
-            </Button>
-            {"   "}
-            <Button variant="success" onClick={onEdit}>
-              <FontAwesome name="edit" /> Edit
-            </Button>
-          </React.Fragment>
-        )}
-      </Card.Title>
-    </Card.Header>
-    <Card.Body>{message}</Card.Body>
-    <Card.Footer>
-      By #<strong>{author}</strong> on{" "}
-      <i>{date ? moment(date).format("LLL") : "N/A"}</i>
-    </Card.Footer>
+  <Card style={{ marginTop: 5, marginBottom: 5 }}>
+    <Card.Body>
+      <Card.Title>{title}</Card.Title>
+      <Card.Subtitle className="mb-2 text-muted">
+        By #<strong>{author}</strong> on{" "}
+        <i>{date ? moment(date).format("LLL") : "N/A"}</i>
+      </Card.Subtitle>
+      <Card.Text>{message}</Card.Text>
+      {hasEditDeletePermissions && (
+        <Card.Text>
+          <Button variant="danger" onClick={onDelete}>
+            <FontAwesome name="trash" /> Delete
+          </Button>
+          {"   "}
+          <Button variant="success" onClick={onEdit}>
+            <FontAwesome name="edit" /> Edit
+          </Button>
+        </Card.Text>
+      )}
+    </Card.Body>
   </Card>
 );
 

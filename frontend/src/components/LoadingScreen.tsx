@@ -1,5 +1,5 @@
 import React from "react";
-import { ProgressBar } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import styled from "styled-components";
 
 const LoadingScreenWrapper = styled.div`
@@ -12,8 +12,10 @@ const LoadingScreenWrapper = styled.div`
 
 const LoadingScreen = () => (
   <LoadingScreenWrapper>
-    <h3>Loading...</h3>
-    <ProgressBar animated now={100} />
+    <Spinner animation="grow" variant="success" role="status" />
+    <Spinner animation="grow" variant="danger" role="status" />
+    <Spinner animation="grow" variant="warning" role="status" />
+    <Spinner animation="grow" variant="info" role="status" />
   </LoadingScreenWrapper>
 );
 
