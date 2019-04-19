@@ -1,6 +1,7 @@
 {
   "name": "clubhouse-frontend",
   "version": "1.0.0",
+  "homepage": "https://clubhouse.alehuo.dev",
   "license": "MIT",
   "private": true,
   "dependencies": {
