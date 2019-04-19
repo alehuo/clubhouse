@@ -19,12 +19,25 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <h3>
-          Loading...
-        </h3>,
         <ForwardRef(render)
-          animated={true}
-          now={100}
+          animation="grow"
+          role="status"
+          variant="success"
+        />,
+        <ForwardRef(render)
+          animation="grow"
+          role="status"
+          variant="danger"
+        />,
+        <ForwardRef(render)
+          animation="grow"
+          role="status"
+          variant="warning"
+        />,
+        <ForwardRef(render)
+          animation="grow"
+          role="status"
+          variant="info"
         />,
       ],
     },
@@ -33,28 +46,75 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Loading...",
-        },
-        "ref": null,
-        "rendered": "Loading...",
-        "type": "h3",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "animated": true,
-          "now": 100,
+          "animation": "grow",
+          "role": "status",
+          "variant": "success",
         },
         "ref": null,
         "rendered": null,
         "type": Object {
           "$$typeof": Symbol(react.forward_ref),
           "defaultProps": undefined,
-          "displayName": "Bootstrap(ProgressBar)",
+          "displayName": "Bootstrap(Spinner)",
+          "propTypes": undefined,
+          "render": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "animation": "grow",
+          "role": "status",
+          "variant": "danger",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "Bootstrap(Spinner)",
+          "propTypes": undefined,
+          "render": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "animation": "grow",
+          "role": "status",
+          "variant": "warning",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "Bootstrap(Spinner)",
+          "propTypes": undefined,
+          "render": [Function],
+        },
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "animation": "grow",
+          "role": "status",
+          "variant": "info",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "defaultProps": undefined,
+          "displayName": "Bootstrap(Spinner)",
           "propTypes": undefined,
           "render": [Function],
         },
@@ -93,12 +153,25 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <h3>
-            Loading...
-          </h3>,
           <ForwardRef(render)
-            animated={true}
-            now={100}
+            animation="grow"
+            role="status"
+            variant="success"
+          />,
+          <ForwardRef(render)
+            animation="grow"
+            role="status"
+            variant="danger"
+          />,
+          <ForwardRef(render)
+            animation="grow"
+            role="status"
+            variant="warning"
+          />,
+          <ForwardRef(render)
+            animation="grow"
+            role="status"
+            variant="info"
           />,
         ],
       },
@@ -107,28 +180,75 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Loading...",
-          },
-          "ref": null,
-          "rendered": "Loading...",
-          "type": "h3",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "animated": true,
-            "now": 100,
+            "animation": "grow",
+            "role": "status",
+            "variant": "success",
           },
           "ref": null,
           "rendered": null,
           "type": Object {
             "$$typeof": Symbol(react.forward_ref),
             "defaultProps": undefined,
-            "displayName": "Bootstrap(ProgressBar)",
+            "displayName": "Bootstrap(Spinner)",
+            "propTypes": undefined,
+            "render": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animation": "grow",
+            "role": "status",
+            "variant": "danger",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "Bootstrap(Spinner)",
+            "propTypes": undefined,
+            "render": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animation": "grow",
+            "role": "status",
+            "variant": "warning",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "Bootstrap(Spinner)",
+            "propTypes": undefined,
+            "render": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "animation": "grow",
+            "role": "status",
+            "variant": "info",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": undefined,
+            "displayName": "Bootstrap(Spinner)",
             "propTypes": undefined,
             "render": [Function],
           },
@@ -173,6 +293,7 @@ ShallowWrapper {
           "getChildContext": Object {
             "calledByRenderer": false,
           },
+          "getDerivedStateFromError": true,
           "getDerivedStateFromProps": Object {
             "hasShouldComponentUpdateBug": false,
           },
@@ -286,6 +407,7 @@ ShallowWrapper {
           "getChildContext": Object {
             "calledByRenderer": false,
           },
+          "getDerivedStateFromError": true,
           "getDerivedStateFromProps": Object {
             "hasShouldComponentUpdateBug": false,
           },
