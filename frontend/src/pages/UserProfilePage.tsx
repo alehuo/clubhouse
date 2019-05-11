@@ -1,6 +1,6 @@
 import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
-import { Col, Container, Jumbotron, Nav, NavItem, Row } from "react-bootstrap";
+import { Col, Nav, Row } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -14,7 +14,7 @@ interface Props {
   userData?: User;
 }
 
-const UserProfilePage: React.SFC<Props> = (props) => {
+const UserProfilePage: React.FC<Props> = (props) => {
   return (
     <React.Fragment>
       <Row className="clearfix">

@@ -10,7 +10,7 @@ interface Props {
   keyTypes: KeyType[];
 }
 
-const KeyList: React.SFC<Props> = ({
+const KeyList: React.FC<Props> = ({
   keys,
   studentUnions,
   keyTypes,

@@ -20,7 +20,7 @@ interface Props {
   isAdding: boolean;
 }
 
-const AddStudentUnionForm: React.SFC<Props> = ({
+const AddStudentUnionForm: React.FC<Props> = ({
   handleSubmit,
   handleClose,
   isAdding,

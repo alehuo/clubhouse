@@ -6,7 +6,7 @@ interface Props {
   type: "success" | "warning" | "danger" | "info";
 }
 
-const Notification: React.SFC<Props> = ({ text, type }) => (
+const Notification: React.FC<Props> = ({ text, type }) => (
   <Alert variant={type}>
     <p>{text}</p>
   </Alert>

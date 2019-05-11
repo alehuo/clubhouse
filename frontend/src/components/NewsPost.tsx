@@ -11,7 +11,7 @@ interface Props {
   hasEditDeletePermissions: boolean;
 }
 
-const NewsPost: React.SFC<
+const NewsPost: React.FC<
   Pick<Newspost, "title" | "author" | "message"> & Props
 > = ({
   title,

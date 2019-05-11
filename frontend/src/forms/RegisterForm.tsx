@@ -24,7 +24,7 @@ interface Props {
   isRegistering: boolean;
 }
 
-const RegisterForm: React.SFC<Props> = (props) => (
+const RegisterForm: React.FC<Props> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       name="firstName"

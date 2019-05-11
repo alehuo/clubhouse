@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { compose } from "redux";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { FieldGroup } from "../components/FieldGroup";
 import { isEmpty } from "../utils/FormValidators";
 
@@ -13,7 +12,7 @@ interface LoginFormProps {
   handleSubmit: any;
 }
 
-const LoginForm: React.SFC<LoginFormProps> = ({
+const LoginForm: React.FC<LoginFormProps> = ({
   handleSubmit,
   isLoggingIn,
 }) => (

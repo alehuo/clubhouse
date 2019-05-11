@@ -15,7 +15,7 @@ interface Props {
   isAdding: boolean;
 }
 
-const AddNewspostForm: React.SFC<Props> = ({
+const AddNewspostForm: React.FC<Props> = ({
   handleSubmit,
   handleClose,
   isAdding,

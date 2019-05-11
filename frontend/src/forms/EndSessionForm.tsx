@@ -18,7 +18,7 @@ interface Props {
   isEnding: boolean;
 }
 
-const EndSessionForm: React.SFC<Props> = (props) => (
+const EndSessionForm: React.FC<Props> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       autoFocus={true}

@@ -16,7 +16,7 @@ interface EditNewspostFormProps {
   isEditing?: any;
 }
 
-const EditNewspostForm: React.SFC<EditNewspostFormProps> = (props) => (
+const EditNewspostForm: React.FC<EditNewspostFormProps> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       name="newspostTitle"

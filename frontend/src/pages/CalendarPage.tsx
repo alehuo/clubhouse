@@ -59,6 +59,7 @@ class CalendarPage extends React.Component<Props> {
                       "/api/v1/calendar/ical"
                     }
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {process.env.REACT_APP_BACKEND_URL +
                       "/api/v1/calendar/ical"}

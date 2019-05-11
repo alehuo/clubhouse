@@ -1,4 +1,4 @@
-import { ApiResponse, DbUser, User } from "@alehuo/clubhouse-shared";
+import { ApiResponse, User } from "@alehuo/clubhouse-shared";
 import customAxios from "./custom-axios";
 
 const login = async (email: string, password: string) => {
@@ -9,9 +9,6 @@ const login = async (email: string, password: string) => {
       {
         email,
         password,
-      },
-      {
-        baseURL: process.env.REACT_APP_BACKEND_URL,
       },
     );
   return res.data;
@@ -30,9 +27,6 @@ const register = async (
       password,
       firstName,
       lastName,
-    },
-    {
-      baseURL: process.env.REACT_APP_BACKEND_URL,
     },
   );
   return res.data;

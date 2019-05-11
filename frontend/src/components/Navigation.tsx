@@ -1,6 +1,6 @@
 import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
-import { Nav, Navbar, NavDropdown, NavItem } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { LinkContainer } from "react-router-bootstrap";
 import { NavButton } from "../navButtons";
@@ -11,13 +11,16 @@ interface NavigationProps {
   userData?: User;
 }
 
-const Navigation: React.SFC<NavigationProps> = ({
+const Navigation: React.FC<NavigationProps> = ({
   navButtons,
   isAuthenticated,
   userData,
 }) => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
-    <Navbar.Brand><img src="icon_512x512.png" height={40}/> Clubhouse management</Navbar.Brand>
+    <Navbar.Brand>
+      <img src="icon_512x512.png" height={40} alt="Clubhouse management" />{" "}
+      Clubhouse management
+    </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav>

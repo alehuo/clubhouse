@@ -14,7 +14,7 @@ interface Props {
   onMoveDownClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export const SingleRule: React.SFC<Props> = ({
+export const SingleRule: React.FC<Props> = ({
   id,
   rule,
   editMode,

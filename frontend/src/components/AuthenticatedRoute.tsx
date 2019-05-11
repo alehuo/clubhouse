@@ -6,7 +6,7 @@ interface AuthenticatedRouteProps {
   isAuthenticated: boolean;
 }
 
-const AuthenticatedRoute: React.SFC<AuthenticatedRouteProps & RouteProps> = ({
+const AuthenticatedRoute: React.FC<AuthenticatedRouteProps & RouteProps> = ({
   component: Component,
   isAuthenticated,
   ...rest

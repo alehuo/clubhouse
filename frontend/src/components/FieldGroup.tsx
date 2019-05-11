@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 
-export const FieldGroup: React.SFC<any> = ({
+export const FieldGroup: React.FC<any> = ({
   input,
   meta,
   id,

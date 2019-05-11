@@ -1,7 +1,6 @@
 import { User } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import "moment/locale/fi";
-moment.locale("fi");
 import React from "react";
 import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -29,6 +28,7 @@ import UserListPage from "./pages/UserListPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import { INIT_APP } from "./reducers/constants";
 import { RootState } from "./reduxStore";
+moment.locale("fi");
 
 interface Props {
   sessionInterval?: NodeJS.Timeout;
@@ -64,7 +64,7 @@ class App extends React.Component<Props> {
           navButtons={navButtons}
           userData={userData}
         />
-        <Container className="container" style={{paddingTop: 30}}>
+        <Container className="container" style={{ paddingTop: 30 }}>
           <NotificationDrawer />
           {!(sessionPage || !(this.props.token !== "")) && sessionRunning && (
             <Alert variant="info">

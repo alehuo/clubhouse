@@ -13,7 +13,7 @@ interface Props {
   userData?: User;
 }
 
-const UserInformation: React.SFC<Props> = ({ userData }) => {
+const UserInformation: React.FC<Props> = ({ userData }) => {
   if (!userData) {
     return <div>Failed to display user data</div>;
   }

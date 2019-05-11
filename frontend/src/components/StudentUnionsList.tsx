@@ -15,7 +15,7 @@ interface Props {
   token: string;
 }
 
-const StudentUnionsList: React.SFC<Props> = ({
+const StudentUnionsList: React.FC<Props> = ({
   perms,
   stdus,
   deleteStdu,

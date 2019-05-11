@@ -30,7 +30,7 @@ interface Props {
   studentUnions: StudentUnion[];
 }
 
-const AddKeyHolderForm: React.SFC<Props> = ({
+const AddKeyHolderForm: React.FC<Props> = ({
   handleSubmit,
   users,
   studentUnions,
