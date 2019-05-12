@@ -46,6 +46,7 @@
 | 12.2.2019  | 1.0h  | Created tests for some reducer actions                                                                                                                                                                                                                            |
 | 23.3.2019  | 2.0h  | Updated dependencies, improving app UI                                                                                                                                                                                                                            |
 | 19.4.2019  | 2.0h  | Improved UI layout                                                                                                                                                                                                                                                |
+| 12.5.2019  | 0.5h  | Fix keyholder form. Improve typings for FieldGroup                                                                                                                                                                                                                |
 
 Total:
 
@@ -53,4 +54,4 @@ Total:
 
 29.5 h (Part 2)
 
-7.5 h (Post-course)
+8.0 h (Post-course)
