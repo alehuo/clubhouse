@@ -67,6 +67,23 @@ const sessionMessages: SessionMessage[] = [
   },
 ];
 
+/**
+ * Returns the text color of the message box.
+ * @param type Message type
+ */
+const getTextColor = (type?: "warning" | "danger" | "info") => {
+  switch (type) {
+    case "warning":
+      return "dark";
+    case "danger":
+      return "light";
+    case "info":
+      return "light";
+    default:
+      return "dark";
+  }
+};
+
 export class Session extends React.Component<Props> {
   public componentDidMount() {
     this.props.toggleSessionPage(true);
@@ -166,7 +183,7 @@ export class Session extends React.Component<Props> {
           {sessionMessages &&
             sessionMessages.map((msg) => (
               <Card
-                text={msg.type ? "white" : "dark"}
+                text={getTextColor(msg.type)}
                 bg={msg.type ? msg.type : "light"}
                 key={msg.id}
                 style={{ marginTop: 5, marginBottom: 5 }}

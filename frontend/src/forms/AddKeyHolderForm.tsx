@@ -17,6 +17,14 @@ const userFilter = (users: User[], id: number) => {
   return user.firstName + " " + user.lastName;
 };
 
+const showKeyTitle = (keyTypes: KeyType[], selectedKey: number) => {
+  const keyType = keyTypes.find((kt) => kt.keyTypeId === selectedKey);
+  if (keyType !== undefined) {
+    return keyType.title;
+  }
+  return "N/A";
+};
+
 const confirmed = checked("You must have the permission to add a key");
 
 interface Props {
@@ -41,12 +49,7 @@ const AddKeyHolderForm: React.FC<Props> = ({
   isAdding,
 }) => (
   <form onSubmit={handleSubmit}>
-    <Field
-      component={FieldGroup}
-      name="user"
-      componentClass="select"
-      label="User"
-    >
+    <Field component={FieldGroup} as="select" name="user" label="User">
       {users &&
         users.map((user) => (
           <option key={user.firstName + user.lastName} value={user.userId}>
@@ -56,8 +59,8 @@ const AddKeyHolderForm: React.FC<Props> = ({
     </Field>
     <Field
       component={FieldGroup}
+      as="select"
       name="studentUnion"
-      componentClass="select"
       label="Student union"
     >
       {studentUnions &&
@@ -69,8 +72,9 @@ const AddKeyHolderForm: React.FC<Props> = ({
     </Field>
     <Field
       component={FieldGroup}
+      as="select"
       name="keyType"
-      componentClass="select"
+      id="keyType"
       label="Key type"
     >
       {keyTypes &&
@@ -99,14 +103,8 @@ const AddKeyHolderForm: React.FC<Props> = ({
       <p>
         {selectedKey && selectedUser && keyTypes && (
           <span>
-            <b>
-              {keyTypes &&
-                keyTypes.find(
-                  (keyType) => keyType.keyTypeId === selectedKey,
-                )!.title}{" "}
-              key
-            </b>{" "}
-            for user <b>{userFilter(users, selectedUser)}</b>
+            <b>{keyTypes && showKeyTitle(keyTypes, selectedKey)} key</b> for
+            user <b>{userFilter(users, selectedUser)}</b>
           </span>
         )}
       </p>
