@@ -13,17 +13,17 @@ const AppCrashScreenWrapper = styled.div`
 `;
 
 interface State {
-  error: any;
-  errorInfo: any;
+  error?: Error;
+  errorInfo?: React.ErrorInfo;
 }
 
 class AppCrashHandler extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
-    this.state = { error: null, errorInfo: null };
+    this.state = { error: undefined, errorInfo: undefined };
   }
 
-  public componentDidCatch(error: any, errorInfo: any) {
+  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     this.setState({
       error,
       errorInfo,
@@ -31,7 +31,7 @@ class AppCrashHandler extends React.Component<{}, State> {
   }
 
   public render() {
-    if (this.state.errorInfo) {
+    if (this.state.errorInfo !== undefined && this.state.error !== undefined) {
       return (
         <AppCrashScreenWrapper>
           <FontAwesome name={"frown"} size={"4x"} />
@@ -42,6 +42,8 @@ class AppCrashHandler extends React.Component<{}, State> {
               {bugReportUrl}
             </a>
           </p>
+          <p>{this.state.error !== undefined && this.state.error}</p>
+          <p>{this.state.errorInfo !== undefined && this.state.errorInfo}</p>
         </AppCrashScreenWrapper>
       );
     }
