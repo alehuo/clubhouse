@@ -41,13 +41,23 @@ export type RootState = StateType<typeof reducer>;
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middleware =
-  process.env.NODE_ENV !== "production" ? [thunk, sagaMiddleware, logger] : [thunk, sagaMiddleware];
-
+// Middlewares for different environments
+const middleware = () => {
+  switch (process.env.NODE_ENV) {
+    case "production":
+      return [thunk, sagaMiddleware];
+    case "development":
+      return [thunk, sagaMiddleware, logger];
+    case "test":
+      return [thunk, sagaMiddleware];
+    default:
+      return [thunk, sagaMiddleware];
+  }
+};
 // Create store
 const reduxStore = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(...middleware)),
+  composeWithDevTools(applyMiddleware(...middleware())),
 );
 
 sagaMiddleware.run(rootSaga);

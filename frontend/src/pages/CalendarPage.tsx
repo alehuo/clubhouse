@@ -1,7 +1,8 @@
 import { CalendarEvent, Permission } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
-import BigCalendar from "react-big-calendar";
+// @ts-ignore
+import { Calendar } from "react-big-calendar";
 import { Button, Container, Jumbotron } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
@@ -13,7 +14,7 @@ import { fetchEvents } from "./../reducers/actions/calendarActions";
 import { eventMapper } from "./../services/CalendarService";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-const Calendar = styled<any>(BigCalendar)`
+const StyledCalendar = styled(Calendar)`
   height: 800px !important;
 `;
 
@@ -74,13 +75,13 @@ class CalendarPage extends React.Component<Props> {
           </Container>
         </Jumbotron>
 
-        <Calendar
-          localizer={BigCalendar.momentLocalizer(moment)}
+        <StyledCalendar
+          localizer={Calendar.momentLocalizer(moment)}
           events={this.props.events.map(eventMapper)}
           step={60}
-          views={Object.keys(BigCalendar.Views).map(
+          views={Object.keys(Calendar.Views).map(
             // @ts-ignore
-            (k) => BigCalendar.Views[k],
+            (k) => Calendar.Views[k],
           )}
           timeslots={1}
           showMultiDayTimes

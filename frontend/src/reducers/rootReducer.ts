@@ -11,7 +11,7 @@ const initialState: RootState = {
   appLoading: true,
 };
 
-type RootAction = ActionType<typeof rootActions>;
+export type RootAction = ActionType<typeof rootActions>;
 
 const rootReducer: Reducer<RootState, RootAction> = (
   state = initialState,
