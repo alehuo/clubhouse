@@ -48,6 +48,7 @@
 | 19.4.2019  | 2.0h  | Improved UI layout                                                                                                                                                                                                                                                |
 | 12.5.2019  | 0.5h  | Fix keyholder form. Improve typings for FieldGroup                                                                                                                                                                                                                |
 | 26.6.2019  | 2.0h  | Update dependencies, code refactoring. Create some tests for Root and Session reducers.                                                                                                                                                                           |
+| 28.6.2019  | 0.1h  | Modify .travis.yml and Now.sh deployment configs                                                                                                                                                                                                                  |
 
 Total:
 
@@ -55,4 +56,4 @@ Total:
 
 29.5 h (Part 2)
 
-10.0 h (Post-course)
+10.1 h (Post-course)

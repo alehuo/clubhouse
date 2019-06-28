@@ -9,10 +9,13 @@
       "config": { "distDir": "build" }
     }
   ],
+  "env": {
+    "REACT_APP_BACKEND_URL": "clubhouse-backend-dev.alehuo.dev"
+  },
   "routes": [
     {
       "src": "/static/(.*)",
-      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "headers": { "cache-control": "s-maxage=1200,immutable" },
       "dest": "/static/$1"
     },
     { "src": "/favicon.ico", "dest": "/favicon.ico" },
