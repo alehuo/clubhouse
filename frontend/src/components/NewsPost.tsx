@@ -1,19 +1,19 @@
+import { Newspost } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
-import { Button, Panel } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 
 interface Props {
-  title: string;
-  message: string;
-  author: number;
   date?: string;
-  onDelete: any;
-  onEdit: any;
+  onDelete: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onEdit: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   hasEditDeletePermissions: boolean;
 }
 
-const NewsPost: React.SFC<Props> = ({
+const NewsPost: React.FC<
+  Pick<Newspost, "title" | "author" | "message"> & Props
+> = ({
   title,
   message,
   author,
@@ -22,30 +22,27 @@ const NewsPost: React.SFC<Props> = ({
   onEdit,
   hasEditDeletePermissions,
 }) => (
-  <Panel bsStyle="primary">
-    <Panel.Heading>
-      <Panel.Title>
-        <b>{title}</b>
-        {hasEditDeletePermissions && (
-          <React.Fragment>
-            {"   "}
-            <Button bsStyle="danger" onClick={onDelete}>
-              <FontAwesome name="trash" /> Delete
-            </Button>
-            {"   "}
-            <Button bsStyle="success" onClick={onEdit}>
-              <FontAwesome name="edit" /> Edit
-            </Button>
-          </React.Fragment>
-        )}
-      </Panel.Title>
-    </Panel.Heading>
-    <Panel.Body>{message}</Panel.Body>
-    <Panel.Footer>
-      By #<strong>{author}</strong> on{" "}
-      <i>{date ? moment(date).format("LLL") : "N/A"}</i>
-    </Panel.Footer>
-  </Panel>
+  <Card style={{ marginTop: 5, marginBottom: 5 }}>
+    <Card.Body>
+      <Card.Title>{title}</Card.Title>
+      <Card.Subtitle className="mb-2 text-muted">
+        By #<strong>{author}</strong> on{" "}
+        <i>{date ? moment(date).format("LLL") : "N/A"}</i>
+      </Card.Subtitle>
+      <Card.Text>{message}</Card.Text>
+      {hasEditDeletePermissions && (
+        <Card.Text>
+          <Button variant="danger" onClick={onDelete}>
+            <FontAwesome name="trash" /> Delete
+          </Button>
+          {"   "}
+          <Button variant="success" onClick={onEdit}>
+            <FontAwesome name="edit" /> Edit
+          </Button>
+        </Card.Text>
+      )}
+    </Card.Body>
+  </Card>
 );
 
 export default NewsPost;

@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { Button, Label, PageHeader, Panel } from "react-bootstrap";
+import { Badge, Button, Card, Container, Jumbotron } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import CustomOverlay from "../components/CustomOverlay";
@@ -27,6 +27,63 @@ interface Props {
   peopleCount: number;
 }
 
+interface SessionMessage {
+  id: number;
+  name: string;
+  date: string;
+  text: string;
+  type?: "warning" | "danger" | "info";
+}
+
+const sessionMessages: SessionMessage[] = [
+  {
+    id: 1,
+    name: "John Doe",
+    date: "08.08.2017 at 22:33",
+    text:
+      "I have left the building. Moved people under my supervision to another keyholder.",
+    type: "warning",
+  },
+  {
+    id: 2,
+    name: "John Doe",
+    date: "08.08.2017 at 22:33",
+    text: "A glass bowl shattered as one of the students dropped it.",
+    type: "danger",
+  },
+  {
+    id: 3,
+    name: "John Doe",
+    date: "08.08.2017 at 17:33",
+    text:
+      "Status update. Everything is going as expected, no incidents to report!",
+  },
+  {
+    id: 4,
+    name: "John Doe",
+    date: "08.08.2017 at 10:33",
+    text: "Good evening, I'm taking responsibility of a few exchange students.",
+    type: "info",
+  },
+];
+
+/**
+ * Returns the text color of the message box.
+ * @param type Message type
+ */
+const getTextColor = (type?: "warning" | "danger" | "info") => {
+  switch (type) {
+    case "warning":
+      return "dark";
+    case "danger":
+      return "light";
+    case "info":
+      return "light";
+    default:
+      return "dark";
+  }
+};
+
 export class Session extends React.Component<Props> {
   public componentDidMount() {
     this.props.toggleSessionPage(true);
@@ -50,10 +107,10 @@ export class Session extends React.Component<Props> {
             onHide={() => this.props.toggleStartSessionModal(false)}
           />
         )}
-        <PageHeader>
-          Session status{" "}
-          <p>
-            <small>
+        <Jumbotron>
+          <Container>
+            <h1>Session status</h1>
+            <p>
               {this.props.watchRunning && this.props.startTime ? (
                 <span>
                   Session started
@@ -63,120 +120,82 @@ export class Session extends React.Component<Props> {
               ) : (
                 <span>You are not currently in a session.</span>
               )}
-            </small>
-          </p>
-          <p>
-            {this.props.watchRunning && (
-              <CustomOverlay
-                id="endSessionTooltip"
-                text="This will end your current session."
-              >
-                <Button
-                  bsStyle="warning"
-                  onClick={() => this.props.toggleEndSessionModal(true)}
+            </p>
+            <p>
+              {this.props.watchRunning && (
+                <CustomOverlay
+                  id="endSessionTooltip"
+                  text="This will end your current session."
                 >
-                  <FontAwesome name="hourglass" /> End session
+                  <Button
+                    variant="warning"
+                    onClick={() => this.props.toggleEndSessionModal(true)}
+                  >
+                    <FontAwesome name="hourglass" /> End session
+                  </Button>
+                </CustomOverlay>
+              )}
+              {!this.props.watchRunning && (
+                <CustomOverlay
+                  id="startSessionTooltip"
+                  text="This will start a new session"
+                >
+                  <Button
+                    variant="success"
+                    onClick={() => this.props.toggleStartSessionModal(true)}
+                  >
+                    <FontAwesome name="play" /> Start session
+                  </Button>
+                </CustomOverlay>
+              )}
+              {"  "}
+              <CustomOverlay
+                id="sendMessageTooltip"
+                text="Sends a message to all verified keyholders."
+              >
+                <Button variant="info">
+                  <FontAwesome name="envelope" /> Send message
                 </Button>
               </CustomOverlay>
-            )}
-            {!this.props.watchRunning && (
-              <CustomOverlay
-                id="startSessionTooltip"
-                text="This will start a new session"
-              >
-                <Button
-                  bsStyle="success"
-                  onClick={() => this.props.toggleStartSessionModal(true)}
-                >
-                  <FontAwesome name="play" /> Start session
-                </Button>
-              </CustomOverlay>
-            )}
-            {"  "}
-            <CustomOverlay
-              id="sendMessageTooltip"
-              text="Sends a message to all verified keyholders."
-            >
-              <Button bsStyle="info">
-                <FontAwesome name="envelope" /> Send message
-              </Button>
-            </CustomOverlay>
-          </p>
-        </PageHeader>
+            </p>
+          </Container>
+        </Jumbotron>
         <p>
           There {this.props.peopleCount > 1 ? "are" : "is"} currently{" "}
-          <strong>
+          <Badge variant="primary">
             {this.props.peopleCount === 0
               ? "no one"
               : this.props.peopleCount > 1
               ? this.props.peopleCount + " persons"
               : this.props.peopleCount + " person"}
-          </strong>{" "}
+          </Badge>{" "}
           in an ongoing session.
         </p>
         <p>
           Messages have different color codes.{" "}
-          <Label bsStyle="info">Blue</Label> is session start, whereas{" "}
-          <Label bsStyle="warning">yellow</Label> is a session end.{" "}
-          <Label bsStyle="danger">Red</Label> is an incident, and white is a
+          <Badge variant="info">Blue</Badge> is session start, whereas{" "}
+          <Badge variant="warning">yellow</Badge> is a session end.{" "}
+          <Badge variant="danger">Red</Badge> is an incident, and white is a
           general message.
         </p>
         <h3>Session timeline</h3>
-        <div
-          style={{
-            overflowY: "scroll",
-            height: 350,
-          }}
-        >
-          <Panel bsStyle="warning">
-            <Panel.Heading>
-              <h4>
-                <b>John Doe</b> on 8.8.2017 at 22:33
-              </h4>
-            </Panel.Heading>
-            <Panel.Body>
-              <p>
-                I have left the building. Moved people under my supervision to
-                another keyholder.
-              </p>
-            </Panel.Body>
-          </Panel>
-          <Panel bsStyle="danger">
-            <Panel.Heading>
-              <h4>
-                <b>John Doe</b> on 8.8.2017 at 21:02
-              </h4>
-            </Panel.Heading>
-            <Panel.Body>
-              <p>A glass bowl shattered as one of the students dropped it.</p>
-            </Panel.Body>
-          </Panel>
-          <Panel>
-            <Panel.Heading>
-              <h4>
-                <b>John Doe</b> on 8.8.2017 at 17:33
-              </h4>
-            </Panel.Heading>
-            <Panel.Body>
-              <p>
-                Status update. Everything is going as expected, no incidents to
-                report!
-              </p>
-            </Panel.Body>
-          </Panel>
-          <Panel bsStyle="info">
-            <Panel.Heading>
-              <h4>
-                <b>John Doe</b> on 8.8.2017 at 10:33
-              </h4>
-            </Panel.Heading>
-            <Panel.Body>
-              <p>
-                Good evening, I'm taking responsibility of a few exchange
-                students.
-              </p>
-            </Panel.Body>
-          </Panel>
+        <div>
+          {sessionMessages &&
+            sessionMessages.map((msg) => (
+              <Card
+                text={getTextColor(msg.type)}
+                bg={msg.type ? msg.type : "light"}
+                key={msg.id}
+                style={{ marginTop: 5, marginBottom: 5 }}
+              >
+                <Card.Header>Session message</Card.Header>
+                <Card.Body>
+                  <Card.Title>{msg.name}</Card.Title>
+                  <Card.Subtitle className="mb-2">{msg.date}</Card.Subtitle>
+                  <Card.Text>{msg.text}</Card.Text>
+                </Card.Body>
+              </Card>
+            ))}
         </div>
       </React.Fragment>
     );

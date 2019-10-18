@@ -1,8 +1,9 @@
 import { ApiResponse } from "@alehuo/clubhouse-shared";
 import { ThunkDispatch } from "redux-thunk";
 import { action } from "typesafe-actions";
-import * as sessionService from "../../services/SessionService";
+import sessionService from "../../services/SessionService";
 import {
+  FETCH_OWN_SESSION_STATUS,
   SET_OWN_SESSION_STATUS,
   SET_SESSION_CHECK_INTERVAL,
   TOGGLE_END_SESSION_MODAL,
@@ -31,35 +32,7 @@ export const toggleEndSessionModal = (value: boolean) =>
 export const setSessionCheckInterval = (interval: NodeJS.Timeout) =>
   action(SET_SESSION_CHECK_INTERVAL, { interval });
 
-export const fetchOwnSessionStatus = (token: string) => {
-  return async (dispatch: ThunkDispatch<any, any, any>) => {
-    try {
-      const ownSessionStatus = await sessionService.getOwnSessionStatus(token);
-      if (ownSessionStatus.payload !== undefined) {
-        const session = ownSessionStatus.payload;
-        dispatch(
-          setOwnSessionStatus(
-            session.running,
-            session.peopleCount,
-            session.startTime,
-          ),
-        );
-      } else {
-        console.error("Response payload was undefined.");
-      }
-    } catch (err) {
-      if (err.response && err.response.data) {
-        const res = err.response.data as ApiResponse<undefined>;
-        if (res.error !== undefined) {
-          dispatch(errorMessage(res.error.message));
-        }
-      } else {
-        // If the response doesn't contain an error key, the back-end might be down
-        dispatch(errorMessage("Error fetching watch status"));
-      }
-    }
-  };
-};
+export const fetchOwnSessionStatus = (token: string) => action(FETCH_OWN_SESSION_STATUS, { token });
 
 export const setOwnSessionStatus = (
   ownSessionRunning: boolean,

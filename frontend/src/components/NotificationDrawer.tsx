@@ -11,7 +11,7 @@ interface Props {
   }>;
 }
 
-const NotificationDrawer: React.SFC<Props> = ({ notifications }) => (
+const NotificationDrawer: React.FC<Props> = ({ notifications }) => (
   <React.Fragment>
     {notifications &&
       notifications.map((notification) => (

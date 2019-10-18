@@ -41,9 +41,19 @@
 | 16.12.2018 | 0.5h  | Updated shared library. Implemented fetching rules from the back-end.                                                                                                                                                                                             |
 | 26.12.2018 | 0.5h  | Upgraded dependencies.                                                                                                                                                                                                                                            |
 | 27.12.2018 | 1.0h  | Adding keyholders is now working. Improved key listing component.                                                                                                                                                                                                 |
+| 28.1.2019  | 2.0h  | Added redux-saga dependency. Refactored Thunk actions in UserReducer to UserSaga. The plan is to get rid of Redux thunk in favor of Redux Saga.                                                                                                                   |
+| 8.2.2019   | 0.5h  | Created SessionSaga, fixed UserSaga and cleaned up code of RootSaga                                                                                                                                                                                               |
+| 12.2.2019  | 1.0h  | Created tests for some reducer actions                                                                                                                                                                                                                            |
+| 23.3.2019  | 2.0h  | Updated dependencies, improving app UI                                                                                                                                                                                                                            |
+| 19.4.2019  | 2.0h  | Improved UI layout                                                                                                                                                                                                                                                |
+| 12.5.2019  | 0.5h  | Fix keyholder form. Improve typings for FieldGroup                                                                                                                                                                                                                |
+| 26.6.2019  | 2.0h  | Update dependencies, code refactoring. Create some tests for Root and Session reducers.                                                                                                                                                                           |
+| 28.6.2019  | 0.1h  | Modify .travis.yml and Now.sh deployment configs                                                                                                                                                                                                                  |
 
 Total:
 
 25.5 h (Part 1)
 
 29.5 h (Part 2)
+
+10.1 h (Post-course)

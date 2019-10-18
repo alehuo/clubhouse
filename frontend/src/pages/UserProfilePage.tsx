@@ -1,6 +1,6 @@
 import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
-import { Col, Nav, NavItem, PageHeader, Row } from "react-bootstrap";
+import { Col, Nav, Row } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -14,35 +14,26 @@ interface Props {
   userData?: User;
 }
 
-const UserProfilePage: React.SFC<Props> = (props) => {
-  if (!props.userData) {
-    return <div>Failed to display user data</div>;
-  }
+const UserProfilePage: React.FC<Props> = (props) => {
   return (
     <React.Fragment>
-      <PageHeader>
-        {(props.userData.firstName || "") +
-          " " +
-          (props.userData.lastName || "")}{" "}
-        <small>{props.userData.email || ""}</small>
-      </PageHeader>
       <Row className="clearfix">
         <Col xs={3}>
-          <Nav bsStyle="pills" stacked>
+          <Nav variant="pills" className="flex-column">
             <LinkContainer to="/user/info">
-              <NavItem>
+              <Nav.Link>
                 <FontAwesome name="user" /> My information
-              </NavItem>
+              </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/user/history">
-              <NavItem>
+              <Nav.Link>
                 <FontAwesome name="clock" /> My history
-              </NavItem>
+              </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/user/keys">
-              <NavItem>
+              <Nav.Link>
                 <FontAwesome name="key" /> My keys
-              </NavItem>
+              </Nav.Link>
             </LinkContainer>
           </Nav>
         </Col>

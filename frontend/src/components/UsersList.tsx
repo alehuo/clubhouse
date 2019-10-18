@@ -22,7 +22,7 @@ export class UsersList extends React.Component<Props> {
   }
   public render() {
     return (
-      <Table striped bordered condensed hover responsive>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>#</th>
@@ -53,7 +53,7 @@ export class UsersList extends React.Component<Props> {
                       Permission.ALLOW_REMOVE_USER,
                     ) && (
                       <Button
-                        bsStyle="danger"
+                        variant="danger"
                         onClick={() => {
                           if (
                             window.confirm(

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsPost matches snapshot (has permissions) 1`] = `ShallowWrapper {}`;
+
+exports[`NewsPost matches snapshot 1`] = `ShallowWrapper {}`;

@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactElement<any>;
 }
 
-const CustomOverlay: React.SFC<Props> = ({ id, delay, text, children }) => {
+const CustomOverlay: React.FC<Props> = ({ id, delay, text, children }) => {
   return (
     <OverlayTrigger
       placement="bottom"

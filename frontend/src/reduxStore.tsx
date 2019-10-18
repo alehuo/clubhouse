@@ -1,3 +1,4 @@
+import createSagaMiddleware from "@redux-saga/core";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
@@ -9,12 +10,18 @@ import keyReducer from "./reducers/keyReducer";
 import { logger } from "./reducers/middleware";
 import newsReducer from "./reducers/newsReducer";
 import notificationReducer from "./reducers/notificationReducer";
+import rootReducer from "./reducers/rootReducer";
 import ruleReducer from "./reducers/ruleReducer";
 import sessionReducer from "./reducers/sessionReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
 import userReducer from "./reducers/userReducer";
+import notificationSaga from "./sagas/NotificationSaga";
+import rootSaga from "./sagas/RootSaga";
+import sessionSaga from "./sagas/SessionSaga";
+import userSaga from "./sagas/UserSaga";
 
 const reducerObj = {
+  root: rootReducer,
   calendar: calendarReducer,
   auth: authenticationReducer,
   user: userReducer,
@@ -32,11 +39,30 @@ const reducer = combineReducers(reducerObj);
 
 export type RootState = StateType<typeof reducer>;
 
-const middleware =
-  process.env.NODE_ENV !== "production" ? [thunk, logger] : [thunk];
+const sagaMiddleware = createSagaMiddleware();
 
+// Middlewares for different environments
+const middleware = () => {
+  switch (process.env.NODE_ENV) {
+    case "production":
+      return [thunk, sagaMiddleware];
+    case "development":
+      return [thunk, sagaMiddleware, logger];
+    case "test":
+      return [thunk, sagaMiddleware];
+    default:
+      return [thunk, sagaMiddleware];
+  }
+};
 // Create store
-export const reduxStore = createStore(
+const reduxStore = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(...middleware)),
+  composeWithDevTools(applyMiddleware(...middleware())),
 );
+
+sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(notificationSaga);
+sagaMiddleware.run(userSaga);
+sagaMiddleware.run(sessionSaga);
+
+export { reduxStore };

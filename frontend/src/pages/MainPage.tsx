@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
 
-const MainPage: React.SFC = () => (
+const MainPage: React.FC = () => (
   <Jumbotron>
     <h1>Welcome!</h1>
     <p>

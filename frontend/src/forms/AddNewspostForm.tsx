@@ -3,14 +3,19 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
-import { any } from "prop-types";
 import { FieldGroup } from "./../components/FieldGroup";
 import { isEmpty } from "./../utils/FormValidators";
 
 const emptyTitle = isEmpty("Title");
 const emptyText = isEmpty("Text");
 
-const AddNewspostForm: React.SFC<any> = ({
+interface Props {
+  handleSubmit: any;
+  handleClose: any;
+  isAdding: boolean;
+}
+
+const AddNewspostForm: React.FC<Props> = ({
   handleSubmit,
   handleClose,
   isAdding,
@@ -40,14 +45,14 @@ const AddNewspostForm: React.SFC<any> = ({
     />
     <Button
       type="button"
-      bsStyle="danger"
+      variant="danger"
       onClick={handleClose}
       disabled={isAdding}
     >
       Cancel
     </Button>
     &nbsp;&nbsp;&nbsp;
-    <Button type="submit" bsStyle="success" disabled={isAdding}>
+    <Button type="submit" variant="success" disabled={isAdding}>
       {isAdding ? "Adding newspost.." : "Add"}
     </Button>
   </form>

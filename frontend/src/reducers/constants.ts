@@ -1,3 +1,6 @@
+// Init app
+export const INIT_APP = "INIT_APP";
+export const SET_APP_LOADED = "SET_APP_LOADED";
 // Newspost reducer
 export const TOGGLE_ADD_NEWSPOST_MODAL = "TOGGLE_ADD_NEWSPOST_MODAL";
 export const TOGGLE_EDIT_NEWSPOST_MODAL = "TOGGLE_EDIT_NEWSPOST_MODAL";
@@ -35,6 +38,11 @@ export const REMOVE_USER = "REMOVE_USER";
 export const SET_USER_DATA = "SET_USER_DATA";
 export const CLEAR_USER_DATA = "CLEAR_USER_DATA";
 export const SET_USER_PERMS = "SET_USER_PERMS";
+export const GET_USER_PERMS = "GET_USER_PERMS";
+export const DELETE_USER = "DELETE_USER";
+export const ADD_USER = "ADD_USER";
+export const FETCH_USERS = "FETCH_USERS";
+export const FETCH_USER_DATA = "FETCH_USER_DATA";
 // Student union
 export const ADD_STUDENT_UNION = "ADD_STUDENT_UNION";
 export const DELETE_STUDENT_UNION = "DELETE_STUDENT_UNION";

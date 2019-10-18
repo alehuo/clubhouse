@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import { ActionType } from "typesafe-actions";
 import * as notificationActions from "./actions/notificationActions";
+import { NotificationType } from "./actions/notificationActions";
 import { ADD_NOTIFICATION, CLEAR_NOTIFICATION } from "./constants";
 
 // Initial notification reducer state
@@ -10,7 +11,7 @@ export interface NotificationState {
 
 export interface Notification {
   readonly id: string;
-  readonly notificationType: string;
+  readonly notificationType: NotificationType;
   readonly text: string;
 }
 
@@ -40,7 +41,7 @@ const notificationReducer: Reducer<NotificationState, NotificationAction> = (
       };
     case CLEAR_NOTIFICATION:
       const notifications = state.notifications.filter(
-        (notification: any) => notification.id !== action.payload.id,
+        (notification) => notification.id !== action.payload.id,
       );
       return { ...{}, ...state, ...{ notifications } };
     default:

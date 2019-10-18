@@ -1,6 +1,6 @@
 import { User } from "@alehuo/clubhouse-shared";
 import React from "react";
-import { Button, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 
 export interface UserData {
   email: string;
@@ -13,25 +13,30 @@ interface Props {
   userData?: User;
 }
 
-const UserInformation: React.SFC<Props> = (props) => {
-  if (!props.userData) {
+const UserInformation: React.FC<Props> = ({ userData }) => {
+  if (!userData) {
     return <div>Failed to display user data</div>;
   }
+  const { email, firstName, lastName, created_at } = userData;
   return (
     <React.Fragment>
       <h2>User information</h2>
       <ListGroup>
-        <ListGroupItem header={<strong>E-mail address</strong>}>
-          {props.userData.email || ""}
-        </ListGroupItem>
-        <ListGroupItem header={<strong>Name</strong>}>
-          {(props.userData.firstName || "") +
-            " " +
-            (props.userData.lastName || "")}
-        </ListGroupItem>
-        <ListGroupItem header={<strong>Registration date</strong>}>
-          {props.userData.created_at || ""}
-        </ListGroupItem>
+        <ListGroup.Item>
+          <b>E-mail address</b>
+          {"  "}
+          {email}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Account owner</b>
+          {"  "}
+          {firstName} {lastName}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Account creation date</b>
+          {"  "}
+          {created_at}
+        </ListGroup.Item>
       </ListGroup>
       <h2>Account removal</h2>
       <p>
@@ -43,7 +48,7 @@ const UserInformation: React.SFC<Props> = (props) => {
         </strong>
       </p>
       <p>
-        <Button bsStyle="danger">Request account removal</Button>
+        <Button variant="danger">Request account removal</Button>
       </p>
       <hr />
       <h2>Download personal information</h2>
@@ -77,7 +82,7 @@ const UserInformation: React.SFC<Props> = (props) => {
         </li>
       </ul>
       <p>
-        <Button bsStyle="success">Download personal information</Button>
+        <Button variant="success">Download personal information</Button>
       </p>
       <hr />
     </React.Fragment>

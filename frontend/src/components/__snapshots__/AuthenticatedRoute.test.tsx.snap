@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthenticatedRoute matches snapshot (authenticated) 1`] = `ShallowWrapper {}`;
+
+exports[`AuthenticatedRoute matches snapshot (not authenticated) 1`] = `ShallowWrapper {}`;

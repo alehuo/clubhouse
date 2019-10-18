@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Button, HelpBlock } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 
 import { KeyType, StudentUnion, User } from "@alehuo/clubhouse-shared";
@@ -9,12 +9,20 @@ import { RootState } from "../reduxStore";
 import { FieldGroup } from "./../components/FieldGroup";
 import { checked } from "./../utils/FormValidators";
 
-const userFilter = (users: any, id: number) => {
-  const user = users.find((usr: any) => Number(usr.userId) === Number(id));
+const userFilter = (users: User[], id: number) => {
+  const user = users.find((usr) => usr.userId === id);
   if (!user) {
     return "N/A";
   }
   return user.firstName + " " + user.lastName;
+};
+
+const showKeyTitle = (keyTypes: KeyType[], selectedKey: number) => {
+  const keyType = keyTypes.find((kt) => kt.keyTypeId === selectedKey);
+  if (keyType !== undefined) {
+    return keyType.title;
+  }
+  return "N/A";
 };
 
 const confirmed = checked("You must have the permission to add a key");
@@ -30,7 +38,7 @@ interface Props {
   studentUnions: StudentUnion[];
 }
 
-const AddKeyHolderForm: React.SFC<Props> = ({
+const AddKeyHolderForm: React.FC<Props> = ({
   handleSubmit,
   users,
   studentUnions,
@@ -41,12 +49,7 @@ const AddKeyHolderForm: React.SFC<Props> = ({
   isAdding,
 }) => (
   <form onSubmit={handleSubmit}>
-    <Field
-      component={FieldGroup}
-      name="user"
-      componentClass="select"
-      label="User"
-    >
+    <Field component={FieldGroup} as="select" name="user" label="User">
       {users &&
         users.map((user) => (
           <option key={user.firstName + user.lastName} value={user.userId}>
@@ -56,8 +59,8 @@ const AddKeyHolderForm: React.SFC<Props> = ({
     </Field>
     <Field
       component={FieldGroup}
+      as="select"
       name="studentUnion"
-      componentClass="select"
       label="Student union"
     >
       {studentUnions &&
@@ -69,8 +72,9 @@ const AddKeyHolderForm: React.SFC<Props> = ({
     </Field>
     <Field
       component={FieldGroup}
+      as="select"
       name="keyType"
-      componentClass="select"
+      id="keyType"
       label="Key type"
     >
       {keyTypes &&
@@ -93,29 +97,23 @@ const AddKeyHolderForm: React.SFC<Props> = ({
       component={FieldGroup}
       validate={[confirmed]}
     />{" "}
-    <HelpBlock>
+    <div>
       By checking this checkbox you agree you have the permission to add the
       following key:
       <p>
         {selectedKey && selectedUser && keyTypes && (
           <span>
-            <b>
-              {keyTypes &&
-                keyTypes.find(
-                  (keyType) => Number(keyType.keyTypeId) === Number(selectedKey),
-                )!.title}{" "}
-              key
-            </b>{" "}
-            for user <b>{userFilter(users, selectedUser)}</b>
+            <b>{keyTypes && showKeyTitle(keyTypes, selectedKey)} key</b> for
+            user <b>{userFilter(users, selectedUser)}</b>
           </span>
         )}
       </p>
-    </HelpBlock>
-    <Button type="button" bsStyle="danger" onClick={handleClose}>
+    </div>
+    <Button type="button" variant="danger" onClick={handleClose}>
       Cancel
     </Button>
     {"   "}
-    <Button type="submit" bsStyle="success">
+    <Button type="submit" variant="success">
       {isAdding ? "Adding key to user..." : "Add"}
     </Button>
   </form>

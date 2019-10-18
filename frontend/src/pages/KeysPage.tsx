@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Button, PageHeader } from "react-bootstrap";
+import { Alert, Button, Container, Jumbotron } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import KeysList from "./../components/KeysList";
@@ -60,35 +60,38 @@ export class KeysPage extends React.Component<Props> {
     }
     return (
       <React.Fragment>
-        <PageHeader>
-          Keys
-          <p>
-            {PermissionUtils.hasPermission(
-              this.props.perms,
-              Permission.ALLOW_ADD_REMOVE_KEYS,
-            ) && (
-              <CustomOverlay id="addKey" text="Add a new keyholder.">
-                <Button
-                  bsStyle="success"
-                  onClick={() => this.props.toggleModal(true)}
+        <Jumbotron>
+          <Container>
+            <h1>Keys</h1>{" "}
+            <p>
+              {PermissionUtils.hasPermission(
+                this.props.perms,
+                Permission.ALLOW_ADD_REMOVE_KEYS,
+              ) && (
+                <CustomOverlay id="addKey" text="Add a new keyholder.">
+                  <Button
+                    variant="success"
+                    onClick={() => this.props.toggleModal(true)}
+                  >
+                    <FontAwesome name="plus" /> Add a keyholder
+                  </Button>
+                </CustomOverlay>
+              )}
+              {"  "}
+              {
+                <CustomOverlay
+                  id="sendEmail"
+                  text="Send an email to all verified keyholders in the system."
                 >
-                  <FontAwesome name="plus" /> Add a keyholder
-                </Button>
-              </CustomOverlay>
-            )}
-            {"  "}
-            {
-              <CustomOverlay
-                id="sendEmail"
-                text="Send an email to all verified keyholders in the system."
-              >
-                <Button bsStyle="info">
-                  <FontAwesome name="envelope" /> Send an email to keyholder(s)
-                </Button>
-              </CustomOverlay>
-            }
-          </p>
-        </PageHeader>
+                  <Button variant="info">
+                    <FontAwesome name="envelope" /> Send an email to
+                    keyholder(s)
+                  </Button>
+                </CustomOverlay>
+              }
+            </p>
+          </Container>
+        </Jumbotron>
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permission.ALLOW_VIEW_KEYS,
@@ -100,7 +103,7 @@ export class KeysPage extends React.Component<Props> {
             users={this.props.users}
           />
         ) : (
-          <Alert bsStyle="warning">
+          <Alert variant="warning">
             <h4>No permission to view keys</h4>
             <p>You don't have correct permissions to view keys.</p>
           </Alert>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, PageHeader } from "react-bootstrap";
+import { Alert, Container, Jumbotron } from "react-bootstrap";
 import { connect } from "react-redux";
 import UsersList from "./../components/UsersList";
 import PermissionUtils from "./../utils/PermissionUtils";
@@ -16,14 +16,18 @@ export class UserListPage extends React.Component<Props> {
   public render() {
     return (
       <React.Fragment>
-        <PageHeader>Users</PageHeader>
+        <Jumbotron>
+          <Container>
+            <h1>Users</h1>
+          </Container>
+        </Jumbotron>
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permission.ALLOW_VIEW_USERS,
         ) ? (
           <UsersList users={this.props.users} />
         ) : (
-          <Alert bsStyle="warning">
+          <Alert variant="warning">
             <h4>No permission to view users</h4>
             <p>You don't have correct permissions to view users.</p>
           </Alert>

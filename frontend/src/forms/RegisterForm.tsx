@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
+import { Button, FormGroup } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 import { FieldGroup } from "./../components/FieldGroup";
 
@@ -19,7 +19,12 @@ const passwordEmpty = isEmpty("Password");
 const passwordValid = passwd(8);
 const check = checked("User permission");
 
-const RegisterForm: React.SFC<any> = (props) => (
+interface Props {
+  handleSubmit: any;
+  isRegistering: boolean;
+}
+
+const RegisterForm: React.FC<Props> = (props) => (
   <form onSubmit={props.handleSubmit}>
     <Field
       name="firstName"
@@ -67,7 +72,7 @@ const RegisterForm: React.SFC<any> = (props) => (
       component={FieldGroup}
       validate={[validatePasswords]}
     />
-    <Well>
+    <div>
       <FormGroup controlId="studentUnionPermission">
         <Field
           name="userPermission"
@@ -79,10 +84,10 @@ const RegisterForm: React.SFC<any> = (props) => (
           I give my consent for the service to store my data to the server as
           said in the privacy policy.
         </b>
-        <HelpBlock>Your answer will be saved.</HelpBlock>
+        <div>Your answer will be saved.</div>
       </FormGroup>
-    </Well>
-    <Button type="submit" bsStyle="success" disabled={props.isRegistering}>
+    </div>
+    <Button type="submit" variant="success" disabled={props.isRegistering}>
       {props.isRegistering ? "Registering user.." : "Register"}
     </Button>
   </form>

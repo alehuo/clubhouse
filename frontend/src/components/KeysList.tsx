@@ -10,13 +10,13 @@ interface Props {
   keyTypes: KeyType[];
 }
 
-const KeyList: React.SFC<Props> = ({
+const KeyList: React.FC<Props> = ({
   keys,
   studentUnions,
   keyTypes,
   users,
 }) => (
-  <Table striped bordered condensed hover responsive>
+  <Table striped bordered hover responsive>
     <thead>
       <tr>
         <th>#</th>
@@ -28,7 +28,7 @@ const KeyList: React.SFC<Props> = ({
       </tr>
     </thead>
     <tbody>
-      {keys ? (
+      {(keys && keys.length > 0) ? (
         keys.map((key) => (
           <tr key={key.keyId}>
             <td>{key.keyId}</td>

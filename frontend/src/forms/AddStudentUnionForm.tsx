@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Button, FormGroup, HelpBlock, Well } from "react-bootstrap";
+import { Button, FormGroup } from "react-bootstrap";
 import { Field, reduxForm } from "redux-form";
 
 import { RootState } from "../reduxStore";
@@ -20,7 +20,7 @@ interface Props {
   isAdding: boolean;
 }
 
-const AddStudentUnionForm: React.SFC<Props> = ({
+const AddStudentUnionForm: React.FC<Props> = ({
   handleSubmit,
   handleClose,
   isAdding,
@@ -47,7 +47,7 @@ const AddStudentUnionForm: React.SFC<Props> = ({
       component={FieldGroup}
       validate={[emptyDesc]}
     />
-    <Well>
+    <div>
       <FormGroup controlId="studentUnionPermission">
         <Field
           name="studentUnionPermission"
@@ -59,23 +59,23 @@ const AddStudentUnionForm: React.SFC<Props> = ({
           I have the permission from the student union to save their information
           to the service
         </b>
-        <HelpBlock>
+        <p>
           Your answer will be saved in case a student union wants to do a data
           request, as required by the European Union General Data Protection
           Regulation.
-        </HelpBlock>
+        </p>
       </FormGroup>
-    </Well>
+    </div>
     <Button
       type="button"
-      bsStyle="danger"
+      variant="danger"
       onClick={handleClose}
       disabled={isAdding}
     >
       Cancel
     </Button>
     &nbsp;&nbsp;&nbsp;
-    <Button type="submit" bsStyle="success" disabled={isAdding}>
+    <Button type="submit" variant="success" disabled={isAdding}>
       {isAdding ? "Adding student union.." : "Add"}
     </Button>
   </form>

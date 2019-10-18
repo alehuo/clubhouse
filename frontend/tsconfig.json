@@ -18,7 +18,8 @@
       "dom",
       "dom.iterable",
       "esnext"
-    ]
+    ],
+    "types": ["react", "jest"]
   },
   "include": [
     "src"
