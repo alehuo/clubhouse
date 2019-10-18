@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+access.log
+.nyc_output
+coverage
+dist
+load-testing
+node_modules
+requests
+.env
+.env.example
+.gitignore
+LICENSE
+yarn-error.log
+build-container.sh
+stop-container.sh
+start-container.sh
