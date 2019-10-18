@@ -13,7 +13,6 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.11.1",
     "chai": "^4.2.0",
-    "husky": "^3.0.9",
     "mocha": "^6.2.1",
     "moment": "^2.24.0",
     "nyc": "^14.1.1",
@@ -50,10 +49,5 @@
       "ts-node/register",
       "source-map-support/register"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn clean && yarn build && yarn test"
-    }
   }
 }
