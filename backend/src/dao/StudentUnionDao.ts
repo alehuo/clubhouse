@@ -9,19 +9,19 @@ const TABLE_NAME = "studentUnions";
 class StudentUnionDao implements Dao<StudentUnion> {
 
   public findAll(): PromiseLike<StudentUnion[]> {
-    return Promise.resolve(knex(TABLE_NAME).select());
+    return Promise.resolve(knex<StudentUnion>(TABLE_NAME).select());
   }
-  public findOne(unionId: number): PromiseLike<StudentUnion> {
+  public findOne(unionId: number): PromiseLike<StudentUnion | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<StudentUnion>(TABLE_NAME)
         .select()
         .where({ unionId })
         .first()
     );
   }
-  public findByName(name: string): PromiseLike<StudentUnion> {
+  public findByName(name: string): PromiseLike<StudentUnion | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<StudentUnion>(TABLE_NAME)
         .select()
         .where({ name })
         .first()
@@ -34,12 +34,12 @@ class StudentUnionDao implements Dao<StudentUnion> {
     }
     stdu.created_at = moment().format(dtFormat);
     stdu.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex(TABLE_NAME).insert(stdu));
+    return Promise.resolve(knex<StudentUnion>(TABLE_NAME).insert(stdu));
   }
 
   public remove(id: number): PromiseLike<number> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<StudentUnion>(TABLE_NAME)
         .delete()
         .where({ unionId: id })
     );

@@ -7,20 +7,20 @@ import Dao from "./Dao";
 const TABLE_NAME = "users";
 
 class UserDao implements Dao<DbUser> {
-  public findAll() {
-    return Promise.resolve(knex(TABLE_NAME).select<DbUser[]>());
+  public findAll(): PromiseLike<DbUser[]> {
+    return Promise.resolve(knex<DbUser>(TABLE_NAME).select());
   }
-  public findOne(userId: number): PromiseLike<DbUser> {
+  public findOne(userId: number): PromiseLike<DbUser | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<DbUser>(TABLE_NAME)
         .select()
         .where({ userId })
         .first()
     );
   }
-  public findByEmail(email: string): PromiseLike<DbUser> {
+  public findByEmail(email: string): PromiseLike<DbUser | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<DbUser>(TABLE_NAME)
         .select()
         .where({ email })
         .first()
@@ -33,7 +33,7 @@ class UserDao implements Dao<DbUser> {
     }
     user.created_at = moment().format(dtFormat);
     user.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex(TABLE_NAME).insert(user));
+    return Promise.resolve(knex<DbUser>(TABLE_NAME).insert(user));
   }
 
   public update(user: DbUser): PromiseLike<boolean> {
@@ -41,7 +41,7 @@ class UserDao implements Dao<DbUser> {
     delete user.userId;
     user.updated_at = moment().format(dtFormat);
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<DbUser>(TABLE_NAME)
         .where({ userId })
         .update(user)
     );
@@ -49,7 +49,7 @@ class UserDao implements Dao<DbUser> {
 
   public remove(userId: number): Promise<number> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<DbUser>(TABLE_NAME)
         .delete()
         .where({ userId })
     );

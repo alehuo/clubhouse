@@ -8,21 +8,21 @@ const TABLE_NAME = "locations";
 
 class LocationDao implements Dao<Location> {
   public findAll(): PromiseLike<Location[]> {
-    return Promise.resolve(knex(TABLE_NAME).select());
+    return Promise.resolve(knex<Location>(TABLE_NAME).select());
   }
 
-  public findOne(locationId: number): PromiseLike<Location> {
+  public findOne(locationId: number): PromiseLike<Location | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Location>(TABLE_NAME)
         .select()
         .where({ locationId })
         .first()
     );
   }
 
-  public findByName(name: string): PromiseLike<Location> {
+  public findByName(name: string): PromiseLike<Location | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Location>(TABLE_NAME)
         .select()
         .where({ name })
         .first()
@@ -35,12 +35,12 @@ class LocationDao implements Dao<Location> {
     }
     location.created_at = moment().format(dtFormat);
     location.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex(TABLE_NAME).insert(location));
+    return Promise.resolve(knex<Location>(TABLE_NAME).insert(location));
   }
 
   public remove(locationId: number): PromiseLike<number> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Location>(TABLE_NAME)
         .delete()
         .where({ locationId })
     );

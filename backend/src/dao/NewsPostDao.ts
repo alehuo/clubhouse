@@ -8,11 +8,11 @@ const TABLE_NAME = "newsposts";
 
 class NewsPostDao implements Dao<Newspost> {
   public findAll(): PromiseLike<Newspost[]> {
-    return Promise.resolve(knex(TABLE_NAME).select());
+    return Promise.resolve(knex<Newspost>(TABLE_NAME).select());
   }
-  public findOne(postId: number): PromiseLike<Newspost> {
+  public findOne(postId: number): PromiseLike<Newspost | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Newspost>(TABLE_NAME)
         .select()
         .where({ postId })
         .first()
@@ -20,7 +20,7 @@ class NewsPostDao implements Dao<Newspost> {
   }
   public findByAuthor(author: number): PromiseLike<Newspost[]> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Newspost>(TABLE_NAME)
         .select()
         .where({ author })
     );
@@ -32,12 +32,12 @@ class NewsPostDao implements Dao<Newspost> {
     }
     newsPost.created_at = moment().format(dtFormat);
     newsPost.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex(TABLE_NAME).insert(newsPost));
+    return Promise.resolve(knex<Newspost>(TABLE_NAME).insert(newsPost));
   }
 
   public remove(postId: number): PromiseLike<number> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Newspost>(TABLE_NAME)
         .delete()
         .where({ postId })
     );

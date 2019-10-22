@@ -8,11 +8,11 @@ const table = "rules";
 
 class RuleDao implements Dao<Rule> {
   public findAll(): PromiseLike<Rule[]> {
-    return Promise.resolve(knex(table).select());
+    return Promise.resolve(knex<Rule>(table).select());
   }
-  public findOne(id: number): PromiseLike<Rule> {
+  public findOne(id: number): PromiseLike<Rule | undefined> {
     return Promise.resolve(
-      knex(table)
+      knex<Rule>(table)
         .select()
         .where({ ruleId: id })
         .first()
@@ -27,7 +27,7 @@ class RuleDao implements Dao<Rule> {
     }
     entity.created_at = moment().format(dtFormat);
     entity.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex(table).insert(entity));
+    return Promise.resolve(knex<Rule>(table).insert(entity));
   }
 }
 

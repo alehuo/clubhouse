@@ -11,18 +11,18 @@ const TABLE_NAME = "sessions";
  */
 class SessionDao implements Dao<Session> {
   public findAll(): PromiseLike<Session[]> {
-    return Promise.resolve(knex(TABLE_NAME).select());
+    return Promise.resolve(knex<Session>(TABLE_NAME).select());
   }
   public findAllOngoing(): PromiseLike<Session[]> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Session>(TABLE_NAME)
         .select()
         .where("ended", "=", 0)
     );
   }
-  public findOne(sessionId: number): PromiseLike<Session> {
+  public findOne(sessionId: number): PromiseLike<Session | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Session>(TABLE_NAME)
         .select()
         .where({ sessionId })
         .first()
@@ -30,7 +30,7 @@ class SessionDao implements Dao<Session> {
   }
   public findOngoingByUser(userId: number): PromiseLike<Session[]> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Session>(TABLE_NAME)
         .select()
         .where({ userId })
         .andWhere("ended", "=", 0)
@@ -38,7 +38,7 @@ class SessionDao implements Dao<Session> {
   }
   public findByUser(userId: number): PromiseLike<Session[]> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Session>(TABLE_NAME)
         .select()
         .where({ userId })
     );
@@ -50,7 +50,7 @@ class SessionDao implements Dao<Session> {
     }
     session.created_at = moment().format(dtFormat);
     session.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex(TABLE_NAME).insert(session));
+    return Promise.resolve(knex<Session>(TABLE_NAME).insert(session));
   }
 
   public endSession(
@@ -59,7 +59,7 @@ class SessionDao implements Dao<Session> {
   ): PromiseLike<number> {
     const currentTimestamp = moment().format(dtFormat);
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Session>(TABLE_NAME)
         .update({
           endTime: currentTimestamp,
           endMessage,
@@ -72,7 +72,7 @@ class SessionDao implements Dao<Session> {
 
   public remove(sessionId: number): PromiseLike<number> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<Session>(TABLE_NAME)
         .delete()
         .where({ sessionId })
     );

@@ -66,6 +66,7 @@
 | 30.12.2018 | 1.0h  | Bug fixes, added Winston to log back-end exceptions                                                                                                                                                                                                                                                                                                       |
 | 19.01.2019 | 0.5h  | Fixed an issue where exported timestamp format in index.js would cause the server to fire up in port 8080 and cause a failure when seeding the database.                                                                                                                                                                                                  |
 | 18.10.2019 | 1.5h  | Refactor folder structure. Upgrade dependencies.                                                                                                                                                                                                                                                                                                          |
+| 22.10.2019 | 1.0h  | Improve DAO Knex query return types                                                                                                                                                                                                                                                                                                                       |
 
 Total:
 
@@ -73,4 +74,4 @@ Total:
 
 54.2 h (part 2)
 
-1.5 h (post-course)
+2.5 h (post-course)

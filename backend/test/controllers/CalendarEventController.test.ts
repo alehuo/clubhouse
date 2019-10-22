@@ -64,6 +64,10 @@ describe("CalendarEventController", () => {
   it("Returns a single calendar event", async () => {
     const calendarEvent = await CalendarEventDao.findOne(1);
 
+    if (calendarEvent === undefined) {
+      throw new Error("Calendar event is undefined");
+    }
+
     const res = await chai
       .request(app)
       .get(calendarUrl + "/1")
@@ -97,6 +101,9 @@ describe("CalendarEventController", () => {
 
   it("Returns a single calendar event as iCal", async () => {
     const calendarEvent = await CalendarEventDao.findOne(1);
+    if (calendarEvent === undefined) {
+      throw new Error("Calendar event is undefined");
+    }
     const mockDate = moment(new Date(2015, 1, 1)).toISOString();
     const calendarEventString = await createICal(
       calendarEvent,

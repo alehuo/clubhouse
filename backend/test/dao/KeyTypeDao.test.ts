@@ -85,6 +85,9 @@ describe("KeyTypeDao", () => {
   describe("findOne()", () => {
     it("Returns a single key type", async () => {
       const res = await keyTypeDao.findOne(1);
+      if (res === undefined) {
+        throw new Error("KeyType is undefined");
+      }
       const keyType: KeyType = { ...res };
       const dbKey = dbKeyTypes.find((keyType) => keyType.keyTypeId === 1);
       dbKey!.should.not.equal(null);
@@ -118,6 +121,9 @@ describe("KeyTypeDao", () => {
       keyTypes2.length.should.equal(4);
 
       const res = await keyTypeDao.findOne(4);
+      if (res === undefined) {
+        throw new Error("KeyType is undefined");
+      }
       const keyType: KeyType = { ...res };
 
       should.exist(keyType.created_at);
@@ -136,6 +142,9 @@ describe("KeyTypeDao", () => {
   describe("update()", () => {
     it("Updates a single key type", async () => {
       const res = await keyTypeDao.findOne(1);
+      if (res === undefined) {
+        throw new Error("KeyType is undefined");
+      }
       const key: KeyType = { ...res };
       key.title.should.not.equal("Updated title");
       key.title = "Updated title";
@@ -143,6 +152,9 @@ describe("KeyTypeDao", () => {
       await keyTypeDao.update(key);
 
       const res2 = await keyTypeDao.findOne(1);
+      if (res2 === undefined) {
+        throw new Error("KeyType is undefined");
+      }
       const key2: KeyType = { ...res2 };
       key2.title.should.equal("Updated title");
       // key.updated_at.should.not.equal(key2.updated_at);

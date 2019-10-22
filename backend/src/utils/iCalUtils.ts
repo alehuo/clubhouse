@@ -37,6 +37,9 @@ export const createICal = async (
   iCalData += "DESCRIPTION: " + data.description + "\r\n";
   if (data.locationId !== undefined) {
     const location = await locationDao.findOne(data.locationId);
+    if (location === undefined) {
+      throw new Error("Location is undefined");
+    }
     iCalData += "LOCATION: " + location.address.trim() + "\r\n";
   }
   iCalData += "CLASS:PRIVATE\r\n";
@@ -81,6 +84,9 @@ export const createICalStream = async (
     iCalData += "DESCRIPTION: " + event.description + "\r\n";
     if (event.locationId !== undefined) {
       const location = await locationDao.findOne(event.locationId);
+      if (location === undefined) {
+        throw new Error("Location is undefined");
+      }
       iCalData += "LOCATION: " + location.address.trim() + "\r\n";
     }
     iCalData += "CLASS:PRIVATE\r\n";

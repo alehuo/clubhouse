@@ -220,6 +220,11 @@ class UserController extends Controller {
             const result = await UserDao.update(user);
             if (result) {
               const updatedUser = await UserDao.findOne(userId);
+              if (updatedUser === undefined) {
+                return res
+                  .status(StatusCode.INTERNAL_SERVER_ERROR)
+                  .json(MessageFactory.createError("Update failed"));
+              }
               return res
                 .status(StatusCode.OK)
                 .json(
@@ -357,6 +362,11 @@ class UserController extends Controller {
 
             const savedUser = await UserDao.save(userToSave);
             const savedDbUser = await UserDao.findOne(savedUser[0]);
+            if (savedDbUser === undefined) {
+              return res
+                .status(StatusCode.INTERNAL_SERVER_ERROR)
+                .json(MessageFactory.createError("Saved user not found"));
+            }
 
             return res
               .status(StatusCode.CREATED)

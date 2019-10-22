@@ -1,6 +1,6 @@
 import { KeyType } from "@alehuo/clubhouse-shared";
-import knex from "../Database";
 import moment from "moment";
+import knex from "../Database";
 import { dtFormat } from "../utils/DtFormat";
 import Dao from "./Dao";
 
@@ -8,11 +8,11 @@ const TABLE_NAME = "keyTypes";
 
 class KeyTypeDao implements Dao<KeyType> {
   public findAll(): PromiseLike<KeyType[]> {
-    return Promise.resolve(knex(TABLE_NAME).select());
+    return Promise.resolve(knex<KeyType>(TABLE_NAME).select());
   }
-  public findOne(id: number): PromiseLike<KeyType> {
+  public findOne(id: number): PromiseLike<KeyType | undefined> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<KeyType>(TABLE_NAME)
         .select()
         .where({ keyTypeId: id })
         .first()
@@ -20,7 +20,7 @@ class KeyTypeDao implements Dao<KeyType> {
   }
   public remove(id: number): PromiseLike<number> {
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<KeyType>(TABLE_NAME)
         .delete()
         .where({ keyTypeId: id })
     );
@@ -30,7 +30,7 @@ class KeyTypeDao implements Dao<KeyType> {
     delete entity.keyTypeId;
     entity.updated_at = moment().format(dtFormat);
     return Promise.resolve(
-      knex(TABLE_NAME)
+      knex<KeyType>(TABLE_NAME)
         .update(entity)
         .where({ keyTypeId: id })
     );
@@ -39,8 +39,8 @@ class KeyTypeDao implements Dao<KeyType> {
     delete entity.keyTypeId;
     entity.created_at = moment().format(dtFormat);
     entity.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex(TABLE_NAME).insert(entity));
+    return Promise.resolve(knex<KeyType>(TABLE_NAME).insert(entity));
   }
 }
 
-export default new KeyTypeDao()
+export default new KeyTypeDao();

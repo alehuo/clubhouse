@@ -99,6 +99,12 @@ class MessageController extends Controller {
 
           const user = await UserDao.findOne(userId);
 
+          if (user === undefined) {
+            return res
+              .status(StatusCode.INTERNAL_SERVER_ERROR)
+              .json(MessageFactory.createError("User not found"));
+          }
+
           // TODO: Websocket integration
 
           const emailTitle =

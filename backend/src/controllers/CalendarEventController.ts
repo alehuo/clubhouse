@@ -143,27 +143,25 @@ class CalendarEventController extends Controller {
         const event = await CalendarEventDao.findOne(
           Number(req.params.eventId)
         );
+        if (event === undefined) {
+          return res
+            .status(StatusCode.NOT_FOUND)
+            .json(MessageFactory.createError("Calendar event not found"));
+        }
         if (!isCalendarEvent(event)) {
           return res
             .status(StatusCode.INTERNAL_SERVER_ERROR)
             .json(MessageFactory.createModelValidationError("CalendarEvent"));
         }
-
-        if (!event) {
-          return res
-            .status(StatusCode.NOT_FOUND)
-            .json(MessageFactory.createError("Calendar event not found"));
-        } else {
-          return res
-            .status(StatusCode.OK)
-            .json(
-              MessageFactory.createResponse<CalendarEvent>(
-                true,
-                "Succesfully fetched single calendar event",
-                event
-              )
-            );
-        }
+        return res
+          .status(StatusCode.OK)
+          .json(
+            MessageFactory.createResponse<CalendarEvent>(
+              true,
+              "Succesfully fetched single calendar event",
+              event
+            )
+          );
       } catch (ex) {
         logger.error(ex);
         return res

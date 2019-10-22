@@ -163,6 +163,12 @@ class SessionController extends Controller {
 
           const user = await UserDao.findOne(userId);
 
+          if (user === undefined) {
+            return res
+              .status(StatusCode.INTERNAL_SERVER_ERROR)
+              .json(MessageFactory.createError("User not found"));
+          }
+
           await SessionDao.save(session);
 
           const title =
@@ -273,6 +279,12 @@ class SessionController extends Controller {
           await SessionDao.endSession(currentSession.sessionId, endMessage);
 
           const user = await UserDao.findOne(userId);
+
+          if (user === undefined) {
+            return res
+              .status(StatusCode.INTERNAL_SERVER_ERROR)
+              .json(MessageFactory.createError("User not found"));
+          }
 
           const title =
             (process.env.MAIL_PREFIX

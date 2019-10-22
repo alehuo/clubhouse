@@ -7,9 +7,9 @@ class StatisticsDao implements Dao<Statistics> {
     throw new Error("Not implemented");
   }
 
-  public findStatistics(): PromiseLike<Statistics[]> {
+  public findStatistics(): PromiseLike<Statistics> {
     return Promise.resolve(
-      knex.raw(
+      knex.raw<Statistics>(
         "SELECT (SELECT COUNT(*) from users) AS userCount, " +
           "(SELECT COUNT(*) from calendarEvents) AS eventCount, " +
           "(SELECT COUNT(*) from newsposts) AS newspostCount, " +
@@ -20,9 +20,9 @@ class StatisticsDao implements Dao<Statistics> {
     );
   }
 
-  public findStatisticsFromUser(userId: number): PromiseLike<UserStatistics[]> {
+  public findStatisticsFromUser(userId: number): PromiseLike<UserStatistics> {
     return Promise.resolve(
-      knex.raw(
+      knex.raw<UserStatistics>(
         "SELECT (SELECT COUNT(*) from calendarEvents WHERE addedBy = :userId) AS eventCount, " +
           "(SELECT COUNT(*) from newsposts WHERE author = :userId) AS newspostCount, " +
           "(SELECT COALESCE(SUM((endTime - startTime) / (1000.0 * 60 * 60)),0)" +

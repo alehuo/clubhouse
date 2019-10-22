@@ -1,4 +1,5 @@
 import { isStatistics, Statistics } from "@alehuo/clubhouse-shared";
+import { isUserStatistics } from "@alehuo/clubhouse-shared/dist/Validators";
 import StatisticsDao from "../dao/StatisticsDao";
 import UserDao from "../dao/UserDao";
 import { logger } from "../logger";
@@ -18,14 +19,14 @@ class StatisticsController extends Controller {
     this.router.get("", JWTMiddleware, async (req, res) => {
       try {
         const result = await StatisticsDao.findStatistics();
-        if (!isStatistics(result[0])) {
+        if (!isStatistics(result)) {
           return res
             .status(StatusCode.INTERNAL_SERVER_ERROR)
             .json(MessageFactory.createModelValidationError("Statistics"));
         }
         return res
           .status(StatusCode.OK)
-          .json(MessageFactory.createResponse<Statistics>(true, "", result[0]));
+          .json(MessageFactory.createResponse<Statistics>(true, "", result));
       } catch (err) {
         logger.error(err);
         return res
@@ -51,7 +52,13 @@ class StatisticsController extends Controller {
           Number(req.params.userId)
         );
 
-        if (result && result.length === 1) {
+        if (!isUserStatistics(result)) {
+          return res
+            .status(StatusCode.INTERNAL_SERVER_ERROR)
+            .json(MessageFactory.createModelValidationError("UserStatistics"));
+        }
+
+        if (result) {
           return res.status(StatusCode.OK).json(result);
         } else {
           return res
