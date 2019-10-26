@@ -50,6 +50,7 @@
 | 26.6.2019  | 2.0h  | Update dependencies, code refactoring. Create some tests for Root and Session reducers.                                                                                                                                                                           |
 | 28.6.2019  | 0.1h  | Modify .travis.yml and Now.sh deployment configs                                                                                                                                                                                                                  |
 | 21.10.2019 | 0.2h  | Upgrade dependencies                                                                                                                                                                                                                                              |
+| 26.10.2019 | 0.3h  | Fix monorepo configuration                                                                                                                                                                                                                                        |
 
 Total:
 
@@ -57,4 +58,4 @@ Total:
 
 29.5 h (Part 2)
 
-10.13h (Post-course)
+10.6h (Post-course)
