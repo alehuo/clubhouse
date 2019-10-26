@@ -1,5 +1,5 @@
 FROM node:10-alpine AS build
-WORKDIR /srv
+WORKDIR /data
 RUN apk add --no-cache --virtual .gyp \
         python \
         make \
@@ -12,5 +12,5 @@ COPY shared ./shared
 RUN yarn install --frozen-lockfile && \
     apk del .gyp
 
-WORKDIR /srv/backend
+WORKDIR /data/backend
 CMD [ "yarn", "start" ]

@@ -16,7 +16,7 @@ services:
     ports:
       - 8081:8080
   clubhouse-backend:
-    container_name: "clubhouse-backend"
+    container_name: "clubhouse-backend-dev"
     build:
       context: .
       shm_size: 1G
@@ -26,11 +26,11 @@ services:
     depends_on:
       - mysli
     volumes:
-      - ./backend/src:/srv/backend/src
-      - ./backendtest:/srv/backend/test
-      - ./backend/seeds:/srv/backend/seeds
-      - ./backend/migrations:/srv/backend/migrations
-      - ./backend/knexfile.ts:/srv/backend/knexfile.ts
+      - ./backend/src:/data/backend/src
+      - ./backend/test:/data/backend/test
+      - ./backend/seeds:/data/backend/seeds
+      - ./backend/migrations:/data/backend/migrations
+      - ./backend/knexfile.ts:/data/backend/knexfile.ts
     command: yarn start
     environment:
       - NODE_ENV=development
@@ -56,3 +56,15 @@ services:
       - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
       - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
       - SPOTIFY_REDIRECT_URL=${SPOTIFY_REDIRECT_URL}
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend-dev.dockerfile
+      shm_size: 1G
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/data/frontend/src
+      - ./frontend/public:/data/frontend/public
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:3000
