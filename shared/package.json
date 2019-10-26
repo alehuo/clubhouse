@@ -4,7 +4,6 @@
   "description": "Shared libraries for Clubhouse front-end and back-end.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "repository": "https://github.com/alehuo/clubhouse-shared",
   "author": "alehuo",
   "license": "MIT",
   "private": true,
