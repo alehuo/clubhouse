@@ -1,16 +1,19 @@
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
-import { AppCrashHandler } from "./components/AppCrashHandler";
 import { reduxStore } from "./reduxStore";
 import * as serviceWorker from "./serviceWorker";
+import theme from "./theme";
 
 ReactDOM.render(
   <Provider store={reduxStore}>
-    <AppCrashHandler>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <App />
-    </AppCrashHandler>
+    </ThemeProvider>
   </Provider>,
   document.getElementById("root"),
 );

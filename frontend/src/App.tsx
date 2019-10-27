@@ -1,3 +1,4 @@
+import Container from "@material-ui/core/Container";
 import moment from "moment";
 import "moment/locale/fi";
 import React, { useEffect } from "react";
@@ -7,17 +8,15 @@ import { LinkContainer } from "react-router-bootstrap";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Dispatch } from "redux";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
-import { Container } from "./components/Container";
 import CustomOverlay from "./components/CustomOverlay";
 import { LoadingScreen } from "./components/LoadingScreen";
-import { Navigation } from "./components/Navigation";
+import NavigationBar from "./components/NavigationBar";
 import NotificationDrawer from "./components/NotificationDrawer";
-import { navButtons } from "./navButtons";
 import CalendarPage from "./pages/CalendarPage";
 import KeysPage from "./pages/KeysPage";
-import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import MainPage from "./pages/MainPage";
+import NewLoginPage from "./pages/NewLoginPage";
 import NewsPage from "./pages/NewsPage";
 import RegisterPage from "./pages/RegisterPage";
 import RulesPage from "./pages/RulesPage";
@@ -30,6 +29,64 @@ import { RootAction } from "./reducers/rootReducer";
 import { RootState } from "./reduxStore";
 moment.locale("fi");
 
+const SessionNotification: React.FC = () => {
+  const sessionPage = useSelector(
+    (state: RootState) => state.session.sessionPage,
+  );
+  const sessionRunning = useSelector(
+    (state: RootState) => state.session.ownSessionRunning,
+  );
+  const peopleCount = useSelector(
+    (state: RootState) => state.session.ownSessionPeopleCount,
+  );
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
+
+  if (sessionPage) {
+    return null;
+  }
+  if (!isAuthenticated) {
+    return null;
+  }
+  if (!sessionRunning) {
+    return null;
+  }
+  return (
+    <Alert variant="info">
+      <h5>
+        {peopleCount > 0 && (
+          <React.Fragment>
+            You are currently in an ongoing session.
+          </React.Fragment>
+        )}
+        <br />
+        <br />
+        <LinkContainer to="/session">
+          <CustomOverlay
+            id="currentSessionInfo"
+            text="View current session info."
+          >
+            <Button variant="primary">View current session</Button>
+          </CustomOverlay>
+        </LinkContainer>
+      </h5>
+    </Alert>
+  );
+};
+
+const withContainer = <P extends object>(
+  Component: React.ComponentType<P>,
+): React.FC<P> => (props: P) => (
+  <>
+    <NavigationBar />
+    <SessionNotification />
+    <Container>
+      <Component {...props} />
+    </Container>
+  </>
+);
+
 const App: React.FC = () => {
   const dispatch = useDispatch<Dispatch<RootAction>>();
 
@@ -41,16 +98,6 @@ const App: React.FC = () => {
   const isAuthenticated = token !== "";
 
   const appLoading = useSelector((state: RootState) => state.root.appLoading);
-  const userData = useSelector((state: RootState) => state.user.userData);
-  const sessionPage = useSelector(
-    (state: RootState) => state.session.sessionPage,
-  );
-  const sessionRunning = useSelector(
-    (state: RootState) => state.session.ownSessionRunning,
-  );
-  const peopleCount = useSelector(
-    (state: RootState) => state.session.ownSessionPeopleCount,
-  );
 
   if (appLoading) {
     return <LoadingScreen />;
@@ -58,68 +105,44 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <Navigation
-        isAuthenticated={isAuthenticated}
-        navButtons={navButtons}
-        userData={userData}
-      />
-      <Container className="container" style={{ paddingTop: 30 }}>
-        <NotificationDrawer />
-        {!(sessionPage || !isAuthenticated) && sessionRunning && (
-          <Alert variant="info">
-            <h5>
-              {peopleCount > 0 && (
-                <React.Fragment>
-                  You are currently in an ongoing session.
-                </React.Fragment>
-              )}
-              <br />
-              <br />
-              <LinkContainer to="/session">
-                <CustomOverlay
-                  id="currentSessionInfo"
-                  text="View current session info."
-                >
-                  <Button variant="primary">View current session</Button>
-                </CustomOverlay>
-              </LinkContainer>
-            </h5>
-          </Alert>
-        )}
-        <React.Fragment>
-          <Route exact path="/" component={MainPage} />
-          <Route exact path="/studentunions" component={StudentUnionsPage} />
-          <Route exact path="/keys" token={token} component={KeysPage} />
-          <Route exact path="/calendar" component={CalendarPage} />
-          <Route exact path="/rules" component={RulesPage} />
-          <Route exact path="/news" component={NewsPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
-          <AuthenticatedRoute
-            isAuthenticated={isAuthenticated}
-            exact
-            path="/session"
-            component={Session}
-          />
-          <AuthenticatedRoute
-            isAuthenticated={isAuthenticated}
-            exact
-            path="/logout"
-            component={LogoutPage}
-          />
-          <AuthenticatedRoute
-            isAuthenticated={isAuthenticated}
-            path="/user"
-            component={UserProfilePage}
-          />
-          <AuthenticatedRoute
-            isAuthenticated={isAuthenticated}
-            exact
-            path="/users"
-            component={UserListPage}
-          />
-        </React.Fragment>
-      </Container>
+      <NotificationDrawer />
+      <React.Fragment>
+        <Route exact path="/" component={withContainer(MainPage)} />
+        <Route
+          exact
+          path="/studentunions"
+          component={withContainer(StudentUnionsPage)}
+        />
+        <Route exact path="/keys" component={withContainer(KeysPage)} />
+        <Route exact path="/calendar" component={withContainer(CalendarPage)} />
+        <Route exact path="/rules" component={withContainer(RulesPage)} />
+        <Route exact path="/news" component={withContainer(NewsPage)} />
+        <Route exact path="/login" component={NewLoginPage} />
+        <Route exact path="/register" component={RegisterPage} />
+        <AuthenticatedRoute
+          isAuthenticated={isAuthenticated}
+          exact
+          path="/session"
+          component={withContainer(Session)}
+        />
+        <AuthenticatedRoute
+          isAuthenticated={isAuthenticated}
+          exact
+          path="/logout"
+          component={LogoutPage}
+        />
+        <AuthenticatedRoute
+          isAuthenticated={isAuthenticated}
+          path="/user"
+          component={withContainer(UserProfilePage)}
+        />
+        <AuthenticatedRoute
+          isAuthenticated={isAuthenticated}
+          exact
+          path="/users"
+          component={withContainer(UserListPage)}
+        />
+      </React.Fragment>
     </Router>
   );
 };
