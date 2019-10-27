@@ -1,6 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Alert, Button, Container, Jumbotron } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import KeysList from "./../components/KeysList";
 import { toggleModal } from "./../reducers/actions/keyActions";
@@ -73,7 +73,7 @@ export class KeysPage extends React.Component<Props> {
                     variant="success"
                     onClick={() => this.props.toggleModal(true)}
                   >
-                    <FontAwesome name="plus" /> Add a keyholder
+                    <FontAwesomeIcon icon="plus" /> Add a keyholder
                   </Button>
                 </CustomOverlay>
               )}
@@ -84,7 +84,7 @@ export class KeysPage extends React.Component<Props> {
                   text="Send an email to all verified keyholders in the system."
                 >
                   <Button variant="info">
-                    <FontAwesome name="envelope" /> Send an email to
+                    <FontAwesomeIcon icon="envelope" /> Send an email to
                     keyholder(s)
                   </Button>
                 </CustomOverlay>

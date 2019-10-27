@@ -1,4 +1,6 @@
 import createSagaMiddleware from "@redux-saga/core";
+import { connectRouter, routerMiddleware } from "connected-react-router";
+import { createBrowserHistory, History } from "history";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
@@ -20,7 +22,7 @@ import rootSaga from "./sagas/RootSaga";
 import sessionSaga from "./sagas/SessionSaga";
 import userSaga from "./sagas/UserSaga";
 
-const reducerObj = {
+const reducerObj = (history: History) => ({
   root: rootReducer,
   calendar: calendarReducer,
   auth: authenticationReducer,
@@ -32,31 +34,31 @@ const reducerObj = {
   form: formReducer,
   rule: ruleReducer,
   news: newsReducer,
-};
+  router: connectRouter(history),
+});
 
-// Combine reducers
-const reducer = combineReducers(reducerObj);
+const reducer = (history: History) => combineReducers(reducerObj(history));
 
-export type RootState = StateType<typeof reducer>;
+const history = createBrowserHistory();
+export type RootState = StateType<ReturnType<typeof reducer>>;
 
 const sagaMiddleware = createSagaMiddleware();
 
-// Middlewares for different environments
 const middleware = () => {
   switch (process.env.NODE_ENV) {
     case "production":
-      return [thunk, sagaMiddleware];
+      return [thunk, sagaMiddleware, routerMiddleware(history)];
     case "development":
-      return [thunk, sagaMiddleware, logger];
+      return [thunk, sagaMiddleware, routerMiddleware(history), logger];
     case "test":
-      return [thunk, sagaMiddleware];
+      return [thunk, sagaMiddleware, routerMiddleware(history)];
     default:
-      return [thunk, sagaMiddleware];
+      return [thunk, sagaMiddleware, routerMiddleware(history)];
   }
 };
-// Create store
+
 const reduxStore = createStore(
-  reducer,
+  reducer(history),
   composeWithDevTools(applyMiddleware(...middleware())),
 );
 
@@ -65,4 +67,4 @@ sagaMiddleware.run(notificationSaga);
 sagaMiddleware.run(userSaga);
 sagaMiddleware.run(sessionSaga);
 
-export { reduxStore };
+export { reduxStore, history };

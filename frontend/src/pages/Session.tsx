@@ -1,7 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React from "react";
 import { Badge, Button, Card, Container, Jumbotron } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import CustomOverlay from "../components/CustomOverlay";
 import {
@@ -131,7 +131,7 @@ export class Session extends React.Component<Props> {
                     variant="warning"
                     onClick={() => this.props.toggleEndSessionModal(true)}
                   >
-                    <FontAwesome name="hourglass" /> End session
+                    <FontAwesomeIcon icon="hourglass" /> End session
                   </Button>
                 </CustomOverlay>
               )}
@@ -144,7 +144,7 @@ export class Session extends React.Component<Props> {
                     variant="success"
                     onClick={() => this.props.toggleStartSessionModal(true)}
                   >
-                    <FontAwesome name="play" /> Start session
+                    <FontAwesomeIcon icon="play" /> Start session
                   </Button>
                 </CustomOverlay>
               )}
@@ -154,7 +154,7 @@ export class Session extends React.Component<Props> {
                 text="Sends a message to all verified keyholders."
               >
                 <Button variant="info">
-                  <FontAwesome name="envelope" /> Send message
+                  <FontAwesomeIcon icon="envelope" /> Send message
                 </Button>
               </CustomOverlay>
             </p>

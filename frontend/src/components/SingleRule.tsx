@@ -1,7 +1,7 @@
 import { Rule } from "@alehuo/clubhouse-shared";
 import React from "react";
 import { Button } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomOverlay from "./CustomOverlay";
 
 interface Props {
@@ -38,7 +38,7 @@ export const SingleRule: React.FC<Props> = ({
             text="Edit the currently selected rule."
           >
             <Button variant="success" size="sm">
-              <FontAwesome name="edit" /> Edit
+              <FontAwesomeIcon icon="edit" /> Edit
             </Button>
           </CustomOverlay>
         </td>
@@ -53,7 +53,7 @@ export const SingleRule: React.FC<Props> = ({
               disabled={canMoveUp}
               onClick={onMoveUpClick}
             >
-              <FontAwesome name="arrow-up" /> Move up
+              <FontAwesomeIcon icon="arrow-up" /> Move up
             </Button>
           </CustomOverlay>
         </td>
@@ -68,7 +68,7 @@ export const SingleRule: React.FC<Props> = ({
               disabled={canMoveDown}
               onClick={onMoveDownClick}
             >
-              <FontAwesome name="arrow-down" /> Move down
+              <FontAwesomeIcon icon="arrow-down" /> Move down
             </Button>
           </CustomOverlay>
         </td>
@@ -78,7 +78,7 @@ export const SingleRule: React.FC<Props> = ({
             text="Delete the currently selected rule."
           >
             <Button variant="danger" size="sm">
-              <FontAwesome name="trash-alt" /> Delete
+              <FontAwesomeIcon icon="trash-alt" /> Delete
             </Button>
           </CustomOverlay>
         </td>

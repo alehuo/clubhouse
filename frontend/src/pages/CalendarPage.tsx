@@ -1,14 +1,14 @@
 import { CalendarEvent, Permission } from "@alehuo/clubhouse-shared";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 // @ts-ignore
 import { Calendar } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Button, Container, Jumbotron } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import CustomOverlay from "../components/CustomOverlay";
 import { RootState } from "../reduxStore";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import { fetchEvents } from "./../reducers/actions/calendarActions";
 import { eventMapper } from "./../services/CalendarService";
 import PermissionUtils from "./../utils/PermissionUtils";
@@ -44,7 +44,7 @@ class CalendarPage extends React.Component<Props> {
                   text="Add a new calendar event."
                 >
                   <Button variant="success">
-                    <FontAwesome name="plus" /> Add an event
+                    <FontAwesomeIcon icon="plus" /> Add an event
                   </Button>
                 </CustomOverlay>
               )}

@@ -1,5 +1,6 @@
+import { faGoogle, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "@material-ui/core/Avatar";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,19 +12,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import React from "react";
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-
-const Copyright: React.FC = () => (
-  <Typography variant="body2" color="textSecondary" align="center">
-    {"Copyright © "}
-    <Link color="inherit" href="https://github.com/alehuo/clubhouse">
-      Clubhouse
-    </Link>{" "}
-    {new Date().getFullYear()}
-    {"."}
-  </Typography>
-);
+import { login } from "../reducers/actions/userActions";
+import { RootState } from "../reduxStore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,6 +49,19 @@ const useStyles = makeStyles((theme) => ({
 
 const NewLoginPage: React.FC = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const isLoggingIn = useSelector((state: RootState) => state.auth.isLoggingIn);
+
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(login(email, password, rememberMe));
+    },
+    [email, password, rememberMe, dispatch],
+  );
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -69,7 +75,7 @@ const NewLoginPage: React.FC = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -80,6 +86,9 @@ const NewLoginPage: React.FC = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={isLoggingIn}
             />
             <TextField
               variant="outlined"
@@ -91,9 +100,20 @@ const NewLoginPage: React.FC = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoggingIn}
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  disabled={isLoggingIn}
+                />
+              }
               label="Remember me"
             />
             <Button
@@ -102,6 +122,7 @@ const NewLoginPage: React.FC = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={isLoggingIn}
             >
               Sign In
             </Button>
@@ -121,9 +142,21 @@ const NewLoginPage: React.FC = () => {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
+            <hr />
+            <Grid container justify="center" spacing={3}>
+              <Grid item>
+                <Button type="button" variant="contained" color="secondary">
+                  <FontAwesomeIcon icon={faGoogle} />
+                  &nbsp;&nbsp;Sign In with Google
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button type="button" variant="contained" color="secondary">
+                  <FontAwesomeIcon icon={faMicrosoft} />
+                  &nbsp;&nbsp;Sign In with Microsoft
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </div>
       </Grid>

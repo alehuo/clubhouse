@@ -1,6 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Alert, Button, Container, Jumbotron } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import StudentUnionsList from "./../components/StudentUnionsList";
 import {
@@ -46,7 +46,7 @@ export class StudentUnionsPage extends React.Component<Props> {
                   variant="success"
                   onClick={() => this.props.addFormModalOpen(true)}
                 >
-                  <FontAwesome name="plus" /> Add a student union
+                  <FontAwesomeIcon icon="plus" /> Add a student union
                 </Button>
               )}
             </p>

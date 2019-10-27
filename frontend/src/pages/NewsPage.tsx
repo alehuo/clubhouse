@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import NewsPost from "../components/NewsPost";
 import PermissionUtils from "./../utils/PermissionUtils";
 
-import FontAwesome from "react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Newspost, Permission } from "@alehuo/clubhouse-shared";
 import {
@@ -51,7 +51,7 @@ export class NewsPage extends React.Component<Props> {
                   variant="success"
                   onClick={() => this.props.toggleNewsAddModal(true)}
                 >
-                  <FontAwesome name="plus" /> Add an article
+                  <FontAwesomeIcon icon="plus" /> Add an article
                 </Button>
               )}
             </p>

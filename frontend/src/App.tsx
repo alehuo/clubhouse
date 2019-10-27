@@ -26,7 +26,8 @@ import UserListPage from "./pages/UserListPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import { initApp } from "./reducers/actions/rootActions";
 import { RootAction } from "./reducers/rootReducer";
-import { RootState } from "./reduxStore";
+import { RootState, history } from "./reduxStore";
+import { ConnectedRouter } from "connected-react-router";
 moment.locale("fi");
 
 const SessionNotification: React.FC = () => {
@@ -104,7 +105,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <Router>
+    <ConnectedRouter history={history}>
       <NotificationDrawer />
       <React.Fragment>
         <Route exact path="/" component={withContainer(MainPage)} />
@@ -143,7 +144,7 @@ const App: React.FC = () => {
           component={withContainer(UserListPage)}
         />
       </React.Fragment>
-    </Router>
+    </ConnectedRouter>
   );
 };
 

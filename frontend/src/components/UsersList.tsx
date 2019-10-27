@@ -1,12 +1,11 @@
+import { Permission, User } from "@alehuo/clubhouse-shared";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from "react";
 import { Button, Table } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
+import { RootState } from "../reduxStore";
 import { deleteUser, fetchUsers } from "./../reducers/actions/userActions";
 import PermissionUtils from "./../utils/PermissionUtils";
-
-import { Permission, User } from "@alehuo/clubhouse-shared";
-import { RootState } from "../reduxStore";
 
 interface Props {
   token: string;
@@ -68,7 +67,7 @@ export class UsersList extends React.Component<Props> {
                           }
                         }}
                       >
-                        <FontAwesome name="trash" /> Delete
+                        <FontAwesomeIcon icon="trash" /> Delete
                       </Button>
                     )}
                   </td>

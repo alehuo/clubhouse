@@ -1,4 +1,5 @@
 import { ApiResponse, isString, isUser } from "@alehuo/clubhouse-shared";
+import { push } from "connected-react-router";
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
   authenticateUser,
@@ -9,9 +10,7 @@ import {
   errorMessage,
   successMessage,
 } from "../reducers/actions/notificationActions";
-import {
-  fetchOwnSessionStatus,
-} from "../reducers/actions/sessionActions";
+import { fetchOwnSessionStatus } from "../reducers/actions/sessionActions";
 import {
   addUser,
   deleteUser,
@@ -55,6 +54,7 @@ function* userSaga_login(action: ReturnType<typeof login>) {
       yield put(setUserData(userdata.payload));
       yield put(authenticateUser());
       yield put(successMessage("Successfully logged in"));
+      yield put(push("/"));
     } else {
       yield put(errorMessage("Response payload was undefined."));
     }

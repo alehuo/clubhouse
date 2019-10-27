@@ -2,7 +2,7 @@ import React from "react";
 import FontAwesome from "react-fontawesome";
 import styled from "styled-components";
 
-const bugReportUrl = "https://github.com/alehuo/clubhouse-frontend/issues/new";
+const bugReportUrl = "https://github.com/alehuo/clubhouse/issues/new";
 
 const AppCrashScreenWrapper = styled.div`
   height: 100vh;

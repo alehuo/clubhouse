@@ -2,7 +2,7 @@ import { Newspost } from "@alehuo/clubhouse-shared";
 import moment from "moment";
 import React from "react";
 import { Button, Card } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface Props {
   date?: string;
@@ -33,11 +33,11 @@ const NewsPost: React.FC<
       {hasEditDeletePermissions && (
         <Card.Text>
           <Button variant="danger" onClick={onDelete}>
-            <FontAwesome name="trash" /> Delete
+            <FontAwesomeIcon icon="trash" /> Delete
           </Button>
           {"   "}
           <Button variant="success" onClick={onEdit}>
-            <FontAwesome name="edit" /> Edit
+            <FontAwesomeIcon icon="edit" /> Edit
           </Button>
         </Card.Text>
       )}

@@ -1,6 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Button, Table } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import { deleteStudentUnion } from "./../reducers/actions/studentUnionActions";
 import PermissionUtils from "./../utils/PermissionUtils";
@@ -57,7 +57,7 @@ const StudentUnionsList: React.FC<Props> = ({
                     }
                   }}
                 >
-                  <FontAwesome name="trash" /> Delete
+                  <FontAwesomeIcon icon="trash" /> Delete
                 </Button>
               </td>
             )}

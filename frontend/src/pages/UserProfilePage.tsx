@@ -1,7 +1,7 @@
 import { User } from "@alehuo/clubhouse-shared";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Col, Nav, Row } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, Route } from "react-router-dom";
@@ -22,17 +22,17 @@ const UserProfilePage: React.FC<Props> = (props) => {
           <Nav variant="pills" className="flex-column">
             <LinkContainer to="/user/info">
               <Nav.Link>
-                <FontAwesome name="user" /> My information
+                <FontAwesomeIcon icon="user" /> My information
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/user/history">
               <Nav.Link>
-                <FontAwesome name="clock" /> My history
+                <FontAwesomeIcon icon="clock" /> My history
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/user/keys">
               <Nav.Link>
-                <FontAwesome name="key" /> My keys
+                <FontAwesomeIcon icon="key" /> My keys
               </Nav.Link>
             </LinkContainer>
           </Nav>

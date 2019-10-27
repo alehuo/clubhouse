@@ -1,6 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Button, Table } from "react-bootstrap";
-import FontAwesome from "react-fontawesome";
 import { connect } from "react-redux";
 
 import { Permission, Rule } from "@alehuo/clubhouse-shared";
@@ -49,11 +49,11 @@ export class RulesPage extends React.Component<Props> {
                 >
                   {!this.props.editMode ? (
                     <React.Fragment>
-                      <FontAwesome name="lock" /> Edit rules
+                      <FontAwesomeIcon icon="lock" /> Edit rules
                     </React.Fragment>
                   ) : (
                     <React.Fragment>
-                      <FontAwesome name="lock-open" /> Finish editing
+                      <FontAwesomeIcon icon="lock-open" /> Finish editing
                     </React.Fragment>
                   )}
                 </Button>
@@ -61,7 +61,7 @@ export class RulesPage extends React.Component<Props> {
               {"  "}
               <CustomOverlay id="addRuleTooltip" text="Add a new rule.">
                 <Button onClick={() => console.log("Todo")} variant="success">
-                  <FontAwesome name="plus" /> Add new rule
+                  <FontAwesomeIcon icon="plus" /> Add new rule
                 </Button>
               </CustomOverlay>
             </React.Fragment>
