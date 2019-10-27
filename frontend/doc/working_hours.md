@@ -52,6 +52,7 @@
 | 21.10.2019 | 0.2h  | Upgrade dependencies                                                                                                                                                                                                                                              |
 | 26.10.2019 | 0.3h  | Fix monorepo configuration                                                                                                                                                                                                                                        |
 | 27.10.2019 | 1.5h  | Start implementing Material UI                                                                                                                                                                                                                                    |
+| 28.10.2019 | 1.0h  | UI improvements                                                                                                                                                                                                                                                   |
 
 Total:
 
@@ -59,4 +60,4 @@ Total:
 
 29.5 h (Part 2)
 
-12.1h (Post-course)
+13.1h (Post-course)
