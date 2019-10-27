@@ -1,12 +1,10 @@
-import React from "react";
-import { Button, Container, Jumbotron } from "react-bootstrap";
+import { Newspost, Permission } from "@alehuo/clubhouse-shared";
+import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import NewsPost from "../components/NewsPost";
-import PermissionUtils from "./../utils/PermissionUtils";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { Newspost, Permission } from "@alehuo/clubhouse-shared";
 import {
   deleteNewspost,
   fetchNewsposts,
@@ -15,8 +13,20 @@ import {
   toggleNewsEditModal,
 } from "../reducers/actions/newsActions";
 import { RootState } from "../reduxStore";
+import PermissionUtils from "./../utils/PermissionUtils";
 import AddNewspost from "./subpages/AddNewspost";
 import EditNewspost from "./subpages/EditNewspost";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    fab: {
+      margin: theme.spacing(1),
+    },
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
+  }),
+);
 
 interface Props {
   token: string;
@@ -31,67 +41,73 @@ interface Props {
   editModalOpen: any;
 }
 
-export class NewsPage extends React.Component<Props> {
-  public componentDidMount() {
-    this.props.fetchNewsposts();
-  }
-  public render() {
-    const editDeletePermissions = PermissionUtils.hasPermission(
-      this.props.perms,
-      Permission.ALLOW_ADD_EDIT_REMOVE_POSTS,
-    );
-    return (
-      <React.Fragment>
-        <Jumbotron>
-          <Container>
-            <h1>News</h1>
-            <p>
-              {editDeletePermissions && (
-                <Button
-                  variant="success"
-                  onClick={() => this.props.toggleNewsAddModal(true)}
-                >
-                  <FontAwesomeIcon icon="plus" /> Add an article
-                </Button>
-              )}
-            </p>
-          </Container>
-        </Jumbotron>
-        {this.props.newsPosts &&
-          this.props.newsPosts.map((newsPost) => (
-            <NewsPost
-              key={newsPost.postId}
-              title={newsPost.title}
-              author={newsPost.author}
-              message={newsPost.message}
-              date={newsPost.created_at}
-              onDelete={(event) => {
-                event.preventDefault();
-                if (
-                  window.confirm("Do you want to delete the selected newspost?")
-                ) {
-                  this.props.deleteNewspost(this.props.token, newsPost.postId);
-                }
-              }}
-              onEdit={() => {
-                this.props.setEditId(newsPost.postId);
-                this.props.toggleNewsEditModal(true);
-              }}
-              hasEditDeletePermissions={editDeletePermissions}
-            />
-          ))}
-        <AddNewspost
-          show={this.props.addModalOpen}
-          onHide={() => this.props.toggleNewsAddModal(false)}
-        />
-        <EditNewspost
-          show={this.props.editModalOpen}
-          onHide={() => this.props.toggleNewsEditModal(false)}
-        />
-      </React.Fragment>
-    );
-  }
-}
+const NewsPage: React.FC<Props> = ({
+  token,
+  perms,
+  fetchNewsposts,
+  toggleNewsAddModal,
+  newsPosts,
+  deleteNewspost,
+  setEditId,
+  toggleNewsEditModal,
+  addModalOpen,
+  editModalOpen,
+}) => {
+  useEffect(() => {
+    fetchNewsposts();
+  }, []);
+
+  const editDeletePermissions = PermissionUtils.hasPermission(
+    perms,
+    Permission.ALLOW_ADD_EDIT_REMOVE_POSTS,
+  );
+  const classes = useStyles();
+  return (
+    <React.Fragment>
+      <Typography variant="h2">News</Typography>
+      {newsPosts &&
+        newsPosts.map((newsPost) => (
+          <NewsPost
+            key={newsPost.postId}
+            title={newsPost.title}
+            author={newsPost.author}
+            message={newsPost.message}
+            date={newsPost.created_at}
+            onDelete={(event) => {
+              event.preventDefault();
+              if (
+                window.confirm("Do you want to delete the selected newspost?")
+              ) {
+                deleteNewspost(token, newsPost.postId);
+              }
+            }}
+            onEdit={() => {
+              setEditId(newsPost.postId);
+              toggleNewsEditModal(true);
+            }}
+            hasEditDeletePermissions={editDeletePermissions}
+          />
+        ))}
+      <AddNewspost
+        show={addModalOpen}
+        onHide={() => toggleNewsAddModal(false)}
+      />
+      <EditNewspost
+        show={editModalOpen}
+        onHide={() => toggleNewsEditModal(false)}
+      />
+      {editDeletePermissions && (
+        <Fab
+          color="primary"
+          className={classes.fab}
+          onClick={() => toggleNewsAddModal(true)}
+        >
+          <AddIcon />
+        </Fab>
+      )}
+    </React.Fragment>
+  );
+};
 
 const mapStateToProps = (state: RootState) => ({
   perms: state.user.userPerms,

@@ -1,8 +1,14 @@
 import { Newspost } from "@alehuo/clubhouse-shared";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+import Typography from "@material-ui/core/Typography";
 import moment from "moment";
 import React from "react";
-import { Button, Card } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface Props {
   date?: string;
@@ -21,28 +27,32 @@ const NewsPost: React.FC<
   onDelete,
   onEdit,
   hasEditDeletePermissions,
-}) => (
-  <Card style={{ marginTop: 5, marginBottom: 5 }}>
-    <Card.Body>
-      <Card.Title>{title}</Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">
-        By #<strong>{author}</strong> on{" "}
-        <i>{date ? moment(date).format("LLL") : "N/A"}</i>
-      </Card.Subtitle>
-      <Card.Text>{message}</Card.Text>
+}) => {
+  return (
+    <Card style={{ marginTop: 5, marginBottom: 5 }}>
+      <CardHeader
+        avatar={<Avatar aria-label="recipe">{author}</Avatar>}
+        title={title}
+        subheader={date ? moment(date).format("LLL") : "N/A"}
+      />
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {message}
+        </Typography>
+      </CardContent>
       {hasEditDeletePermissions && (
-        <Card.Text>
-          <Button variant="danger" onClick={onDelete}>
+        <CardActions>
+          <Button size="small" onClick={onDelete}>
             <FontAwesomeIcon icon="trash" /> Delete
           </Button>
           {"   "}
-          <Button variant="success" onClick={onEdit}>
+          <Button size="small" onClick={onEdit}>
             <FontAwesomeIcon icon="edit" /> Edit
           </Button>
-        </Card.Text>
+        </CardActions>
       )}
-    </Card.Body>
-  </Card>
-);
+    </Card>
+  );
+};
 
 export default NewsPost;

@@ -1,4 +1,5 @@
 import Container from "@material-ui/core/Container";
+import { ConnectedRouter } from "connected-react-router";
 import moment from "moment";
 import "moment/locale/fi";
 import React, { useEffect } from "react";
@@ -11,12 +12,13 @@ import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import CustomOverlay from "./components/CustomOverlay";
 import { LoadingScreen } from "./components/LoadingScreen";
 import NavigationBar from "./components/NavigationBar";
+import NavigationDrawer from "./components/NavigationDrawer";
 import NotificationDrawer from "./components/NotificationDrawer";
 import CalendarPage from "./pages/CalendarPage";
 import KeysPage from "./pages/KeysPage";
+import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import MainPage from "./pages/MainPage";
-import NewLoginPage from "./pages/NewLoginPage";
 import NewsPage from "./pages/NewsPage";
 import RegisterPage from "./pages/RegisterPage";
 import RulesPage from "./pages/RulesPage";
@@ -26,8 +28,7 @@ import UserListPage from "./pages/UserListPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import { initApp } from "./reducers/actions/rootActions";
 import { RootAction } from "./reducers/rootReducer";
-import { RootState, history } from "./reduxStore";
-import { ConnectedRouter } from "connected-react-router";
+import { history, RootState } from "./reduxStore";
 moment.locale("fi");
 
 const SessionNotification: React.FC = () => {
@@ -81,6 +82,7 @@ const withContainer = <P extends object>(
 ): React.FC<P> => (props: P) => (
   <>
     <NavigationBar />
+    <NavigationDrawer />
     <SessionNotification />
     <Container>
       <Component {...props} />
@@ -118,7 +120,7 @@ const App: React.FC = () => {
         <Route exact path="/calendar" component={withContainer(CalendarPage)} />
         <Route exact path="/rules" component={withContainer(RulesPage)} />
         <Route exact path="/news" component={withContainer(NewsPage)} />
-        <Route exact path="/login" component={NewLoginPage} />
+        <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
         <AuthenticatedRoute
           isAuthenticated={isAuthenticated}

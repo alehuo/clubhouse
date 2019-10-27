@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Alert, Button, Container, Jumbotron } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import KeysList from "./../components/KeysList";
 import { toggleModal } from "./../reducers/actions/keyActions";
@@ -16,6 +16,7 @@ import {
   StudentUnion,
   User,
 } from "@alehuo/clubhouse-shared";
+import { Typography } from "@material-ui/core";
 import CustomOverlay from "../components/CustomOverlay";
 import { fetchStudentUnions } from "../reducers/actions/studentUnionActions";
 import { RootState } from "../reduxStore";
@@ -60,38 +61,34 @@ export class KeysPage extends React.Component<Props> {
     }
     return (
       <React.Fragment>
-        <Jumbotron>
-          <Container>
-            <h1>Keys</h1>{" "}
-            <p>
-              {PermissionUtils.hasPermission(
-                this.props.perms,
-                Permission.ALLOW_ADD_REMOVE_KEYS,
-              ) && (
-                <CustomOverlay id="addKey" text="Add a new keyholder.">
-                  <Button
-                    variant="success"
-                    onClick={() => this.props.toggleModal(true)}
-                  >
-                    <FontAwesomeIcon icon="plus" /> Add a keyholder
-                  </Button>
-                </CustomOverlay>
-              )}
-              {"  "}
-              {
-                <CustomOverlay
-                  id="sendEmail"
-                  text="Send an email to all verified keyholders in the system."
-                >
-                  <Button variant="info">
-                    <FontAwesomeIcon icon="envelope" /> Send an email to
-                    keyholder(s)
-                  </Button>
-                </CustomOverlay>
-              }
-            </p>
-          </Container>
-        </Jumbotron>
+        <Typography variant="h4">Keys</Typography>
+        <p>
+          {PermissionUtils.hasPermission(
+            this.props.perms,
+            Permission.ALLOW_ADD_REMOVE_KEYS,
+          ) && (
+            <CustomOverlay id="addKey" text="Add a new keyholder.">
+              <Button
+                variant="success"
+                onClick={() => this.props.toggleModal(true)}
+              >
+                <FontAwesomeIcon icon="plus" /> Add a keyholder
+              </Button>
+            </CustomOverlay>
+          )}
+          {"  "}
+          {
+            <CustomOverlay
+              id="sendEmail"
+              text="Send an email to all verified keyholders in the system."
+            >
+              <Button variant="info">
+                <FontAwesomeIcon icon="envelope" /> Send an email to
+                keyholder(s)
+              </Button>
+            </CustomOverlay>
+          }
+        </p>
         {PermissionUtils.hasPermission(
           this.props.perms,
           Permission.ALLOW_VIEW_KEYS,

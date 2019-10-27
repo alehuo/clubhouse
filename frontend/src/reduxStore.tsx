@@ -16,6 +16,7 @@ import rootReducer from "./reducers/rootReducer";
 import ruleReducer from "./reducers/ruleReducer";
 import sessionReducer from "./reducers/sessionReducer";
 import studentUnionReducer from "./reducers/studentUnionReducer";
+import uiReducer from "./reducers/uiReducer";
 import userReducer from "./reducers/userReducer";
 import notificationSaga from "./sagas/NotificationSaga";
 import rootSaga from "./sagas/RootSaga";
@@ -35,6 +36,7 @@ const reducerObj = (history: History) => ({
   rule: ruleReducer,
   news: newsReducer,
   router: connectRouter(history),
+  ui: uiReducer,
 });
 
 const reducer = (history: History) => combineReducers(reducerObj(history));
