@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { Alert, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Dispatch } from "redux";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import CustomOverlay from "./components/CustomOverlay";

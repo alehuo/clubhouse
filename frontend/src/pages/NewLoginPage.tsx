@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
@@ -14,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import { login } from "../reducers/actions/userActions";
 import { RootState } from "../reduxStore";
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage: "url(/autumn.jpg)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -54,6 +55,9 @@ const NewLoginPage: React.FC = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const isLoggingIn = useSelector((state: RootState) => state.auth.isLoggingIn);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
 
   const handleSubmit = useCallback(
     (e) => {
@@ -62,6 +66,10 @@ const NewLoginPage: React.FC = () => {
     },
     [email, password, rememberMe, dispatch],
   );
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -124,7 +132,7 @@ const NewLoginPage: React.FC = () => {
               className={classes.submit}
               disabled={isLoggingIn}
             >
-              Sign In
+              {isLoggingIn ? <CircularProgress /> : "Sign In"}
             </Button>
             <Grid container>
               <Grid item xs>
