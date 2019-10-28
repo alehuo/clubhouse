@@ -1,6 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import ChatIcon from "@material-ui/icons/Chat";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,6 +11,9 @@ import { RootState } from "../reduxStore";
 const NavigationDrawer: React.FC = () => {
   const menuOpen = useSelector((state: RootState) => state.ui.menuOpen);
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
   return (
     <SwipeableDrawer
       open={menuOpen}
@@ -24,11 +27,19 @@ const NavigationDrawer: React.FC = () => {
           width: 200,
         }}
       >
-        {navButtons.map((btn) => (
-          <ListItem button key={btn.text} to={btn.url} component={Link}>
-            <ListItemText primary={btn.text} />
-          </ListItem>
-        ))}
+        {navButtons
+          .filter((btn) => btn.auth === false || isAuthenticated)
+          .map((btn) => {
+            const { icon: Icon } = btn;
+            return (
+              <ListItem button key={btn.text} to={btn.url} component={Link}>
+                <ListItemIcon>
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={btn.text} />
+              </ListItem>
+            );
+          })}
       </List>
     </SwipeableDrawer>
   );

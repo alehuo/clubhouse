@@ -7,13 +7,18 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import LockIcon from "@material-ui/icons/Lock";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import PersonIcon from "@material-ui/icons/Person";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { openMenu } from "../reducers/actions/uiActions";
+import { RootState } from "../reduxStore";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,6 +67,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,
@@ -99,8 +107,29 @@ export default function PrimarySearchAppBar() {
       open={isUserMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {isAuthenticated ? (
+        <>
+          <MenuItem onClick={handleMenuClose} component={Link} to="/profile">
+            <IconButton edge="start" color="inherit">
+              <PersonIcon />
+            </IconButton>
+            Profile
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} component={Link} to="/logout">
+            <IconButton edge="start" color="inherit">
+              <ExitToAppIcon />
+            </IconButton>
+            Logout
+          </MenuItem>
+        </>
+      ) : (
+        <MenuItem onClick={handleMenuClose} component={Link} to="/login">
+          <IconButton edge="start" color="inherit">
+            <LockIcon />
+          </IconButton>
+          Login
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -142,6 +171,17 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="logout"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Logout</p>
+      </MenuItem>
     </Menu>
   );
 
@@ -163,16 +203,23 @@ export default function PrimarySearchAppBar() {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            {isAuthenticated && (
+              <>
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+              </>
+            )}
             <IconButton
               edge="end"
               aria-label="account of current user"

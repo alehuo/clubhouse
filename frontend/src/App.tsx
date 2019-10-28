@@ -123,24 +123,16 @@ const App: React.FC = () => {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
         <AuthenticatedRoute
-          isAuthenticated={isAuthenticated}
           exact
           path="/session"
           component={withContainer(Session)}
         />
+        <AuthenticatedRoute exact path="/logout" component={LogoutPage} />
         <AuthenticatedRoute
-          isAuthenticated={isAuthenticated}
-          exact
-          path="/logout"
-          component={LogoutPage}
-        />
-        <AuthenticatedRoute
-          isAuthenticated={isAuthenticated}
           path="/user"
           component={withContainer(UserProfilePage)}
         />
         <AuthenticatedRoute
-          isAuthenticated={isAuthenticated}
           exact
           path="/users"
           component={withContainer(UserListPage)}

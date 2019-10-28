@@ -1,26 +1,31 @@
 import React from "react";
-import { Route, RouteProps } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Redirect, Route, RouteProps } from "react-router-dom";
+import { RootState } from "../reduxStore";
 
 interface AuthenticatedRouteProps {
   component: React.ComponentType;
-  isAuthenticated: boolean;
 }
 
 const AuthenticatedRoute: React.FC<AuthenticatedRouteProps & RouteProps> = ({
   component: Component,
-  isAuthenticated,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    render={(props) => {
-      return isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <div>You must be logged in to view this page.</div>
-      );
-    }}
-  />
-);
+}) => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return isAuthenticated === true ? (
+          <Component {...props} />
+        ) : (
+          <div>Please login</div>
+        );
+      }}
+    />
+  );
+};
 
 export { AuthenticatedRoute };

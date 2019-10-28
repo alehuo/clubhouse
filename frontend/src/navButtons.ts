@@ -1,6 +1,13 @@
+import { SvgIconProps } from "@material-ui/core/SvgIcon";
+import ChatIcon from "@material-ui/icons/Chat";
+import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import PeopleIcon from "@material-ui/icons/People";
+import SchoolIcon from "@material-ui/icons/School";
+import TodayIcon from "@material-ui/icons/Today";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 export interface NavButton {
   url: string;
-  icon: string;
+  icon: (props: SvgIconProps) => JSX.Element;
   text: string;
   auth: boolean;
 }
@@ -8,37 +15,37 @@ export interface NavButton {
 const navButtons: NavButton[] = [
   {
     url: "/news",
-    icon: "comments",
+    icon: ChatIcon,
     text: "News",
     auth: false,
   },
   {
     url: "/calendar",
-    icon: "calendar",
+    icon: TodayIcon,
     text: "Calendar",
     auth: false,
   },
   {
     url: "/keys",
-    icon: "key",
+    icon: VpnKeyIcon,
     text: "Keys",
     auth: true,
   },
   {
     url: "/studentunions",
-    icon: "users",
+    icon: SchoolIcon,
     text: "Student unions",
     auth: true,
   },
   {
     url: "/rules",
-    icon: "list-ol",
+    icon: FormatListNumberedIcon,
     text: "Rules",
     auth: false,
   },
   {
     url: "/users",
-    icon: "users",
+    icon: PeopleIcon,
     text: "Users",
     auth: true,
   },
