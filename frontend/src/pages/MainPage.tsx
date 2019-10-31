@@ -1,25 +1,25 @@
-import { Typography } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 import React from "react";
 
 const MainPage: React.FC = () => (
-  <>
+  <Paper style={{ padding: 20, marginTop: 20, marginBottom: 20 }}>
     <Typography variant="h3">Welcome!</Typography>
-    <Typography component="p">
+    <Typography component="p" style={{ marginTop: 10, marginBottom: 10 }}>
       Manage your clubhouse with ease. Source code available{" "}
       <a href="https://github.com/alehuo/clubhouse.git" target="blank">
         here
       </a>
     </Typography>
-    <Typography component="p">
+    <Typography component="p" style={{ marginTop: 10, marginBottom: 10 }}>
       Many student unions across Finland use so called "clubhouses" where they
       can organize events and have fun with other students.
     </Typography>
-    <Typography component="p">
+    <Typography component="p" style={{ marginTop: 10, marginBottom: 10 }}>
       It is not always clear what events are kept there, who has the permission
       to use such places and how to keep a good track of who is in response of
       other people, and when has such a person been there.
     </Typography>
-    <Typography component="p">
+    <Typography component="p" style={{ marginTop: 10, marginBottom: 10 }}>
       This project is meant to solve this problem by providing:
       <ul>
         <li>Student union management</li>
@@ -50,11 +50,11 @@ const MainPage: React.FC = () => (
         </li>
       </ul>
     </Typography>
-    <Typography component="p">
+    <Typography component="p" style={{ marginTop: 10, marginBottom: 10 }}>
       Feel free to fork the project and modify it to suit your needs. The
       project has been licensed with MIT license.
     </Typography>
-  </>
+  </Paper>
 );
 
 export default MainPage;

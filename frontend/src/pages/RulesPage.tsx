@@ -4,6 +4,7 @@ import { Button, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import { Permission, Rule } from "@alehuo/clubhouse-shared";
+import { Typography } from "@material-ui/core";
 import CustomOverlay from "../components/CustomOverlay";
 import { SingleRule } from "../components/SingleRule";
 import { RootState } from "../reduxStore";
@@ -32,7 +33,7 @@ export class RulesPage extends React.Component<Props> {
   public render() {
     return (
       <React.Fragment>
-        <div>Rules</div>
+        <Typography variant="h3">Rules</Typography>
         <p>
           {PermissionUtils.hasPermission(
             this.props.perms,

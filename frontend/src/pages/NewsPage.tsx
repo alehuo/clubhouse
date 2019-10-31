@@ -64,7 +64,7 @@ const NewsPage: React.FC<Props> = ({
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Typography variant="h2">News</Typography>
+      <Typography variant="h3">News</Typography>
       {newsPosts &&
         newsPosts.map((newsPost) => (
           <NewsPost

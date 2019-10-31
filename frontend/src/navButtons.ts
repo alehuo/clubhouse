@@ -1,10 +1,12 @@
 import { SvgIconProps } from "@material-ui/core/SvgIcon";
 import ChatIcon from "@material-ui/icons/Chat";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import HomeIcon from "@material-ui/icons/Home";
 import PeopleIcon from "@material-ui/icons/People";
 import SchoolIcon from "@material-ui/icons/School";
 import TodayIcon from "@material-ui/icons/Today";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+
 export interface NavButton {
   url: string;
   icon: (props: SvgIconProps) => JSX.Element;
@@ -13,6 +15,12 @@ export interface NavButton {
 }
 
 const navButtons: NavButton[] = [
+  {
+    url: "/",
+    icon: HomeIcon,
+    text: "Home",
+    auth: false,
+  },
   {
     url: "/news",
     icon: ChatIcon,
