@@ -1,58 +1,49 @@
-import { JWTMiddleware } from "../middleware/JWTMiddleware";
-import { MessageFactory } from "../utils/MessageFactory";
-import Controller from "./Controller";
+import { JWTMiddleware } from '../middleware/JWTMiddleware';
+import { MessageFactory } from '../utils/MessageFactory';
+import Controller from './Controller';
 
-import { Permission } from "@alehuo/clubhouse-shared";
-import { logger } from "../logger";
-import { PermissionMiddleware } from "../middleware/PermissionMiddleware";
-import { getPermissions } from "../utils/PermissionUtils";
-import { StatusCode } from "../utils/StatusCodes";
+import { Permission } from '@alehuo/clubhouse-shared';
+import { logger } from '../logger';
+import { PermissionMiddleware } from '../middleware/PermissionMiddleware';
+import { getPermissions } from '../utils/PermissionUtils';
+import { StatusCode } from '../utils/StatusCodes';
 
 class PermissionController extends Controller {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  public routes() {
-    this.router.get(
-      "",
-      JWTMiddleware,
-      PermissionMiddleware(Permission.ALLOW_VIEW_PERMISSIONS),
-      async (req, res) => {
-        try {
-          return res.json(
-            MessageFactory.createResponse<typeof Permission>(
-              true,
-              "",
-              Permission
-            )
-          );
-        } catch (err) {
-          logger.error(err);
-          return res
-            .status(500)
-            .json(
-              MessageFactory.createError(
-                "Internal server error: Cannot get permissions",
-                err as Error
-              )
+    public routes() {
+        this.router.get(
+            '',
+            JWTMiddleware,
+            PermissionMiddleware(Permission.ALLOW_VIEW_PERMISSIONS),
+            async (req, res) => {
+                try {
+                    return res.json(MessageFactory.createResponse<typeof Permission>(true, '', Permission));
+                } catch (err) {
+                    logger.error(err);
+                    return res
+                        .status(500)
+                        .json(
+                            MessageFactory.createError('Internal server error: Cannot get permissions', err as Error),
+                        );
+                }
+            },
+        );
+
+        // Return permissions of the logged in user.
+        this.router.get('/user', JWTMiddleware, async (req, res) => {
+            const permissions: number = res.locals.token.data.permissions;
+            const permlist = getPermissions(permissions);
+            return res.status(StatusCode.OK).json(
+                MessageFactory.createResponse(true, '', {
+                    permissions,
+                    permission_list: permlist,
+                }),
             );
-        }
-      }
-    );
-
-    // Return permissions of the logged in user.
-    this.router.get("/user", JWTMiddleware, async (req, res) => {
-      const permissions: number = res.locals.token.data.permissions;
-      const permlist = getPermissions(permissions);
-      return res.status(StatusCode.OK).json(
-        MessageFactory.createResponse(true, "", {
-          permissions,
-          permission_list: permlist
-        })
-      );
-    });
-    /*
+        });
+        /*
     this.router.get(
       "/:permissionId(\\d+)",
       JWTMiddleware,
@@ -87,7 +78,7 @@ class PermissionController extends Controller {
       }
     );
       */
-    /*
+        /*
     this.router.post(
       "",
       RequestParamMiddleware("name", "value"),
@@ -143,8 +134,8 @@ class PermissionController extends Controller {
       }
     );
       */
-    return this.router;
-  }
+        return this.router;
+    }
 }
 
 export default new PermissionController();

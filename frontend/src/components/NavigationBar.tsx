@@ -108,20 +108,20 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       {isAuthenticated ? (
-        <>
-          <MenuItem onClick={handleMenuClose} component={Link} to="/profile">
+        [
+          <MenuItem onClick={handleMenuClose} component={Link} to="/user" key={1}>
             <IconButton edge="start" color="inherit">
               <PersonIcon />
             </IconButton>
             Profile
-          </MenuItem>
-          <MenuItem onClick={handleMenuClose} component={Link} to="/logout">
+          </MenuItem>,
+          <MenuItem onClick={handleMenuClose} component={Link} to="/logout" key={2}>
             <IconButton edge="start" color="inherit">
               <ExitToAppIcon />
             </IconButton>
             Logout
-          </MenuItem>
-        </>
+          </MenuItem>,
+        ]
       ) : (
         <MenuItem onClick={handleMenuClose} component={Link} to="/login">
           <IconButton edge="start" color="inherit">

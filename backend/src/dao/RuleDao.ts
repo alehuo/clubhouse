@@ -1,34 +1,37 @@
-import { Rule } from "@alehuo/clubhouse-shared";
-import knex from "../Database";
-import moment from "moment";
-import { dtFormat } from "../utils/DtFormat";
-import Dao from "./Dao";
+import { Rule } from '@alehuo/clubhouse-shared';
+import knex from '../Database';
+import moment from 'moment';
+import { dtFormat } from '../utils/DtFormat';
+import Dao from './Dao';
 
-const table = "rules";
+const table = 'rules';
 
 class RuleDao implements Dao<Rule> {
-  public findAll(): PromiseLike<Rule[]> {
-    return Promise.resolve(knex<Rule>(table).select());
-  }
-  public findOne(id: number): PromiseLike<Rule | undefined> {
-    return Promise.resolve(
-      knex<Rule>(table)
-        .select()
-        .where({ ruleId: id })
-        .first()
-    );
-  }
-  public remove(id: number): PromiseLike<number> {
-    throw new Error("Method not implemented.");
-  }
-  public save(entity: Rule): PromiseLike<number[]> {
-    if (entity.ruleId) {
-      delete entity.ruleId;
+    public findAll(): PromiseLike<Rule[]> {
+        return Promise.resolve(knex<Rule>(table).select());
     }
-    entity.created_at = moment().format(dtFormat);
-    entity.updated_at = moment().format(dtFormat);
-    return Promise.resolve(knex<Rule>(table).insert(entity));
-  }
+
+    public findOne(id: number): PromiseLike<Rule | undefined> {
+        return Promise.resolve(
+            knex<Rule>(table)
+                .select()
+                .where({ ruleId: id })
+                .first(),
+        );
+    }
+
+    public remove(id: number): PromiseLike<number> {
+        throw new Error('Method not implemented.');
+    }
+
+    public save(entity: Rule): PromiseLike<number[]> {
+        if (entity.ruleId) {
+            delete entity.ruleId;
+        }
+        entity.created_at = moment().format(dtFormat);
+        entity.updated_at = moment().format(dtFormat);
+        return Promise.resolve(knex<Rule>(table).insert(entity));
+    }
 }
 
 export default new RuleDao();
