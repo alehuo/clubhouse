@@ -86,4 +86,4 @@ const knexfile: KnexFile<Knex.Config> = {
     test,
 };
 
-export default knexfile;
+module.exports = knexfile;

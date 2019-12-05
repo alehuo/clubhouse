@@ -3,13 +3,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import moment from 'moment';
 import 'moment/locale/fi';
 import React, { useEffect } from 'react';
-import { Alert, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { LinkContainer } from 'react-router-bootstrap';
 import { Route } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { AuthenticatedRoute } from './components/AuthenticatedRoute';
-import CustomOverlay from './components/CustomOverlay';
 import { LoadingScreen } from './components/LoadingScreen';
 import NavigationBar from './components/NavigationBar';
 import NavigationDrawer from './components/NavigationDrawer';
@@ -29,38 +26,8 @@ import UserProfilePage from './pages/UserProfilePage';
 import { initApp } from './reducers/actions/rootActions';
 import { RootAction } from './reducers/rootReducer';
 import { history, RootState } from './reduxStore';
+import { SessionNotification } from './components/SessionNotification';
 moment.locale('fi');
-
-const SessionNotification: React.FC = () => {
-    const sessionPage = useSelector((state: RootState) => state.session.sessionPage);
-    const sessionRunning = useSelector((state: RootState) => state.session.ownSessionRunning);
-    const peopleCount = useSelector((state: RootState) => state.session.ownSessionPeopleCount);
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-
-    if (sessionPage) {
-        return null;
-    }
-    if (!isAuthenticated) {
-        return null;
-    }
-    if (!sessionRunning) {
-        return null;
-    }
-    return (
-        <Alert variant="info">
-            <h5>
-                {peopleCount > 0 && <React.Fragment>You are currently in an ongoing session.</React.Fragment>}
-                <br />
-                <br />
-                <LinkContainer to="/session">
-                    <CustomOverlay id="currentSessionInfo" text="View current session info.">
-                        <Button variant="primary">View current session</Button>
-                    </CustomOverlay>
-                </LinkContainer>
-            </h5>
-        </Alert>
-    );
-};
 
 const withContainer = <P extends object>(Component: React.ComponentType<P>): React.FC<P> => (props: P) => (
     <>
