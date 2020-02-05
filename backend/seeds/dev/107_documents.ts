@@ -1,20 +1,20 @@
-import { Rule } from '@alehuo/clubhouse-shared';
+import { Document } from '@alehuo/clubhouse-shared';
 import Knex from 'knex';
 import moment from 'moment';
 import { dtFormat } from '../../src/utils/DtFormat';
 
-const rules: Rule[] = [
+const documents: Document[] = [
     {
-        ruleId: 1,
+        documentId: 1,
         order: 1,
-        text: 'Rule 1',
+        text: '# Document 1',
         created_at: moment().format(dtFormat),
         updated_at: moment().format(dtFormat),
     },
     {
-        ruleId: 2,
+        documentId: 2,
         order: 2,
-        text: 'Rule 2',
+        text: '# Document 2',
         created_at: moment().format(dtFormat),
         updated_at: moment().format(dtFormat),
     },
@@ -22,7 +22,7 @@ const rules: Rule[] = [
 
 export async function seed(knex: Knex): Promise<void> {
     // Deletes ALL existing entries
-    await knex('rules').del();
+    await knex('documents').del();
     // Insert data
-    await knex('rules').insert(rules);
+    await knex('documents').insert(documents);
 }

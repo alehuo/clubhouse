@@ -1,10 +1,10 @@
 import Knex from 'knex';
 
 export async function up(knex: Knex) {
-    const exists = await knex.schema.hasTable('rules');
+    const exists = await knex.schema.hasTable('documents');
     if (!exists) {
-        await knex.schema.createTable('rules', function(table) {
-            table.increments('ruleId');
+        await knex.schema.createTable('documents', function(table) {
+            table.increments('documentId');
             // Ordering
             table.integer('order');
             // Message
@@ -19,8 +19,8 @@ export async function down(knex: Knex) {
     if (process.env.NODE_ENV === 'production') {
         throw new Error('Do not drop tables in a production environment.');
     }
-    const exists = await knex.schema.hasTable('rules');
+    const exists = await knex.schema.hasTable('documents');
     if (exists) {
-        await knex.schema.dropTable('rules');
+        await knex.schema.dropTable('documents');
     }
 }
