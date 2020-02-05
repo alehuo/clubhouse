@@ -129,20 +129,12 @@ You need to create databases `DB_NAME_test`, `DB_NAME_dev` and `DB_NAME`, where 
 ### Without docker
 
 1.  Clone the repo
-2.  Install yarn if not yet installed
-3.  Run `yarn` to install dependencies
-4.  Create `.env` file and define environment variables. See `.env.example` file.
-5.  `yarn create-databases` to create necessary databases (optionally, you can create the databases manually.)
-6.  `yarn migrate` to run migrations
-7.  `yarn seed` to seed the database
-8.  `yarn start` to start the server or `yarn watch` to watch for code changes
-
-### With Docker
-
-1. Clone the repo
-2. Run `docker-compose up -d --build`
-3. Run `yarn migrate-docker`
-4. Run `yarn seed-docker` to seed your database with example users
+2.  Run `npm install` to install dependencies
+3.  Create `.env` file and define environment variables. See `.env.example` file.
+4.  `npm run create-databases` to create necessary databases (optionally, you can create the databases manually.)
+5.  `npm run migrate` to run migrations
+6.  `npm run seed` to seed the database
+7.  `npm start` to start the server or `npm run watch` to watch for code changes
 
 ### Credentials
 

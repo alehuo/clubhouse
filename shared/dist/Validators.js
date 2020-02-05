@@ -176,7 +176,8 @@ exports.isSession = (x) => {
         if (exports.isString(s.created_at) &&
             exports.isString(s.endMessage) &&
             exports.isString(s.endTime) &&
-            (exports.isNumber(s.ended) && (s.ended === 1 || s.ended === 0)) &&
+            exports.isNumber(s.ended) &&
+            (s.ended === 1 || s.ended === 0) &&
             exports.isNumber(s.sessionId) &&
             exports.isString(s.startMessage) &&
             exports.isString(s.startTime) &&
@@ -253,17 +254,17 @@ exports.isUserStatistics = (x) => {
     }
     return false;
 };
-exports.isRule = (x) => {
+exports.isDocument = (x) => {
     if (!exports.isObject(x)) {
         return false;
     }
     const s = x;
     if (s.order !== undefined &&
-        s.ruleId !== undefined &&
+        s.documentId !== undefined &&
         s.text !== undefined &&
         s.created_at !== undefined &&
         s.updated_at !== undefined) {
-        if (exports.isNumber(s.ruleId) &&
+        if (exports.isNumber(s.documentId) &&
             exports.isNumber(s.order) &&
             exports.isString(s.text) &&
             exports.isString(s.created_at) &&

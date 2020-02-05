@@ -18,7 +18,7 @@ import LocationController from './controllers/LocationController';
 import MessageController from './controllers/MessageController';
 import NewsPostController from './controllers/NewsPostController';
 import PermissionController from './controllers/PermissionController';
-import RuleController from './controllers/RuleController';
+import DocumentController from './controllers/DocumentController';
 import SessionController from './controllers/SessionController';
 import StatisticsController from './controllers/StatisticsController';
 import StudentUnionController from './controllers/StudentUnionController';
@@ -100,8 +100,8 @@ app.use(apiUrl('newspost', API_VERSION), apiHeader(API_VERSION), NewsPostControl
 // Statistics route
 app.use(apiUrl('statistics', API_VERSION), apiHeader(API_VERSION), StatisticsController.routes());
 
-// Rules route
-app.use(apiUrl('rule', API_VERSION), apiHeader(API_VERSION), RuleController.routes());
+// Documents route
+app.use(apiUrl('document', API_VERSION), apiHeader(API_VERSION), DocumentController.routes());
 
 // Key types route
 app.use(apiUrl('keyType', API_VERSION), apiHeader(API_VERSION), KeyTypeController.routes());

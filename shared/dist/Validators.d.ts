@@ -1,4 +1,4 @@
-import { CalendarEvent, DbUser, Key, KeyType, Location, Message, Newspost, Rule, Session, Statistics, StudentUnion, User, UserStatistics } from "./Models";
+import { CalendarEvent, DbUser, Key, KeyType, Location, Message, Newspost, Document, Session, Statistics, StudentUnion, User, UserStatistics } from "./Models";
 export declare type Validator<T> = (x: unknown) => x is T;
 export declare const isString: (x: unknown) => x is string;
 export declare const isNumber: (x: unknown) => x is number;
@@ -14,7 +14,7 @@ export declare const isSession: Validator<Session>;
 export declare const isStatistics: Validator<Statistics>;
 export declare const isStudentUnion: Validator<StudentUnion>;
 export declare const isUserStatistics: Validator<UserStatistics>;
-export declare const isRule: Validator<Rule>;
+export declare const isDocument: Validator<Document>;
 export declare const isKeyType: Validator<KeyType>;
 export declare const isKey: Validator<Key>;
 //# sourceMappingURL=Validators.d.ts.map

@@ -43,10 +43,10 @@ This project is meant to solve this problem by providing:
 ## Installation instructions
 
 1.  Clone the repo
-2.  Install yarn if not yet installed
-3.  Run `yarn` to install dependencies
-4.  `yarn start` to start the front-end, or `yarn build` to create a production optimized build.
+2.  Run `npm install` to install dependencies
+3.  Link the shared library with the script provided in the root directory
+4.  Run `npm start` to start the front-end, or `npm run build` to create a production optimized build.
 
 ## Running tests
 
-To run tests, run `yarn test`.
+To run tests, run `npm test`.

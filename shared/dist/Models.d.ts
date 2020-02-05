@@ -80,8 +80,8 @@ export interface UserStatistics {
     hoursOnWatch: number;
     eventCount: number;
 }
-export interface Rule {
-    ruleId: number;
+export interface Document {
+    documentId: number;
     order: number;
     text: string;
     created_at: string;

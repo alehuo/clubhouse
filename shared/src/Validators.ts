@@ -6,12 +6,12 @@ import {
   Location,
   Message,
   Newspost,
-  Rule,
+  Document,
   Session,
   Statistics,
   StudentUnion,
   User,
-  UserStatistics,
+  UserStatistics
 } from "./Models";
 
 export type Validator<T> = (x: unknown) => x is T;
@@ -85,7 +85,7 @@ export const isUser: Validator<User> = (x): x is User => {
 };
 
 export const isCalendarEvent: Validator<CalendarEvent> = (
-  x,
+  x
 ): x is CalendarEvent => {
   if (!isObject(x)) {
     return false;
@@ -227,7 +227,8 @@ export const isSession: Validator<Session> = (x): x is Session => {
       isString(s.created_at) &&
       isString(s.endMessage) &&
       isString(s.endTime) &&
-      (isNumber(s.ended) && (s.ended === 1 || s.ended === 0)) &&
+      isNumber(s.ended) &&
+      (s.ended === 1 || s.ended === 0) &&
       isNumber(s.sessionId) &&
       isString(s.startMessage) &&
       isString(s.startTime) &&
@@ -271,7 +272,7 @@ export const isStatistics: Validator<Statistics> = (x): x is Statistics => {
 };
 
 export const isStudentUnion: Validator<StudentUnion> = (
-  x,
+  x
 ): x is StudentUnion => {
   if (!isObject(x)) {
     return false;
@@ -298,7 +299,7 @@ export const isStudentUnion: Validator<StudentUnion> = (
 };
 
 export const isUserStatistics: Validator<UserStatistics> = (
-  x: unknown,
+  x: unknown
 ): x is UserStatistics => {
   if (!isObject(x)) {
     return false;
@@ -325,20 +326,20 @@ export const isUserStatistics: Validator<UserStatistics> = (
   return false;
 };
 
-export const isRule: Validator<Rule> = (x: unknown): x is Rule => {
+export const isDocument: Validator<Document> = (x: unknown): x is Document => {
   if (!isObject(x)) {
     return false;
   }
-  const s = x as Rule;
+  const s = x as Document;
   if (
     s.order !== undefined &&
-    s.ruleId !== undefined &&
+    s.documentId !== undefined &&
     s.text !== undefined &&
     s.created_at !== undefined &&
     s.updated_at !== undefined
   ) {
     if (
-      isNumber(s.ruleId) &&
+      isNumber(s.documentId) &&
       isNumber(s.order) &&
       isString(s.text) &&
       isString(s.created_at) &&

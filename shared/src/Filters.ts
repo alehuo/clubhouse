@@ -4,12 +4,12 @@ import {
   Location,
   Message,
   Newspost,
-  Rule,
+  Document,
   Session,
   Statistics,
   StudentUnion,
   User,
-  UserStatistics,
+  UserStatistics
 } from "./Models";
 
 export const timestampFilter = (entity: any): any => {
@@ -36,8 +36,7 @@ export const sessionFilter = (session: Session): Session => {
   return session;
 };
 
-export const userStatisticsFilter = (stats: UserStatistics): UserStatistics =>
-  stats;
+export const userStatisticsFilter = (stats: UserStatistics) => stats;
 
 export const userFilter = (user: DbUser): User => {
   return {
@@ -47,21 +46,20 @@ export const userFilter = (user: DbUser): User => {
     lastName: user.lastName,
     permissions: user.permissions,
     created_at: user.created_at,
-    updated_at: user.updated_at,
+    updated_at: user.updated_at
   };
 };
 
-export const studentUnionFilter = (stdu: StudentUnion): StudentUnion => stdu;
+export const studentUnionFilter = (stdu: StudentUnion) => stdu;
 
-export const statisticsFilter = (stats: Statistics): Statistics => stats;
+export const statisticsFilter = (stats: Statistics) => stats;
 
-export const newsPostFilter = (post: Newspost): Newspost => post;
+export const newsPostFilter = (post: Newspost) => post;
 
-export const messageFilter = (message: Message): Message => message;
+export const messageFilter = (message: Message) => message;
 
-export const locationFilter = (location: Location): Location => location;
+export const locationFilter = (location: Location) => location;
 
-export const calendarEventFilter = (event: CalendarEvent): CalendarEvent =>
-  event;
+export const calendarEventFilter = (event: CalendarEvent) => event;
 
-export const ruleFilter = (rule: Rule): Rule => rule;
+export const documentFilter = (document: Document) => document;

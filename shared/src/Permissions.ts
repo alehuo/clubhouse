@@ -11,8 +11,8 @@ export const Permission = {
   ALLOW_ADD_EDIT_REMOVE_EVENTS: Math.pow(2, 6),
   ALLOW_VIEW_EVENTS: Math.pow(2, 7),
 
-  ALLOW_ADD_EDIT_REMOVE_RULES: Math.pow(2, 8),
-  ALLOW_VIEW_RULES: Math.pow(2, 9),
+  ALLOW_ADD_EDIT_REMOVE_DOCUMENTS: Math.pow(2, 8),
+  ALLOW_VIEW_DOCUMENTS: Math.pow(2, 9),
 
   ALLOW_ADD_EDIT_REMOVE_POSTS: Math.pow(2, 10),
   ALLOW_VIEW_POSTS: Math.pow(2, 11),
