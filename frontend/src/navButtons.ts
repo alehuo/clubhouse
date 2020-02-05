@@ -9,7 +9,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 export interface NavButton {
     url: string;
-    icon: (props: SvgIconProps) => JSX.Element;
+    icon: React.ComponentType<any>;
     text: string;
     auth: boolean;
 }
