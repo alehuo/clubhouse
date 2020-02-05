@@ -17,9 +17,9 @@ RUN apk del .build-deps
 
 COPY backend ./backend
 COPY shared ./shared
-RUN cd shared && \
+RUN cd /data/shared && \
     npm link && \
-    cd ../frontend && \
+    cd /data/backend && \
     npm link @alehuo/clubhouse-shared
 
 WORKDIR /data/backend
