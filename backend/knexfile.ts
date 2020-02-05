@@ -74,13 +74,7 @@ const production: Knex.Config = {
     },
 };
 
-interface KnexFile<T> {
-    development: T;
-    production: T;
-    test: T;
-}
-
-const knexfile: KnexFile<Knex.Config> = {
+const knexfile: Record<'development' | 'production' | 'test', Knex.Config> = {
     development,
     production,
     test,

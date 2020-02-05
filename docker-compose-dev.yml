@@ -8,6 +8,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
       MYSQL_DATABASE: clubhouse_dev
+      TZ: Europe/Helsinki
     volumes:
       - clubhouse-mysql-data:/var/lib/mysql
   adminer:

@@ -56,7 +56,6 @@ class AuthController extends Controller {
         this.router.post('', RequestParamMiddleware<DbUser>('email', 'password'), async (req, res) => {
             try {
                 const { email, password }: Pick<DbUser, 'email' | 'password'> = req.body;
-
                 if (!isString(email) || !isString(password)) {
                     return res
                         .status(StatusCode.BAD_REQUEST)

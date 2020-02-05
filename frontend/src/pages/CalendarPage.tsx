@@ -1,21 +1,12 @@
 import { CalendarEvent, Permission } from '@alehuo/clubhouse-shared';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-// @ts-ignore
-import { Calendar } from 'react-big-calendar';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Button, Container, Jumbotron } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import CustomOverlay from '../components/CustomOverlay';
 import { RootState } from '../reduxStore';
 import { fetchEvents } from './../reducers/actions/calendarActions';
-import { eventMapper } from './../services/CalendarService';
 import PermissionUtils from './../utils/PermissionUtils';
-
-const StyledCalendar = styled(Calendar)`
-    height: 800px !important;
-`;
 
 interface Props {
     token: string;
@@ -64,19 +55,6 @@ class CalendarPage extends React.Component<Props> {
                         </p>
                     </Container>
                 </Jumbotron>
-
-                <StyledCalendar
-                    events={this.props.events.map(eventMapper)}
-                    step={60}
-                    views={Object.keys(Calendar.Views).map(
-                        // @ts-ignore
-                        k => Calendar.Views[k],
-                    )}
-                    timeslots={1}
-                    showMultiDayTimes
-                    defaultDate={new Date()}
-                />
-                <div style={{ height: 50 }} />
             </React.Fragment>
         );
     }

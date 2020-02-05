@@ -14,7 +14,7 @@ export function RequestParamMiddleware<T>(...params: Array<keyof T>): RequestHan
     return (req, res, next) => {
         const missing: Array<keyof T> = [];
         for (const param of params) {
-            if (req.body.param === undefined) {
+            if (req.body[param] === undefined) {
                 missing.push(param);
             }
         }

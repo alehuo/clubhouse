@@ -44,11 +44,6 @@ app.use(helmet());
 // JSON parser
 app.use(express.json());
 
-const server = http.createServer(app);
-
-// initialize WebSocket server
-const ws = new WebSocketServer(server);
-
 // API version
 export const API_VERSION = 'v1';
 
@@ -117,5 +112,10 @@ app.use(apiUrl('key', API_VERSION), apiHeader(API_VERSION), KeyController.routes
 app.use(InvalidRouteMiddleware);
 
 app.use(ErrorMiddleware);
+
+const server = http.createServer(app);
+
+// initialize WebSocket server
+const ws = new WebSocketServer(server);
 
 export { app, server, ws };

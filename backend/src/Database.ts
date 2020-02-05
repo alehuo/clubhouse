@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import knexfile from '../knexfile';
+import * as knexfile from '../knexfile';
 import { Environment } from './Environment';
 
 const isEnv = (x?: string): x is Environment => {
@@ -24,5 +24,6 @@ if (!isEnv(environment)) {
     throw new Error('NODE_ENV is invalid!');
 }
 
+// @ts-ignore
 const knexConfig = knexfile[environment];
 export default Knex(knexConfig);

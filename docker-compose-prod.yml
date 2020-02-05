@@ -8,6 +8,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
       MYSQL_DATABASE: clubhouse_dev
+      TZ: Europe/Helsinki
     volumes:
       - clubhouse-mysql-data:/var/lib/mysql
   adminer:
@@ -16,24 +17,17 @@ services:
     ports:
       - 8081:8080
   clubhouse-backend:
-    container_name: "clubhouse-backend"
+    container_name: "clubhouse-backend-prod"
     build:
       context: .
       shm_size: 1G
-      dockerfile: Dockerfile-dev.dockerfile
+      dockerfile: Dockerfile-backend-prod.dockerfile
     ports:
       - "8080:8080"
     depends_on:
       - mysli
-    volumes:
-      - ./src:/backend/src
-      - ./test:/backend/test
-      - ./seeds:/backend/seeds
-      - ./migrations:/backend/migrations
-      - ./knexfile.ts:/backend/knexfile.ts
-    command: yarn watch
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - PORT=8080
       - JWT_SECRET=abcd1234
       - JWT_EXPIRE=86400
@@ -56,3 +50,13 @@ services:
       - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
       - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
       - SPOTIFY_REDIRECT_URL=${SPOTIFY_REDIRECT_URL}
+  clubhouse-frontend:
+    container_name: "clubhouse-frontend-prod"
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend-prod.dockerfile
+      shm_size: 1G
+    ports:
+      - "80:80"
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8080
