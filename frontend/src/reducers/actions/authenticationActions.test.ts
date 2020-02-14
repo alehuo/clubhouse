@@ -5,8 +5,11 @@ describe('Authentication actions', () => {
     it('Should create an action to authenticate user', () => {
         const expectedAction: ReturnType<typeof authenticateUser> = {
             type: AUTHENTICATE_USER,
+            payload: {
+                token: 'Hello',
+            },
         };
-        expect(authenticateUser()).toEqual(expectedAction);
+        expect(authenticateUser('Hello')).toEqual(expectedAction);
     });
     it('Should create an action to deauthenticate user', () => {
         const expectedAction: ReturnType<typeof deAuthenticateUser> = {

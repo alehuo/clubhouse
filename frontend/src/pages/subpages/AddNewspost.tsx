@@ -7,7 +7,7 @@ import { addNewspost } from '../../reducers/actions/newsActions';
 import { RootState } from '../../reduxStore';
 
 interface Props {
-    token: string;
+    token: string | null;
     show: boolean;
     onHide: any;
     addNewspost: any;
@@ -15,7 +15,9 @@ interface Props {
 
 export class AddNewspost extends React.Component<Props> {
     public handleSubmit = (values: any) => {
-        this.props.addNewspost(this.props.token, values.newspostTitle, values.newspostMessage);
+        if (this.props.token !== null) {
+            this.props.addNewspost(this.props.token, values.newspostTitle, values.newspostMessage);
+        }
     };
     public render() {
         return (
@@ -32,7 +34,7 @@ export class AddNewspost extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
     isAdding: state.news.isAdding,
 });
 

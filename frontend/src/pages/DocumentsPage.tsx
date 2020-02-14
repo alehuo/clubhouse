@@ -3,43 +3,43 @@ import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { Permission, Rule } from '@alehuo/clubhouse-shared';
+import { Permission, Document } from '@alehuo/clubhouse-shared';
 import { Typography } from '@material-ui/core';
 import CustomOverlay from '../components/CustomOverlay';
-import { SingleRule } from '../components/SingleRule';
+import { SingleDocument } from '../components/SingleDocument';
 import { RootState } from '../reduxStore';
-import { fetchRules, moveRuleDown, moveRuleUp, toggleEditMode } from './../reducers/ruleReducer';
-import PermissionUtils from './../utils/PermissionUtils';
+import { fetchDocuments, moveDocumentDown, moveDocumentUp, toggleEditMode } from '../reducers/documentReducer';
+import PermissionUtils from '../utils/PermissionUtils';
 
 interface Props {
     editMode: boolean;
-    fetchRules: any;
+    fetchDocuments: any;
     toggleEditMode: any;
     perms: number;
-    rules: Rule[];
-    moveRuleUp: any;
-    moveRuleDown: any;
+    documents: Document[];
+    moveDocumentUp: any;
+    moveDocumentDown: any;
 }
 
-export class RulesPage extends React.Component<Props> {
+export class DocumentsPage extends React.Component<Props> {
     public componentDidMount() {
-        this.props.fetchRules();
+        this.props.fetchDocuments();
     }
     public render() {
         return (
             <React.Fragment>
-                <Typography variant="h3">Rules</Typography>
+                <Typography variant="h3">Documents</Typography>
                 <p>
-                    {PermissionUtils.hasPermission(this.props.perms, Permission.ALLOW_ADD_EDIT_REMOVE_RULES) && (
+                    {PermissionUtils.hasPermission(this.props.perms, Permission.ALLOW_ADD_EDIT_REMOVE_DOCUMENTS) && (
                         <React.Fragment>
-                            <CustomOverlay id="editRuleTooltip" text="Lock or unlock rule editing.">
+                            <CustomOverlay id="editRuleTooltip" text="Lock or unlock document editing.">
                                 <Button
                                     variant={!this.props.editMode ? 'info' : 'danger'}
                                     onClick={() => this.props.toggleEditMode()}
                                 >
                                     {!this.props.editMode ? (
                                         <React.Fragment>
-                                            <FontAwesomeIcon icon="lock" /> Edit rules
+                                            <FontAwesomeIcon icon="lock" /> Edit documents
                                         </React.Fragment>
                                     ) : (
                                         <React.Fragment>
@@ -49,26 +49,26 @@ export class RulesPage extends React.Component<Props> {
                                 </Button>
                             </CustomOverlay>
                             {'  '}
-                            <CustomOverlay id="addRuleTooltip" text="Add a new rule.">
+                            <CustomOverlay id="addRuleTooltip" text="Add a new document.">
                                 <Button onClick={() => console.log('Todo')} variant="success">
-                                    <FontAwesomeIcon icon="plus" /> Add new rule
+                                    <FontAwesomeIcon icon="plus" /> Add new document
                                 </Button>
                             </CustomOverlay>
                         </React.Fragment>
                     )}
                 </p>
-                {this.props.rules && (
+                {this.props.documents && (
                     <Table responsive striped>
                         <tbody>
-                            {this.props.rules.map((rule: any, i: number) => (
-                                <SingleRule
+                            {this.props.documents.map((document, i: number) => (
+                                <SingleDocument
                                     id={i + 1}
                                     key={i}
-                                    rule={rule}
+                                    document={document}
                                     canMoveUp={i === 0}
-                                    canMoveDown={i === this.props.rules.length - 1}
-                                    onMoveUpClick={() => this.props.moveRuleUp(rule.id)}
-                                    onMoveDownClick={() => this.props.moveRuleDown(rule.id)}
+                                    canMoveDown={i === this.props.documents.length - 1}
+                                    onMoveUpClick={() => this.props.moveDocumentUp(document.documentId)}
+                                    onMoveDownClick={() => this.props.moveDocumentDown(document.documentId)}
                                     editMode={this.props.editMode}
                                 />
                             ))}
@@ -82,15 +82,15 @@ export class RulesPage extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState) => ({
     perms: state.user.userPerms,
-    rules: state.rule.rules,
-    editMode: state.rule.editMode,
+    documents: state.document.documents,
+    editMode: state.document.editMode,
 });
 
 const mapDispatchToProps = {
-    fetchRules,
-    moveRuleUp,
-    moveRuleDown,
+    fetchDocuments,
+    moveDocumentUp,
+    moveDocumentDown,
     toggleEditMode,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RulesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(DocumentsPage);

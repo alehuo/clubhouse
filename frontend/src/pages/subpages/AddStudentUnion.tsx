@@ -7,7 +7,7 @@ import { RootState } from '../../reduxStore';
 
 interface Props {
     addStudentUnion: any;
-    token: string;
+    token: string | null;
     show: boolean;
     onHide: any;
 }
@@ -19,13 +19,15 @@ interface FormValues {
 
 export class AddStudentUnion extends React.Component<Props> {
     public handleSubmit = (values: FormValues) => {
-        this.props.addStudentUnion(
-            {
-                name: values.studentUnionName,
-                description: values.studentUnionDescription,
-            },
-            this.props.token,
-        );
+        if (this.props.token !== null) {
+            this.props.addStudentUnion(
+                {
+                    name: values.studentUnionName,
+                    description: values.studentUnionDescription,
+                },
+                this.props.token,
+            );
+        }
     };
     public render() {
         return (
@@ -45,7 +47,7 @@ export class AddStudentUnion extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
 });
 
 const mapDispatchToProps = { addStudentUnion };

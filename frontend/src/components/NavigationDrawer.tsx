@@ -10,7 +10,7 @@ import { RootState } from '../reduxStore';
 const NavigationDrawer: React.FC = () => {
     const menuOpen = useSelector((state: RootState) => state.ui.menuOpen);
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+    const isAuthenticated = useSelector((state: RootState) => state.auth.token) !== null;
     return (
         <SwipeableDrawer open={menuOpen} onClose={() => dispatch(closeMenu())} onOpen={() => dispatch(openMenu())}>
             <List

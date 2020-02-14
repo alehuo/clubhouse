@@ -12,7 +12,7 @@ interface Props {
     perms: number;
     stdus: StudentUnion[];
     deleteStdu: any;
-    token: string;
+    token: string | null;
 }
 
 const StudentUnionsList: React.FC<Props> = ({ perms, stdus, deleteStdu, token }) => (
@@ -60,7 +60,7 @@ const StudentUnionsList: React.FC<Props> = ({ perms, stdus, deleteStdu, token })
 );
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
     perms: state.user.userPerms,
 });
 

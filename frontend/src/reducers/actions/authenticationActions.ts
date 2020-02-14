@@ -1,7 +1,7 @@
 import { action } from 'typesafe-actions';
 import * as authenticationActions from '../constants';
 
-export const authenticateUser = () => action(authenticationActions.AUTHENTICATE_USER);
+export const authenticateUser = (token: string) => action(authenticationActions.AUTHENTICATE_USER, { token });
 
 export const deAuthenticateUser = () => action(authenticationActions.DEAUTHENTICATE_USER);
 

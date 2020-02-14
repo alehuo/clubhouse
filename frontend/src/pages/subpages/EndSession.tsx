@@ -6,7 +6,7 @@ import { endSession } from '../../reducers/actions/sessionActions';
 import { RootState } from '../../reduxStore';
 
 interface Props {
-    token: string;
+    token: string | null;
     endSession: any;
     show: boolean;
     onHide: any;
@@ -15,7 +15,9 @@ interface Props {
 
 export class EndSession extends React.Component<Props> {
     public handleSubmit = (values: any) => {
-        this.props.endSession(this.props.token, values.endMessage);
+        if (this.props.token !== null) {
+            this.props.endSession(this.props.token, values.endMessage);
+        }
     };
     public render() {
         return (
@@ -36,7 +38,7 @@ export class EndSession extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
     isEnding: state.session.isEnding,
 });
 

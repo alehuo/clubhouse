@@ -32,7 +32,6 @@ export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 // User reducer
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
-export const SET_TOKEN = 'SET_TOKEN';
 export const SET_USERS = 'SET_USERS';
 export const REMOVE_USER = 'REMOVE_USER';
 export const SET_USER_DATA = 'SET_USER_DATA';

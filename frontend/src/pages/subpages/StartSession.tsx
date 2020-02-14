@@ -6,7 +6,7 @@ import { startSession } from '../../reducers/actions/sessionActions';
 import { RootState } from '../../reduxStore';
 
 interface Props {
-    token: string;
+    token: string | null;
     isAdding: boolean;
     show: boolean;
     onHide: any;
@@ -15,7 +15,9 @@ interface Props {
 
 export class StartSession extends React.Component<Props> {
     public handleSubmit = (values: any) => {
-        this.props.startSession(this.props.token, values.startMessage);
+        if (this.props.token !== null) {
+            this.props.startSession(this.props.token, values.startMessage);
+        }
     };
     public render() {
         return (
@@ -36,7 +38,7 @@ export class StartSession extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
     isAdding: state.studentUnion.isAdding,
 });
 

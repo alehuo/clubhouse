@@ -15,7 +15,7 @@ import EndSession from './subpages/EndSession';
 import StartSession from './subpages/StartSession';
 
 interface Props {
-    token: string;
+    token: string | null;
     endSessionModalOpen: boolean;
     startSessionModalOpen: boolean;
     toggleSessionPage: any;
@@ -184,7 +184,7 @@ export class Session extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState) => ({
     perms: state.user.userPerms,
-    token: state.user.token,
+    token: state.auth.token,
     endSessionModalOpen: state.session.endSessionModalOpen,
     startSessionModalOpen: state.session.startSessionModalOpen,
     watchRunning: state.session.ownSessionRunning,

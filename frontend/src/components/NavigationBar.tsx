@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PrimarySearchAppBar() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+    const isAuthenticated = useSelector((state: RootState) => state.auth.token) !== null;
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 

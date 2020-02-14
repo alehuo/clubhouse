@@ -8,7 +8,7 @@ import { deleteUser, fetchUsers } from './../reducers/actions/userActions';
 import PermissionUtils from './../utils/PermissionUtils';
 
 interface Props {
-    token: string;
+    token: string | null;
     fetchUsers: any;
     perms: number;
     users: User[];
@@ -56,7 +56,7 @@ export class UsersList extends React.Component<Props> {
                                                                 ' Deleting a user will delete ALL messages and watch history.',
                                                         )
                                                     ) {
-                                                        this.props.deleteUser(user.userId, this.props.token);
+                                                        this.props.deleteUser(user.userId);
                                                     }
                                                 }}
                                             >
@@ -79,7 +79,7 @@ export class UsersList extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
     perms: state.user.userPerms,
 });
 

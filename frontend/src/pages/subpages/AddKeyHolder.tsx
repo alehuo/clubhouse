@@ -21,18 +21,20 @@ interface Props {
     studentUnions: StudentUnion[];
     users: User[];
     addKey: (token: string, data: Partial<Key>) => void;
-    token: string;
+    token: string | null;
 }
 
 export class AddKeyHolder extends React.Component<Props> {
     public handleSubmit = (values: FormValues) => {
         console.log(values);
-        this.props.addKey(this.props.token, {
-            userId: Number(values.user),
-            unionId: Number(values.studentUnion),
-            keyType: Number(values.keyType),
-            description: values.description,
-        });
+        if (this.props.token !== null) {
+            this.props.addKey(this.props.token, {
+                userId: Number(values.user),
+                unionId: Number(values.studentUnion),
+                keyType: Number(values.keyType),
+                description: values.description,
+            });
+        }
     };
     public render() {
         return (
@@ -55,7 +57,7 @@ export class AddKeyHolder extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
 });
 
 const mapDispatchToProps = {

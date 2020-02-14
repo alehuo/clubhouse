@@ -46,9 +46,9 @@ const navButtons: NavButton[] = [
         auth: true,
     },
     {
-        url: '/rules',
+        url: '/Documents',
         icon: FormatListNumberedIcon,
-        text: 'Rules',
+        text: 'Documents',
         auth: false,
     },
     {

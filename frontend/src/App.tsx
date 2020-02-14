@@ -18,7 +18,7 @@ import LogoutPage from './pages/LogoutPage';
 import MainPage from './pages/MainPage';
 import NewsPage from './pages/NewsPage';
 import RegisterPage from './pages/RegisterPage';
-import RulesPage from './pages/RulesPage';
+import DocumentsPage from './pages/DocumentsPage';
 import Session from './pages/Session';
 import StudentUnionsPage from './pages/StudentUnionsPage';
 import UserListPage from './pages/UserListPage';
@@ -61,7 +61,7 @@ const App: React.FC = () => {
                 <Route exact path="/studentunions" component={withContainer(StudentUnionsPage)} />
                 <Route exact path="/keys" component={withContainer(KeysPage)} />
                 <Route exact path="/calendar" component={withContainer(CalendarPage)} />
-                <Route exact path="/rules" component={withContainer(RulesPage)} />
+                <Route exact path="/documents" component={withContainer(DocumentsPage)} />
                 <Route exact path="/news" component={withContainer(NewsPage)} />
                 <Route exact path="/login" component={LoginPage} />
                 <Route exact path="/register" component={RegisterPage} />

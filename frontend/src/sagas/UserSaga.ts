@@ -1,6 +1,6 @@
 import { ApiResponse, isString, isUser } from '@alehuo/clubhouse-shared';
 import { push } from 'connected-react-router';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { authenticateUser, deAuthenticateUser, setIsLoggingIn } from '../reducers/actions/authenticationActions';
 import { errorMessage, successMessage } from '../reducers/actions/notificationActions';
 import { fetchOwnSessionStatus } from '../reducers/actions/sessionActions';
@@ -12,7 +12,6 @@ import {
     getUserPerms,
     login,
     removeUserFromList,
-    setToken,
     setUserData,
     setUserPerms,
     setUsers,
@@ -20,21 +19,22 @@ import {
 import { ADD_USER, DELETE_USER, FETCH_USER_DATA, FETCH_USERS, GET_USER_PERMS, LOGIN } from '../reducers/constants';
 import PermissionService from '../services/PermissionService';
 import UserService from '../services/UserService';
+import { RootState } from '../reduxStore';
 
 function* userSaga_login(action: ReturnType<typeof login>) {
     try {
         yield put(setIsLoggingIn(true));
         const loginResponse = yield call(UserService.login, action.payload.email, action.payload.password);
         if (loginResponse.payload !== undefined) {
-            const token: string = loginResponse.payload.token;
+            const token = String(loginResponse.payload.token);
+            localStorage.removeItem('token');
             localStorage.setItem('token', token);
-            yield put(setToken(token));
+            yield put(authenticateUser(token));
             yield put(fetchOwnSessionStatus(token));
             const userPerms = yield call(PermissionService.getUserPermissions, token);
             yield put(setUserPerms(userPerms.payload.permissions));
             const userdata = yield call(UserService.getOwnData, token);
             yield put(setUserData(userdata.payload));
-            yield put(authenticateUser());
             yield put(successMessage('Successfully logged in'));
             yield put(push('/'));
         } else {
@@ -57,9 +57,14 @@ function* userSaga_login(action: ReturnType<typeof login>) {
 
 function* userSaga_deleteUser(action: ReturnType<typeof deleteUser>) {
     try {
-        yield call(UserService.remove, action.payload.userId, action.payload.token);
-        yield put(successMessage('Successfully deleted user'));
-        yield put(removeUserFromList(action.payload.userId));
+        const token = yield select((state: RootState) => state.auth.token);
+        if (token !== null) {
+            yield call(UserService.remove, action.payload.userId, String(token));
+            yield put(successMessage('Successfully deleted user'));
+            yield put(removeUserFromList(action.payload.userId));
+        } else {
+            yield put(successMessage('User is unauthenticated, cannot delete user'));
+        }
     } catch (err) {
         if (err.response && err.response.data) {
             const res = err.response.data as ApiResponse<undefined>;
@@ -73,18 +78,23 @@ function* userSaga_deleteUser(action: ReturnType<typeof deleteUser>) {
     }
 }
 
-function* userSaga_fetchUsers(action: ReturnType<typeof fetchUsers>) {
+function* userSaga_fetchUsers() {
     try {
-        const res = yield call(UserService.getUsers, action.payload.token);
-        if (res.payload !== undefined) {
-            const users = res.payload;
-            if (users.every(isUser)) {
-                yield put(setUsers(users));
+        const token = yield select((state: RootState) => state.auth.token);
+        if (token !== null) {
+            const res = yield call(UserService.getUsers, String(token));
+            if (res.payload !== undefined) {
+                const users = res.payload;
+                if (users.every(isUser)) {
+                    yield put(setUsers(users));
+                } else {
+                    yield put(errorMessage('Back-end returned malformed users.'));
+                }
             } else {
-                yield put(errorMessage('Back-end returned malformed users.'));
+                yield put(errorMessage('Response payload was undefined.'));
             }
         } else {
-            yield put(errorMessage('Response payload was undefined.'));
+            yield put(errorMessage('User is unauthenticated, cannot fetch users.'));
         }
     } catch (err) {
         if (err.response && err.response.data) {
@@ -130,13 +140,18 @@ function* userSaga_addUser(action: ReturnType<typeof addUser>) {
     }
 }
 
-function* userSaga_fetchUserData(action: ReturnType<typeof fetchUserData>) {
+function* userSaga_fetchUserData() {
     try {
-        const res = yield call(UserService.getOwnData, action.payload.token);
-        if (res.payload !== undefined) {
-            yield put(setUserData(res.payload));
+        const token = yield select((state: RootState) => state.auth.token);
+        if (token !== null) {
+            const res = yield call(UserService.getOwnData, String(token));
+            if (res.payload !== undefined) {
+                yield put(setUserData(res.payload));
+            } else {
+                yield put(errorMessage('Response payload was undefined.'));
+            }
         } else {
-            yield put(errorMessage('Response payload was undefined.'));
+            yield put(errorMessage('User is unauthenticated, cannot fetch user data.'));
         }
     } catch (err) {
         if (err.response && err.response.data) {
@@ -151,13 +166,18 @@ function* userSaga_fetchUserData(action: ReturnType<typeof fetchUserData>) {
     }
 }
 
-function* userSaga_getUserPerms(action: ReturnType<typeof getUserPerms>) {
+function* userSaga_getUserPerms() {
     try {
-        const res = yield call(PermissionService.getUserPermissions, action.payload.token);
-        if (res.payload !== undefined) {
-            yield put(setUserPerms(res.payload.permissions));
+        const token = yield select((state: RootState) => state.auth.token);
+        if (token !== null) {
+            const res = yield call(PermissionService.getUserPermissions, String(token));
+            if (res.payload !== undefined) {
+                yield put(setUserPerms(res.payload.permissions));
+            } else {
+                yield put(errorMessage('Response payload was undefined.'));
+            }
         } else {
-            yield put(errorMessage('Response payload was undefined.'));
+            yield put(errorMessage('User is unauthenticated, cannot get user permissions.'));
         }
     } catch (err) {
         if (err.response && err.response.data && err.response.data) {

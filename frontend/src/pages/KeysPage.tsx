@@ -16,7 +16,7 @@ import { fetchStudentUnions } from '../reducers/actions/studentUnionActions';
 import { RootState } from '../reduxStore';
 
 interface Props {
-    token: string;
+    token: string | null;
     fetchKeys: any;
     fetchKeyTypes: any;
     fetchUsers: any;
@@ -96,7 +96,7 @@ export class KeysPage extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
     keys: state.key.keys,
     users: state.user.users,
     keyTypes: state.key.keyTypes,

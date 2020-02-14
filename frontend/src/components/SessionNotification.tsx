@@ -9,7 +9,7 @@ import { push } from 'connected-react-router';
 const Action = () => {
     const dispatch = useDispatch();
     return (
-        <Button color="secondary" size="small" onClick={() => dispatch(push('/session'))}>
+        <Button color="primary" size="small" onClick={() => dispatch(push('/session'))}>
             View session info
         </Button>
     );
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 export const SessionNotification: React.FC = () => {
     const sessionPage = useSelector((state: RootState) => state.session.sessionPage);
     const sessionRunning = useSelector((state: RootState) => state.session.ownSessionRunning);
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+    const isAuthenticated = useSelector((state: RootState) => state.auth.token) !== null;
     const classes = useStyles();
     if (sessionPage) {
         return null;

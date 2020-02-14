@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-    token: string;
+    token: string | null;
     perms: number;
     fetchNewsposts: any;
     toggleNewsAddModal: any;
@@ -99,7 +99,7 @@ const mapStateToProps = (state: RootState) => ({
     newsPosts: state.news.newsPosts,
     addModalOpen: state.news.addModalOpen,
     editModalOpen: state.news.editModalOpen,
-    token: state.user.token,
+    token: state.auth.token,
 });
 
 const mapDispatchToProps = {

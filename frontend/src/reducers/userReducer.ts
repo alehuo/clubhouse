@@ -2,10 +2,9 @@ import { User } from '@alehuo/clubhouse-shared';
 import { Reducer } from 'redux';
 import { ActionType } from 'typesafe-actions';
 import * as userActions from './actions/userActions';
-import { CLEAR_USER_DATA, REMOVE_USER, SET_TOKEN, SET_USER_DATA, SET_USER_PERMS, SET_USERS } from './constants';
+import { CLEAR_USER_DATA, REMOVE_USER, SET_USER_DATA, SET_USER_PERMS, SET_USERS } from './constants';
 
 export interface UserState {
-    readonly token: string;
     readonly users: User[];
     readonly userData?: User;
     readonly userPerms: number;
@@ -14,7 +13,6 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-    token: '',
     users: [],
     userData: undefined,
     userPerms: 0,
@@ -26,8 +24,6 @@ type UserAction = ActionType<typeof userActions>;
 
 const userReducer: Reducer<UserState, UserAction> = (state = initialState, action) => {
     switch (action.type) {
-        case SET_TOKEN:
-            return { ...{}, ...state, ...{ token: action.payload.token } };
         case SET_USERS:
             return { ...{}, ...state, ...{ users: action.payload.users } };
         case REMOVE_USER:

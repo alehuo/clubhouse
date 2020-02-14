@@ -1,12 +1,13 @@
-import { Rule } from '@alehuo/clubhouse-shared';
+import { Document } from '@alehuo/clubhouse-shared';
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import ReactMarkdown from 'react-markdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomOverlay from './CustomOverlay';
 
 interface Props {
     id: number;
-    rule: Rule;
+    document: Document;
     editMode: boolean;
     canMoveUp: boolean;
     canMoveDown: boolean;
@@ -14,9 +15,9 @@ interface Props {
     onMoveDownClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export const SingleRule: React.FC<Props> = ({
+export const SingleDocument: React.FC<Props> = ({
     id,
-    rule,
+    document,
     editMode,
     canMoveUp,
     onMoveUpClick,
@@ -28,7 +29,9 @@ export const SingleRule: React.FC<Props> = ({
             <strong>{id}</strong>
         </td>
         <td>
-            <span>{rule.text}</span>
+            <span>
+                <ReactMarkdown source={document.text} />
+            </span>
         </td>
         {editMode && (
             <React.Fragment>

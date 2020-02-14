@@ -8,12 +8,12 @@ interface AuthenticatedRouteProps {
 }
 
 const AuthenticatedRoute: React.FC<AuthenticatedRouteProps & RouteProps> = ({ component: Component, ...rest }) => {
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+    const token = useSelector((state: RootState) => state.auth.token);
     return (
         <Route
             {...rest}
             render={props => {
-                return isAuthenticated === true ? <Component {...props} /> : <div>Please login</div>;
+                return token !== null ? <Component {...props} /> : <div>Please login</div>;
             }}
         />
     );

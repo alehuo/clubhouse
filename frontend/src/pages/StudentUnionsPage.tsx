@@ -11,7 +11,7 @@ import { Permission, StudentUnion } from '@alehuo/clubhouse-shared';
 import { RootState } from '../reduxStore';
 
 interface Props {
-    token: string;
+    token: string | null;
     fetchStudentUnions: any;
     perms: number;
     addFormModalOpen: any;
@@ -64,7 +64,7 @@ const mapStateToProps = (state: RootState) => ({
     studentUnions: state.studentUnion.studentUnions,
     modalOpen: state.studentUnion.modalOpen,
     perms: state.user.userPerms,
-    token: state.user.token,
+    token: state.auth.token,
 });
 
 const mapDispatchToProps = { addFormModalOpen, fetchStudentUnions };

@@ -13,7 +13,7 @@ import { logger } from './reducers/middleware';
 import newsReducer from './reducers/newsReducer';
 import notificationReducer from './reducers/notificationReducer';
 import rootReducer from './reducers/rootReducer';
-import ruleReducer from './reducers/ruleReducer';
+import documentReducer from './reducers/documentReducer';
 import sessionReducer from './reducers/sessionReducer';
 import studentUnionReducer from './reducers/studentUnionReducer';
 import uiReducer from './reducers/uiReducer';
@@ -33,7 +33,7 @@ const reducerObj = (history: History) => ({
     studentUnion: studentUnionReducer,
     session: sessionReducer,
     form: formReducer,
-    rule: ruleReducer,
+    document: documentReducer,
     news: newsReducer,
     router: connectRouter(history),
     ui: uiReducer,
@@ -59,7 +59,16 @@ const middleware = () => {
     }
 };
 
-const reduxStore = createStore(reducer(history), composeWithDevTools(applyMiddleware(...middleware())));
+const reduxStore = createStore(
+    reducer(history),
+    {
+        auth: {
+            token: localStorage.getItem('token'),
+            isLoggingIn: false,
+        },
+    },
+    composeWithDevTools(applyMiddleware(...middleware())),
+);
 
 sagaMiddleware.run(rootSaga);
 sagaMiddleware.run(notificationSaga);

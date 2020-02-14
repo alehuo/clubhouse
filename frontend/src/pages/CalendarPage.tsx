@@ -9,7 +9,7 @@ import { fetchEvents } from './../reducers/actions/calendarActions';
 import PermissionUtils from './../utils/PermissionUtils';
 
 interface Props {
-    token: string;
+    token: string | null;
     fetchEvents: any;
     perms: number;
     events: CalendarEvent[];
@@ -63,7 +63,7 @@ class CalendarPage extends React.Component<Props> {
 const mapStateToProps = (state: RootState) => ({
     events: state.calendar.events,
     perms: state.user.userPerms,
-    token: state.user.token,
+    token: state.auth.token,
 });
 
 const mapDispatchToProps = {

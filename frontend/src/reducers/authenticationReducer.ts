@@ -5,13 +5,13 @@ import { AUTHENTICATE_USER, DEAUTHENTICATE_USER, SET_IS_LOGGING_IN } from './con
 
 // Initial authentication reducer state
 export interface AuthenticationState {
+    readonly token: string | null;
     readonly isLoggingIn: boolean;
-    readonly isAuthenticated: boolean;
 }
 
 const initialState: AuthenticationState = {
+    token: null,
     isLoggingIn: false,
-    isAuthenticated: false,
 };
 
 export type AuthenticationAction = ActionType<typeof actions>;
@@ -19,9 +19,9 @@ export type AuthenticationAction = ActionType<typeof actions>;
 const authenticationReducer: Reducer<AuthenticationState, AuthenticationAction> = (state = initialState, action) => {
     switch (action.type) {
         case AUTHENTICATE_USER:
-            return { ...{}, ...state, isAuthenticated: true };
+            return { ...{}, ...state, token: action.payload.token };
         case DEAUTHENTICATE_USER:
-            return { ...{}, ...state, isAuthenticated: false };
+            return { ...{}, ...state, token: null };
         case SET_IS_LOGGING_IN:
             return { ...{}, ...state, isLoggingIn: action.payload.isLoggingIn };
         default:

@@ -28,7 +28,7 @@ export class EditNewspost extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    token: state.user.token,
+    token: state.auth.token,
     isEditing: state.news.isEditing,
 });
 

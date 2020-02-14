@@ -55,7 +55,7 @@ const LoginPage: React.FC = () => {
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const isLoggingIn = useSelector((state: RootState) => state.auth.isLoggingIn);
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+    const isAuthenticated = useSelector((state: RootState) => state.auth.token) !== null;
 
     const handleSubmit = useCallback(
         e => {
