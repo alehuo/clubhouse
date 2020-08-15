@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import React from 'react';
-import { Badge, Button, Card, Container, Jumbotron } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import CustomOverlay from '../components/CustomOverlay';
 import {
@@ -13,6 +12,7 @@ import {
 import { RootState } from '../reduxStore';
 import EndSession from './subpages/EndSession';
 import StartSession from './subpages/StartSession';
+import { Badge, Button, Card, Typography, CardContent } from '@material-ui/core';
 
 interface Props {
     token: string | null;
@@ -64,11 +64,7 @@ const sessionMessages: SessionMessage[] = [
         type: 'info',
     },
 ];
-
-/**
- * Returns the text color of the message box.
- * @param type Message type
- */
+/*
 const getTextColor = (type?: 'warning' | 'danger' | 'info') => {
     switch (type) {
         case 'warning':
@@ -81,6 +77,7 @@ const getTextColor = (type?: 'warning' | 'danger' | 'info') => {
             return 'dark';
     }
 };
+*/
 
 export class Session extends React.Component<Props> {
     public componentDidMount() {
@@ -105,8 +102,8 @@ export class Session extends React.Component<Props> {
                         onHide={() => this.props.toggleStartSessionModal(false)}
                     />
                 )}
-                <Jumbotron>
-                    <Container>
+                <div>
+                    <div>
                         <h1>Session status</h1>
                         <p>
                             {this.props.watchRunning && this.props.startTime ? (
@@ -115,47 +112,47 @@ export class Session extends React.Component<Props> {
                                     {' ' + moment(this.props.startTime).format('DD.MM.YYYY HH:mm:ss')}
                                 </span>
                             ) : (
-                                <span>You are not currently in a session.</span>
-                            )}
+                                    <span>You are not currently in a session.</span>
+                                )}
                         </p>
                         <p>
                             {this.props.watchRunning && (
                                 <CustomOverlay id="endSessionTooltip" text="This will end your current session.">
-                                    <Button variant="warning" onClick={() => this.props.toggleEndSessionModal(true)}>
+                                    <Button variant="text" onClick={() => this.props.toggleEndSessionModal(true)}>
                                         <FontAwesomeIcon icon="hourglass" /> End session
                                     </Button>
                                 </CustomOverlay>
                             )}
                             {!this.props.watchRunning && (
                                 <CustomOverlay id="startSessionTooltip" text="This will start a new session">
-                                    <Button variant="success" onClick={() => this.props.toggleStartSessionModal(true)}>
+                                    <Button variant="text" onClick={() => this.props.toggleStartSessionModal(true)}>
                                         <FontAwesomeIcon icon="play" /> Start session
                                     </Button>
                                 </CustomOverlay>
                             )}
                             {'  '}
                             <CustomOverlay id="sendMessageTooltip" text="Sends a message to all verified keyholders.">
-                                <Button variant="info">
+                                <Button variant="text">
                                     <FontAwesomeIcon icon="envelope" /> Send message
                                 </Button>
                             </CustomOverlay>
                         </p>
-                    </Container>
-                </Jumbotron>
+                    </div>
+                </div>
                 <p>
                     There {this.props.peopleCount > 1 ? 'are' : 'is'} currently{' '}
-                    <Badge variant="primary">
+                    <Badge variant="standard">
                         {this.props.peopleCount === 0
                             ? 'no one'
                             : this.props.peopleCount > 1
-                            ? this.props.peopleCount + ' persons'
-                            : this.props.peopleCount + ' person'}
+                                ? this.props.peopleCount + ' persons'
+                                : this.props.peopleCount + ' person'}
                     </Badge>{' '}
                     in an ongoing session.
                 </p>
                 <p>
-                    Messages have different color codes. <Badge variant="info">Blue</Badge> is session start, whereas{' '}
-                    <Badge variant="warning">yellow</Badge> is a session end. <Badge variant="danger">Red</Badge> is an
+                    Messages have different color codes. <Badge variant="standard">Blue</Badge> is session start, whereas{' '}
+                    <Badge variant="standard">yellow</Badge> is a session end. <Badge variant="standard">Red</Badge> is an
                     incident, and white is a general message.
                 </p>
                 <h3>Session timeline</h3>
@@ -163,17 +160,14 @@ export class Session extends React.Component<Props> {
                     {sessionMessages &&
                         sessionMessages.map(msg => (
                             <Card
-                                text={getTextColor(msg.type)}
-                                bg={msg.type ? msg.type : 'light'}
                                 key={msg.id}
                                 style={{ marginTop: 5, marginBottom: 5 }}
                             >
-                                <Card.Header>Session message</Card.Header>
-                                <Card.Body>
-                                    <Card.Title>{msg.name}</Card.Title>
-                                    <Card.Subtitle className="mb-2">{msg.date}</Card.Subtitle>
-                                    <Card.Text>{msg.text}</Card.Text>
-                                </Card.Body>
+                                <CardContent>
+                                    <Typography>{msg.name}</Typography>
+                                    <Typography>{msg.date}</Typography>
+                                    <Typography>{msg.text}</Typography>
+                                </CardContent>
                             </Card>
                         ))}
                 </div>

@@ -43,6 +43,7 @@ const useStyles1 = makeStyles((theme: Theme) => ({
 interface Props {
     className?: string;
     message?: string;
+    text: string;
     variant: keyof typeof variantIcon;
 }
 

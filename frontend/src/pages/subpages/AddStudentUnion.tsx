@@ -1,9 +1,9 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import AddStudentUnionForm from '../../forms/AddStudentUnionForm';
 import { addStudentUnion } from '../../reducers/actions/studentUnionActions';
 import { RootState } from '../../reduxStore';
+import { Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 
 interface Props {
     addStudentUnion: any;
@@ -31,17 +31,15 @@ export class AddStudentUnion extends React.Component<Props> {
     };
     public render() {
         return (
-            <Modal show={this.props.show} onHide={this.props.onHide}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add a student union</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <Dialog open={this.props.show}>
+                <DialogTitle>Add a student union</DialogTitle>
+                <DialogContent>
                     <AddStudentUnionForm
                         handleClose={this.props.onHide}
                         onSubmit={(values: FormValues) => this.handleSubmit(values)}
                     />
-                </Modal.Body>
-            </Modal>
+                </DialogContent>
+            </Dialog>
         );
     }
 }

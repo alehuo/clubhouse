@@ -1,9 +1,9 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import EndWatchForm from '../../forms/EndSessionForm';
 import { endSession } from '../../reducers/actions/sessionActions';
 import { RootState } from '../../reduxStore';
+import { Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 
 interface Props {
     token: string | null;
@@ -21,18 +21,16 @@ export class EndSession extends React.Component<Props> {
     };
     public render() {
         return (
-            <Modal show={this.props.show} onHide={this.props.onHide}>
-                <Modal.Header closeButton>
-                    <Modal.Title>End session</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <Dialog open={this.props.show} >
+                <DialogTitle>End session</DialogTitle>
+                <DialogContent>
                     <EndWatchForm
                         handleClose={this.props.onHide}
                         onSubmit={this.handleSubmit}
                         isEnding={this.props.isEnding}
                     />
-                </Modal.Body>
-            </Modal>
+                </DialogContent>
+            </Dialog>
         );
     }
 }

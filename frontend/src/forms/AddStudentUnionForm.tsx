@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import { Button, FormGroup } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 
 import { RootState } from '../reduxStore';
 import { FieldGroup } from './../components/FieldGroup';
 import { checked, isEmpty } from './../utils/FormValidators';
+import { Button } from '@material-ui/core';
 
 const emptyName = isEmpty('Student union name');
 const emptyDesc = isEmpty('Student union description');
@@ -42,20 +41,20 @@ const AddStudentUnionForm: React.FC<Props> = ({ handleSubmit, handleClose, isAdd
             validate={[emptyDesc]}
         />
         <div>
-            <FormGroup controlId="studentUnionPermission">
+            <div>
                 <Field name="studentUnionPermission" component="input" type="checkbox" validate={[stduPermission]} />{' '}
                 <b>I have the permission from the student union to save their information to the service</b>
                 <p>
                     Your answer will be saved in case a student union wants to do a data request, as required by the
                     European Union General Data Protection Regulation.
                 </p>
-            </FormGroup>
+            </div>
         </div>
-        <Button type="button" variant="danger" onClick={handleClose} disabled={isAdding}>
+        <Button type="button" variant="text" onClick={handleClose} disabled={isAdding}>
             Cancel
         </Button>
         &nbsp;&nbsp;&nbsp;
-        <Button type="submit" variant="success" disabled={isAdding}>
+        <Button type="submit" variant="text" disabled={isAdding}>
             {isAdding ? 'Adding student union..' : 'Add'}
         </Button>
     </form>

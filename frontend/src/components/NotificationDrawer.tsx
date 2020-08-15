@@ -12,12 +12,13 @@ const NotificationDrawer: React.FC = () => {
                     <Notification
                         key={notification.id}
                         message={notification.text}
+                        text={notification.text}
                         variant={
                             notification.notificationType === 'SUCCESS'
                                 ? 'success'
                                 : notification.notificationType === 'ERROR'
-                                ? 'error'
-                                : 'warning'
+                                    ? 'error'
+                                    : 'warning'
                         }
                     />
                 ))}

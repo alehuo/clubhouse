@@ -1,6 +1,6 @@
 import { User } from '@alehuo/clubhouse-shared';
 import React from 'react';
-import { Button, ListGroup } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
 
 export interface UserData {
     email: string;
@@ -21,23 +21,15 @@ const UserInformation: React.FC<Props> = ({ userData }) => {
     return (
         <React.Fragment>
             <h2>User information</h2>
-            <ListGroup>
-                <ListGroup.Item>
-                    <b>E-mail address</b>
-                    {'  '}
-                    {email}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <b>Account owner</b>
-                    {'  '}
-                    {firstName} {lastName}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <b>Account creation date</b>
-                    {'  '}
-                    {created_at}
-                </ListGroup.Item>
-            </ListGroup>
+            <b>E-mail address</b>
+            {'  '}
+            {email}
+            <b>Account owner</b>
+            {'  '}
+            {firstName} {lastName}
+            <b>Account creation date</b>
+            {'  '}
+            {created_at}
             <h2>Account removal</h2>
             <p>
                 You can request the removal of your account by clicking this link. Your request will be reviewed by an
@@ -48,7 +40,7 @@ const UserInformation: React.FC<Props> = ({ userData }) => {
                 </strong>
             </p>
             <p>
-                <Button variant="danger">Request account removal</Button>
+                <Button variant="text">Request account removal</Button>
             </p>
             <hr />
             <h2>Download personal information</h2>
@@ -76,7 +68,7 @@ const UserInformation: React.FC<Props> = ({ userData }) => {
                 </li>
             </ul>
             <p>
-                <Button variant="success">Download personal information</Button>
+                <Button variant="text">Download personal information</Button>
             </p>
             <hr />
         </React.Fragment>

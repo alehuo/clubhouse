@@ -10,9 +10,11 @@
     "removeComments": true,
     "noUnusedLocals": true,
     "noImplicitAny": true,
+    "strict": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "outDir": "./dist/",
     "rootDirs": ["src"]
   },

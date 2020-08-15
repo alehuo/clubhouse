@@ -3,11 +3,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import moment from 'moment';
 import 'moment/locale/fi';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { AuthenticatedRoute } from './components/AuthenticatedRoute';
-import { LoadingScreen } from './components/LoadingScreen';
 import NavigationBar from './components/NavigationBar';
 import NavigationDrawer from './components/NavigationDrawer';
 import NotificationDrawer from './components/NotificationDrawer';
@@ -25,7 +24,7 @@ import UserListPage from './pages/UserListPage';
 import UserProfilePage from './pages/UserProfilePage';
 import { initApp } from './reducers/actions/rootActions';
 import { RootAction } from './reducers/rootReducer';
-import { history, RootState } from './reduxStore';
+import { history } from './reduxStore';
 import { SessionNotification } from './components/SessionNotification';
 moment.locale('fi');
 
@@ -46,12 +45,6 @@ const App: React.FC = () => {
     useEffect(() => {
         dispatch(initApp());
     }, [dispatch]);
-
-    const appLoading = useSelector((state: RootState) => state.root.appLoading);
-
-    if (appLoading) {
-        return <LoadingScreen />;
-    }
 
     return (
         <ConnectedRouter history={history}>

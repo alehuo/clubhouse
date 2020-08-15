@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Button, FormGroup } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { FieldGroup } from './../components/FieldGroup';
 
 import { checked, isEmpty, passwd, validatePasswords, validEmail } from './../utils/FormValidators';
+import { Button } from '@material-ui/core';
 
 const firstNameEmpty = isEmpty('First name');
 const lastNameEmpty = isEmpty('Last name');
@@ -67,13 +67,13 @@ const RegisterForm: React.FC<Props> = props => (
             validate={[validatePasswords]}
         />
         <div>
-            <FormGroup controlId="studentUnionPermission">
+            <div>
                 <Field name="userPermission" component="input" type="checkbox" validate={[check]} />{' '}
                 <b>I give my consent for the service to store my data to the server as said in the privacy policy.</b>
                 <div>Your answer will be saved.</div>
-            </FormGroup>
+            </div>
         </div>
-        <Button type="submit" variant="success" disabled={props.isRegistering}>
+        <Button type="submit" variant="text" disabled={props.isRegistering}>
             {props.isRegistering ? 'Registering user..' : 'Register'}
         </Button>
     </form>

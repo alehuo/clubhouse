@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Alert, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import KeysList from './../components/KeysList';
 import { toggleModal } from './../reducers/actions/keyActions';
@@ -10,7 +9,7 @@ import PermissionUtils from './../utils/PermissionUtils';
 import AddKeyHolder from './subpages/AddKeyHolder';
 
 import { Key, KeyType, Permission, StudentUnion, User } from '@alehuo/clubhouse-shared';
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import CustomOverlay from '../components/CustomOverlay';
 import { fetchStudentUnions } from '../reducers/actions/studentUnionActions';
 import { RootState } from '../reduxStore';
@@ -56,7 +55,7 @@ export class KeysPage extends React.Component<Props> {
                 <p>
                     {PermissionUtils.hasPermission(this.props.perms, Permission.ALLOW_ADD_REMOVE_KEYS) && (
                         <CustomOverlay id="addKey" text="Add a new keyholder.">
-                            <Button variant="success" onClick={() => this.props.toggleModal(true)}>
+                            <Button variant="text" onClick={() => this.props.toggleModal(true)}>
                                 <FontAwesomeIcon icon="plus" /> Add a keyholder
                             </Button>
                         </CustomOverlay>
@@ -64,7 +63,7 @@ export class KeysPage extends React.Component<Props> {
                     {'  '}
                     {
                         <CustomOverlay id="sendEmail" text="Send an email to all verified keyholders in the system.">
-                            <Button variant="info">
+                            <Button variant="text">
                                 <FontAwesomeIcon icon="envelope" /> Send an email to keyholder(s)
                             </Button>
                         </CustomOverlay>
@@ -78,11 +77,11 @@ export class KeysPage extends React.Component<Props> {
                         users={this.props.users}
                     />
                 ) : (
-                    <Alert variant="warning">
-                        <h4>No permission to view keys</h4>
-                        <p>You don&apos;t have correct permissions to view keys.</p>
-                    </Alert>
-                )}
+                        <div>
+                            <h4>No permission to view keys</h4>
+                            <p>You don&apos;t have correct permissions to view keys.</p>
+                        </div>
+                    )}
                 <AddKeyHolder
                     show={this.props.modalOpen}
                     onHide={() => this.props.toggleModal(false)}

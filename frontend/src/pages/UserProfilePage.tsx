@@ -1,21 +1,14 @@
 import { User } from '@alehuo/clubhouse-shared';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Col, Nav, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Redirect, Route } from 'react-router-dom';
 import { RootState } from '../reduxStore';
-import UserHistory from './subpages/UserHistory';
-import UserInformation from './subpages/UserInformation';
-import UserKeys from './subpages/UserKeys';
 
 interface Props {
     userData?: User;
 }
 
 const UserProfilePage: React.FC<Props> = props => {
-    return (
+    /*return (
         <React.Fragment>
             <Row className="clearfix">
                 <Col xs={3}>
@@ -45,7 +38,8 @@ const UserProfilePage: React.FC<Props> = props => {
                 </Col>
             </Row>
         </React.Fragment>
-    );
+    );*/
+    return <div />;
 };
 
 const mapStateToProps = (state: RootState) => ({

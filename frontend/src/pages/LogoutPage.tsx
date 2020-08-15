@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from '../reduxStore';
@@ -13,20 +13,18 @@ interface Props {
     successMessage: any;
 }
 
-export class LogoutPage extends React.Component<Props> {
-    public UNSAFE_componentWillMount() {
-        if (this.props.sessionInterval) {
-            clearInterval(this.props.sessionInterval);
+const LogoutPage: React.FC<Props> = (props) => {
+    useEffect(() => {
+        if (props.sessionInterval) {
+            clearInterval(props.sessionInterval);
         }
-        this.props.setSessionCheckInterval(undefined);
+        props.setSessionCheckInterval(undefined);
         localStorage.clear();
-        this.props.deAuthenticateUser();
-        this.props.successMessage('You have been logged out.');
-    }
+        props.deAuthenticateUser();
+        props.successMessage('You have been logged out.');
+    }, [props])
 
-    public render() {
-        return <Redirect to="/" />;
-    }
+    return <Redirect to="/" />;
 }
 
 const mapStateToProps = (state: RootState) => ({

@@ -1,6 +1,5 @@
 import { ApiResponse, Key } from '@alehuo/clubhouse-shared';
 import { call, put, takeEvery, select } from 'redux-saga/effects';
-import { authenticateUser } from '../reducers/actions/authenticationActions';
 import { setEvents } from '../reducers/actions/calendarActions';
 import { setKeys } from '../reducers/actions/keyActions';
 import { setNewsposts } from '../reducers/actions/newsActions';

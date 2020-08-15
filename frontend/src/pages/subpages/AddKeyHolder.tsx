@@ -1,10 +1,10 @@
 import { Key, KeyType, StudentUnion, User } from '@alehuo/clubhouse-shared';
 import React from 'react';
-import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import AddKeyHolderForm from '../../forms/AddKeyHolderForm';
 import { addKey } from '../../reducers/actions/keyActions';
 import { RootState } from '../../reduxStore';
+import { DialogContent, DialogTitle, Dialog } from '@material-ui/core';
 
 interface FormValues {
     user: number;
@@ -38,11 +38,9 @@ export class AddKeyHolder extends React.Component<Props> {
     };
     public render() {
         return (
-            <Modal show={this.props.show} onHide={this.props.onHide}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add a keyholder</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <Dialog open={this.props.show}>
+                <DialogTitle>Add a keyholder</DialogTitle>
+                <DialogContent>
                     <AddKeyHolderForm
                         handleClose={this.props.onHide}
                         onSubmit={(values: FormValues) => this.handleSubmit(values)}
@@ -50,8 +48,8 @@ export class AddKeyHolder extends React.Component<Props> {
                         users={this.props.users}
                         studentUnions={this.props.studentUnions}
                     />
-                </Modal.Body>
-            </Modal>
+                </DialogContent>
+            </Dialog>
         );
     }
 }

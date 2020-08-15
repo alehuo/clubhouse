@@ -7,9 +7,6 @@ import { fetchOwnSessionStatus } from '../reducers/actions/sessionActions';
 import {
     addUser,
     deleteUser,
-    fetchUserData,
-    fetchUsers,
-    getUserPerms,
     login,
     removeUserFromList,
     setUserData,

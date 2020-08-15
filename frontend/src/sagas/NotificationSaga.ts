@@ -1,5 +1,5 @@
 import { call, delay, put, takeEvery } from 'redux-saga/effects';
-import uuidv1 from 'uuid/v1';
+import { v1 as uuidv1 } from 'uuid';
 import {
     addNotification,
     clearNotification,

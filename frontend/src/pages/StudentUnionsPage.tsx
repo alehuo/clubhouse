@@ -1,14 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Alert, Button, Container, Jumbotron } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import StudentUnionsList from './../components/StudentUnionsList';
 import { addFormModalOpen, fetchStudentUnions } from './../reducers/actions/studentUnionActions';
 import PermissionUtils from './../utils/PermissionUtils';
 import AddStudentUnion from './subpages/AddStudentUnion';
-
 import { Permission, StudentUnion } from '@alehuo/clubhouse-shared';
 import { RootState } from '../reduxStore';
+import { Button } from '@material-ui/core';
 
 interface Props {
     token: string | null;
@@ -31,29 +30,26 @@ export class StudentUnionsPage extends React.Component<Props> {
         }
         return (
             <React.Fragment>
-                <Jumbotron>
-                    <Container>
+                <div>
+                    <div>
                         <h1>Student unions</h1>
                         <p>
                             {PermissionUtils.hasPermission(
                                 this.props.perms,
                                 Permission.ALLOW_ADD_EDIT_REMOVE_STUDENT_UNIONS,
                             ) && (
-                                <Button variant="success" onClick={() => this.props.addFormModalOpen(true)}>
-                                    <FontAwesomeIcon icon="plus" /> Add a student union
-                                </Button>
-                            )}
+                                    <Button variant="text" onClick={() => this.props.addFormModalOpen(true)}>
+                                        <FontAwesomeIcon icon="plus" /> Add a student union
+                                    </Button>
+                                )}
                         </p>
-                    </Container>
-                </Jumbotron>
+                    </div>
+                </div>
                 {PermissionUtils.hasPermission(this.props.perms, Permission.ALLOW_VIEW_STUDENT_UNIONS) ? (
                     <StudentUnionsList stdus={this.props.studentUnions} />
                 ) : (
-                    <Alert variant="warning">
-                        <h4>No permission to view student unions</h4>
-                        <p>You don&apos;t have correct permissions to view student unions.</p>
-                    </Alert>
-                )}
+                        <div>You don&apos;t have correct permissions to view student unions.</div>
+                    )}
                 <AddStudentUnion show={this.props.modalOpen} onHide={() => this.props.addFormModalOpen(false)} />
             </React.Fragment>
         );

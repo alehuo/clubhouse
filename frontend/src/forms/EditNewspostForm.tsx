@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 
 import { FieldGroup } from './../components/FieldGroup';
 import { isEmpty } from './../utils/FormValidators';
+import { Button } from '@material-ui/core';
 
 const emptyTitle = isEmpty('Title');
 const emptyText = isEmpty('Text');
@@ -40,11 +40,11 @@ const EditNewspostForm: React.FC<EditNewspostFormProps> = props => (
             componentClass="textarea"
             validate={[emptyText]}
         />
-        <Button type="button" variant="danger" onClick={props.handleClose} disabled={props.isEditing}>
+        <Button type="button" variant="text" onClick={props.handleClose} disabled={props.isEditing}>
             Cancel
         </Button>
         &nbsp;&nbsp;&nbsp;
-        <Button type="submit" variant="success" disabled={props.isEditing}>
+        <Button type="submit" variant="text" disabled={props.isEditing}>
             {props.isEditing ? 'Editing newspost..' : 'Edit'}
         </Button>
     </form>

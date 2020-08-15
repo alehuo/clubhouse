@@ -1,4 +1,3 @@
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import ChatIcon from '@material-ui/icons/Chat';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import HomeIcon from '@material-ui/icons/Home';

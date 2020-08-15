@@ -55,7 +55,7 @@ const NewsPage: React.FC<Props> = ({
 }) => {
     useEffect(() => {
         fetchNewsposts();
-    }, []);
+    }, [fetchNewsposts]);
 
     const editDeletePermissions = PermissionUtils.hasPermission(perms, Permission.ALLOW_ADD_EDIT_REMOVE_POSTS);
     const classes = useStyles();

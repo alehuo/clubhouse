@@ -1,9 +1,9 @@
 import { Document } from '@alehuo/clubhouse-shared';
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomOverlay from './CustomOverlay';
+import { Button, TableRow, TableCell } from '@material-ui/core';
 
 interface Props {
     id: number;
@@ -24,46 +24,46 @@ export const SingleDocument: React.FC<Props> = ({
     canMoveDown,
     onMoveDownClick,
 }) => (
-    <tr>
-        <td>
+    <TableRow>
+        <TableCell>
             <strong>{id}</strong>
-        </td>
-        <td>
+        </TableCell>
+        <TableCell>
             <span>
                 <ReactMarkdown source={document.text} />
             </span>
-        </td>
+        </TableCell>
         {editMode && (
             <React.Fragment>
-                <td>
+                <TableCell>
                     <CustomOverlay id="editSingleRule" text="Edit the currently selected rule.">
-                        <Button variant="success" size="sm">
+                        <Button variant="text" size="small">
                             <FontAwesomeIcon icon="edit" /> Edit
                         </Button>
                     </CustomOverlay>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                     <CustomOverlay id="moveRuleUp" text="Move the currently selected rule up in the list.">
-                        <Button variant="info" size="sm" disabled={canMoveUp} onClick={onMoveUpClick}>
+                        <Button variant="text" size="small" disabled={canMoveUp} onClick={onMoveUpClick}>
                             <FontAwesomeIcon icon="arrow-up" /> Move up
                         </Button>
                     </CustomOverlay>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                     <CustomOverlay id="moveRuleDown" text="Move the currently selected rule down in the list.">
-                        <Button variant="info" size="sm" disabled={canMoveDown} onClick={onMoveDownClick}>
+                        <Button variant="text" size="small" disabled={canMoveDown} onClick={onMoveDownClick}>
                             <FontAwesomeIcon icon="arrow-down" /> Move down
                         </Button>
                     </CustomOverlay>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell>
                     <CustomOverlay id="deleteSingleRule" text="Delete the currently selected rule.">
-                        <Button variant="danger" size="sm">
+                        <Button variant="text" size="small">
                             <FontAwesomeIcon icon="trash-alt" /> Delete
                         </Button>
                     </CustomOverlay>
-                </td>
+                </TableCell>
             </React.Fragment>
         )}
-    </tr>
+    </TableRow>
 );
