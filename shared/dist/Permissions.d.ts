@@ -7,8 +7,8 @@ export declare const Permission: {
     ALLOW_VIEW_STUDENT_UNIONS: number;
     ALLOW_ADD_EDIT_REMOVE_EVENTS: number;
     ALLOW_VIEW_EVENTS: number;
-    ALLOW_ADD_EDIT_REMOVE_RULES: number;
-    ALLOW_VIEW_RULES: number;
+    ALLOW_ADD_EDIT_REMOVE_DOCUMENTS: number;
+    ALLOW_VIEW_DOCUMENTS: number;
     ALLOW_ADD_EDIT_REMOVE_POSTS: number;
     ALLOW_VIEW_POSTS: number;
     ALLOW_ADD_EDIT_REMOVE_LOCATIONS: number;

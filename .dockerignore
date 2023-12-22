@@ -1,0 +1,15 @@
+*/.nyc_output
+*/coverage
+*/node_modules
+*/npm-debug.log
+*/access.log
+.nyc_output
+*/load-testing
+*/requests
+*/.env
+*/.env.example
+.gitignore
+LICENSE
+build-container.sh
+stop-container.sh
+start-container.sh

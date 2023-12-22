@@ -1,53 +1,43 @@
-import React from "react";
-import { Modal } from "react-bootstrap";
-import { connect } from "react-redux";
-import AddNewspostForm from "../../forms/AddNewspostForm";
+import React from 'react';
+import { connect } from 'react-redux';
+import AddNewspostForm from '../../forms/AddNewspostForm';
 
-import { addNewspost } from "../../reducers/actions/newsActions";
-import { RootState } from "../../reduxStore";
+import { addNewspost } from '../../reducers/actions/newsActions';
+import { RootState } from '../../reduxStore';
+import { DialogTitle, DialogContent, Dialog } from '@material-ui/core';
 
 interface Props {
-  token: string;
-  show: boolean;
-  onHide: any;
-  addNewspost: any;
+    token: string | null;
+    show: boolean;
+    onHide: any;
+    addNewspost: any;
 }
 
 export class AddNewspost extends React.Component<Props> {
-  public handleSubmit = (values: any) => {
-    this.props.addNewspost(
-      this.props.token,
-      values.newspostTitle,
-      values.newspostMessage,
-    );
-  }
-  public render() {
-    return (
-      <Modal show={this.props.show} onHide={this.props.onHide}>
-        <Modal.Header closeButton>
-          <Modal.Title>Submit a newspost</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddNewspostForm
-            handleClose={this.props.onHide}
-            onSubmit={this.handleSubmit}
-          />
-        </Modal.Body>
-      </Modal>
-    );
-  }
+    public handleSubmit = (values: any) => {
+        if (this.props.token !== null) {
+            this.props.addNewspost(this.props.token, values.newspostTitle, values.newspostMessage);
+        }
+    };
+    public render() {
+        return (
+            <Dialog open={this.props.show}>
+                <DialogTitle>Submit a newspost</DialogTitle>
+                <DialogContent>
+                    <AddNewspostForm handleClose={this.props.onHide} onSubmit={this.handleSubmit} />
+                </DialogContent>
+            </Dialog>
+        );
+    }
 }
 
 const mapStateToProps = (state: RootState) => ({
-  token: state.user.token,
-  isAdding: state.news.isAdding,
+    token: state.auth.token,
+    isAdding: state.news.isAdding,
 });
 
 const mapDispatchToProps = {
-  addNewspost,
+    addNewspost,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AddNewspost);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewspost);

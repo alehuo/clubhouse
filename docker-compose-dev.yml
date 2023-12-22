@@ -1,0 +1,71 @@
+version: "3.7"
+volumes:
+  clubhouse-mysql-data:
+services:
+  mysli:
+    container_name: "clubhouse-mysli"
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: clubhouse_dev
+      TZ: Europe/Helsinki
+    volumes:
+      - clubhouse-mysql-data:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+  clubhouse-backend:
+    container_name: "clubhouse-backend-dev"
+    build:
+      context: .
+      shm_size: 1G
+      dockerfile: Dockerfile-backend-dev.dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysli
+    volumes:
+      - ./backend/src:/data/backend/src
+      - ./backend/test:/data/backend/test
+      - ./backend/seeds:/data/backend/seeds
+      - ./backend/migrations:/data/backend/migrations
+      - ./backend/knexfile.ts:/data/backend/knexfile.ts
+    command: yarn start
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+      - JWT_SECRET=abcd1234
+      - JWT_EXPIRE=86400
+      - CAL_DOMAIN=clubhouse.com
+      - CAL_LOCATION=Club house
+      - MYSQL_HOST=mysli
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=my-secret-pw
+      - MYSQL_DB_NAME=clubhouse
+      - ENABLE_EMAIL_SENDING=no
+      - MAIL_PREFIX=Clubhouse
+      - MAIL_FROM_ADDRESS=clubhouse@example.com
+      - MAIL_FROM_NAME=Clubhouse
+      - SMTP_SERVER=smtp.ethereal.email
+      - SMTP_USERNAME=qd3m27cu6ds4u4dd@ethereal.email
+      - SMTP_PASSWORD=3YaRwf2q5hMdkQ6yFM
+      - SMTP_PORT=587
+      - SMTP_SECURE=true
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+      - SPOTIFY_REDIRECT_URL=${SPOTIFY_REDIRECT_URL}
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend-dev.dockerfile
+      shm_size: 1G
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/data/frontend/src
+      - ./frontend/public:/data/frontend/public
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8080

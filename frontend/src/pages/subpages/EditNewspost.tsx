@@ -1,43 +1,35 @@
-import React from "react";
-import { Modal } from "react-bootstrap";
-import { connect } from "react-redux";
-import EditNewspostForm from "../../forms/EditNewspostForm";
-import { RootState } from "../../reduxStore";
+import React from 'react';
+import { connect } from 'react-redux';
+import EditNewspostForm from '../../forms/EditNewspostForm';
+import { RootState } from '../../reduxStore';
+import { Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 
 interface Props {
-  show: boolean;
-  onHide: any;
+    show: boolean;
+    onHide: any;
 }
 
 export class EditNewspost extends React.Component<Props> {
-  public handleSubmit = (values: any) => {
-    console.log(values);
-  }
-  public render() {
-    return (
-      <Modal show={this.props.show} onHide={this.props.onHide}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit newspost</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <EditNewspostForm
-            handleClose={this.props.onHide}
-            onSubmit={this.handleSubmit}
-          />
-        </Modal.Body>
-      </Modal>
-    );
-  }
+    public handleSubmit = (values: any) => {
+        console.log(values);
+    };
+    public render() {
+        return (
+            <Dialog open={this.props.show}>
+                <DialogTitle>Edit newspost</DialogTitle>
+                <DialogContent>
+                    <EditNewspostForm handleClose={this.props.onHide} onSubmit={this.handleSubmit} />
+                </DialogContent>
+            </Dialog >
+        );
+    }
 }
 
 const mapStateToProps = (state: RootState) => ({
-  token: state.user.token,
-  isEditing: state.news.isEditing,
+    token: state.auth.token,
+    isEditing: state.news.isEditing,
 });
 
 const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(EditNewspost);
+export default connect(mapStateToProps, mapDispatchToProps)(EditNewspost);

@@ -1,37 +1,29 @@
-import React from "react";
-import { connect } from "react-redux";
-import { RootState } from "../reduxStore";
-import Notification from "./Notification";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reduxStore';
+import Notification from './Notification';
 
-interface Props {
-  notifications: Array<{
-    id: string;
-    text: string;
-    notificationType: string;
-  }>;
-}
+const NotificationDrawer: React.FC = () => {
+    const notifications = useSelector((state: RootState) => state.notification.notifications);
+    return (
+        <>
+            {notifications &&
+                notifications.map(notification => (
+                    <Notification
+                        key={notification.id}
+                        message={notification.text}
+                        text={notification.text}
+                        variant={
+                            notification.notificationType === 'SUCCESS'
+                                ? 'success'
+                                : notification.notificationType === 'ERROR'
+                                    ? 'error'
+                                    : 'warning'
+                        }
+                    />
+                ))}
+        </>
+    );
+};
 
-const NotificationDrawer: React.FC<Props> = ({ notifications }) => (
-  <React.Fragment>
-    {notifications &&
-      notifications.map((notification) => (
-        <Notification
-          key={notification.id}
-          text={notification.text}
-          type={
-            notification.notificationType === "SUCCESS"
-              ? "success"
-              : notification.notificationType === "ERROR"
-              ? "danger"
-              : "warning"
-          }
-        />
-      ))}
-  </React.Fragment>
-);
-
-const mapStateToProps = (state: RootState) => ({
-  notifications: state.notification.notifications,
-});
-
-export default connect(mapStateToProps)(NotificationDrawer);
+export default NotificationDrawer;

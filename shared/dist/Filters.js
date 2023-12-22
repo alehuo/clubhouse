@@ -29,7 +29,7 @@ exports.userFilter = (user) => {
         lastName: user.lastName,
         permissions: user.permissions,
         created_at: user.created_at,
-        updated_at: user.updated_at,
+        updated_at: user.updated_at
     };
 };
 exports.studentUnionFilter = (stdu) => stdu;
@@ -38,5 +38,5 @@ exports.newsPostFilter = (post) => post;
 exports.messageFilter = (message) => message;
 exports.locationFilter = (location) => location;
 exports.calendarEventFilter = (event) => event;
-exports.ruleFilter = (rule) => rule;
+exports.documentFilter = (document) => document;
 //# sourceMappingURL=Filters.js.map

@@ -9,13 +9,13 @@ import {
   locationFilter,
   messageFilter,
   newsPostFilter,
-  ruleFilter,
+  documentFilter,
   sessionFilter,
   statisticsFilter,
   studentUnionFilter,
   timestampFilter,
   userFilter,
-  userStatisticsFilter,
+  userStatisticsFilter
 } from "./Filters";
 import {
   CalendarEvent,
@@ -25,12 +25,12 @@ import {
   Location,
   Message,
   Newspost,
-  Rule,
+  Document,
   Session,
   Statistics,
   StudentUnion,
   User,
-  UserStatistics,
+  UserStatistics
 } from "./Models";
 import { Permission } from "./Permissions";
 import {
@@ -44,12 +44,12 @@ import {
   isNewspost,
   isNumber,
   isObject,
-  isRule,
+  isDocument,
   isSession,
   isStatistics,
   isString,
   isStudentUnion,
-  isUser,
+  isUser
 } from "./Validators";
 
 export {
@@ -63,7 +63,7 @@ export {
   Statistics,
   StudentUnion,
   UserStatistics,
-  Rule,
+  Document,
   KeyType,
   Key,
   isBoolean,
@@ -79,7 +79,7 @@ export {
   isStudentUnion,
   isCalendarEvent,
   isUser,
-  isRule,
+  isDocument,
   isKey,
   isKeyType,
   ApiResponse,
@@ -96,5 +96,5 @@ export {
   timestampFilter,
   userFilter,
   userStatisticsFilter,
-  ruleFilter,
+  documentFilter
 };
